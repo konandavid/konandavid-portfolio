@@ -1,0 +1,32 @@
+{
+  "logos": [
+    {
+      "name": "Vogue",
+      "image": "/uploads/logos/vogue.png"
+    },
+    {
+      "name": "Dior",
+      "image": "/uploads/logos/dior.png"
+    },
+    {
+      "name": "Nike",
+      "image": "/uploads/logos/nike.png"
+    },
+    {
+      "name": "Rabanne",
+      "image": "/uploads/logos/rabanne.png"
+    },
+    {
+      "name": "NRJ",
+      "image": "/uploads/logos/nrj.png"
+    },
+    {
+      "name": "Canal+",
+      "image": "/uploads/logos/canal.png"
+    },
+    {
+      "name": "TMC",
+      "image": "/uploads/logos/tmc.png"
+    }
+  ]
+}
