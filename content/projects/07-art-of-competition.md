@@ -1,10 +1,11 @@
 ---
 order: 7
-artist: "Short Film"
-title: "The Art Of Competition"
-category: "Film & Music Video"
-image: "/uploads/art-of-competition.jpg"
-description: "Creative project exploring competition through movement."
-work: "Performer"
-date: "2023-01-01"
+artist: Short Film
+title: The Art Of Competition
+category: Film & Music Video
+image: /uploads/7eafd11b561b1d52.jpeg
+description: Creative project exploring competition through movement.
+work: Choreographer
+date: 2023-01-01
+video: https://vimeo.com/917498620
 ---
