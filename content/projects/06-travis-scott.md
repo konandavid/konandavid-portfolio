@@ -1,5 +1,5 @@
 ---
-order: 7
+order: 6
 artist: Travis Scott
 title: Modern Jam (Circus Maximus)
 category: Film & Music Video
