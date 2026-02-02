@@ -1,10 +1,10 @@
 ---
 order: 12
-artist: "Rabanne"
-title: "Invictus Victory"
-category: "Commercial"
-image: "/uploads/rabanne.jpg"
-description: "Choreography for the Invictus Victory fragrance campaign."
-work: "Choreographer"
-date: "2022-08-01"
+artist: Rabanne
+title: Invictus Victory Campaign
+category: Commercial
+image: /uploads/446139318693a585.jpg
+description: Choreography and performance for this digital campaign.
+work: Choreographer
+date: 2022-08-01
 ---
