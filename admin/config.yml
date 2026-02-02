@@ -19,8 +19,21 @@ collections:
       - { label: "Image", name: "image", widget: "image" }
       - { label: "Description", name: "description", widget: "text" }
       - { label: "Work Role", name: "work", widget: "string", hint: "e.g., Choreographer, Performer, Creative Director" }
-      - { label: "Date", name: "date", widget: "string", hint: "e.g., June 2024" }
-      - { label: "Video URL", name: "video", widget: "string", required: false }
+      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
+
+  - name: "press"
+    label: "Press & Logos"
+    files:
+      - name: "logos"
+        label: "Brand Logos"
+        file: "_data/press.json"
+        fields:
+          - label: "Logos"
+            name: "logos"
+            widget: "list"
+            fields:
+              - { label: "Brand Name", name: "name", widget: "string" }
+              - { label: "Logo Image", name: "image", widget: "image", hint: "Upload PNG with transparent background" }
 
   - name: "settings"
     label: "Site Settings"
