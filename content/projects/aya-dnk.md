@@ -6,5 +6,5 @@ category: "Live Show"
 image: "/uploads/aya-dnk.jpg"
 description: "Choreography for the sold-out Accor Arena shows."
 work: "Performer"
-date: "2024-09-01"
+date: "2023-05-01"
 ---
