@@ -17,6 +17,13 @@ layout: base.njk
     </button>
 </nav>
 
+<!-- Mobile Menu -->
+<div class="mobile-menu">
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+</div>
+
 <!-- Hero Section -->
 <section class="hero" id="hero">
     <div class="hero-content">
@@ -31,6 +38,7 @@ layout: base.njk
         <div class="hero-text" id="hero-text">
             <h1>
                 <span>Choreography</span>
+                <span class="separator">—</span>
                 <span>Creative & Movement Direction</span>
             </h1>
         </div>
@@ -70,13 +78,9 @@ layout: base.njk
 <section class="press-section">
     <p class="press-label">Featured In & Collaborations</p>
     <div class="press-logos">
-        <span class="press-logo">Vogue</span>
-        <span class="press-logo">Dior</span>
-        <span class="press-logo">Nike</span>
-        <span class="press-logo">Rabanne</span>
-        <span class="press-logo">NRJ</span>
-        <span class="press-logo">Canal+</span>
-        <span class="press-logo">TMC</span>
+        {%- for logo in press.logos -%}
+        <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo">
+        {%- endfor -%}
     </div>
 </section>
 
@@ -89,7 +93,7 @@ layout: base.njk
         <div class="about-content">
             <span class="about-label">About</span>
             <h2>Creating powerful visual experiences through movement</h2>
-            <p>Born in Abidjan, Côte d'Ivoire, and raised in France, <strong>Konan David</strong> operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including Dior, Nike, and Vogue.</p>
+            <p>Born in Abidjan, Côte d'Ivoire, and raised in France, Konan David operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including <strong>Dior</strong>, <strong>Nike</strong>, and <strong>Vogue</strong>.</p>
             <p>Specializing in artist development and movement coaching, Konan empowers performers to unlock their expressive potential. Alongside this expertise, he has worked with renowned artists such as <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, and <strong>Dadju</strong>.</p>
             <p>His work is defined by meticulous attention to detail, raw attitude, and effortless flow. Driven by cinematic vision and cultural authenticity, Konan continuously explores new visual languages to elevate every artistic narrative.</p>
         </div>
