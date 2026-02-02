@@ -1,6 +1,6 @@
 ---
 order: 7
-artist: Short Film
+artist: Lea Esmaili
 title: The Art Of Competition
 category: Film & Music Video
 image: /uploads/7eafd11b561b1d52.jpeg
