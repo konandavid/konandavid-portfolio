@@ -1,0 +1,105 @@
+---
+layout: base.njk
+---
+
+<!-- Navigation -->
+<nav>
+    <a href="/" class="logo">{{ site.title }}</a>
+    <ul class="nav-links">
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button class="mobile-menu-btn" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
+</nav>
+
+<!-- Hero Section -->
+<section class="hero" id="hero">
+    <div class="hero-sticky">
+        <div class="hero-grid" id="hero-grid">
+            <div class="hero-showreel" id="hero-showreel">
+                <iframe 
+                    id="hero-video"
+                    src="{{ site.vimeoShowreel }}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                    allow="autoplay; fullscreen; picture-in-picture"
+                    allowfullscreen>
+                </iframe>
+            </div>
+            <div class="hero-content" id="hero-content">
+                <h1>
+                    <span>Choreographer</span>
+                    <span>Performance Director</span>
+                    <span>Artist Development</span>
+                </h1>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Scroll Indicator -->
+<div class="scroll-indicator">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+</div>
+
+<!-- Work Section -->
+<section class="work-section" id="work">
+    <div class="section-header">
+        <h2>Selected Work</h2>
+        <span>Drag to explore →</span>
+    </div>
+    <div class="projects-container">
+        <div class="projects-grid">
+            {%- for project in collections.projects -%}
+            <article class="project-card">
+                <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
+                <div class="project-info">
+                    <span class="project-category">{{ project.data.category }}</span>
+                    <div class="project-text">
+                        <span class="project-artist">{{ project.data.artist }}</span>
+                        <h3 class="project-title">{{ project.data.title }}</h3>
+                        <p class="project-description">{{ project.data.description }}</p>
+                    </div>
+                </div>
+            </article>
+            {%- endfor -%}
+        </div>
+    </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section" id="about">
+    <div class="about-container">
+        <div class="about-image">
+            <img src="/assets/images/about.jpg" alt="{{ site.title }}">
+        </div>
+        <div class="about-content">
+            <span class="about-label">About</span>
+            <h2>Creating powerful visual experiences through movement</h2>
+            <p><strong>Konan David</strong>, born in Abidjan, Côte d'Ivoire and grew up in France, is a multi-faceted creative force: choreographer, performer and globally a visual story-teller.</p>
+            <p>He has worked with renowned artists like <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, <strong>Gazo</strong> and more, while collaborating with global brands like <strong>Rabanne</strong>, <strong>Vogue</strong>, <strong>Dior</strong> and <strong>Nike</strong>.</p>
+            <p>Passionate about movement and cinematography, Konan crafts powerful visual experiences blending meticulous attention to detail with an organic approach.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section class="contact-section" id="contact">
+    <span class="contact-label">Get in Touch</span>
+    <h2>Let's create something together</h2>
+    <a href="mailto:{{ site.email }}" class="contact-email">{{ site.email }}</a>
+    <div class="social-links">
+        <a href="{{ site.instagram }}" target="_blank">Instagram</a>
+        <a href="{{ site.youtube }}" target="_blank">YouTube</a>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer>
+    <span>© 2026 {{ site.title }}. All rights reserved.</span>
+    <span>Paris, France</span>
+</footer>

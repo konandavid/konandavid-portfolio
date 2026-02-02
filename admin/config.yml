@@ -1,0 +1,37 @@
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "projects"
+    label: "Projects"
+    folder: "content/projects"
+    create: true
+    sortable_fields: ["order", "title", "artist"]
+    fields:
+      - { label: "Order", name: "order", widget: "number", default: 10, hint: "Lower number = appears first" }
+      - { label: "Artist", name: "artist", widget: "string" }
+      - { label: "Title", name: "title", widget: "string" }
+      - { label: "Category", name: "category", widget: "select", options: ["Live Show", "Commercial", "Film & Music Video"] }
+      - { label: "Image", name: "image", widget: "image" }
+      - { label: "Description", name: "description", widget: "text" }
+      - { label: "Work Role", name: "work", widget: "string", hint: "e.g., Choreographer, Performer, Creative Director" }
+      - { label: "Date", name: "date", widget: "string", hint: "e.g., June 2024" }
+      - { label: "Video URL", name: "video", widget: "string", required: false }
+
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "general"
+        label: "General Settings"
+        file: "_data/site.json"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "string" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Instagram URL", name: "instagram", widget: "string" }
+          - { label: "YouTube URL", name: "youtube", widget: "string" }
+          - { label: "Vimeo Showreel URL", name: "vimeoShowreel", widget: "string", hint: "Use embed URL: https://player.vimeo.com/video/XXXXXX" }
