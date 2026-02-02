@@ -1,10 +1,10 @@
 ---
 order: 9
-artist: "Dadju"
-title: "Parc des Princes 2022"
-category: "Live Show"
-image: "/uploads/dadju.jpg"
-description: "Performance direction for the historic stadium show."
-work: "Performance Director"
-date: "2022-06-18"
+artist: Dadju
+title: Parc des Princes
+category: Live Show
+image: /uploads/f4d0e4eedf61f20e.jpg
+description: Performance for this historic stadium show.
+work: Performer
+date: 2022-06-18
 ---
