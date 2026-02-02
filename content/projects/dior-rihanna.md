@@ -6,5 +6,5 @@ category: "Commercial"
 image: "/uploads/dior-rihanna.jpg"
 description: "Performer in Steven Klein's campaign shot at Versailles."
 work: "Performer"
-date: "September 2024"
+date: "2024-09-01"
 ---
