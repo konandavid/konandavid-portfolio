@@ -5,6 +5,6 @@ title: "DNK Tour 2023"
 category: "Live Show"
 image: "/uploads/aya-dnk.jpg"
 description: "Choreography for the sold-out Accor Arena shows."
-work: "Choreographer"
-date: "May 2023"
+work: "Performer"
+date: "2024-09-01"
 ---
