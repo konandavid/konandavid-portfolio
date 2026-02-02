@@ -9,9 +9,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #ffffff;
-            --text: #0a0a0a;
-            --text-secondary: #666666;
+            --bg-dark: #0a0a0a;
+            --bg-card: #141414;
+            --bg-hover: #1a1a1a;
+            --text: #ffffff;
+            --text-secondary: #888888;
+            --text-muted: #666666;
         }
 
         * {
@@ -26,7 +29,7 @@
 
         body {
             font-family: 'Instrument Sans', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg);
+            background: var(--bg-dark);
             color: var(--text);
             line-height: 1.6;
             overflow-x: hidden;
@@ -43,13 +46,13 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0);
+            background: rgba(10, 10, 10, 0);
             backdrop-filter: blur(0px);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
+            background: rgba(10, 10, 10, 0.95);
             backdrop-filter: blur(20px);
             padding: 16px 48px;
         }
@@ -94,39 +97,34 @@
 
         /* Hero Section */
         .hero {
-            height: 180vh;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 120px 48px 60px;
             position: relative;
         }
 
-        .hero-sticky {
-            position: sticky;
-            top: 0;
-            height: 100vh;
+        .hero-content {
             display: flex;
             align-items: center;
-            padding: 0 48px;
-            overflow: hidden;
-        }
-
-        .hero-grid {
-            display: grid;
-            grid-template-columns: 1.4fr 1fr;
-            align-items: center;
-            gap: 50px;
+            gap: 60px;
             width: 100%;
-            max-width: 1500px;
+            max-width: 1400px;
             margin: 0 auto;
         }
 
-        /* Showreel 16:9 */
+        /* Showreel 16:9 - centered */
         .hero-showreel {
             position: relative;
             border-radius: 12px;
             overflow: hidden;
+            width: 55%;
             aspect-ratio: 16/9;
-            background: #000;
-            width: 100%;
-            max-width: 700px;
+            background: var(--bg-card);
+            flex-shrink: 0;
+            transition: all 0.4s ease-out;
         }
 
         .hero-showreel iframe {
@@ -139,21 +137,23 @@
         }
 
         /* Titles on right */
-        .hero-content {
+        .hero-text {
             display: flex;
             flex-direction: column;
             gap: 0;
+            transition: opacity 0.4s ease;
         }
 
-        .hero-content h1 {
+        .hero-text h1 {
             font-family: 'Instrument Sans', sans-serif;
-            font-size: clamp(36px, 4.5vw, 58px);
+            font-size: clamp(32px, 4vw, 52px);
             font-weight: 700;
             line-height: 1.12;
             letter-spacing: -0.03em;
+            color: var(--text);
         }
 
-        .hero-content h1 span {
+        .hero-text h1 span {
             display: block;
         }
 
@@ -163,20 +163,21 @@
             flex-direction: column;
             align-items: center;
             gap: 12px;
-            opacity: 0.6;
-            padding: 20px 0 40px;
+            opacity: 0.5;
+            padding: 40px 0;
         }
 
         .scroll-indicator span {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.15em;
+            color: var(--text-secondary);
         }
 
         .scroll-line {
             width: 1px;
             height: 40px;
-            background: linear-gradient(to bottom, var(--text), transparent);
+            background: linear-gradient(to bottom, var(--text-secondary), transparent);
             animation: scrollPulse 2s ease-in-out infinite;
         }
 
@@ -187,7 +188,7 @@
 
         /* Work Section */
         .work-section {
-            padding: 30px 48px 120px;
+            padding: 60px 48px 120px;
         }
 
         .section-header {
@@ -207,14 +208,15 @@
 
         .section-header h2 {
             font-family: 'Instrument Sans', sans-serif;
-            font-size: clamp(28px, 4vw, 40px);
+            font-size: clamp(24px, 3.5vw, 36px);
             font-weight: 600;
             letter-spacing: -0.02em;
+            color: var(--text);
         }
 
         .section-header span {
-            font-size: 14px;
-            color: var(--text-secondary);
+            font-size: 13px;
+            color: var(--text-muted);
         }
 
         /* Projects Grid */
@@ -235,18 +237,19 @@
 
         .projects-grid {
             display: flex;
-            gap: 28px;
+            gap: 24px;
             width: max-content;
         }
 
         /* Project Card */
         .project-card {
-            width: 480px;
+            width: 450px;
             aspect-ratio: 5/4;
             border-radius: 12px;
             overflow: hidden;
             position: relative;
             flex-shrink: 0;
+            background: var(--bg-card);
             opacity: 0;
             transform: translateY(40px);
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
@@ -271,57 +274,57 @@
         .project-info {
             position: absolute;
             inset: 0;
-            padding: 28px;
+            padding: 24px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             background: linear-gradient(
                 to bottom,
-                rgba(0, 0, 0, 0.4) 0%,
-                rgba(0, 0, 0, 0) 40%,
-                rgba(0, 0, 0, 0) 60%,
-                rgba(0, 0, 0, 0.6) 100%
+                rgba(0, 0, 0, 0.5) 0%,
+                rgba(0, 0, 0, 0) 35%,
+                rgba(0, 0, 0, 0) 55%,
+                rgba(0, 0, 0, 0.7) 100%
             );
             color: white;
         }
 
         .project-category {
-            font-size: 11px;
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.12em;
-            opacity: 0.85;
+            opacity: 0.8;
             font-weight: 500;
         }
 
         .project-text {
             display: flex;
             flex-direction: column;
-            gap: 4px;
+            gap: 2px;
         }
 
         .project-artist {
-            font-size: 15px;
-            opacity: 0.85;
-            font-weight: 400;
+            font-size: 14px;
+            font-weight: 600;
+            opacity: 0.95;
         }
 
         .project-title {
             font-family: 'Instrument Sans', sans-serif;
-            font-size: 26px;
+            font-size: 22px;
             font-weight: 600;
             letter-spacing: -0.01em;
             line-height: 1.2;
         }
 
         .project-description {
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.5;
             opacity: 0;
             max-height: 0;
             overflow: hidden;
             transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            margin-top: 10px;
-            color: rgba(255, 255, 255, 0.9);
+            margin-top: 8px;
+            color: rgba(255, 255, 255, 0.85);
         }
 
         .project-card:hover .project-description {
@@ -332,17 +335,17 @@
         .project-card:hover .project-info {
             background: linear-gradient(
                 to bottom,
-                rgba(0, 0, 0, 0.5) 0%,
-                rgba(0, 0, 0, 0.2) 40%,
+                rgba(0, 0, 0, 0.6) 0%,
+                rgba(0, 0, 0, 0.2) 35%,
                 rgba(0, 0, 0, 0.2) 50%,
-                rgba(0, 0, 0, 0.75) 100%
+                rgba(0, 0, 0, 0.85) 100%
             );
         }
 
         /* About Section */
         .about-section {
             padding: 120px 48px;
-            background: #fafafa;
+            background: var(--bg-card);
         }
 
         .about-container {
@@ -360,6 +363,8 @@
             opacity: 0;
             transform: translateX(-40px);
             transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            background: var(--bg-hover);
+            aspect-ratio: 3/4;
         }
 
         .about-image.visible {
@@ -369,7 +374,8 @@
 
         .about-image img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
         }
 
@@ -386,31 +392,33 @@
         }
 
         .about-label {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-bottom: 24px;
         }
 
         .about-content h2 {
             font-family: 'Instrument Sans', sans-serif;
-            font-size: clamp(28px, 3.5vw, 40px);
+            font-size: clamp(26px, 3vw, 36px);
             font-weight: 600;
             line-height: 1.3;
-            margin-bottom: 32px;
+            margin-bottom: 28px;
             letter-spacing: -0.02em;
+            color: var(--text);
         }
 
         .about-content p {
-            font-size: 16px;
+            font-size: 15px;
             line-height: 1.8;
             color: var(--text-secondary);
-            margin-bottom: 16px;
+            margin-bottom: 14px;
         }
 
         .about-content strong {
             color: var(--text);
+            font-weight: 600;
         }
 
         /* Contact Section */
@@ -428,35 +436,36 @@
         }
 
         .contact-label {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.15em;
-            color: var(--text-secondary);
+            color: var(--text-muted);
             margin-bottom: 24px;
         }
 
         .contact-section h2 {
             font-family: 'Instrument Sans', sans-serif;
-            font-size: clamp(32px, 4.5vw, 56px);
+            font-size: clamp(28px, 4vw, 48px);
             font-weight: 600;
-            margin-bottom: 48px;
+            margin-bottom: 40px;
             letter-spacing: -0.02em;
+            color: var(--text);
         }
 
         .contact-email {
             display: inline-block;
-            font-size: 18px;
-            color: var(--text-secondary);
+            font-size: 16px;
+            color: var(--text);
             text-decoration: none;
-            padding: 16px 48px;
-            border: 1px solid #ddd;
+            padding: 14px 40px;
+            border: 1px solid var(--text-muted);
             border-radius: 50px;
             transition: all 0.3s ease;
         }
 
         .contact-email:hover {
             background: var(--text);
-            color: var(--bg);
+            color: var(--bg-dark);
             border-color: var(--text);
         }
 
@@ -464,7 +473,7 @@
             display: flex;
             justify-content: center;
             gap: 32px;
-            margin-top: 48px;
+            margin-top: 40px;
         }
 
         .social-links a {
@@ -484,9 +493,9 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid #eee;
-            font-size: 13px;
-            color: var(--text-secondary);
+            border-top: 1px solid var(--bg-card);
+            font-size: 12px;
+            color: var(--text-muted);
         }
 
         /* Mobile */
@@ -507,18 +516,18 @@
         }
 
         @media (max-width: 1024px) {
-            .hero-grid {
-                grid-template-columns: 1fr;
-                gap: 40px;
+            .hero-content {
+                flex-direction: column;
+                text-align: center;
             }
 
             .hero-showreel {
-                max-width: 100%;
+                width: 100%;
+                max-width: 600px;
             }
 
-            .hero-content {
-                order: -1;
-                text-align: center;
+            .hero-text {
+                align-items: center;
             }
 
             .about-container {
@@ -527,7 +536,7 @@
             }
 
             .project-card {
-                width: 400px;
+                width: 380px;
             }
         }
 
@@ -544,11 +553,11 @@
                 display: flex;
             }
 
-            .hero-sticky {
-                padding: 0 24px;
+            .hero {
+                padding: 100px 24px 40px;
             }
 
-            .hero-content h1 {
+            .hero-text h1 {
                 font-size: 28px;
             }
 
@@ -566,7 +575,7 @@
             }
 
             .project-card {
-                width: 320px;
+                width: 300px;
             }
 
             footer {
@@ -582,53 +591,36 @@
 
     <script>
         // ============================================
-        // SHOWREEL EXPAND TO CENTER & FADE
+        // SHOWREEL EXPAND ON SCROLL (CENTERED)
         // ============================================
         const heroShowreel = document.getElementById('hero-showreel');
-        const heroContent = document.getElementById('hero-content');
+        const heroText = document.getElementById('hero-text');
 
-        if (heroShowreel && heroContent) {
-            function updateHeroOnScroll() {
+        if (heroShowreel && heroText) {
+            function updateShowreel() {
                 const scrollY = window.scrollY;
-                const windowWidth = window.innerWidth;
+                const maxScroll = 400;
+                const progress = Math.min(scrollY / maxScroll, 1);
                 
-                const initialWidth = Math.min(700, windowWidth * 0.45);
-                const initialHeight = initialWidth * 9 / 16;
+                // Scale from 1 to 1.15 (stays centered)
+                const scale = 1 + (progress * 0.15);
+                heroShowreel.style.transform = `scale(${scale})`;
                 
-                const targetWidth = Math.min(900, windowWidth * 0.7);
-                const targetHeight = targetWidth * 9 / 16;
+                // Fade out text
+                heroText.style.opacity = 1 - progress;
+                heroText.style.transform = `translateX(${progress * 30}px)`;
                 
-                const phase1End = 300;
-                const phase1Progress = Math.min(scrollY / phase1End, 1);
-                
-                const currentWidth = initialWidth + (targetWidth - initialWidth) * phase1Progress;
-                
-                const gridLeft = 48;
-                const initialCenterX = gridLeft + initialWidth / 2;
-                const targetCenterX = windowWidth / 2;
-                const offsetX = (targetCenterX - initialCenterX) * phase1Progress;
-                
-                heroShowreel.style.width = currentWidth + 'px';
-                heroShowreel.style.maxWidth = 'none';
-                heroShowreel.style.transform = `translateX(${offsetX}px)`;
-                
-                heroContent.style.opacity = 1 - phase1Progress;
-                heroContent.style.transform = `translateX(${phase1Progress * 50}px)`;
-                
-                const phase2Start = 300;
-                const phase2End = 500;
-                
-                if (scrollY > phase2Start) {
-                    const phase2Progress = Math.min((scrollY - phase2Start) / (phase2End - phase2Start), 1);
-                    heroShowreel.style.opacity = 1 - phase2Progress;
+                // Fade out showreel after text is gone
+                if (scrollY > 300) {
+                    const fadeProgress = Math.min((scrollY - 300) / 200, 1);
+                    heroShowreel.style.opacity = 1 - fadeProgress;
                 } else {
                     heroShowreel.style.opacity = 1;
                 }
             }
 
-            window.addEventListener('scroll', updateHeroOnScroll);
-            window.addEventListener('resize', updateHeroOnScroll);
-            updateHeroOnScroll();
+            window.addEventListener('scroll', updateShowreel);
+            updateShowreel();
         }
 
         // ============================================
