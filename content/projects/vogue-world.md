@@ -6,5 +6,5 @@ category: "Live Show"
 image: "/uploads/vogue-world.jpg"
 description: "Performer at Place Vendôme alongside Gigi Hadid, Bad Bunny & more."
 work: "Performer"
-date: "June 2024"
+date: "2024-06-01"
 ---
