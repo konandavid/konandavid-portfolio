@@ -2,31 +2,39 @@
   "logos": [
     {
       "name": "Vogue",
-      "image": "/uploads/logos/vogue.png"
+      "image": "/uploads/channels4_profile.png"
     },
     {
       "name": "Dior",
-      "image": "/uploads/logos/dior.png"
+      "image": "/uploads/23599595-dior-marque-logo-blanc-conception-symbole-luxe-vetements-mode-vecteur-illustration-avec-noir-contexte-gratuit-vectoriel.png"
     },
     {
       "name": "Nike",
-      "image": "/uploads/logos/nike.png"
+      "image": "/uploads/nike_logo_1.png"
     },
     {
       "name": "Rabanne",
-      "image": "/uploads/logos/rabanne.png"
+      "image": "/uploads/header-logo-rabanne-2.png"
     },
     {
       "name": "NRJ",
-      "image": "/uploads/logos/nrj.png"
+      "image": "/uploads/nrj_idsoi1njdd_0.png"
     },
     {
       "name": "Canal+",
-      "image": "/uploads/logos/canal.png"
+      "image": "/uploads/logo.png"
     },
     {
       "name": "TMC",
-      "image": "/uploads/logos/tmc.png"
+      "image": "/uploads/tmc_logo_2016.svg.png"
+    },
+    {
+      "name": "OkayAfrica",
+      "image": "/uploads/idkwucdn1d_1770072306293.png"
+    },
+    {
+      "name": "Hypebeast",
+      "image": "/uploads/ideycax1ue_1770072028487.png"
     }
   ]
 }
