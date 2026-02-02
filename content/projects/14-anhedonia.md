@@ -1,6 +1,6 @@
 ---
 order: 14
-artist: Short Film
+artist: Konan David
 title: Anhedonia
 category: Film & Music Video
 image: /uploads/anhedonia-insta.png
