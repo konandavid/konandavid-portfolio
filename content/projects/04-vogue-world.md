@@ -1,7 +1,7 @@
 ---
 order: 5
 artist: Vogue
-title: World Paris 2024
+title: World Paris
 category: Live Show
 image: /uploads/channels4_profile.jpg
 description: Performance at Place Vendôme alongside Gigi Hadid, Bad Bunny &
