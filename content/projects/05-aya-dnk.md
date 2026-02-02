@@ -1,7 +1,7 @@
 ---
 order: 5
 artist: Aya Nakamura
-title: DNK Tour 2023
+title: DNK TOUR
 category: Live Show
 image: /uploads/dsc_8363_littleshao_web.jpg
 description: |-
