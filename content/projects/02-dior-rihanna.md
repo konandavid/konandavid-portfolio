@@ -1,5 +1,5 @@
 ---
-order: 2
+order: 3
 artist: Dior x Rihanna
 title: J'Adore Campaign
 category: Commercial
