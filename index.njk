@@ -65,28 +65,26 @@ layout: base.njk
         <span>Drag to explore</span>
     </div>
     <div class="projects-container">
-        <div class="projects-scroll">
-            <div class="projects-grid">
-                {%- for project in collections.projects -%}
-                <article class="project-card" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
-                    <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
-                    {% if project.data.video %}<div class="project-play"></div>{% endif %}
-                    <div class="project-info">
-                        <span class="project-category">{{ project.data.category }}</span>
-                        <div class="project-text">
-                            <span class="project-artist">{{ project.data.artist }}</span>
-                            <h3 class="project-title">{{ project.data.title }}</h3>
-                            <p class="project-description">{{ project.data.description }}</p>
-                        </div>
+        <div class="projects-grid">
+            {%- for project in collections.projects -%}
+            <article class="project-card" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
+                <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
+                {% if project.data.video %}<div class="project-play"></div>{% endif %}
+                <div class="project-info">
+                    <span class="project-category">{{ project.data.category }}</span>
+                    <div class="project-text">
+                        <span class="project-artist">{{ project.data.artist }}</span>
+                        <h3 class="project-title">{{ project.data.title }}</h3>
+                        <p class="project-description">{{ project.data.description }}</p>
                     </div>
-                </article>
-                {%- endfor -%}
-            </div>
+                </div>
+            </article>
+            {%- endfor -%}
         </div>
     </div>
 </section>
 
-<!-- Press / Clients Section - Marquee -->
+<!-- Press / Clients Section -->
 <section class="press-section">
     <p class="press-label">Featured In & Collaborations</p>
     <div class="marquee-wrapper">
@@ -94,7 +92,6 @@ layout: base.njk
             {%- for logo in press.logos -%}
             <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo">
             {%- endfor -%}
-            <!-- Duplicate for seamless loop -->
             {%- for logo in press.logos -%}
             <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo">
             {%- endfor -%}
