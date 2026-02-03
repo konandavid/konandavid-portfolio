@@ -25,8 +25,8 @@
       "image": "/uploads/header-logo-rabanne-2.png"
     },
     {
-      "name": "NRJ",
-      "image": "/uploads/nrj_idsoi1njdd_0.png"
+      "image": "/uploads/1301438-2.png",
+      "name": "Epic label"
     },
     {
       "name": "Hypebeast",
@@ -41,28 +41,32 @@
       "image": "/uploads/tf1-logo-blanc-1.png"
     },
     {
-      "image": "/uploads/id82auqvup_logos.png",
-      "name": "YARDLAND"
-    },
-    {
-      "image": "/uploads/1301438-2.png",
-      "name": "Epic label"
-    },
-    {
       "image": "/uploads/idcvsa6kky_1770082900281.png",
       "name": "UNIVERSAL MUSIC GROUP"
-    },
-    {
-      "image": "/uploads/birth-2025.png",
-      "name": "BIRTH"
     },
     {
       "name": "CANAL",
       "image": "/uploads/canal-logo.png"
     },
     {
+      "name": "NRJ",
+      "image": "/uploads/nrj_idsoi1njdd_0.png"
+    },
+    {
+      "image": "/uploads/id82auqvup_logos.png",
+      "name": "YARDLAND"
+    },
+    {
+      "image": "/uploads/birth-2025.png",
+      "name": "BIRTH"
+    },
+    {
       "name": "TMC",
       "image": "/uploads/tmc_logo_2016.svg-2.png"
+    },
+    {
+      "name": "france tv",
+      "image": "/uploads/1200px-france.tv_-_logo_2018.svg_.png"
     }
   ]
 }
