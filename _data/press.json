@@ -1,16 +1,20 @@
 {
   "logos": [
     {
+      "name": "OkayAfrica",
+      "image": "/uploads/idkwucdn1d_1770072306293.png"
+    },
+    {
       "name": "Vogue",
       "image": "/uploads/channels4_profile.png"
     },
     {
-      "name": "Dior",
-      "image": "/uploads/23599595-dior-marque-logo-blanc-conception-symbole-luxe-vetements-mode-vecteur-illustration-avec-noir-contexte-gratuit-vectoriel.png"
-    },
-    {
       "name": "Nike",
       "image": "/uploads/nike_logo_1.png"
+    },
+    {
+      "name": "Dior",
+      "image": "/uploads/23599595-dior-marque-logo-blanc-conception-symbole-luxe-vetements-mode-vecteur-illustration-avec-noir-contexte-gratuit-vectoriel.png"
     },
     {
       "name": "Rabanne",
@@ -19,10 +23,6 @@
     {
       "name": "NRJ",
       "image": "/uploads/nrj_idsoi1njdd_0.png"
-    },
-    {
-      "name": "OkayAfrica",
-      "image": "/uploads/idkwucdn1d_1770072306293.png"
     },
     {
       "name": "Hypebeast",
@@ -35,6 +35,34 @@
     {
       "name": "TF1",
       "image": "/uploads/tf1-logo-blanc-1.png"
+    },
+    {
+      "image": "/uploads/id82auqvup_logos.png",
+      "name": "YARDLAND"
+    },
+    {
+      "image": "/uploads/idounyk2u5_1770080616830.png",
+      "name": "FRANCE TV"
+    },
+    {
+      "image": "/uploads/1301438-2.png",
+      "name": "Epic label"
+    },
+    {
+      "image": "/uploads/non-stop-logo-rouge-fond-noir-1-1920x567.png",
+      "name": "NONSTOP"
+    },
+    {
+      "image": "/uploads/idcvsa6kky_1770082900281.png",
+      "name": "UNIVERSAL MUSIC GROUP"
+    },
+    {
+      "image": "/uploads/birth-2025.png",
+      "name": "BIRTH"
+    },
+    {
+      "name": "CANAL",
+      "image": "/uploads/logo.png"
     }
   ]
 }
