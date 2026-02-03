@@ -409,26 +409,26 @@
             letter-spacing: 0.02em;
         }
 
-        /* =========================================
-           FIXED HORIZONTAL SCROLL
-           ========================================= */
+        /* ======================================= */
+        /* CORRECTION DU SCROLL ICI (FLUIDE + CLEAN) */
+        /* ======================================= */
+        
         .projects-container {
             display: flex;
-            /* Scroll Natif activé : permet le scroll trackpad fluide */
-            overflow-x: auto;
-            overflow-y: hidden;
+            gap: 28px;
             padding: 20px 48px;
             margin: 0 -48px;
-            gap: 28px;
             
-            /* Fluidité sur mobile */
+            /* C'est ça qui rend le scroll trackpad natif et fluide */
+            overflow-x: auto;
+            scroll-snap-type: x mandatory; 
             -webkit-overflow-scrolling: touch;
             
-            /* Cacher la barre de scroll disgracieuse */
+            /* On cache la barre de scroll disgracieuse */
             scrollbar-width: none;
             -ms-overflow-style: none;
             
-            /* Curseur */
+            /* Pour le drag à la souris */
             cursor: grab;
         }
 
@@ -440,27 +440,29 @@
             cursor: grabbing;
         }
 
+        /* On enlève les widths bizarres, on laisse flex gérer */
         .projects-grid {
-            /* Flex layout pour mettre les items côte à côte */
-            display: flex;
-            gap: 28px;
-            /* Important : on ne force plus de width bizarre */
+            display: contents; /* Astuce: ignore ce div et affiche les enfants directement */
         }
 
         /* Project Card */
         .project-card {
+            flex: 0 0 400px; /* Largeur fixe propre */
             width: 400px;
             aspect-ratio: 4/5;
             border-radius: 16px;
             overflow: hidden;
             position: relative;
-            flex-shrink: 0; /* Empêche les cartes de s'écraser */
             background: var(--bg-tertiary);
+            scroll-snap-align: start; /* Le scroll s'arrête proprement sur les cartes */
+            
+            /* On garde tes animations d'origine ! */
             opacity: 0;
             transform: translateY(60px);
             transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
                         transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
                         box-shadow 0.4s ease;
+            
             box-shadow: 
                 0 10px 40px -10px rgba(0, 0, 0, 0.5),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.08);
@@ -994,7 +996,7 @@
             .hero-showreel { max-width: 100%; }
             .about-container { grid-template-columns: 1fr; gap: 50px; }
             .about-image { max-width: 280px; margin: 0 auto; }
-            .project-card { width: 340px; }
+            .project-card { flex: 0 0 340px; width: 340px; }
             .marquee-track { gap: 60px; }
             .press-logo { height: 22px; }
             .nav-contact span { display: none; }
@@ -1014,7 +1016,7 @@
             .work-section { padding: 60px 24px 40px; }
             .about-section, .contact-section { padding-left: 24px; padding-right: 24px; }
             .projects-container { margin: 0 -24px; padding: 20px 24px; }
-            .project-card { width: 300px; }
+            .project-card { flex: 0 0 300px; width: 300px; }
             .projects-grid { gap: 20px; }
             .press-section { padding: 30px 0 50px; }
             .press-label { padding: 0 24px; }
@@ -1060,38 +1062,33 @@
         }
 
         // ============================================
-        // SIMPLE SCROLL LOGIC
+        // DRAG TO SCROLL (Pour la souris - optionnel mais cool)
         // ============================================
         const slider = document.querySelector('.projects-container');
-        
-        if (slider) {
-            // 1. DRAG TO SCROLL (Pour souris/desktop)
+        if(slider) {
             let isDown = false;
             let startX;
             let scrollLeft;
 
             slider.addEventListener('mousedown', (e) => {
                 isDown = true;
-                slider.classList.add('active'); // Change cursor to grabbing
+                slider.classList.add('active');
                 startX = e.pageX - slider.offsetLeft;
                 scrollLeft = slider.scrollLeft;
             });
-
             slider.addEventListener('mouseleave', () => {
                 isDown = false;
                 slider.classList.remove('active');
             });
-
             slider.addEventListener('mouseup', () => {
                 isDown = false;
                 slider.classList.remove('active');
             });
-
             slider.addEventListener('mousemove', (e) => {
-                if (!isDown) return;
+                if(!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - slider.offsetLeft;
-                const walk = (x - startX) * 2; // Vitesse du drag (x2)
+                const walk = (x - startX) * 2; 
                 slider.scrollLeft = scrollLeft - walk;
             });
         }
@@ -1147,14 +1144,13 @@
         });
 
         // ============================================
-        // SCROLL EFFECTS (Hero & Nav)
+        // SCROLL EFFECTS (Hero & Nav & Reveal)
         // ============================================
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
         const scrollLine = document.querySelector('.scroll-line::after');
         const workSection = document.querySelector('.work-section');
-
         const scrollLineEl = document.querySelector('.scroll-line');
 
         function updateScroll() {
@@ -1162,11 +1158,10 @@
             const maxScroll = 500;
             const progress = Math.min(scrollY / maxScroll, 1);
 
-            // Showreel scale and fade
+            // Showreel
             if (heroShowreel) {
                 const scale = 1 + (progress * 0.08);
                 heroShowreel.style.transform = `scale(${scale})`;
-                
                 if (scrollY > 300) {
                     const fadeProgress = Math.min((scrollY - 300) / 250, 1);
                     heroShowreel.style.opacity = 1 - fadeProgress;
@@ -1181,7 +1176,7 @@
                 heroText.style.opacity = Math.max(0, textOpacity);
             }
             
-            // Scroll line follows scroll
+            // Scroll line
             if (scrollLineEl) {
                 const lineProgress = Math.min(scrollY / 200, 1);
                 const lineAfter = scrollLineEl.querySelector('.line-indicator') || document.createElement('div');
@@ -1194,7 +1189,7 @@
                 lineAfter.style.opacity = 1 - lineProgress;
             }
             
-            // Hide scroll indicator when work section visible
+            // Hide scroll indicator
             if (scrollIndicator && workSection) {
                 const workRect = workSection.getBoundingClientRect();
                 if (workRect.top < window.innerHeight * 0.7) {
@@ -1208,17 +1203,13 @@
         window.addEventListener('scroll', updateScroll, { passive: true });
         updateScroll();
 
-        // ============================================
-        // NAVIGATION
-        // ============================================
+        // Nav blur
         const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
             nav.classList.toggle('scrolled', window.scrollY > 100);
         }, { passive: true });
 
-        // ============================================
-        // SCROLL REVEAL
-        // ============================================
+        // Reveal Animations (Important pour que tes cartes apparaissent !)
         const revealObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('visible');
@@ -1273,29 +1264,6 @@
                     marqueeTrack.classList.add('animating');
                 }, 100);
             });
-
-            marqueeTrack.addEventListener('touchstart', (e) => {
-                isDragging = true;
-                marqueeTrack.classList.remove('animating');
-                startX = e.touches[0].clientX;
-                currentX = getTransformX();
-                marqueeTrack.style.transform = `translateX(${currentX}px)`;
-            }, { passive: true });
-
-            marqueeTrack.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                const diff = e.touches[0].clientX - startX;
-                marqueeTrack.style.transform = `translateX(${currentX + diff}px)`;
-            }, { passive: true });
-
-            marqueeTrack.addEventListener('touchend', () => {
-                if (!isDragging) return;
-                isDragging = false;
-                setTimeout(() => {
-                    marqueeTrack.style.transform = '';
-                    marqueeTrack.classList.add('animating');
-                }, 100);
-            }, { passive: true });
         }
 
         // ============================================
