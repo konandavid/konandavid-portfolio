@@ -409,25 +409,42 @@
             letter-spacing: 0.02em;
         }
 
-        /* Projects - UPDATED for Smooth Logic */
+        /* =========================================
+           FIXED HORIZONTAL SCROLL
+           ========================================= */
         .projects-container {
-            /* IMPORTANT: Hidden so JS controls the scroll */
-            overflow: hidden; 
-            margin: 0 -48px;
+            display: flex;
+            /* Scroll Natif activé : permet le scroll trackpad fluide */
+            overflow-x: auto;
+            overflow-y: hidden;
             padding: 20px 48px;
+            margin: 0 -48px;
+            gap: 28px;
+            
+            /* Fluidité sur mobile */
+            -webkit-overflow-scrolling: touch;
+            
+            /* Cacher la barre de scroll disgracieuse */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            
+            /* Curseur */
             cursor: grab;
         }
 
-        .projects-container:active {
+        .projects-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .projects-container.active {
             cursor: grabbing;
         }
 
         .projects-grid {
+            /* Flex layout pour mettre les items côte à côte */
             display: flex;
             gap: 28px;
-            width: max-content;
-            /* Critical for performance during animation */
-            will-change: transform; 
+            /* Important : on ne force plus de width bizarre */
         }
 
         /* Project Card */
@@ -437,7 +454,7 @@
             border-radius: 16px;
             overflow: hidden;
             position: relative;
-            flex-shrink: 0;
+            flex-shrink: 0; /* Empêche les cartes de s'écraser */
             background: var(--bg-tertiary);
             opacity: 0;
             transform: translateY(60px);
@@ -447,7 +464,7 @@
             box-shadow: 
                 0 10px 40px -10px rgba(0, 0, 0, 0.5),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.08);
-            user-select: none; /* Prevent text selection while dragging */
+            user-select: none;
         }
 
         .project-card.visible {
@@ -467,7 +484,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            pointer-events: none; /* Helps with drag */
+            pointer-events: none;
         }
 
         .project-card:hover img {
@@ -1043,87 +1060,40 @@
         }
 
         // ============================================
-        // SMOOTH WORK SCROLL (CHARM LA'DONNA STYLE)
+        // SIMPLE SCROLL LOGIC
         // ============================================
-        const workContainer = document.querySelector('.projects-container');
-        const workGrid = document.querySelector('.projects-grid');
+        const slider = document.querySelector('.projects-container');
+        
+        if (slider) {
+            // 1. DRAG TO SCROLL (Pour souris/desktop)
+            let isDown = false;
+            let startX;
+            let scrollLeft;
 
-        if (workContainer && workGrid) {
-            let currentX = 0;
-            let targetX = 0;
-            let maxScroll = 0;
-            let isDragging = false;
-            let startX = 0;
-            let dragStartPos = 0;
-
-            // Update max dimensions on resize
-            function updateDimensions() {
-                maxScroll = workGrid.offsetWidth - workContainer.offsetWidth + 96; // 96 = padding
-                if (maxScroll < 0) maxScroll = 0;
-            }
-            window.addEventListener('resize', updateDimensions);
-            updateDimensions();
-
-            // 1. Mouse Wheel Logic
-            workContainer.addEventListener('wheel', (e) => {
-                // If we can scroll horizontally, prevent default vertical scroll
-                if (maxScroll > 0) {
-                    e.preventDefault();
-                    targetX += e.deltaY; // Convert vertical wheel to horizontal
-                    targetX = Math.max(0, Math.min(targetX, maxScroll));
-                }
-            }, { passive: false });
-
-            // 2. Drag Logic
-            workContainer.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                startX = e.clientX;
-                dragStartPos = targetX;
-                workContainer.style.cursor = 'grabbing';
+            slider.addEventListener('mousedown', (e) => {
+                isDown = true;
+                slider.classList.add('active'); // Change cursor to grabbing
+                startX = e.pageX - slider.offsetLeft;
+                scrollLeft = slider.scrollLeft;
             });
 
-            window.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
+            slider.addEventListener('mouseleave', () => {
+                isDown = false;
+                slider.classList.remove('active');
+            });
+
+            slider.addEventListener('mouseup', () => {
+                isDown = false;
+                slider.classList.remove('active');
+            });
+
+            slider.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
                 e.preventDefault();
-                const diff = (e.clientX - startX) * 1.5; // 1.5 multiplier for faster drag
-                targetX = dragStartPos - diff;
-                targetX = Math.max(0, Math.min(targetX, maxScroll));
+                const x = e.pageX - slider.offsetLeft;
+                const walk = (x - startX) * 2; // Vitesse du drag (x2)
+                slider.scrollLeft = scrollLeft - walk;
             });
-
-            window.addEventListener('mouseup', () => {
-                isDragging = false;
-                workContainer.style.cursor = 'grab';
-            });
-
-            // Touch events for mobile
-            workContainer.addEventListener('touchstart', (e) => {
-                isDragging = true;
-                startX = e.touches[0].clientX;
-                dragStartPos = targetX;
-            }, { passive: true });
-
-            workContainer.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                const diff = (e.touches[0].clientX - startX) * 1.5;
-                targetX = dragStartPos - diff;
-                targetX = Math.max(0, Math.min(targetX, maxScroll));
-            }, { passive: true });
-
-            workContainer.addEventListener('touchend', () => {
-                isDragging = false;
-            });
-
-            // 3. Animation Loop (Lerp)
-            function animateScroll() {
-                // Smoothly interpolate current position to target
-                currentX += (targetX - currentX) * 0.08; // 0.08 = smooth factor (lower is slower)
-                
-                // Apply transform
-                workGrid.style.transform = `translateX(${-currentX}px)`;
-                
-                requestAnimationFrame(animateScroll);
-            }
-            animateScroll();
         }
 
         // ============================================
@@ -1177,7 +1147,7 @@
         });
 
         // ============================================
-        // SCROLL EFFECTS
+        // SCROLL EFFECTS (Hero & Nav)
         // ============================================
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
@@ -1185,7 +1155,6 @@
         const scrollLine = document.querySelector('.scroll-line::after');
         const workSection = document.querySelector('.work-section');
 
-        // Scroll line follows scroll
         const scrollLineEl = document.querySelector('.scroll-line');
 
         function updateScroll() {
@@ -1273,7 +1242,6 @@
             let startX = 0;
             let currentX = 0;
 
-            // Start with animation
             marqueeTrack.classList.add('animating');
 
             function getTransformX() {
@@ -1306,7 +1274,6 @@
                 }, 100);
             });
 
-            // Touch events
             marqueeTrack.addEventListener('touchstart', (e) => {
                 isDragging = true;
                 marqueeTrack.classList.remove('animating');
