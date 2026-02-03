@@ -75,10 +75,12 @@
             padding: 16px 48px;
         }
 
+        /* Logo - UPPERCASE with letter-spacing */
         .logo {
-            font-size: 15px;
+            font-size: 13px;
             font-weight: 600;
-            letter-spacing: -0.01em;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
             text-decoration: none;
             color: var(--text-primary);
             transition: color 0.3s ease;
@@ -287,38 +289,62 @@
             border: none;
         }
 
-        /* Titles - below showreel */
+        /* Titles - Premium effect */
         .hero-text {
             text-align: center;
             transition: opacity 0.5s ease, transform 0.5s ease;
+            perspective: 1000px;
         }
 
         .hero-text h1 {
-            font-size: clamp(14px, 2vw, 22px);
+            font-size: clamp(14px, 2vw, 20px);
             font-weight: 500;
-            letter-spacing: 0.15em;
+            letter-spacing: 0.2em;
             text-transform: uppercase;
             color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 0;
         }
 
-        .hero-text h1 span {
-            display: inline;
+        .hero-text h1 .title-word {
+            display: inline-block;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .hero-text h1 .title-word:hover {
+            color: var(--text-primary);
+            transform: translateY(-2px) scale(1.05);
+            text-shadow: 0 10px 30px rgba(255, 107, 53, 0.3);
         }
 
         .hero-text h1 span.separator {
-            margin: 0 12px;
+            margin: 0 16px;
             color: var(--accent);
+            font-size: 1.4em;
+            font-weight: 600;
+            display: inline-block;
+            transition: all 0.4s ease;
+            text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
         }
 
-        /* Scroll indicator - below titles */
+        .hero-text h1 span.separator:hover {
+            transform: scale(1.3) rotate(90deg);
+            text-shadow: 0 0 30px rgba(255, 107, 53, 0.8);
+        }
+
+        /* Scroll indicator - animated line that extends and fades */
         .scroll-indicator {
             margin-top: 24px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 10px;
-            opacity: 0.5;
-            transition: opacity 0.5s ease;
+            opacity: 1;
+            transition: opacity 0.8s ease;
         }
 
         .scroll-indicator.hidden {
@@ -334,19 +360,24 @@
 
         .scroll-line {
             width: 1px;
-            height: 32px;
+            height: 0;
             background: linear-gradient(to bottom, var(--text-muted), transparent);
-            animation: scrollPulse 2s ease-in-out infinite;
+            animation: scrollLineGrow 2s ease-out forwards, scrollLineFade 2s ease-out 1.5s forwards;
         }
 
-        @keyframes scrollPulse {
-            0%, 100% { opacity: 0.3; transform: scaleY(0.6); }
-            50% { opacity: 0.8; transform: scaleY(1); }
+        @keyframes scrollLineGrow {
+            0% { height: 0; opacity: 0.8; }
+            100% { height: 60px; opacity: 0.8; }
+        }
+
+        @keyframes scrollLineFade {
+            0% { opacity: 0.8; }
+            100% { opacity: 0; }
         }
 
         /* Work Section */
         .work-section {
-            padding: 80px 48px 100px;
+            padding: 80px 48px 60px;
             position: relative;
         }
 
@@ -378,9 +409,9 @@
             letter-spacing: 0.02em;
         }
 
-        /* Projects Grid */
+        /* Projects Grid - Fixed scrolling */
         .projects-container {
-            overflow-x: auto;
+            overflow-x: scroll;
             overflow-y: hidden;
             padding-bottom: 20px;
             margin: 0 -48px;
@@ -389,7 +420,7 @@
             scrollbar-width: none;
             -ms-overflow-style: none;
             cursor: grab;
-            user-select: none;
+            -webkit-overflow-scrolling: touch;
         }
 
         .projects-container:active {
@@ -404,6 +435,7 @@
             display: flex;
             gap: 28px;
             width: max-content;
+            padding-right: 48px;
         }
 
         /* Project Card with stronger glow */
@@ -444,6 +476,8 @@
             object-fit: cover;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .project-card:hover img {
@@ -654,9 +688,9 @@
             transform: rotate(-45deg);
         }
 
-        /* Press / Clients Section - Marquee */
+        /* Press / Clients Section - Marquee - Reduced top padding */
         .press-section {
-            padding: 70px 0;
+            padding: 40px 0 70px;
             position: relative;
             overflow: hidden;
         }
@@ -715,8 +749,9 @@
 
         .marquee {
             display: flex;
+            align-items: center;
             gap: 80px;
-            animation: marquee 30s linear infinite;
+            animation: marquee 40s linear infinite;
             width: max-content;
             will-change: transform;
         }
@@ -734,12 +769,15 @@
             }
         }
 
+        /* Uniform logo height */
         .press-logo {
-            height: 30px;
+            height: 24px;
+            width: auto;
             opacity: 0.5;
             transition: opacity 0.3s ease;
             filter: brightness(0) invert(1);
             flex-shrink: 0;
+            object-fit: contain;
         }
 
         .press-logo:hover {
@@ -981,7 +1019,7 @@
             }
 
             .press-logo {
-                height: 26px;
+                height: 22px;
             }
 
             .nav-contact span {
@@ -1023,33 +1061,36 @@
             }
 
             .hero-text h1 {
-                font-size: 12px;
+                font-size: 11px;
                 letter-spacing: 0.1em;
             }
 
             .hero-text h1 span.separator {
-                margin: 0 8px;
+                margin: 0 10px;
+                font-size: 1.3em;
             }
 
             .scroll-indicator {
                 margin-top: 20px;
             }
 
-            .work-section,
+            .work-section {
+                padding: 60px 24px 40px;
+            }
+            
             .about-section,
             .contact-section {
                 padding-left: 24px;
                 padding-right: 24px;
             }
 
-            .work-section {
-                padding-top: 60px;
-                padding-bottom: 80px;
-            }
-
             .projects-container {
                 margin: 0 -24px;
                 padding-left: 24px;
+                padding-right: 24px;
+            }
+
+            .projects-grid {
                 padding-right: 24px;
             }
 
@@ -1062,7 +1103,7 @@
             }
 
             .press-section {
-                padding: 50px 0;
+                padding: 30px 0 50px;
             }
 
             .press-label {
@@ -1074,7 +1115,7 @@
             }
 
             .press-logo {
-                height: 22px;
+                height: 20px;
             }
 
             .about-section,
@@ -1137,6 +1178,7 @@
         document.querySelectorAll('.project-play').forEach(playBtn => {
             playBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
+                e.preventDefault();
                 const card = playBtn.closest('.project-card');
                 const videoUrl = card?.dataset.video;
                 
@@ -1196,15 +1238,12 @@
                 const textOpacity = 1 - (progress * 2);
                 heroText.style.opacity = Math.max(0, textOpacity);
                 
-                // Scroll indicator disappears when projects are half visible
+                // Scroll indicator hides when work section appears
                 if (scrollIndicator && workSection) {
                     const workRect = workSection.getBoundingClientRect();
                     const windowHeight = window.innerHeight;
-                    // Hide when work section is 50% visible
-                    if (workRect.top < windowHeight * 0.5) {
+                    if (workRect.top < windowHeight * 0.7) {
                         scrollIndicator.classList.add('hidden');
-                    } else {
-                        scrollIndicator.classList.remove('hidden');
                     }
                 }
                 
@@ -1260,42 +1299,32 @@
         });
 
         // ============================================
-        // HORIZONTAL SCROLL DRAG FOR PROJECTS
+        // HORIZONTAL SCROLL DRAG FOR PROJECTS - FIXED
         // ============================================
         const projectsContainer = document.querySelector('.projects-container');
         if (projectsContainer) {
             let isDown = false;
             let startX;
             let scrollLeft;
-            let hasMoved = false;
 
             projectsContainer.addEventListener('mousedown', (e) => {
-                // Don't start drag if clicking on play button
                 if (e.target.closest('.project-play')) return;
-                
                 isDown = true;
-                hasMoved = false;
-                projectsContainer.style.cursor = 'grabbing';
+                projectsContainer.classList.add('dragging');
                 startX = e.pageX - projectsContainer.offsetLeft;
                 scrollLeft = projectsContainer.scrollLeft;
             });
 
-            projectsContainer.addEventListener('mouseleave', () => {
+            document.addEventListener('mouseup', () => {
                 isDown = false;
-                projectsContainer.style.cursor = 'grab';
+                projectsContainer.classList.remove('dragging');
             });
 
-            projectsContainer.addEventListener('mouseup', () => {
-                isDown = false;
-                projectsContainer.style.cursor = 'grab';
-            });
-
-            projectsContainer.addEventListener('mousemove', (e) => {
+            document.addEventListener('mousemove', (e) => {
                 if (!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - projectsContainer.offsetLeft;
                 const walk = (x - startX) * 2;
-                if (Math.abs(walk) > 5) hasMoved = true;
                 projectsContainer.scrollLeft = scrollLeft - walk;
             });
 
@@ -1324,10 +1353,8 @@
         if (marqueeContainer && marquee) {
             let isDragging = false;
             let startXMarquee;
-            let scrollLeftMarquee = 0;
             let currentTranslate = 0;
 
-            // Get current translateX from animation
             function getCurrentTranslate() {
                 const style = window.getComputedStyle(marquee);
                 const matrix = new DOMMatrix(style.transform);
@@ -1342,17 +1369,16 @@
                 marqueeContainer.style.cursor = 'grabbing';
             });
 
-            window.addEventListener('mousemove', (e) => {
+            document.addEventListener('mousemove', (e) => {
                 if (!isDragging) return;
                 const diff = e.pageX - startXMarquee;
                 marquee.style.transform = `translateX(${currentTranslate + diff}px)`;
             });
 
-            window.addEventListener('mouseup', () => {
+            document.addEventListener('mouseup', () => {
                 if (isDragging) {
                     isDragging = false;
                     marqueeContainer.style.cursor = 'grab';
-                    // Resume animation after a short delay
                     setTimeout(() => {
                         marquee.classList.remove('paused');
                         marquee.style.transform = '';
@@ -1360,7 +1386,7 @@
                 }
             });
 
-            // Touch support for marquee
+            // Touch support
             marqueeContainer.addEventListener('touchstart', (e) => {
                 marquee.classList.add('paused');
                 startXMarquee = e.touches[0].pageX;
