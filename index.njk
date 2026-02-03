@@ -45,12 +45,10 @@ layout: base.njk
         </div>
         <div class="hero-text" id="hero-text">
             <h1>
-                <span class="title-word">Choreography</span>
+                <span class="title-block">Choreography</span>
                 <span class="separator">+</span>
-                <span class="title-word">Creative</span>
-                <span class="title-word">&</span>
-                <span class="title-word">Movement</span>
-                <span class="title-word">Direction</span>
+                <span class="title-block">Creative & Movement</span>
+                <span class="title-block">Direction</span>
             </h1>
         </div>
         <div class="scroll-indicator">
@@ -67,21 +65,23 @@ layout: base.njk
         <span>Drag to explore</span>
     </div>
     <div class="projects-container">
-        <div class="projects-grid">
-            {%- for project in collections.projects -%}
-            <article class="project-card" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
-                <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
-                {% if project.data.video %}<div class="project-play"></div>{% endif %}
-                <div class="project-info">
-                    <span class="project-category">{{ project.data.category }}</span>
-                    <div class="project-text">
-                        <span class="project-artist">{{ project.data.artist }}</span>
-                        <h3 class="project-title">{{ project.data.title }}</h3>
-                        <p class="project-description">{{ project.data.description }}</p>
+        <div class="projects-scroll">
+            <div class="projects-grid">
+                {%- for project in collections.projects -%}
+                <article class="project-card" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
+                    <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
+                    {% if project.data.video %}<div class="project-play"></div>{% endif %}
+                    <div class="project-info">
+                        <span class="project-category">{{ project.data.category }}</span>
+                        <div class="project-text">
+                            <span class="project-artist">{{ project.data.artist }}</span>
+                            <h3 class="project-title">{{ project.data.title }}</h3>
+                            <p class="project-description">{{ project.data.description }}</p>
+                        </div>
                     </div>
-                </div>
-            </article>
-            {%- endfor -%}
+                </article>
+                {%- endfor -%}
+            </div>
         </div>
     </div>
 </section>
@@ -89,8 +89,8 @@ layout: base.njk
 <!-- Press / Clients Section - Marquee -->
 <section class="press-section">
     <p class="press-label">Featured In & Collaborations</p>
-    <div class="marquee-container">
-        <div class="marquee">
+    <div class="marquee-wrapper">
+        <div class="marquee-track">
             {%- for logo in press.logos -%}
             <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo">
             {%- endfor -%}
