@@ -13,6 +13,10 @@
       "image": "/uploads/nike_logo_1.png"
     },
     {
+      "image": "/uploads/non-stop-logo-rouge-fond-noir-1-1920x567.png",
+      "name": "NONSTOP"
+    },
+    {
       "name": "Dior",
       "image": "/uploads/23599595-dior-marque-logo-blanc-conception-symbole-luxe-vetements-mode-vecteur-illustration-avec-noir-contexte-gratuit-vectoriel.png"
     },
@@ -41,16 +45,8 @@
       "name": "YARDLAND"
     },
     {
-      "image": "/uploads/idounyk2u5_1770080616830.png",
-      "name": "FRANCE TV"
-    },
-    {
       "image": "/uploads/1301438-2.png",
       "name": "Epic label"
-    },
-    {
-      "image": "/uploads/non-stop-logo-rouge-fond-noir-1-1920x567.png",
-      "name": "NONSTOP"
     },
     {
       "image": "/uploads/idcvsa6kky_1770082900281.png",
@@ -62,7 +58,11 @@
     },
     {
       "name": "CANAL",
-      "image": "/uploads/logo.png"
+      "image": "/uploads/canal-logo.png"
+    },
+    {
+      "name": "TMC",
+      "image": "/uploads/tmc_logo_2016.svg-2.png"
     }
   ]
 }
