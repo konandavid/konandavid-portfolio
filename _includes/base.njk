@@ -17,7 +17,6 @@
             --text-secondary: #a1a1a6;
             --text-muted: #6e6e73;
             --accent: #FF6B35;
-            --accent-green: #00A651;
             --accent-glow: rgba(255, 107, 53, 0.5);
         }
 
@@ -89,6 +88,12 @@
             color: var(--accent);
         }
 
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 36px;
+        }
+
         .nav-links {
             display: flex;
             gap: 36px;
@@ -106,6 +111,33 @@
 
         .nav-links a:hover {
             color: var(--accent);
+        }
+
+        /* Contact CTA button in nav */
+        .nav-contact {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+            font-size: 13px;
+            font-weight: 500;
+            padding: 10px 20px;
+            border: 1px solid rgba(255, 107, 53, 0.5);
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .nav-contact:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: #fff;
+        }
+
+        .nav-contact svg {
+            width: 16px;
+            height: 16px;
         }
 
         /* Mobile Menu Button */
@@ -286,11 +318,11 @@
             align-items: center;
             gap: 10px;
             opacity: 0.5;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.5s ease;
         }
 
-        .scroll-indicator:hover {
-            opacity: 0.8;
+        .scroll-indicator.hidden {
+            opacity: 0;
         }
 
         .scroll-indicator span {
@@ -357,6 +389,7 @@
             scrollbar-width: none;
             -ms-overflow-style: none;
             cursor: grab;
+            user-select: none;
         }
 
         .projects-container:active {
@@ -390,7 +423,6 @@
             box-shadow: 
                 0 10px 40px -10px rgba(0, 0, 0, 0.5),
                 0 0 0 1px rgba(255, 255, 255, 0.05);
-            cursor: pointer;
         }
 
         .project-card.visible {
@@ -411,6 +443,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none;
         }
 
         .project-card:hover img {
@@ -433,6 +466,7 @@
             );
             color: white;
             transition: background 0.4s ease;
+            pointer-events: none;
         }
 
         .project-card:hover .project-info {
@@ -461,15 +495,15 @@
             border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        /* Play icon for videos */
+        /* Play icon for videos - only this is clickable */
         .project-play {
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%) scale(0.8);
-            width: 60px;
-            height: 60px;
-            background: rgba(255, 255, 255, 0.15);
+            width: 70px;
+            height: 70px;
+            background: rgba(255, 255, 255, 0.2);
             backdrop-filter: blur(10px);
             border-radius: 50%;
             display: flex;
@@ -477,7 +511,10 @@
             justify-content: center;
             opacity: 0;
             transition: all 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            pointer-events: auto;
+            z-index: 10;
         }
 
         .project-play::before {
@@ -485,7 +522,7 @@
             width: 0;
             height: 0;
             border-style: solid;
-            border-width: 10px 0 10px 16px;
+            border-width: 12px 0 12px 20px;
             border-color: transparent transparent transparent white;
             margin-left: 4px;
         }
@@ -493,6 +530,12 @@
         .project-card:hover .project-play {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
+        }
+
+        .project-play:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            transform: translate(-50%, -50%) scale(1.1) !important;
         }
 
         .project-text {
@@ -642,6 +685,11 @@
             overflow: hidden;
             width: 100%;
             position: relative;
+            cursor: grab;
+        }
+
+        .marquee-container:active {
+            cursor: grabbing;
         }
 
         .marquee-container::before,
@@ -668,11 +716,12 @@
         .marquee {
             display: flex;
             gap: 80px;
-            animation: marquee 25s linear infinite;
+            animation: marquee 30s linear infinite;
             width: max-content;
+            will-change: transform;
         }
 
-        .marquee:hover {
+        .marquee.paused {
             animation-play-state: paused;
         }
 
@@ -865,11 +914,11 @@
         }
 
         .contact-email:hover {
-            background: var(--accent-green);
+            background: var(--accent);
             color: #fff;
-            border-color: var(--accent-green);
+            border-color: var(--accent);
             transform: scale(1.02);
-            box-shadow: 0 0 30px rgba(0, 166, 81, 0.3);
+            box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
         }
 
         .social-links {
@@ -934,6 +983,14 @@
             .press-logo {
                 height: 26px;
             }
+
+            .nav-contact span {
+                display: none;
+            }
+
+            .nav-contact {
+                padding: 10px;
+            }
         }
 
         @media (max-width: 768px) {
@@ -946,6 +1003,10 @@
             }
 
             .nav-links {
+                display: none;
+            }
+
+            .nav-contact {
                 display: none;
             }
 
@@ -1067,17 +1128,19 @@
         }
 
         // ============================================
-        // VIDEO MODAL
+        // VIDEO MODAL - Only triggered by play button
         // ============================================
         const videoModal = document.getElementById('video-modal');
         const modalVideo = document.getElementById('modal-video');
         const modalClose = document.getElementById('modal-close');
 
-        document.querySelectorAll('.project-card[data-video]').forEach(card => {
-            card.addEventListener('click', () => {
-                const videoUrl = card.dataset.video;
+        document.querySelectorAll('.project-play').forEach(playBtn => {
+            playBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const card = playBtn.closest('.project-card');
+                const videoUrl = card?.dataset.video;
+                
                 if (videoUrl) {
-                    // Convert YouTube/Vimeo URLs to embed format
                     let embedUrl = videoUrl;
                     if (videoUrl.includes('youtube.com/watch')) {
                         const videoId = videoUrl.split('v=')[1]?.split('&')[0];
@@ -1119,6 +1182,7 @@
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
+        const workSection = document.querySelector('.work-section');
 
         if (heroShowreel && heroText) {
             function updateShowreel() {
@@ -1132,8 +1196,16 @@
                 const textOpacity = 1 - (progress * 2);
                 heroText.style.opacity = Math.max(0, textOpacity);
                 
-                if (scrollIndicator) {
-                    scrollIndicator.style.opacity = Math.max(0, 0.5 - (progress * 1));
+                // Scroll indicator disappears when projects are half visible
+                if (scrollIndicator && workSection) {
+                    const workRect = workSection.getBoundingClientRect();
+                    const windowHeight = window.innerHeight;
+                    // Hide when work section is 50% visible
+                    if (workRect.top < windowHeight * 0.5) {
+                        scrollIndicator.classList.add('hidden');
+                    } else {
+                        scrollIndicator.classList.remove('hidden');
+                    }
                 }
                 
                 if (scrollY > 300) {
@@ -1188,16 +1260,21 @@
         });
 
         // ============================================
-        // HORIZONTAL SCROLL DRAG + MARQUEE SPEED
+        // HORIZONTAL SCROLL DRAG FOR PROJECTS
         // ============================================
         const projectsContainer = document.querySelector('.projects-container');
         if (projectsContainer) {
             let isDown = false;
             let startX;
             let scrollLeft;
+            let hasMoved = false;
 
             projectsContainer.addEventListener('mousedown', (e) => {
+                // Don't start drag if clicking on play button
+                if (e.target.closest('.project-play')) return;
+                
                 isDown = true;
+                hasMoved = false;
                 projectsContainer.style.cursor = 'grabbing';
                 startX = e.pageX - projectsContainer.offsetLeft;
                 scrollLeft = projectsContainer.scrollLeft;
@@ -1217,42 +1294,94 @@
                 if (!isDown) return;
                 e.preventDefault();
                 const x = e.pageX - projectsContainer.offsetLeft;
-                const walk = (x - startX) * 1.5;
+                const walk = (x - startX) * 2;
+                if (Math.abs(walk) > 5) hasMoved = true;
                 projectsContainer.scrollLeft = scrollLeft - walk;
             });
+
+            // Touch support
+            let touchStartX = 0;
+            let touchScrollLeft = 0;
+
+            projectsContainer.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].pageX;
+                touchScrollLeft = projectsContainer.scrollLeft;
+            }, { passive: true });
+
+            projectsContainer.addEventListener('touchmove', (e) => {
+                const x = e.touches[0].pageX;
+                const walk = (touchStartX - x) * 1.5;
+                projectsContainer.scrollLeft = touchScrollLeft + walk;
+            }, { passive: true });
         }
 
-        // Marquee drag to scroll
+        // ============================================
+        // MARQUEE DRAG CONTROL
+        // ============================================
         const marqueeContainer = document.querySelector('.marquee-container');
         const marquee = document.querySelector('.marquee');
         
         if (marqueeContainer && marquee) {
             let isDragging = false;
             let startXMarquee;
+            let scrollLeftMarquee = 0;
             let currentTranslate = 0;
+
+            // Get current translateX from animation
+            function getCurrentTranslate() {
+                const style = window.getComputedStyle(marquee);
+                const matrix = new DOMMatrix(style.transform);
+                return matrix.m41;
+            }
 
             marqueeContainer.addEventListener('mousedown', (e) => {
                 isDragging = true;
+                marquee.classList.add('paused');
                 startXMarquee = e.pageX;
-                marquee.style.animationPlayState = 'paused';
+                currentTranslate = getCurrentTranslate();
+                marqueeContainer.style.cursor = 'grabbing';
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const diff = e.pageX - startXMarquee;
+                marquee.style.transform = `translateX(${currentTranslate + diff}px)`;
             });
 
             window.addEventListener('mouseup', () => {
                 if (isDragging) {
                     isDragging = false;
-                    marquee.style.animationPlayState = 'running';
+                    marqueeContainer.style.cursor = 'grab';
+                    // Resume animation after a short delay
+                    setTimeout(() => {
+                        marquee.classList.remove('paused');
+                        marquee.style.transform = '';
+                    }, 100);
                 }
             });
 
-            marqueeContainer.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                const diff = e.pageX - startXMarquee;
-                marquee.style.transform = `translateX(${diff}px)`;
-            });
+            // Touch support for marquee
+            marqueeContainer.addEventListener('touchstart', (e) => {
+                marquee.classList.add('paused');
+                startXMarquee = e.touches[0].pageX;
+                currentTranslate = getCurrentTranslate();
+            }, { passive: true });
+
+            marqueeContainer.addEventListener('touchmove', (e) => {
+                const diff = e.touches[0].pageX - startXMarquee;
+                marquee.style.transform = `translateX(${currentTranslate + diff}px)`;
+            }, { passive: true });
+
+            marqueeContainer.addEventListener('touchend', () => {
+                setTimeout(() => {
+                    marquee.classList.remove('paused');
+                    marquee.style.transform = '';
+                }, 100);
+            }, { passive: true });
         }
 
         // ============================================
-        // CLICK FOR SOUND
+        // CLICK FOR SOUND ON SHOWREEL
         // ============================================
         const heroVideo = document.getElementById('hero-video');
         let soundEnabled = false;
