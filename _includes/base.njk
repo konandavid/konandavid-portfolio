@@ -285,7 +285,7 @@
             border: none;
         }
 
-        /* Titles - 3 blocks with subtle glow hover */
+        /* Titles */
         .hero-text {
             text-align: center;
             transition: opacity 0.5s ease, transform 0.5s ease;
@@ -332,7 +332,7 @@
             text-shadow: 0 0 30px rgba(255, 107, 53, 0.8);
         }
 
-        /* Scroll indicator - follows user scroll */
+        /* Scroll indicator */
         .scroll-indicator {
             margin-top: 32px;
             display: flex;
@@ -409,27 +409,28 @@
             letter-spacing: 0.02em;
         }
 
-        /* Projects - Simple horizontal scroll like charmladonna.com */
+        /* Projects - UPDATED for Smooth Logic */
         .projects-container {
-            overflow-x: auto;
-            overflow-y: visible;
+            /* IMPORTANT: Hidden so JS controls the scroll */
+            overflow: hidden; 
             margin: 0 -48px;
             padding: 20px 48px;
-            scrollbar-width: none;
-            -ms-overflow-style: none;
+            cursor: grab;
         }
 
-        .projects-container::-webkit-scrollbar {
-            display: none;
+        .projects-container:active {
+            cursor: grabbing;
         }
 
         .projects-grid {
             display: flex;
             gap: 28px;
             width: max-content;
+            /* Critical for performance during animation */
+            will-change: transform; 
         }
 
-        /* Project Card - restored full border glow */
+        /* Project Card */
         .project-card {
             width: 400px;
             aspect-ratio: 4/5;
@@ -446,6 +447,7 @@
             box-shadow: 
                 0 10px 40px -10px rgba(0, 0, 0, 0.5),
                 inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+            user-select: none; /* Prevent text selection while dragging */
         }
 
         .project-card.visible {
@@ -465,6 +467,7 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            pointer-events: none; /* Helps with drag */
         }
 
         .project-card:hover img {
@@ -672,7 +675,7 @@
             transform: rotate(-45deg);
         }
 
-        /* Press Section - Marquee with working drag */
+        /* Press Section - Marquee */
         .press-section {
             padding: 40px 0 70px;
             position: relative;
@@ -1008,7 +1011,6 @@
 <body>
     {{ content | safe }}
 
-    <!-- Video Modal -->
     <div class="video-modal" id="video-modal">
         <div class="video-modal-content">
             <button class="video-modal-close" id="modal-close"></button>
@@ -1038,6 +1040,90 @@
                     document.body.style.overflow = '';
                 });
             });
+        }
+
+        // ============================================
+        // SMOOTH WORK SCROLL (CHARM LA'DONNA STYLE)
+        // ============================================
+        const workContainer = document.querySelector('.projects-container');
+        const workGrid = document.querySelector('.projects-grid');
+
+        if (workContainer && workGrid) {
+            let currentX = 0;
+            let targetX = 0;
+            let maxScroll = 0;
+            let isDragging = false;
+            let startX = 0;
+            let dragStartPos = 0;
+
+            // Update max dimensions on resize
+            function updateDimensions() {
+                maxScroll = workGrid.offsetWidth - workContainer.offsetWidth + 96; // 96 = padding
+                if (maxScroll < 0) maxScroll = 0;
+            }
+            window.addEventListener('resize', updateDimensions);
+            updateDimensions();
+
+            // 1. Mouse Wheel Logic
+            workContainer.addEventListener('wheel', (e) => {
+                // If we can scroll horizontally, prevent default vertical scroll
+                if (maxScroll > 0) {
+                    e.preventDefault();
+                    targetX += e.deltaY; // Convert vertical wheel to horizontal
+                    targetX = Math.max(0, Math.min(targetX, maxScroll));
+                }
+            }, { passive: false });
+
+            // 2. Drag Logic
+            workContainer.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                dragStartPos = targetX;
+                workContainer.style.cursor = 'grabbing';
+            });
+
+            window.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                e.preventDefault();
+                const diff = (e.clientX - startX) * 1.5; // 1.5 multiplier for faster drag
+                targetX = dragStartPos - diff;
+                targetX = Math.max(0, Math.min(targetX, maxScroll));
+            });
+
+            window.addEventListener('mouseup', () => {
+                isDragging = false;
+                workContainer.style.cursor = 'grab';
+            });
+
+            // Touch events for mobile
+            workContainer.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                dragStartPos = targetX;
+            }, { passive: true });
+
+            workContainer.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const diff = (e.touches[0].clientX - startX) * 1.5;
+                targetX = dragStartPos - diff;
+                targetX = Math.max(0, Math.min(targetX, maxScroll));
+            }, { passive: true });
+
+            workContainer.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+            // 3. Animation Loop (Lerp)
+            function animateScroll() {
+                // Smoothly interpolate current position to target
+                currentX += (targetX - currentX) * 0.08; // 0.08 = smooth factor (lower is slower)
+                
+                // Apply transform
+                workGrid.style.transform = `translateX(${-currentX}px)`;
+                
+                requestAnimationFrame(animateScroll);
+            }
+            animateScroll();
         }
 
         // ============================================
@@ -1101,12 +1187,12 @@
 
         // Scroll line follows scroll
         const scrollLineEl = document.querySelector('.scroll-line');
-        
+
         function updateScroll() {
             const scrollY = window.scrollY;
             const maxScroll = 500;
             const progress = Math.min(scrollY / maxScroll, 1);
-            
+
             // Showreel scale and fade
             if (heroShowreel) {
                 const scale = 1 + (progress * 0.08);
@@ -1179,19 +1265,17 @@
         });
 
         // ============================================
-        // MARQUEE DRAG - FIXED
+        // MARQUEE DRAG
         // ============================================
         const marqueeTrack = document.querySelector('.marquee-track');
-        
         if (marqueeTrack) {
             let isDragging = false;
             let startX = 0;
-            let scrollLeft = 0;
             let currentX = 0;
-            
+
             // Start with animation
             marqueeTrack.classList.add('animating');
-            
+
             function getTransformX() {
                 const style = window.getComputedStyle(marqueeTrack);
                 const matrix = new DOMMatrix(style.transform);
@@ -1205,18 +1289,17 @@
                 currentX = getTransformX();
                 marqueeTrack.style.transform = `translateX(${currentX}px)`;
             });
-            
+
             document.addEventListener('mousemove', (e) => {
                 if (!isDragging) return;
                 e.preventDefault();
                 const diff = e.clientX - startX;
                 marqueeTrack.style.transform = `translateX(${currentX + diff}px)`;
             });
-            
+
             document.addEventListener('mouseup', () => {
                 if (!isDragging) return;
                 isDragging = false;
-                // Resume animation after release
                 setTimeout(() => {
                     marqueeTrack.style.transform = '';
                     marqueeTrack.classList.add('animating');
@@ -1264,7 +1347,7 @@
         }
 
         // ============================================
-        // SMOOTH SCROLL
+        // SMOOTH SCROLL ANCHOR
         // ============================================
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function(e) {
