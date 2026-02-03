@@ -38,14 +38,14 @@ layout: base.njk
         <div class="hero-text" id="hero-text">
             <h1>
                 <span>Choreography</span>
-                <span class="separator">—</span>
+                <span class="separator">+</span>
                 <span>Creative & Movement Direction</span>
             </h1>
         </div>
-    </div>
-    <div class="scroll-indicator">
-        <span>Scroll</span>
-        <div class="scroll-line"></div>
+        <div class="scroll-indicator">
+            <span>Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
     </div>
 </section>
 
@@ -58,8 +58,9 @@ layout: base.njk
     <div class="projects-container">
         <div class="projects-grid">
             {%- for project in collections.projects -%}
-            <article class="project-card">
+            <article class="project-card" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
                 <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
+                {% if project.data.video %}<div class="project-play"></div>{% endif %}
                 <div class="project-info">
                     <span class="project-category">{{ project.data.category }}</span>
                     <div class="project-text">
@@ -74,13 +75,19 @@ layout: base.njk
     </div>
 </section>
 
-<!-- Press / Clients Section -->
+<!-- Press / Clients Section - Marquee -->
 <section class="press-section">
     <p class="press-label">Featured In & Collaborations</p>
-    <div class="press-logos">
-        {%- for logo in press.logos -%}
-        <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo">
-        {%- endfor -%}
+    <div class="marquee-container">
+        <div class="marquee">
+            {%- for logo in press.logos -%}
+            <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo">
+            {%- endfor -%}
+            <!-- Duplicate for seamless loop -->
+            {%- for logo in press.logos -%}
+            <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo">
+            {%- endfor -%}
+        </div>
     </div>
 </section>
 
