@@ -51,7 +51,7 @@
             background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
         }
 
-        /* Navigation - Fixed at top */
+        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -226,6 +226,7 @@
             z-index: 1;
         }
 
+        /* Showreel with subtle orange glow */
         .hero-showreel {
             position: relative;
             border-radius: 20px;
@@ -235,7 +236,9 @@
             aspect-ratio: 16/9;
             background: var(--bg-tertiary);
             transition: transform 0.6s ease, opacity 0.6s ease;
-            box-shadow: 0 60px 120px -30px rgba(0, 0, 0, 0.7);
+            box-shadow: 
+                0 60px 120px -30px rgba(0, 0, 0, 0.7),
+                0 30px 60px -20px rgba(255, 107, 53, 0.12);
         }
 
         .hero-showreel::before {
@@ -260,11 +263,11 @@
             border: none;
         }
 
-        /* Title - tighter spacing, 3 blocks */
+        /* Title - natural spacing */
         .hero-text h1 {
             font-size: clamp(11px, 1.4vw, 16px);
             font-weight: 500;
-            letter-spacing: 0.08em;
+            letter-spacing: 0.12em;
             text-transform: uppercase;
             color: var(--text-secondary);
             display: flex;
@@ -283,7 +286,7 @@
         }
 
         .hero-text .separator {
-            margin: 0 12px;
+            margin: 0 14px;
             color: var(--accent);
             font-size: 1.1em;
             font-weight: 600;
@@ -293,10 +296,6 @@
 
         .hero-text .separator:hover {
             transform: scale(1.2) rotate(90deg);
-        }
-
-        .hero-text .spacer {
-            margin: 0 8px;
         }
 
         /* Scroll indicator */
@@ -347,7 +346,7 @@
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 24px;
+            margin-bottom: 32px;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.6s ease;
@@ -402,7 +401,7 @@
             100% { left: 50px; opacity: 0; }
         }
 
-        /* Projects - horizontal scroll */
+        /* Projects wrapper */
         .projects-wrapper {
             position: relative;
         }
@@ -412,7 +411,7 @@
             gap: 28px;
             overflow-x: auto;
             overflow-y: hidden;
-            padding: 20px 0;
+            padding: 20px 0 30px;
             margin: 0 -48px;
             padding-left: 48px;
             padding-right: 48px;
@@ -426,7 +425,7 @@
             display: none;
         }
 
-        /* Project Card */
+        /* Project Card - softer glow, no hard edges */
         .project-card {
             width: 400px;
             min-width: 400px;
@@ -437,16 +436,18 @@
             flex-shrink: 0;
             background: var(--bg-tertiary);
             scroll-snap-align: start;
+            /* Softer, more diffused glow - no hard lines */
             box-shadow: 
-                0 20px 60px -20px rgba(0, 0, 0, 0.8),
-                0 10px 40px -10px rgba(255, 107, 53, 0.15);
-            transition: box-shadow 0.4s ease;
+                0 8px 32px rgba(0, 0, 0, 0.4),
+                0 0 80px -20px rgba(255, 107, 53, 0.2);
+            transition: all 0.4s ease;
         }
 
         .project-card:hover {
             box-shadow: 
-                0 30px 80px -20px rgba(0, 0, 0, 0.9),
-                0 20px 60px -10px rgba(255, 107, 53, 0.3);
+                0 16px 48px rgba(0, 0, 0, 0.5),
+                0 0 100px -10px rgba(255, 107, 53, 0.35);
+            transform: translateY(-4px);
         }
 
         .project-card::before {
@@ -680,7 +681,7 @@
         .video-modal-close::before { transform: translate(-50%, -50%) rotate(45deg); }
         .video-modal-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 
-        /* Press Section - Simple marquee */
+        /* Press Section */
         .press-section {
             padding: 40px 0 70px;
             overflow: hidden;
@@ -925,9 +926,8 @@
             .mobile-menu-btn { display: flex; }
             .mobile-menu { display: flex; }
             .hero { padding: 80px 24px 20px; }
-            .hero-text h1 { font-size: 9px; letter-spacing: 0.06em; }
+            .hero-text h1 { font-size: 9px; letter-spacing: 0.08em; }
             .hero-text .separator { margin: 0 8px; font-size: 1em; }
-            .hero-text .spacer { margin: 0 4px; }
             .work-section { padding: 30px 24px 60px; }
             .projects-container { 
                 margin: 0 -24px; 
@@ -1035,6 +1035,13 @@
             
             document.querySelector('nav')?.classList.toggle('scrolled', y > 100);
         }, { passive: true });
+
+        // Section reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
 
         // Project scroll arrows
         const container = document.querySelector('.projects-container');
