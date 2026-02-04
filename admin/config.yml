@@ -17,23 +17,9 @@ collections:
       - { label: "Title", name: "title", widget: "string" }
       - { label: "Category", name: "category", widget: "select", options: ["Live Show", "Commercial", "Film & Music Video"] }
       - { label: "Image", name: "image", widget: "image" }
-      - { label: "Description", name: "description", widget: "text" }
-      - { label: "Work Role", name: "work", widget: "string", hint: "e.g., Choreographer, Performer, Creative Director" }
-      - { label: "Date", name: "date", widget: "datetime", format: "YYYY-MM-DD" }
-
-  - name: "press"
-    label: "Press & Logos"
-    files:
-      - name: "logos"
-        label: "Brand Logos"
-        file: "_data/press.json"
-        fields:
-          - label: "Logos"
-            name: "logos"
-            widget: "list"
-            fields:
-              - { label: "Brand Name", name: "name", widget: "string" }
-              - { label: "Logo Image", name: "image", widget: "image", hint: "Upload PNG with transparent background" }
+      - { label: "Description (English)", name: "description", widget: "text" }
+      - { label: "Description (Français)", name: "description_fr", widget: "text" }
+      - { label: "Video URL", name: "video", widget: "string", required: false }
 
   - name: "settings"
     label: "Site Settings"
@@ -48,3 +34,44 @@ collections:
           - { label: "Instagram URL", name: "instagram", widget: "string" }
           - { label: "YouTube URL", name: "youtube", widget: "string" }
           - { label: "Vimeo Showreel URL", name: "vimeoShowreel", widget: "string", hint: "Use embed URL: https://player.vimeo.com/video/XXXXXX" }
+
+      - name: "about"
+        label: "About Section"
+        file: "_data/about.json"
+        fields:
+          - { label: "About Image", name: "image", widget: "image" }
+          - label: "English Content"
+            name: "en"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "About" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Paragraph 1", name: "p1", widget: "text" }
+              - { label: "Paragraph 2", name: "p2", widget: "text" }
+              - { label: "Paragraph 3", name: "p3", widget: "text" }
+          - label: "French Content"
+            name: "fr"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "À propos" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Paragraph 1", name: "p1", widget: "text" }
+              - { label: "Paragraph 2", name: "p2", widget: "text" }
+              - { label: "Paragraph 3", name: "p3", widget: "text" }
+
+      - name: "contact"
+        label: "Contact Section"
+        file: "_data/contact.json"
+        fields:
+          - label: "English Content"
+            name: "en"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "Get in Touch" }
+              - { label: "Title", name: "title", widget: "string", default: "Let's create something together" }
+          - label: "French Content"
+            name: "fr"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "Contact" }
+              - { label: "Title", name: "title", widget: "string", default: "Créons quelque chose ensemble" }
