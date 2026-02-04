@@ -475,7 +475,7 @@
             display: none;
         }
 
-        /* Project Card - Premium smooth glow */
+        /* Project Card - Light smooth glow */
         .project-card {
             width: 400px;
             min-width: 400px;
@@ -487,28 +487,20 @@
             background: var(--bg-tertiary);
             scroll-snap-align: start;
             -webkit-scroll-snap-align: start;
-            /* Multi-layer smooth glow */
+            /* Light, smooth glow */
             box-shadow: 
-                0 2px 8px rgba(0, 0, 0, 0.3),
-                0 8px 24px rgba(0, 0, 0, 0.4),
-                0 16px 48px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 107, 53, 0.03),
-                0 4px 24px -4px rgba(255, 107, 53, 0.15),
-                0 12px 48px -8px rgba(255, 107, 53, 0.12),
-                0 24px 80px -16px rgba(255, 107, 53, 0.08);
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+                0 4px 16px rgba(0, 0, 0, 0.4),
+                0 8px 32px rgba(0, 0, 0, 0.3),
+                0 0 60px -20px rgba(255, 107, 53, 0.15);
+            transition: all 0.4s ease;
         }
 
         .project-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-4px);
             box-shadow: 
-                0 4px 12px rgba(0, 0, 0, 0.3),
-                0 12px 32px rgba(0, 0, 0, 0.4),
-                0 24px 64px rgba(0, 0, 0, 0.3),
-                0 0 0 1px rgba(255, 107, 53, 0.1),
-                0 8px 32px -4px rgba(255, 107, 53, 0.25),
-                0 20px 64px -8px rgba(255, 107, 53, 0.2),
-                0 32px 100px -16px rgba(255, 107, 53, 0.15);
+                0 8px 24px rgba(0, 0, 0, 0.4),
+                0 16px 48px rgba(0, 0, 0, 0.3),
+                0 0 80px -15px rgba(255, 107, 53, 0.25);
         }
 
         .project-card::before {
@@ -517,35 +509,25 @@
             inset: 0;
             border-radius: 16px;
             padding: 1px;
-            background: linear-gradient(
-                135deg,
-                rgba(255, 255, 255, 0.1),
-                rgba(255, 255, 255, 0.02) 50%,
-                rgba(255, 107, 53, 0.05)
-            );
+            background: rgba(255, 255, 255, 0.08);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
             z-index: 5;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.4s ease;
         }
 
         .project-card:hover::before {
-            background: linear-gradient(
-                135deg,
-                rgba(255, 107, 53, 0.4),
-                rgba(255, 107, 53, 0.1) 50%,
-                rgba(255, 107, 53, 0.2)
-            );
+            background: var(--accent);
         }
 
         .project-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s ease;
             pointer-events: none;
             user-select: none;
             -webkit-user-select: none;
@@ -1053,9 +1035,39 @@
 
     <script>
         // ===================
-        // TRANSLATIONS
+        // LANGUAGE SYSTEM
         // ===================
-        const translations = {
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+            
+            // Toggle visibility of language-specific elements
+            document.querySelectorAll('[data-lang-en]').forEach(el => {
+                el.style.display = lang === 'en' ? '' : 'none';
+            });
+            document.querySelectorAll('[data-lang-fr]').forEach(el => {
+                el.style.display = lang === 'fr' ? '' : 'none';
+            });
+            
+            // Update static translations
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (staticTranslations[lang] && staticTranslations[lang][key]) {
+                    el.innerHTML = staticTranslations[lang][key];
+                }
+            });
+            
+            // Update active state on all toggle buttons
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        // Static translations for UI elements
+        const staticTranslations = {
             en: {
                 work: 'Work',
                 about: 'About',
@@ -1063,13 +1075,6 @@
                 selectedWork: 'Selected Work',
                 dragToExplore: 'Drag to explore',
                 featuredIn: 'Featured In & Collaborations',
-                aboutLabel: 'About',
-                aboutTitle: 'Creating powerful visual experiences through movement',
-                aboutP1: 'Born in Abidjan, Côte d\'Ivoire, and raised in France, Konan David operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong>, and <strong>Vogue</strong>.',
-                aboutP2: 'Specializing in artist development and movement coaching, Konan empowers performers to unlock their expressive potential. Alongside this expertise, he has worked with renowned artists such as <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, and <strong>Dadju</strong>.',
-                aboutP3: 'His work is defined by meticulous attention to detail, raw attitude, and effortless flow. Driven by cinematic vision and cultural authenticity, Konan continuously explores new visual languages to elevate every artistic narrative.',
-                contactLabel: 'Get in Touch',
-                contactTitle: 'Let\'s create something together',
                 copyright: '© 2026 Konan David. All rights reserved.',
                 location: 'Paris, France'
             },
@@ -1080,41 +1085,10 @@
                 selectedWork: 'Projets Sélectionnés',
                 dragToExplore: 'Glissez pour explorer',
                 featuredIn: 'Collaborations & Parutions',
-                aboutLabel: 'À propos',
-                aboutTitle: 'Créer des expériences visuelles puissantes à travers le mouvement',
-                aboutP1: 'Né à Abidjan, en Côte d\'Ivoire, et élevé en France, Konan David évolue à l\'intersection de la culture urbaine et de la production haut de gamme. Son travail comprend des tournées à guichets fermés, des films de danse, des clips musicaux et des collaborations mode avec des marques internationales telles que <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong> et <strong>Vogue</strong>.',
-                aboutP2: 'Spécialisé dans le développement artistique et le coaching de mouvement, Konan aide les artistes à libérer leur potentiel expressif. Fort de cette expertise, il a travaillé avec des artistes renommés tels que <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong> et <strong>Dadju</strong>.',
-                aboutP3: 'Son travail se distingue par une attention méticuleuse aux détails, une attitude brute et un flow naturel. Guidé par une vision cinématographique et une authenticité culturelle, Konan explore continuellement de nouveaux langages visuels pour sublimer chaque récit artistique.',
-                contactLabel: 'Contact',
-                contactTitle: 'Créons quelque chose ensemble',
                 copyright: '© 2026 Konan David. Tous droits réservés.',
                 location: 'Paris, France'
             }
         };
-
-        // ===================
-        // LANGUAGE SYSTEM
-        // ===================
-        let currentLang = localStorage.getItem('lang') || 'en';
-
-        function setLanguage(lang) {
-            currentLang = lang;
-            localStorage.setItem('lang', lang);
-            document.documentElement.lang = lang;
-            
-            // Update all translatable elements
-            document.querySelectorAll('[data-i18n]').forEach(el => {
-                const key = el.dataset.i18n;
-                if (translations[lang] && translations[lang][key]) {
-                    el.innerHTML = translations[lang][key];
-                }
-            });
-            
-            // Update active state on all toggle buttons
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-        }
 
         // Initialize language
         document.addEventListener('DOMContentLoaded', () => {
