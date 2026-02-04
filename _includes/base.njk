@@ -422,7 +422,6 @@
             -ms-overflow-style: none;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            overscroll-behavior-x: contain;
         }
 
         .projects-container::-webkit-scrollbar {
@@ -1032,54 +1031,25 @@
             }
         });
 
-        // ASYMMETRIC scroll effects
-        // Scroll DOWN = slow disappear (long range)
-        // Scroll UP = fast reappear (short range)
+        // Hero elements fade based on scroll position
+        // Overlapping ranges for smooth transitions
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
-        
-        let lastY = 0;
-        let showreelOpacity = 1;
-        let titleOpacity = 1;
-        let indicatorOpacity = 1;
 
         function handleScroll() {
             const y = window.scrollY;
-            const scrollingDown = y > lastY;
+            const vh = window.innerHeight;
             
-            // Different speeds for up vs down
-            const speed = scrollingDown ? 0.003 : 0.015; // 5x faster when going up
-            const delta = Math.abs(y - lastY) * speed;
+            // Showreel: fades from 0 to 400px scroll
+            const showreelOpacity = Math.max(0, 1 - (y / 400));
             
-            if (scrollingDown) {
-                // Disappear order: showreel -> title -> indicator
-                if (showreelOpacity > 0) {
-                    showreelOpacity = Math.max(0, showreelOpacity - delta);
-                } else if (titleOpacity > 0) {
-                    titleOpacity = Math.max(0, titleOpacity - delta);
-                } else if (indicatorOpacity > 0) {
-                    indicatorOpacity = Math.max(0, indicatorOpacity - delta);
-                }
-            } else {
-                // Reappear order: indicator -> title -> showreel (reverse)
-                if (indicatorOpacity < 1) {
-                    indicatorOpacity = Math.min(1, indicatorOpacity + delta);
-                } else if (titleOpacity < 1) {
-                    titleOpacity = Math.min(1, titleOpacity + delta);
-                } else if (showreelOpacity < 1) {
-                    showreelOpacity = Math.min(1, showreelOpacity + delta);
-                }
-            }
+            // Title: fades from 200 to 500px (starts when showreel is at 50%)
+            const titleOpacity = Math.max(0, Math.min(1, 1 - ((y - 200) / 300)));
             
-            // At top, reset everything to visible
-            if (y <= 10) {
-                showreelOpacity = 1;
-                titleOpacity = 1;
-                indicatorOpacity = 1;
-            }
+            // Indicator: fades from 350 to 550px (starts when title is fading)
+            const indicatorOpacity = Math.max(0, Math.min(1, 1 - ((y - 350) / 200)));
             
-            // Apply opacities
             if (heroShowreel) {
                 heroShowreel.style.opacity = showreelOpacity;
                 heroShowreel.style.transform = `scale(${1 + (1 - showreelOpacity) * 0.1})`;
@@ -1088,7 +1058,6 @@
             if (scrollIndicator) scrollIndicator.style.opacity = indicatorOpacity;
             
             document.querySelector('nav')?.classList.toggle('scrolled', y > 100);
-            lastY = y;
         }
 
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -1101,29 +1070,12 @@
 
         document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
 
-        // Horizontal scroll - capture wheel on the whole section
+        // Horizontal scroll for projects - simple version
         const container = document.querySelector('.projects-container');
-        const workSection = document.querySelector('.work-section');
         const leftArrow = document.getElementById('scroll-left');
         const rightArrow = document.getElementById('scroll-right');
 
-        workSection?.addEventListener('wheel', (e) => {
-            // Check if cursor is over the projects area
-            const rect = container.getBoundingClientRect();
-            if (e.clientY >= rect.top && e.clientY <= rect.bottom) {
-                const atStart = container.scrollLeft <= 0;
-                const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 5;
-                
-                // Use deltaX if available (trackpad horizontal), otherwise convert deltaY
-                let scrollAmount = e.deltaX !== 0 ? e.deltaX : e.deltaY;
-                
-                if ((scrollAmount > 0 && !atEnd) || (scrollAmount < 0 && !atStart)) {
-                    e.preventDefault();
-                    container.scrollLeft += scrollAmount;
-                }
-            }
-        }, { passive: false });
-
+        // Just arrows, no wheel hijacking - let native scroll work
         leftArrow?.addEventListener('click', () => container.scrollBy({ left: -400, behavior: 'smooth' }));
         rightArrow?.addEventListener('click', () => container.scrollBy({ left: 400, behavior: 'smooth' }));
 
@@ -1135,7 +1087,7 @@
         container?.addEventListener('scroll', updateArrows);
         updateArrows();
 
-        // Smooth scroll
+        // Smooth scroll for nav links
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', (e) => {
                 e.preventDefault();
