@@ -27,8 +27,10 @@
 
         html {
             scroll-behavior: smooth;
+            overflow-x: hidden;
         }
 
+        /* Block horizontal scroll on entire site */
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
@@ -36,6 +38,9 @@
             line-height: 1.5;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
+            position: relative;
+            width: 100%;
+            max-width: 100vw;
         }
 
         body::before {
@@ -201,6 +206,7 @@
             align-items: center;
             padding: 100px 48px 20px;
             position: relative;
+            overflow: hidden;
         }
 
         .hero::before {
@@ -340,6 +346,7 @@
         /* Work Section */
         .work-section {
             padding: 40px 48px 60px;
+            overflow: hidden;
         }
 
         .section-header {
@@ -404,6 +411,7 @@
         /* Projects wrapper */
         .projects-wrapper {
             position: relative;
+            overflow: visible;
         }
 
         .projects-container {
@@ -425,7 +433,7 @@
             display: none;
         }
 
-        /* Project Card - softer glow, no hard edges */
+        /* Project Card - minimal glow, no visible edges */
         .project-card {
             width: 400px;
             min-width: 400px;
@@ -436,17 +444,16 @@
             flex-shrink: 0;
             background: var(--bg-tertiary);
             scroll-snap-align: start;
-            /* Softer, more diffused glow - no hard lines */
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.4),
-                0 0 80px -20px rgba(255, 107, 53, 0.2);
+            /* Very subtle shadow - no visible orange glow edges */
+            box-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.6);
             transition: all 0.4s ease;
         }
 
         .project-card:hover {
+            /* Orange glow only on hover, contained within card area */
             box-shadow: 
-                0 16px 48px rgba(0, 0, 0, 0.5),
-                0 0 100px -10px rgba(255, 107, 53, 0.35);
+                0 20px 50px -15px rgba(0, 0, 0, 0.7),
+                0 0 40px -15px rgba(255, 107, 53, 0.4);
             transform: translateY(-4px);
         }
 
@@ -763,6 +770,7 @@
             padding: 100px 48px;
             background: var(--bg-secondary);
             position: relative;
+            overflow: hidden;
         }
 
         .about-section::before {
@@ -835,6 +843,7 @@
             padding: 100px 48px;
             text-align: center;
             position: relative;
+            overflow: hidden;
         }
 
         .contact-section::before {
@@ -908,6 +917,7 @@
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 12px;
             color: var(--text-muted);
+            overflow: hidden;
         }
 
         /* Mobile */
