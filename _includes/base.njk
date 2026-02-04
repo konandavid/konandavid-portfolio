@@ -30,7 +30,6 @@
             overflow-x: hidden;
         }
 
-        /* Block horizontal scroll on entire site */
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-primary);
@@ -232,7 +231,7 @@
             z-index: 1;
         }
 
-        /* Showreel with subtle orange glow */
+        /* Showreel - no transition delay for instant load */
         .hero-showreel {
             position: relative;
             border-radius: 20px;
@@ -241,7 +240,6 @@
             max-width: 900px;
             aspect-ratio: 16/9;
             background: var(--bg-tertiary);
-            transition: transform 0.6s ease, opacity 0.6s ease;
             box-shadow: 
                 0 60px 120px -30px rgba(0, 0, 0, 0.7),
                 0 30px 60px -20px rgba(255, 107, 53, 0.12);
@@ -269,7 +267,7 @@
             border: none;
         }
 
-        /* Title - natural spacing */
+        /* Title */
         .hero-text h1 {
             font-size: clamp(11px, 1.4vw, 16px);
             font-weight: 500;
@@ -414,6 +412,7 @@
             overflow: visible;
         }
 
+        /* Projects container - scrollable from anywhere */
         .projects-container {
             display: flex;
             gap: 28px;
@@ -427,13 +426,18 @@
             -ms-overflow-style: none;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+            cursor: grab;
+        }
+
+        .projects-container:active {
+            cursor: grabbing;
         }
 
         .projects-container::-webkit-scrollbar {
             display: none;
         }
 
-        /* Project Card - minimal glow, no visible edges */
+        /* Project Card - stronger but contained glow */
         .project-card {
             width: 400px;
             min-width: 400px;
@@ -444,16 +448,18 @@
             flex-shrink: 0;
             background: var(--bg-tertiary);
             scroll-snap-align: start;
-            /* Very subtle shadow - no visible orange glow edges */
-            box-shadow: 0 10px 40px -15px rgba(0, 0, 0, 0.6);
+            /* Stronger orange glow, more contained */
+            box-shadow: 
+                0 4px 20px rgba(0, 0, 0, 0.5),
+                0 8px 25px -5px rgba(255, 107, 53, 0.25);
             transition: all 0.4s ease;
+            pointer-events: auto;
         }
 
         .project-card:hover {
-            /* Orange glow only on hover, contained within card area */
             box-shadow: 
-                0 20px 50px -15px rgba(0, 0, 0, 0.7),
-                0 0 40px -15px rgba(255, 107, 53, 0.4);
+                0 8px 30px rgba(0, 0, 0, 0.6),
+                0 12px 35px -5px rgba(255, 107, 53, 0.4);
             transform: translateY(-4px);
         }
 
@@ -482,6 +488,9 @@
             height: 100%;
             object-fit: cover;
             transition: transform 0.8s ease;
+            pointer-events: none;
+            user-select: none;
+            -webkit-user-drag: none;
         }
 
         .project-card:hover img {
@@ -497,6 +506,7 @@
             justify-content: flex-end;
             background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
             color: white;
+            pointer-events: none;
         }
 
         .project-category {
@@ -531,6 +541,7 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             z-index: 10;
+            pointer-events: auto;
         }
 
         .project-play::before {
@@ -1022,13 +1033,13 @@
             }
         });
 
-        // Scroll effects
+        // Scroll effects - no delay
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
         const workSection = document.querySelector('.work-section');
 
-        window.addEventListener('scroll', () => {
+        function handleScroll() {
             const y = window.scrollY;
             const progress = Math.min(y / 500, 1);
             
@@ -1044,7 +1055,9 @@
             }
             
             document.querySelector('nav')?.classList.toggle('scrolled', y > 100);
-        }, { passive: true });
+        }
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
 
         // Section reveal
         const observer = new IntersectionObserver((entries) => {
@@ -1053,8 +1066,40 @@
 
         document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
 
-        // Project scroll arrows
+        // Projects horizontal scroll - drag from anywhere
         const container = document.querySelector('.projects-container');
+        let isDown = false;
+        let startX;
+        let scrollLeft;
+
+        container?.addEventListener('mousedown', (e) => {
+            // Don't interfere with play button clicks
+            if (e.target.closest('.project-play')) return;
+            isDown = true;
+            container.style.cursor = 'grabbing';
+            startX = e.pageX - container.offsetLeft;
+            scrollLeft = container.scrollLeft;
+        });
+
+        container?.addEventListener('mouseleave', () => {
+            isDown = false;
+            container.style.cursor = 'grab';
+        });
+
+        container?.addEventListener('mouseup', () => {
+            isDown = false;
+            container.style.cursor = 'grab';
+        });
+
+        container?.addEventListener('mousemove', (e) => {
+            if (!isDown) return;
+            e.preventDefault();
+            const x = e.pageX - container.offsetLeft;
+            const walk = (x - startX) * 1.5;
+            container.scrollLeft = scrollLeft - walk;
+        });
+
+        // Arrow buttons
         const leftArrow = document.getElementById('scroll-left');
         const rightArrow = document.getElementById('scroll-right');
 
@@ -1067,7 +1112,7 @@
         }
         
         container?.addEventListener('scroll', updateArrows);
-        setTimeout(updateArrows, 100);
+        updateArrows();
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(a => {
