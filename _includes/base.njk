@@ -243,7 +243,7 @@
             box-shadow: 
                 0 60px 120px -30px rgba(0, 0, 0, 0.7),
                 0 30px 60px -20px rgba(255, 107, 53, 0.12);
-            transition: opacity 0.3s ease, transform 0.3s ease;
+            transition: opacity 0.2s ease, transform 0.2s ease;
         }
 
         .hero-showreel::before {
@@ -271,7 +271,7 @@
 
         /* Title */
         .hero-text {
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
         }
 
         .hero-text h1 {
@@ -314,7 +314,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.2s ease;
         }
 
         .scroll-line {
@@ -408,13 +408,23 @@
             100% { left: 50px; opacity: 0; }
         }
 
-        /* Projects wrapper */
+        /* Projects wrapper with scroll zone */
         .projects-wrapper {
             position: relative;
             overflow: visible;
         }
 
-        /* Projects container - horizontal scroll */
+        /* Scroll capture zone - invisible overlay */
+        .scroll-zone {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 1;
+        }
+
+        /* Projects container */
         .projects-container {
             display: flex;
             gap: 28px;
@@ -429,6 +439,8 @@
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
             overscroll-behavior-x: contain;
+            position: relative;
+            z-index: 2;
         }
 
         .projects-container::-webkit-scrollbar {
@@ -592,7 +604,7 @@
             max-height: 80px;
         }
 
-        /* Scroll arrows - desktop only hover */
+        /* Scroll arrows */
         .scroll-arrows {
             display: flex;
             justify-content: center;
@@ -610,12 +622,12 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.3s ease;
+            transition: all 0.15s ease;
             -webkit-tap-highlight-color: transparent;
             touch-action: manipulation;
         }
 
-        /* Hover only on devices that support it (not touch) */
+        /* Hover on desktop */
         @media (hover: hover) and (pointer: fine) {
             .scroll-arrow:hover {
                 border-color: var(--accent);
@@ -623,11 +635,10 @@
             }
         }
 
-        /* Active state for all devices */
+        /* Active state - orange for all devices */
         .scroll-arrow:active {
             border-color: var(--accent);
-            background: rgba(255, 107, 53, 0.2);
-            transform: scale(0.95);
+            background: rgba(255, 107, 53, 0.15);
         }
 
         .scroll-arrow:disabled {
@@ -1041,32 +1052,32 @@
             }
         });
 
-        // Scroll effects - faster reappear when scrolling up
+        // Scroll effects - very fast reappear
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
 
         function handleScroll() {
             const y = window.scrollY;
-            // Use shorter range for faster transitions
-            const progress = Math.min(y / 300, 1);
+            // Very short range for fast transitions
+            const progress = Math.min(y / 200, 1);
             
-            // Showreel: FIRST to disappear, LAST to reappear
+            // Showreel: FIRST to disappear (0-30%)
             if (heroShowreel) {
                 heroShowreel.style.transform = `scale(${1 + progress * 0.08})`;
-                const showreelOpacity = 1 - Math.min(progress / 0.35, 1);
+                const showreelOpacity = 1 - Math.min(progress / 0.3, 1);
                 heroShowreel.style.opacity = showreelOpacity;
             }
             
-            // Title: SECOND to disappear, SECOND to reappear
+            // Title: SECOND to disappear (20-50%)
             if (heroText) {
-                const titleProgress = Math.max(0, (progress - 0.25) / 0.35);
+                const titleProgress = Math.max(0, (progress - 0.2) / 0.3);
                 heroText.style.opacity = 1 - titleProgress;
             }
             
-            // Scroll indicator: LAST to disappear, FIRST to reappear
+            // Scroll indicator: LAST to disappear (40-70%)
             if (scrollIndicator) {
-                const indicatorProgress = Math.max(0, (progress - 0.5) / 0.35);
+                const indicatorProgress = Math.max(0, (progress - 0.4) / 0.3);
                 scrollIndicator.style.opacity = 1 - indicatorProgress;
             }
             
@@ -1083,26 +1094,27 @@
 
         document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
 
-        // Horizontal scroll - convert vertical to horizontal
+        // Horizontal scroll for projects
         const container = document.querySelector('.projects-container');
         const leftArrow = document.getElementById('scroll-left');
         const rightArrow = document.getElementById('scroll-right');
 
-        if (container) {
-            container.addEventListener('wheel', (e) => {
-                // Check if it's primarily a vertical scroll
-                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                    const atStart = container.scrollLeft <= 0;
-                    const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 5;
-                    
-                    // Only hijack scroll if we can scroll in that direction
-                    if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
-                        e.preventDefault();
-                        container.scrollLeft += e.deltaY * 1.5;
-                    }
+        // Capture wheel and convert to horizontal scroll
+        const projectsWrapper = document.querySelector('.projects-wrapper');
+        
+        projectsWrapper?.addEventListener('wheel', (e) => {
+            // Detect if primarily vertical scroll
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                const atStart = container.scrollLeft <= 0;
+                const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 5;
+                
+                if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    container.scrollLeft += e.deltaY * 2;
                 }
-            }, { passive: false });
-        }
+            }
+        }, { passive: false });
 
         leftArrow?.addEventListener('click', () => container.scrollBy({ left: -400, behavior: 'smooth' }));
         rightArrow?.addEventListener('click', () => container.scrollBy({ left: 400, behavior: 'smooth' }));
