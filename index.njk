@@ -84,8 +84,12 @@ layout: base.njk
                     <div class="project-text">
                         <span class="project-artist">{{ project.data.artist }}</span>
                         <h3 class="project-title">{{ project.data.title }}</h3>
-                        <p class="project-description" data-lang-en style="display: block;">{{ project.data.description }}</p>
-                        <p class="project-description" data-lang-fr style="display: none;">{{ project.data.description_fr | default: project.data.description }}</p>
+                        <p class="project-description" data-lang-en>{{ project.data.description }}</p>
+                        {% if project.data.description_fr %}
+                        <p class="project-description" data-lang-fr style="display: none;">{{ project.data.description_fr }}</p>
+                        {% else %}
+                        <p class="project-description" data-lang-fr style="display: none;">{{ project.data.description }}</p>
+                        {% endif %}
                     </div>
                 </div>
             </article>
@@ -121,24 +125,52 @@ layout: base.njk
 <section class="about-section" id="about">
     <div class="about-container">
         <div class="about-image">
-            <img src="{{ about.image | default: '/uploads/about.jpg' }}" alt="Konan David">
+            {% if about.image %}
+            <img src="{{ about.image }}" alt="Konan David">
+            {% else %}
+            <img src="/uploads/about.jpg" alt="Konan David">
+            {% endif %}
         </div>
         <div class="about-content">
             <!-- English -->
-            <div data-lang-en style="display: block;">
-                <span class="about-label">{{ about.en.label | default: 'About' }}</span>
-                <h2>{{ about.en.title | default: 'Creating powerful visual experiences through movement' }}</h2>
-                <p>{{ about.en.p1 | default: "Born in Abidjan, Côte d'Ivoire, and raised in France, Konan David operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong>, and <strong>Vogue</strong>." | safe }}</p>
-                <p>{{ about.en.p2 | default: "Specializing in artist development and movement coaching, Konan empowers performers to unlock their expressive potential. Alongside this expertise, he has worked with renowned artists such as <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, and <strong>Dadju</strong>." | safe }}</p>
-                <p>{{ about.en.p3 | default: "His work is defined by meticulous attention to detail, raw attitude, and effortless flow. Driven by cinematic vision and cultural authenticity, Konan continuously explores new visual languages to elevate every artistic narrative." | safe }}</p>
+            <div data-lang-en>
+                <span class="about-label">{% if about.en.label %}{{ about.en.label }}{% else %}About{% endif %}</span>
+                <h2>{% if about.en.title %}{{ about.en.title }}{% else %}Creating powerful visual experiences through movement{% endif %}</h2>
+                {% if about.en.p1 %}
+                <p>{{ about.en.p1 | safe }}</p>
+                {% else %}
+                <p>Born in Abidjan, Côte d'Ivoire, and raised in France, Konan David operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong>, and <strong>Vogue</strong>.</p>
+                {% endif %}
+                {% if about.en.p2 %}
+                <p>{{ about.en.p2 | safe }}</p>
+                {% else %}
+                <p>Specializing in artist development and movement coaching, Konan empowers performers to unlock their expressive potential. Alongside this expertise, he has worked with renowned artists such as <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, and <strong>Dadju</strong>.</p>
+                {% endif %}
+                {% if about.en.p3 %}
+                <p>{{ about.en.p3 | safe }}</p>
+                {% else %}
+                <p>His work is defined by meticulous attention to detail, raw attitude, and effortless flow. Driven by cinematic vision and cultural authenticity, Konan continuously explores new visual languages to elevate every artistic narrative.</p>
+                {% endif %}
             </div>
             <!-- French -->
             <div data-lang-fr style="display: none;">
-                <span class="about-label">{{ about.fr.label | default: 'À propos' }}</span>
-                <h2>{{ about.fr.title | default: 'Créer des expériences visuelles puissantes à travers le mouvement' }}</h2>
-                <p>{{ about.fr.p1 | default: "Né à Abidjan, en Côte d'Ivoire, et élevé en France, Konan David évolue à l'intersection de la culture urbaine et de la production haut de gamme. Son travail comprend des tournées à guichets fermés, des films de danse, des clips musicaux et des collaborations mode avec des marques internationales telles que <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong> et <strong>Vogue</strong>." | safe }}</p>
-                <p>{{ about.fr.p2 | default: "Spécialisé dans le développement artistique et le coaching de mouvement, Konan aide les artistes à libérer leur potentiel expressif. Fort de cette expertise, il a travaillé avec des artistes renommés tels que <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong> et <strong>Dadju</strong>." | safe }}</p>
-                <p>{{ about.fr.p3 | default: "Son travail se distingue par une attention méticuleuse aux détails, une attitude brute et un flow naturel. Guidé par une vision cinématographique et une authenticité culturelle, Konan explore continuellement de nouveaux langages visuels pour sublimer chaque récit artistique." | safe }}</p>
+                <span class="about-label">{% if about.fr.label %}{{ about.fr.label }}{% else %}À propos{% endif %}</span>
+                <h2>{% if about.fr.title %}{{ about.fr.title }}{% else %}Créer des expériences visuelles puissantes à travers le mouvement{% endif %}</h2>
+                {% if about.fr.p1 %}
+                <p>{{ about.fr.p1 | safe }}</p>
+                {% else %}
+                <p>Né à Abidjan, en Côte d'Ivoire, et élevé en France, Konan David évolue à l'intersection de la culture urbaine et de la production haut de gamme. Son travail comprend des tournées à guichets fermés, des films de danse, des clips musicaux et des collaborations mode avec des marques internationales telles que <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong> et <strong>Vogue</strong>.</p>
+                {% endif %}
+                {% if about.fr.p2 %}
+                <p>{{ about.fr.p2 | safe }}</p>
+                {% else %}
+                <p>Spécialisé dans le développement artistique et le coaching de mouvement, Konan aide les artistes à libérer leur potentiel expressif. Fort de cette expertise, il a travaillé avec des artistes renommés tels que <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong> et <strong>Dadju</strong>.</p>
+                {% endif %}
+                {% if about.fr.p3 %}
+                <p>{{ about.fr.p3 | safe }}</p>
+                {% else %}
+                <p>Son travail se distingue par une attention méticuleuse aux détails, une attitude brute et un flow naturel. Guidé par une vision cinématographique et une authenticité culturelle, Konan explore continuellement de nouveaux langages visuels pour sublimer chaque récit artistique.</p>
+                {% endif %}
             </div>
         </div>
     </div>
@@ -146,13 +178,13 @@ layout: base.njk
 
 <!-- Contact Section -->
 <section class="contact-section" id="contact">
-    <div data-lang-en style="display: block;">
-        <span class="contact-label">{{ contact.en.label | default: 'Get in Touch' }}</span>
-        <h2>{{ contact.en.title | default: "Let's create something together" }}</h2>
+    <div data-lang-en>
+        <span class="contact-label">{% if contact.en.label %}{{ contact.en.label }}{% else %}Get in Touch{% endif %}</span>
+        <h2>{% if contact.en.title %}{{ contact.en.title }}{% else %}Let's create something together{% endif %}</h2>
     </div>
     <div data-lang-fr style="display: none;">
-        <span class="contact-label">{{ contact.fr.label | default: 'Contact' }}</span>
-        <h2>{{ contact.fr.title | default: 'Créons quelque chose ensemble' }}</h2>
+        <span class="contact-label">{% if contact.fr.label %}{{ contact.fr.label }}{% else %}Contact{% endif %}</span>
+        <h2>{% if contact.fr.title %}{{ contact.fr.title }}{% else %}Créons quelque chose ensemble{% endif %}</h2>
     </div>
     <a href="mailto:{{ site.email }}" class="contact-email">{{ site.email }}</a>
     <div class="social-links">
