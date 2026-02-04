@@ -1,0 +1,17 @@
+{
+  "image": "/uploads/about.jpg",
+  "en": {
+    "label": "About",
+    "title": "Creating powerful visual experiences through movement",
+    "p1": "Born in Abidjan, Côte d'Ivoire, and raised in France, Konan David operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong>, and <strong>Vogue</strong>.",
+    "p2": "Specializing in artist development and movement coaching, Konan empowers performers to unlock their expressive potential. Alongside this expertise, he has worked with renowned artists such as <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, and <strong>Dadju</strong>.",
+    "p3": "His work is defined by meticulous attention to detail, raw attitude, and effortless flow. Driven by cinematic vision and cultural authenticity, Konan continuously explores new visual languages to elevate every artistic narrative."
+  },
+  "fr": {
+    "label": "À propos",
+    "title": "Créer des expériences visuelles puissantes à travers le mouvement",
+    "p1": "Né à Abidjan, en Côte d'Ivoire, et élevé en France, Konan David évolue à l'intersection de la culture urbaine et de la production haut de gamme. Son travail comprend des tournées à guichets fermés, des films de danse, des clips musicaux et des collaborations mode avec des marques internationales telles que <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong> et <strong>Vogue</strong>.",
+    "p2": "Spécialisé dans le développement artistique et le coaching de mouvement, Konan aide les artistes à libérer leur potentiel expressif. Fort de cette expertise, il a travaillé avec des artistes renommés tels que <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong> et <strong>Dadju</strong>.",
+    "p3": "Son travail se distingue par une attention méticuleuse aux détails, une attitude brute et un flow naturel. Guidé par une vision cinématographique et une authenticité culturelle, Konan explore continuellement de nouveaux langages visuels pour sublimer chaque récit artistique."
+  }
+}
