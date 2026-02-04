@@ -12,12 +12,11 @@
             --bg-primary: #000000;
             --bg-secondary: #0a0a0a;
             --bg-tertiary: #111111;
-            --bg-card: #1c1c1e;
             --text-primary: #f5f5f7;
             --text-secondary: #a1a1a6;
             --text-muted: #6e6e73;
             --accent: #FF6B35;
-            --accent-glow: rgba(255, 107, 53, 0.5);
+            --accent-glow: rgba(255, 107, 53, 0.4);
         }
 
         * {
@@ -37,10 +36,8 @@
             line-height: 1.5;
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Subtle grain overlay */
         body::before {
             content: '';
             position: fixed;
@@ -70,12 +67,10 @@
 
         nav.scrolled {
             background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(20px) saturate(180%);
-            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            backdrop-filter: blur(20px);
             padding: 16px 48px;
         }
 
-        /* Logo */
         .logo {
             font-size: 13px;
             font-weight: 600;
@@ -107,7 +102,6 @@
             color: var(--text-secondary);
             font-size: 13px;
             font-weight: 500;
-            letter-spacing: 0.01em;
             transition: color 0.3s ease;
         }
 
@@ -158,28 +152,16 @@
             height: 2px;
             background: var(--text-primary);
             transition: all 0.3s ease;
-            border-radius: 2px;
         }
 
-        .mobile-menu-btn.active span:nth-child(1) {
-            transform: rotate(45deg) translate(5px, 5px);
-        }
-
-        .mobile-menu-btn.active span:nth-child(2) {
-            opacity: 0;
-        }
-
-        .mobile-menu-btn.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(5px, -5px);
-        }
+        .mobile-menu-btn.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .mobile-menu-btn.active span:nth-child(2) { opacity: 0; }
+        .mobile-menu-btn.active span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
 
         .mobile-menu {
             display: none;
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: rgba(0, 0, 0, 0.98);
             z-index: 999;
             flex-direction: column;
@@ -208,7 +190,7 @@
             color: var(--accent);
         }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -217,7 +199,6 @@
             align-items: center;
             padding: 100px 48px 40px;
             position: relative;
-            overflow: hidden;
         }
 
         .hero::before {
@@ -228,9 +209,8 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: radial-gradient(ellipse at 50% 40%, rgba(255, 107, 53, 0.1) 0%, transparent 50%);
+            background: radial-gradient(ellipse at 50% 40%, rgba(255, 107, 53, 0.08) 0%, transparent 50%);
             pointer-events: none;
-            z-index: 0;
         }
 
         .hero-content {
@@ -240,12 +220,10 @@
             gap: 32px;
             width: 100%;
             max-width: 1200px;
-            margin: 0 auto;
             position: relative;
             z-index: 1;
         }
 
-        /* Showreel */
         .hero-showreel {
             position: relative;
             border-radius: 20px;
@@ -254,11 +232,8 @@
             max-width: 900px;
             aspect-ratio: 16/9;
             background: var(--bg-tertiary);
-            transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.6s ease;
-            box-shadow: 
-                0 60px 120px -30px rgba(0, 0, 0, 0.7),
-                0 40px 80px -40px rgba(255, 107, 53, 0.2),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+            transition: transform 0.6s ease, opacity 0.6s ease;
+            box-shadow: 0 60px 120px -30px rgba(0, 0, 0, 0.7);
         }
 
         .hero-showreel::before {
@@ -267,32 +242,25 @@
             inset: 0;
             border-radius: 20px;
             padding: 1px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.15), rgba(255,255,255,0.02));
+            background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
-            z-index: 2;
         }
 
         .hero-showreel iframe {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
             border: none;
         }
 
-        /* Titles - 3 blocks with subtle glow hover */
-        .hero-text {
-            text-align: center;
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
+        /* Title - subtle glow only */
         .hero-text h1 {
-            font-size: clamp(12px, 1.6vw, 18px);
+            font-size: clamp(12px, 1.5vw, 17px);
             font-weight: 500;
             letter-spacing: 0.25em;
             text-transform: uppercase;
@@ -300,52 +268,44 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 0;
             white-space: nowrap;
         }
 
-        .hero-text h1 .title-block {
-            display: inline-block;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        .hero-text .title-block {
+            transition: all 0.4s ease;
             padding: 4px 0;
         }
 
-        .hero-text h1 .title-block:hover {
+        .hero-text .title-block:hover {
             color: var(--text-primary);
-            transform: translateY(-3px);
-            text-shadow: 0 10px 40px rgba(255, 107, 53, 0.5), 0 0 20px rgba(255, 107, 53, 0.3);
+            text-shadow: 0 0 30px rgba(255, 107, 53, 0.6), 0 0 60px rgba(255, 107, 53, 0.3);
         }
 
-        .hero-text h1 .separator {
+        .hero-text .separator {
             margin: 0 20px;
             color: var(--accent);
             font-size: 1.2em;
             font-weight: 600;
-            display: inline-flex;
-            align-items: center;
             text-shadow: 0 0 20px rgba(255, 107, 53, 0.5);
             transition: all 0.4s ease;
         }
 
-        .hero-text h1 .separator:hover {
-            transform: scale(1.3) rotate(90deg);
-            text-shadow: 0 0 30px rgba(255, 107, 53, 0.8);
+        .hero-text .separator:hover {
+            transform: scale(1.2) rotate(90deg);
         }
 
-        /* Scroll indicator - follows user scroll */
+        /* Scroll indicator - clean animation */
         .scroll-indicator {
-            margin-top: 32px;
+            margin-top: 40px;
             display: flex;
             flex-direction: column;
             align-items: center;
             gap: 12px;
-            opacity: 1;
             transition: opacity 0.5s ease;
         }
 
         .scroll-indicator.hidden {
             opacity: 0;
-            pointer-events: none;
         }
 
         .scroll-indicator span {
@@ -357,28 +317,33 @@
 
         .scroll-line {
             width: 1px;
-            height: 50px;
-            background: linear-gradient(to bottom, transparent, var(--text-secondary), transparent);
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
         }
 
-        .scroll-line::after {
+        .scroll-line::before {
             content: '';
             position: absolute;
-            top: 0;
+            top: -20px;
             left: 0;
             width: 100%;
             height: 20px;
-            background: var(--text-primary);
-            transform: translateY(-100%);
-            transition: transform 0.1s linear;
+            background: linear-gradient(to bottom, transparent, var(--text-primary), transparent);
+            animation: scrollMove 2s ease-in-out infinite;
+        }
+
+        @keyframes scrollMove {
+            0% { top: -20px; opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { top: 60px; opacity: 0; }
         }
 
         /* Work Section */
         .work-section {
             padding: 80px 48px 60px;
-            position: relative;
         }
 
         .section-header {
@@ -388,7 +353,7 @@
             margin-bottom: 40px;
             opacity: 0;
             transform: translateY(20px);
-            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.6s ease;
         }
 
         .section-header.visible {
@@ -400,23 +365,25 @@
             font-size: clamp(28px, 4vw, 42px);
             font-weight: 600;
             letter-spacing: -0.03em;
-            color: var(--text-primary);
         }
 
         .section-header span {
             font-size: 12px;
             color: var(--text-muted);
-            letter-spacing: 0.02em;
         }
 
-        /* Projects - Simple horizontal scroll like charmladonna.com */
+        /* Projects with arrows */
+        .projects-wrapper {
+            position: relative;
+        }
+
         .projects-container {
             overflow-x: auto;
             overflow-y: visible;
             margin: 0 -48px;
             padding: 20px 48px;
             scrollbar-width: none;
-            -ms-overflow-style: none;
+            scroll-behavior: smooth;
         }
 
         .projects-container::-webkit-scrollbar {
@@ -429,7 +396,46 @@
             width: max-content;
         }
 
-        /* Project Card - restored full border glow */
+        /* Arrow buttons */
+        .scroll-arrows {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 32px;
+        }
+
+        .scroll-arrow {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-arrow:hover {
+            border-color: var(--accent);
+            background: rgba(255, 107, 53, 0.1);
+        }
+
+        .scroll-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .scroll-arrow svg {
+            width: 20px;
+            height: 20px;
+            stroke: var(--text-primary);
+            fill: none;
+            stroke-width: 2;
+        }
+
+        /* Project Card - proper rounded glow */
         .project-card {
             width: 400px;
             aspect-ratio: 4/5;
@@ -440,12 +446,7 @@
             background: var(--bg-tertiary);
             opacity: 0;
             transform: translateY(60px);
-            transition: opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1), 
-                        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
-                        box-shadow 0.4s ease;
-            box-shadow: 
-                0 10px 40px -10px rgba(0, 0, 0, 0.5),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+            transition: all 0.6s ease;
         }
 
         .project-card.visible {
@@ -453,18 +454,33 @@
             transform: translateY(0);
         }
 
-        .project-card:hover {
-            box-shadow: 
-                0 30px 80px -20px rgba(0, 0, 0, 0.8),
-                inset 0 0 0 1px rgba(255, 107, 53, 0.5),
-                0 0 50px -10px var(--accent-glow);
+        /* Proper border that follows rounded corners */
+        .project-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 16px;
+            padding: 1px;
+            background: rgba(255, 255, 255, 0.08);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: 5;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover::before {
+            background: var(--accent);
+            box-shadow: 0 0 30px var(--accent-glow);
         }
 
         .project-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.8s ease;
         }
 
         .project-card:hover img {
@@ -478,25 +494,8 @@
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            background: linear-gradient(
-                to top,
-                rgba(0, 0, 0, 0.9) 0%,
-                rgba(0, 0, 0, 0.4) 40%,
-                rgba(0, 0, 0, 0.1) 70%,
-                transparent 100%
-            );
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
             color: white;
-            transition: background 0.4s ease;
-        }
-
-        .project-card:hover .project-info {
-            background: linear-gradient(
-                to top,
-                rgba(0, 0, 0, 0.95) 0%,
-                rgba(0, 0, 0, 0.6) 50%,
-                rgba(0, 0, 0, 0.2) 80%,
-                transparent 100%
-            );
         }
 
         .project-category {
@@ -506,8 +505,6 @@
             font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 0.1em;
-            color: rgba(255, 255, 255, 0.7);
-            font-weight: 500;
             padding: 6px 12px;
             background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(10px);
@@ -537,8 +534,6 @@
 
         .project-play::before {
             content: '';
-            width: 0;
-            height: 0;
             border-style: solid;
             border-width: 12px 0 12px 20px;
             border-color: transparent transparent transparent white;
@@ -552,22 +547,14 @@
 
         .project-play:hover {
             background: var(--accent);
-            border-color: var(--accent);
-            transform: translate(-50%, -50%) scale(1.1) !important;
-        }
-
-        .project-text {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
         }
 
         .project-artist {
             font-size: 13px;
             font-weight: 600;
-            opacity: 0.85;
-            letter-spacing: 0.02em;
             text-transform: uppercase;
+            letter-spacing: 0.02em;
+            opacity: 0.85;
             transition: color 0.3s ease;
         }
 
@@ -578,8 +565,7 @@
         .project-title {
             font-size: 22px;
             font-weight: 600;
-            letter-spacing: -0.02em;
-            line-height: 1.2;
+            margin-top: 4px;
         }
 
         .project-description {
@@ -588,10 +574,9 @@
             opacity: 0;
             max-height: 0;
             overflow: hidden;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.5s ease;
             margin-top: 12px;
             color: rgba(255, 255, 255, 0.75);
-            font-weight: 400;
         }
 
         .project-card:hover .project-description {
@@ -602,10 +587,7 @@
         /* Video Modal */
         .video-modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
+            inset: 0;
             background: rgba(0, 0, 0, 0.95);
             z-index: 2000;
             display: flex;
@@ -645,9 +627,6 @@
             border: none;
             border-radius: 50%;
             cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
             transition: background 0.3s ease;
         }
 
@@ -659,34 +638,28 @@
         .video-modal-close::after {
             content: '';
             position: absolute;
+            top: 50%;
+            left: 50%;
             width: 18px;
             height: 2px;
             background: white;
         }
 
-        .video-modal-close::before {
-            transform: rotate(45deg);
-        }
+        .video-modal-close::before { transform: translate(-50%, -50%) rotate(45deg); }
+        .video-modal-close::after { transform: translate(-50%, -50%) rotate(-45deg); }
 
-        .video-modal-close::after {
-            transform: rotate(-45deg);
-        }
-
-        /* Press Section - Marquee with working drag */
+        /* Press Section */
         .press-section {
             padding: 40px 0 70px;
-            position: relative;
             overflow: hidden;
         }
 
         .press-section::before {
             content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
+            display: block;
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            margin-bottom: 40px;
         }
 
         .press-label {
@@ -696,12 +669,12 @@
             letter-spacing: 0.2em;
             color: var(--text-muted);
             margin-bottom: 40px;
-            padding: 0 48px;
         }
 
         .marquee-wrapper {
             position: relative;
             overflow: hidden;
+            -webkit-user-select: none;
             user-select: none;
         }
 
@@ -731,30 +704,24 @@
             align-items: center;
             gap: 80px;
             width: max-content;
+            animation: marqueeAnim 40s linear infinite;
             cursor: grab;
-        }
-
-        .marquee-track.animating {
-            animation: marqueeScroll 40s linear infinite;
         }
 
         .marquee-track:active {
             cursor: grabbing;
         }
 
-        @keyframes marqueeScroll {
+        @keyframes marqueeAnim {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
         }
 
         .press-logo {
             height: 24px;
-            width: auto;
             opacity: 0.5;
             transition: opacity 0.3s ease;
             filter: brightness(0) invert(1);
-            flex-shrink: 0;
-            object-fit: contain;
             pointer-events: none;
         }
 
@@ -766,17 +733,18 @@
         .about-section {
             padding: 100px 48px;
             background: var(--bg-secondary);
-            position: relative;
         }
 
         .about-section::before {
             content: '';
+            display: block;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+            margin-bottom: 0;
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
         }
 
         .about-container {
@@ -793,26 +761,9 @@
             overflow: hidden;
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            background: var(--bg-tertiary);
-            aspect-ratio: 3/4;
-            position: relative;
+            transition: all 0.8s ease;
             max-width: 320px;
-        }
-
-        .about-image::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 16px;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02));
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
-            pointer-events: none;
-            z-index: 2;
+            aspect-ratio: 3/4;
         }
 
         .about-image.visible {
@@ -824,14 +775,12 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            display: block;
         }
 
         .about-content {
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-            transition-delay: 0.15s;
+            transition: all 0.8s ease 0.15s;
         }
 
         .about-content.visible {
@@ -851,10 +800,8 @@
         .about-content h2 {
             font-size: clamp(24px, 2.8vw, 32px);
             font-weight: 600;
-            line-height: 1.25;
             margin-bottom: 28px;
             letter-spacing: -0.02em;
-            color: var(--text-primary);
         }
 
         .about-content p {
@@ -880,7 +827,7 @@
             text-align: center;
             opacity: 0;
             transform: translateY(40px);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.8s ease;
             position: relative;
         }
 
@@ -913,7 +860,6 @@
             font-weight: 600;
             margin-bottom: 40px;
             letter-spacing: -0.03em;
-            color: var(--text-primary);
         }
 
         .contact-email {
@@ -925,15 +871,12 @@
             padding: 16px 40px;
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 100px;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            background: transparent;
+            transition: all 0.4s ease;
         }
 
         .contact-email:hover {
             background: var(--accent);
-            color: #fff;
             border-color: var(--accent);
-            transform: scale(1.02);
             box-shadow: 0 0 30px rgba(255, 107, 53, 0.3);
         }
 
@@ -950,7 +893,6 @@
             font-size: 13px;
             font-weight: 500;
             transition: color 0.3s ease;
-            letter-spacing: 0.02em;
         }
 
         .social-links a:hover {
@@ -962,7 +904,6 @@
             padding: 28px 48px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             border-top: 1px solid rgba(255, 255, 255, 0.05);
             font-size: 12px;
             color: var(--text-muted);
@@ -970,38 +911,28 @@
 
         /* Mobile */
         @media (max-width: 1024px) {
-            .hero-content { gap: 28px; }
-            .hero-showreel { max-width: 100%; }
             .about-container { grid-template-columns: 1fr; gap: 50px; }
             .about-image { max-width: 280px; margin: 0 auto; }
             .project-card { width: 340px; }
-            .marquee-track { gap: 60px; }
-            .press-logo { height: 22px; }
             .nav-contact span { display: none; }
             .nav-contact { padding: 10px; }
         }
 
         @media (max-width: 768px) {
-            nav { padding: 16px 24px; }
-            nav.scrolled { padding: 14px 24px; }
+            nav, footer { padding: 16px 24px; }
             .nav-links, .nav-contact { display: none; }
             .mobile-menu-btn { display: flex; }
             .mobile-menu { display: flex; }
             .hero { padding: 90px 24px 40px; }
-            .hero-text h1 { font-size: 10px; letter-spacing: 0.15em; flex-wrap: wrap; gap: 4px; }
-            .hero-text h1 .separator { margin: 0 12px; }
-            .scroll-indicator { margin-top: 24px; }
-            .work-section { padding: 60px 24px 40px; }
-            .about-section, .contact-section { padding-left: 24px; padding-right: 24px; }
+            .hero-text h1 { font-size: 10px; flex-wrap: wrap; gap: 4px; }
+            .hero-text .separator { margin: 0 12px; }
+            .work-section, .about-section, .contact-section { padding-left: 24px; padding-right: 24px; }
             .projects-container { margin: 0 -24px; padding: 20px 24px; }
             .project-card { width: 300px; }
             .projects-grid { gap: 20px; }
-            .press-section { padding: 30px 0 50px; }
-            .press-label { padding: 0 24px; }
-            .marquee-track { gap: 50px; }
-            .press-logo { height: 20px; }
-            .about-section, .contact-section { padding-top: 80px; padding-bottom: 80px; }
-            footer { flex-direction: column; gap: 12px; text-align: center; padding: 24px; }
+            .scroll-arrows { gap: 12px; }
+            .scroll-arrow { width: 40px; height: 40px; }
+            footer { flex-direction: column; gap: 12px; text-align: center; }
         }
     </style>
 </head>
@@ -1017,70 +948,49 @@
     </div>
 
     <script>
-        // ============================================
-        // MOBILE MENU
-        // ============================================
+        // Mobile Menu
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mobileMenu = document.querySelector('.mobile-menu');
-        const mobileMenuLinks = document.querySelectorAll('.mobile-menu a');
+        
+        mobileMenuBtn?.addEventListener('click', () => {
+            mobileMenuBtn.classList.toggle('active');
+            mobileMenu.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        });
 
-        if (mobileMenuBtn && mobileMenu) {
-            mobileMenuBtn.addEventListener('click', () => {
-                mobileMenuBtn.classList.toggle('active');
-                mobileMenu.classList.toggle('active');
-                document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        document.querySelectorAll('.mobile-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenuBtn.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
             });
+        });
 
-            mobileMenuLinks.forEach(link => {
-                link.addEventListener('click', () => {
-                    mobileMenuBtn.classList.remove('active');
-                    mobileMenu.classList.remove('active');
-                    document.body.style.overflow = '';
-                });
-            });
-        }
-
-        // ============================================
-        // VIDEO MODAL
-        // ============================================
+        // Video Modal
         const videoModal = document.getElementById('video-modal');
         const modalVideo = document.getElementById('modal-video');
-        const modalClose = document.getElementById('modal-close');
-
-        document.querySelectorAll('.project-play').forEach(playBtn => {
-            playBtn.addEventListener('click', (e) => {
+        
+        document.querySelectorAll('.project-play').forEach(btn => {
+            btn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                e.preventDefault();
-                const card = playBtn.closest('.project-card');
-                const videoUrl = card?.dataset.video;
-                
-                if (videoUrl) {
-                    let embedUrl = videoUrl;
-                    if (videoUrl.includes('youtube.com/watch')) {
-                        const videoId = videoUrl.split('v=')[1]?.split('&')[0];
-                        embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-                    } else if (videoUrl.includes('youtu.be/')) {
-                        const videoId = videoUrl.split('youtu.be/')[1];
-                        embedUrl = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-                    } else if (videoUrl.includes('vimeo.com/')) {
-                        const videoId = videoUrl.split('vimeo.com/')[1];
-                        embedUrl = `https://player.vimeo.com/video/${videoId}?autoplay=1`;
-                    }
-                    
-                    modalVideo.src = embedUrl;
+                const url = btn.closest('.project-card')?.dataset.video;
+                if (url) {
+                    let embed = url;
+                    if (url.includes('youtube.com/watch')) embed = `https://www.youtube.com/embed/${url.split('v=')[1]?.split('&')[0]}?autoplay=1`;
+                    else if (url.includes('youtu.be/')) embed = `https://www.youtube.com/embed/${url.split('youtu.be/')[1]}?autoplay=1`;
+                    else if (url.includes('vimeo.com/')) embed = `https://player.vimeo.com/video/${url.split('vimeo.com/')[1]}?autoplay=1`;
+                    modalVideo.src = embed;
                     videoModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
                 }
             });
         });
 
-        if (modalClose) {
-            modalClose.addEventListener('click', () => {
-                videoModal.classList.remove('active');
-                modalVideo.src = '';
-                document.body.style.overflow = '';
-            });
-        }
+        document.getElementById('modal-close')?.addEventListener('click', () => {
+            videoModal.classList.remove('active');
+            modalVideo.src = '';
+            document.body.style.overflow = '';
+        });
 
         videoModal?.addEventListener('click', (e) => {
             if (e.target === videoModal) {
@@ -1090,187 +1000,133 @@
             }
         });
 
-        // ============================================
-        // SCROLL EFFECTS
-        // ============================================
+        // Scroll effects
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
-        const scrollLine = document.querySelector('.scroll-line::after');
         const workSection = document.querySelector('.work-section');
 
-        // Scroll line follows scroll
-        const scrollLineEl = document.querySelector('.scroll-line');
-        
-        function updateScroll() {
-            const scrollY = window.scrollY;
-            const maxScroll = 500;
-            const progress = Math.min(scrollY / maxScroll, 1);
-            
-            // Showreel scale and fade
-            if (heroShowreel) {
-                const scale = 1 + (progress * 0.08);
-                heroShowreel.style.transform = `scale(${scale})`;
-                
-                if (scrollY > 300) {
-                    const fadeProgress = Math.min((scrollY - 300) / 250, 1);
-                    heroShowreel.style.opacity = 1 - fadeProgress;
-                } else {
-                    heroShowreel.style.opacity = 1;
-                }
-            }
-            
-            // Text fade
-            if (heroText) {
-                const textOpacity = 1 - (progress * 2);
-                heroText.style.opacity = Math.max(0, textOpacity);
-            }
-            
-            // Scroll line follows scroll
-            if (scrollLineEl) {
-                const lineProgress = Math.min(scrollY / 200, 1);
-                const lineAfter = scrollLineEl.querySelector('.line-indicator') || document.createElement('div');
-                if (!lineAfter.classList.contains('line-indicator')) {
-                    lineAfter.classList.add('line-indicator');
-                    lineAfter.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:20px;background:white;border-radius:1px;transition:transform 0.05s linear;';
-                    scrollLineEl.appendChild(lineAfter);
-                }
-                lineAfter.style.transform = `translateY(${lineProgress * 50}px)`;
-                lineAfter.style.opacity = 1 - lineProgress;
-            }
-            
-            // Hide scroll indicator when work section visible
-            if (scrollIndicator && workSection) {
-                const workRect = workSection.getBoundingClientRect();
-                if (workRect.top < window.innerHeight * 0.7) {
-                    scrollIndicator.classList.add('hidden');
-                } else {
-                    scrollIndicator.classList.remove('hidden');
-                }
-            }
-        }
-
-        window.addEventListener('scroll', updateScroll, { passive: true });
-        updateScroll();
-
-        // ============================================
-        // NAVIGATION
-        // ============================================
-        const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 100);
+            const y = window.scrollY;
+            const progress = Math.min(y / 500, 1);
+            
+            if (heroShowreel) {
+                heroShowreel.style.transform = `scale(${1 + progress * 0.08})`;
+                heroShowreel.style.opacity = y > 300 ? Math.max(0, 1 - (y - 300) / 250) : 1;
+            }
+            
+            if (heroText) heroText.style.opacity = Math.max(0, 1 - progress * 2);
+            
+            if (scrollIndicator && workSection) {
+                scrollIndicator.classList.toggle('hidden', workSection.getBoundingClientRect().top < window.innerHeight * 0.7);
+            }
+            
+            document.querySelector('nav').classList.toggle('scrolled', y > 100);
         }, { passive: true });
 
-        // ============================================
-        // SCROLL REVEAL
-        // ============================================
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) entry.target.classList.add('visible');
-            });
+        // Scroll reveal
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
         }, { threshold: 0.15 });
 
-        document.querySelectorAll('.section-header, .project-card, .about-image, .about-content, .contact-section').forEach(el => {
-            revealObserver.observe(el);
-        });
+        document.querySelectorAll('.section-header, .project-card, .about-image, .about-content, .contact-section').forEach(el => observer.observe(el));
+        document.querySelectorAll('.project-card').forEach((c, i) => c.style.transitionDelay = `${i * 0.08}s`);
 
-        document.querySelectorAll('.project-card').forEach((card, i) => {
-            card.style.transitionDelay = `${i * 0.08}s`;
-        });
+        // Project scroll arrows
+        const container = document.querySelector('.projects-container');
+        const leftArrow = document.getElementById('scroll-left');
+        const rightArrow = document.getElementById('scroll-right');
+        const scrollAmount = 450;
 
-        // ============================================
-        // MARQUEE DRAG - FIXED
-        // ============================================
-        const marqueeTrack = document.querySelector('.marquee-track');
+        leftArrow?.addEventListener('click', () => container.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
+        rightArrow?.addEventListener('click', () => container.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
+
+        // Update arrow states
+        function updateArrows() {
+            if (leftArrow) leftArrow.disabled = container.scrollLeft <= 0;
+            if (rightArrow) rightArrow.disabled = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
+        }
         
-        if (marqueeTrack) {
-            let isDragging = false;
-            let startX = 0;
-            let scrollLeft = 0;
-            let currentX = 0;
-            
-            // Start with animation
-            marqueeTrack.classList.add('animating');
-            
-            function getTransformX() {
-                const style = window.getComputedStyle(marqueeTrack);
-                const matrix = new DOMMatrix(style.transform);
-                return matrix.m41 || 0;
-            }
-            
-            marqueeTrack.addEventListener('mousedown', (e) => {
-                isDragging = true;
-                marqueeTrack.classList.remove('animating');
-                startX = e.clientX;
-                currentX = getTransformX();
-                marqueeTrack.style.transform = `translateX(${currentX}px)`;
-            });
-            
-            document.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-                e.preventDefault();
-                const diff = e.clientX - startX;
-                marqueeTrack.style.transform = `translateX(${currentX + diff}px)`;
-            });
-            
-            document.addEventListener('mouseup', () => {
-                if (!isDragging) return;
-                isDragging = false;
-                // Resume animation after release
-                setTimeout(() => {
-                    marqueeTrack.style.transform = '';
-                    marqueeTrack.classList.add('animating');
-                }, 100);
-            });
+        container?.addEventListener('scroll', updateArrows);
+        updateArrows();
 
-            // Touch events
-            marqueeTrack.addEventListener('touchstart', (e) => {
-                isDragging = true;
-                marqueeTrack.classList.remove('animating');
-                startX = e.touches[0].clientX;
-                currentX = getTransformX();
-                marqueeTrack.style.transform = `translateX(${currentX}px)`;
-            }, { passive: true });
+        // Marquee drag with momentum
+        const marquee = document.querySelector('.marquee-track');
+        let isDragging = false, startX = 0, currentX = 0, velocity = 0;
 
-            marqueeTrack.addEventListener('touchmove', (e) => {
-                if (!isDragging) return;
-                const diff = e.touches[0].clientX - startX;
-                marqueeTrack.style.transform = `translateX(${currentX + diff}px)`;
-            }, { passive: true });
-
-            marqueeTrack.addEventListener('touchend', () => {
-                if (!isDragging) return;
-                isDragging = false;
-                setTimeout(() => {
-                    marqueeTrack.style.transform = '';
-                    marqueeTrack.classList.add('animating');
-                }, 100);
-            }, { passive: true });
+        function getX() {
+            return new DOMMatrix(getComputedStyle(marquee).transform).m41 || 0;
         }
 
-        // ============================================
-        // SHOWREEL SOUND
-        // ============================================
+        marquee?.addEventListener('mousedown', (e) => {
+            isDragging = true;
+            startX = e.clientX;
+            currentX = getX();
+            marquee.style.animation = 'none';
+            marquee.style.transform = `translateX(${currentX}px)`;
+        });
+
+        document.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            const diff = e.clientX - startX;
+            velocity = diff - (velocity || 0);
+            marquee.style.transform = `translateX(${currentX + diff}px)`;
+        });
+
+        document.addEventListener('mouseup', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            // Let it coast then resume animation
+            const finalX = getX();
+            marquee.style.transform = `translateX(${finalX + velocity * 5}px)`;
+            marquee.style.transition = 'transform 0.5s ease-out';
+            setTimeout(() => {
+                marquee.style.transition = '';
+                marquee.style.transform = '';
+                marquee.style.animation = '';
+            }, 600);
+        });
+
+        // Touch support
+        marquee?.addEventListener('touchstart', (e) => {
+            isDragging = true;
+            startX = e.touches[0].clientX;
+            currentX = getX();
+            marquee.style.animation = 'none';
+            marquee.style.transform = `translateX(${currentX}px)`;
+        }, { passive: true });
+
+        document.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            const diff = e.touches[0].clientX - startX;
+            marquee.style.transform = `translateX(${currentX + diff}px)`;
+        }, { passive: true });
+
+        document.addEventListener('touchend', () => {
+            if (!isDragging) return;
+            isDragging = false;
+            setTimeout(() => {
+                marquee.style.transform = '';
+                marquee.style.animation = '';
+            }, 100);
+        });
+
+        // Smooth scroll for anchors
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.querySelector(a.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth' });
+            });
+        });
+
+        // Showreel sound
         const heroVideo = document.getElementById('hero-video');
-        let soundEnabled = false;
-
-        if (heroShowreel && heroVideo) {
-            heroShowreel.addEventListener('click', () => {
-                if (!soundEnabled) {
-                    heroVideo.src = heroVideo.src.replace('muted=1', 'muted=0');
-                    soundEnabled = true;
-                }
-            });
-        }
-
-        // ============================================
-        // SMOOTH SCROLL
-        // ============================================
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href'))?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            });
+        let soundOn = false;
+        heroShowreel?.addEventListener('click', () => {
+            if (!soundOn && heroVideo) {
+                heroVideo.src = heroVideo.src.replace('muted=1', 'muted=0');
+                soundOn = true;
+            }
         });
     </script>
 </body>
