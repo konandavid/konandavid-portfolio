@@ -231,7 +231,7 @@
             z-index: 1;
         }
 
-        /* Showreel - black background for seamless load */
+        /* Showreel */
         .hero-showreel {
             position: relative;
             border-radius: 20px;
@@ -243,6 +243,7 @@
             box-shadow: 
                 0 60px 120px -30px rgba(0, 0, 0, 0.7),
                 0 30px 60px -20px rgba(255, 107, 53, 0.12);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
         .hero-showreel::before {
@@ -269,6 +270,10 @@
         }
 
         /* Title */
+        .hero-text {
+            transition: opacity 0.5s ease;
+        }
+
         .hero-text h1 {
             font-size: clamp(11px, 1.4vw, 16px);
             font-weight: 500;
@@ -303,18 +308,13 @@
             transform: scale(1.2) rotate(90deg);
         }
 
-        /* Scroll indicator - smooth transition */
+        /* Scroll indicator */
         .scroll-indicator {
             margin-top: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            opacity: 1;
-            transition: opacity 0.4s ease;
-        }
-
-        .scroll-indicator.hidden {
-            opacity: 0;
+            transition: opacity 0.5s ease;
         }
 
         .scroll-line {
@@ -414,7 +414,7 @@
             overflow: visible;
         }
 
-        /* Projects container - native scroll works everywhere */
+        /* Projects container */
         .projects-container {
             display: flex;
             gap: 28px;
@@ -434,7 +434,7 @@
             display: none;
         }
 
-        /* Project Card - pointer-events allows scroll through */
+        /* Project Card - pointer-events none to allow scroll through */
         .project-card {
             width: 400px;
             min-width: 400px;
@@ -449,6 +449,13 @@
                 0 4px 20px rgba(0, 0, 0, 0.5),
                 0 8px 25px -5px rgba(255, 107, 53, 0.25);
             transition: all 0.4s ease;
+            /* Allow scroll to pass through */
+            pointer-events: none;
+        }
+
+        /* Re-enable pointer events on hover via container */
+        .projects-container:hover .project-card {
+            pointer-events: auto;
         }
 
         .project-card:hover {
@@ -501,6 +508,7 @@
             justify-content: flex-end;
             background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
             color: white;
+            pointer-events: none;
         }
 
         .project-category {
@@ -535,6 +543,8 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             z-index: 10;
+            /* Play button needs pointer events */
+            pointer-events: auto;
         }
 
         .project-play::before {
@@ -949,7 +959,7 @@
                 padding-right: 24px;
                 gap: 16px;
             }
-            .project-card { width: 280px; min-width: 280px; }
+            .project-card { width: 280px; min-width: 280px; pointer-events: auto; }
             .scroll-arrows { gap: 12px; }
             .scroll-arrow { width: 40px; height: 40px; }
             .about-section, .contact-section { padding: 80px 24px; }
@@ -1026,43 +1036,45 @@
             }
         });
 
-        // Scroll effects
+        // Scroll effects with proper reveal order
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
         const workSection = document.querySelector('.work-section');
-        let lastScrollY = 0;
 
         function handleScroll() {
             const y = window.scrollY;
-            const scrollingUp = y < lastScrollY;
-            const progress = Math.min(y / 500, 1);
             
-            if (heroShowreel) {
-                heroShowreel.style.transform = `scale(${1 + progress * 0.08})`;
-                heroShowreel.style.opacity = y > 300 ? Math.max(0, 1 - (y - 300) / 250) : 1;
+            // Calculate progress (0 to 1)
+            const progress = Math.min(y / 400, 1);
+            
+            // When scrolling DOWN: showreel fades first, then title, then scroll indicator
+            // When scrolling UP: scroll indicator appears first, then title, then showreel
+            
+            // Scroll indicator: first to appear (at progress 0.3), last to disappear
+            const indicatorOpacity = 1 - Math.min(progress / 0.3, 1);
+            if (scrollIndicator) {
+                scrollIndicator.style.opacity = indicatorOpacity;
             }
             
-            if (heroText) heroText.style.opacity = Math.max(0, 1 - progress * 2);
+            // Title: second to appear (at progress 0.5)
+            const titleOpacity = 1 - Math.min(progress / 0.5, 1);
+            if (heroText) {
+                heroText.style.opacity = titleOpacity;
+            }
             
-            // Scroll indicator - show/hide based on work section position
-            // When scrolling up, show it earlier (more progressive)
-            if (scrollIndicator && workSection) {
-                const workTop = workSection.getBoundingClientRect().top;
-                const threshold = scrollingUp ? window.innerHeight * 0.9 : window.innerHeight * 0.7;
-                
-                if (workTop > threshold) {
-                    scrollIndicator.classList.remove('hidden');
-                } else {
-                    scrollIndicator.classList.add('hidden');
-                }
+            // Showreel: last to appear (full progress range)
+            if (heroShowreel) {
+                heroShowreel.style.transform = `scale(${1 + progress * 0.08})`;
+                const showreelOpacity = 1 - Math.max(0, (progress - 0.4) / 0.6);
+                heroShowreel.style.opacity = showreelOpacity;
             }
             
             document.querySelector('nav')?.classList.toggle('scrolled', y > 100);
-            lastScrollY = y;
         }
 
         window.addEventListener('scroll', handleScroll, { passive: true });
+        handleScroll(); // Initial call
 
         // Section reveal
         const observer = new IntersectionObserver((entries) => {
