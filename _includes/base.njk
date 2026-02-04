@@ -231,7 +231,7 @@
             z-index: 1;
         }
 
-        /* Showreel - no transition delay for instant load */
+        /* Showreel - black background for seamless load */
         .hero-showreel {
             position: relative;
             border-radius: 20px;
@@ -239,7 +239,7 @@
             width: 100%;
             max-width: 900px;
             aspect-ratio: 16/9;
-            background: var(--bg-tertiary);
+            background: #000000;
             box-shadow: 
                 0 60px 120px -30px rgba(0, 0, 0, 0.7),
                 0 30px 60px -20px rgba(255, 107, 53, 0.12);
@@ -257,6 +257,7 @@
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
+            z-index: 2;
         }
 
         .hero-showreel iframe {
@@ -302,13 +303,14 @@
             transform: scale(1.2) rotate(90deg);
         }
 
-        /* Scroll indicator */
+        /* Scroll indicator - smooth transition */
         .scroll-indicator {
             margin-top: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: opacity 0.5s ease;
+            opacity: 1;
+            transition: opacity 0.4s ease;
         }
 
         .scroll-indicator.hidden {
@@ -412,7 +414,7 @@
             overflow: visible;
         }
 
-        /* Projects container - scrollable from anywhere */
+        /* Projects container - native scroll works everywhere */
         .projects-container {
             display: flex;
             gap: 28px;
@@ -426,18 +428,13 @@
             -ms-overflow-style: none;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            cursor: grab;
-        }
-
-        .projects-container:active {
-            cursor: grabbing;
         }
 
         .projects-container::-webkit-scrollbar {
             display: none;
         }
 
-        /* Project Card - stronger but contained glow */
+        /* Project Card - pointer-events allows scroll through */
         .project-card {
             width: 400px;
             min-width: 400px;
@@ -448,12 +445,10 @@
             flex-shrink: 0;
             background: var(--bg-tertiary);
             scroll-snap-align: start;
-            /* Stronger orange glow, more contained */
             box-shadow: 
                 0 4px 20px rgba(0, 0, 0, 0.5),
                 0 8px 25px -5px rgba(255, 107, 53, 0.25);
             transition: all 0.4s ease;
-            pointer-events: auto;
         }
 
         .project-card:hover {
@@ -506,7 +501,6 @@
             justify-content: flex-end;
             background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
             color: white;
-            pointer-events: none;
         }
 
         .project-category {
@@ -541,7 +535,6 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             z-index: 10;
-            pointer-events: auto;
         }
 
         .project-play::before {
@@ -1033,14 +1026,16 @@
             }
         });
 
-        // Scroll effects - no delay
+        // Scroll effects
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
         const workSection = document.querySelector('.work-section');
+        let lastScrollY = 0;
 
         function handleScroll() {
             const y = window.scrollY;
+            const scrollingUp = y < lastScrollY;
             const progress = Math.min(y / 500, 1);
             
             if (heroShowreel) {
@@ -1050,11 +1045,21 @@
             
             if (heroText) heroText.style.opacity = Math.max(0, 1 - progress * 2);
             
+            // Scroll indicator - show/hide based on work section position
+            // When scrolling up, show it earlier (more progressive)
             if (scrollIndicator && workSection) {
-                scrollIndicator.classList.toggle('hidden', workSection.getBoundingClientRect().top < window.innerHeight * 0.7);
+                const workTop = workSection.getBoundingClientRect().top;
+                const threshold = scrollingUp ? window.innerHeight * 0.9 : window.innerHeight * 0.7;
+                
+                if (workTop > threshold) {
+                    scrollIndicator.classList.remove('hidden');
+                } else {
+                    scrollIndicator.classList.add('hidden');
+                }
             }
             
             document.querySelector('nav')?.classList.toggle('scrolled', y > 100);
+            lastScrollY = y;
         }
 
         window.addEventListener('scroll', handleScroll, { passive: true });
@@ -1066,40 +1071,8 @@
 
         document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
 
-        // Projects horizontal scroll - drag from anywhere
+        // Arrow buttons for projects
         const container = document.querySelector('.projects-container');
-        let isDown = false;
-        let startX;
-        let scrollLeft;
-
-        container?.addEventListener('mousedown', (e) => {
-            // Don't interfere with play button clicks
-            if (e.target.closest('.project-play')) return;
-            isDown = true;
-            container.style.cursor = 'grabbing';
-            startX = e.pageX - container.offsetLeft;
-            scrollLeft = container.scrollLeft;
-        });
-
-        container?.addEventListener('mouseleave', () => {
-            isDown = false;
-            container.style.cursor = 'grab';
-        });
-
-        container?.addEventListener('mouseup', () => {
-            isDown = false;
-            container.style.cursor = 'grab';
-        });
-
-        container?.addEventListener('mousemove', (e) => {
-            if (!isDown) return;
-            e.preventDefault();
-            const x = e.pageX - container.offsetLeft;
-            const walk = (x - startX) * 1.5;
-            container.scrollLeft = scrollLeft - walk;
-        });
-
-        // Arrow buttons
         const leftArrow = document.getElementById('scroll-left');
         const rightArrow = document.getElementById('scroll-right');
 
