@@ -243,7 +243,7 @@
             box-shadow: 
                 0 60px 120px -30px rgba(0, 0, 0, 0.7),
                 0 30px 60px -20px rgba(255, 107, 53, 0.12);
-            transition: opacity 0.5s ease, transform 0.5s ease;
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .hero-showreel::before {
@@ -271,7 +271,7 @@
 
         /* Title */
         .hero-text {
-            transition: opacity 0.5s ease;
+            transition: opacity 0.3s ease;
         }
 
         .hero-text h1 {
@@ -314,7 +314,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            transition: opacity 0.5s ease;
+            transition: opacity 0.3s ease;
         }
 
         .scroll-line {
@@ -414,11 +414,11 @@
             overflow: visible;
         }
 
-        /* Projects container */
+        /* Projects container - horizontal scroll */
         .projects-container {
             display: flex;
             gap: 28px;
-            overflow-x: auto;
+            overflow-x: scroll;
             overflow-y: hidden;
             padding: 20px 0 30px;
             margin: 0 -48px;
@@ -428,6 +428,7 @@
             -ms-overflow-style: none;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+            overscroll-behavior-x: contain;
         }
 
         .projects-container::-webkit-scrollbar {
@@ -448,7 +449,7 @@
             box-shadow: 
                 0 4px 20px rgba(0, 0, 0, 0.5),
                 0 8px 25px -5px rgba(255, 107, 53, 0.25);
-            transition: all 0.4s ease;
+            transition: box-shadow 0.4s ease, transform 0.4s ease;
         }
 
         .project-card:hover {
@@ -536,6 +537,7 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             cursor: pointer;
             z-index: 10;
+            pointer-events: auto;
         }
 
         .project-play::before {
@@ -590,7 +592,7 @@
             max-height: 80px;
         }
 
-        /* Scroll arrows */
+        /* Scroll arrows - desktop only hover */
         .scroll-arrows {
             display: flex;
             justify-content: center;
@@ -609,11 +611,23 @@
             align-items: center;
             justify-content: center;
             transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
         }
 
-        .scroll-arrow:hover {
+        /* Hover only on devices that support it (not touch) */
+        @media (hover: hover) and (pointer: fine) {
+            .scroll-arrow:hover {
+                border-color: var(--accent);
+                background: rgba(255, 107, 53, 0.1);
+            }
+        }
+
+        /* Active state for all devices */
+        .scroll-arrow:active {
             border-color: var(--accent);
-            background: rgba(255, 107, 53, 0.1);
+            background: rgba(255, 107, 53, 0.2);
+            transform: scale(0.95);
         }
 
         .scroll-arrow:disabled {
@@ -1027,33 +1041,32 @@
             }
         });
 
-        // Scroll effects - CORRECT ORDER:
-        // Down: showreel first, then title, then scroll indicator
-        // Up: scroll indicator first, then title, then showreel
+        // Scroll effects - faster reappear when scrolling up
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
 
         function handleScroll() {
             const y = window.scrollY;
-            const progress = Math.min(y / 400, 1);
+            // Use shorter range for faster transitions
+            const progress = Math.min(y / 300, 1);
             
-            // Showreel: FIRST to disappear (starts immediately)
+            // Showreel: FIRST to disappear, LAST to reappear
             if (heroShowreel) {
                 heroShowreel.style.transform = `scale(${1 + progress * 0.08})`;
-                const showreelOpacity = 1 - Math.min(progress / 0.4, 1);
+                const showreelOpacity = 1 - Math.min(progress / 0.35, 1);
                 heroShowreel.style.opacity = showreelOpacity;
             }
             
-            // Title: SECOND to disappear (starts at 30% progress)
+            // Title: SECOND to disappear, SECOND to reappear
             if (heroText) {
-                const titleProgress = Math.max(0, (progress - 0.3) / 0.4);
+                const titleProgress = Math.max(0, (progress - 0.25) / 0.35);
                 heroText.style.opacity = 1 - titleProgress;
             }
             
-            // Scroll indicator: LAST to disappear (starts at 60% progress)
+            // Scroll indicator: LAST to disappear, FIRST to reappear
             if (scrollIndicator) {
-                const indicatorProgress = Math.max(0, (progress - 0.6) / 0.4);
+                const indicatorProgress = Math.max(0, (progress - 0.5) / 0.35);
                 scrollIndicator.style.opacity = 1 - indicatorProgress;
             }
             
@@ -1070,26 +1083,26 @@
 
         document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
 
-        // Horizontal scroll for projects - capture wheel events
+        // Horizontal scroll - convert vertical to horizontal
         const container = document.querySelector('.projects-container');
         const leftArrow = document.getElementById('scroll-left');
         const rightArrow = document.getElementById('scroll-right');
 
-        // Forward wheel events to horizontal scroll
-        container?.addEventListener('wheel', (e) => {
-            // If horizontal scroll is possible and we're scrolling vertically
-            if (Math.abs(e.deltaX) < Math.abs(e.deltaY)) {
-                // Check if we're not at the edges
-                const atStart = container.scrollLeft <= 0;
-                const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 1;
-                
-                // If scrolling down and not at end, or scrolling up and not at start
-                if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
-                    e.preventDefault();
-                    container.scrollLeft += e.deltaY;
+        if (container) {
+            container.addEventListener('wheel', (e) => {
+                // Check if it's primarily a vertical scroll
+                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                    const atStart = container.scrollLeft <= 0;
+                    const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 5;
+                    
+                    // Only hijack scroll if we can scroll in that direction
+                    if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
+                        e.preventDefault();
+                        container.scrollLeft += e.deltaY * 1.5;
+                    }
                 }
-            }
-        }, { passive: false });
+            }, { passive: false });
+        }
 
         leftArrow?.addEventListener('click', () => container.scrollBy({ left: -400, behavior: 'smooth' }));
         rightArrow?.addEventListener('click', () => container.scrollBy({ left: 400, behavior: 'smooth' }));
