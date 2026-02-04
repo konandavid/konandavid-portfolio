@@ -7,15 +7,20 @@ layout: base.njk
     <a href="/" class="logo">Konan David</a>
     <div class="nav-right">
         <ul class="nav-links">
-            <li><a href="#work">Work</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#work" data-i18n="work">Work</a></li>
+            <li><a href="#about" data-i18n="about">About</a></li>
         </ul>
+        <div class="lang-toggle">
+            <button data-lang="en" class="active">EN</button>
+            <span>/</span>
+            <button data-lang="fr">FR</button>
+        </div>
         <a href="#contact" class="nav-contact">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
                 <polyline points="22,6 12,13 2,6"></polyline>
             </svg>
-            <span>Contact</span>
+            <span data-i18n="contact">Contact</span>
         </a>
     </div>
     <button class="mobile-menu-btn" aria-label="Menu">
@@ -27,9 +32,14 @@ layout: base.njk
 
 <!-- Mobile Menu -->
 <div class="mobile-menu">
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
+    <a href="#work" data-i18n="work">Work</a>
+    <a href="#about" data-i18n="about">About</a>
+    <a href="#contact" data-i18n="contact">Contact</a>
+    <div class="lang-toggle">
+        <button data-lang="en" class="active">EN</button>
+        <span>/</span>
+        <button data-lang="fr">FR</button>
+    </div>
 </div>
 
 <!-- Hero Section -->
@@ -59,9 +69,9 @@ layout: base.njk
 <!-- Work Section -->
 <section class="work-section" id="work">
     <div class="section-header">
-        <h2>Selected Work</h2>
+        <h2 data-i18n="selectedWork">Selected Work</h2>
         <div class="drag-indicator">
-            <span>Drag to explore</span>
+            <span data-i18n="dragToExplore">Drag to explore</span>
             <div class="drag-line"></div>
         </div>
     </div>
@@ -95,7 +105,7 @@ layout: base.njk
 
 <!-- Press / Clients Section -->
 <section class="press-section">
-    <p class="press-label">Featured In & Collaborations</p>
+    <p class="press-label" data-i18n="featuredIn">Featured In & Collaborations</p>
     <div class="marquee-wrapper">
         <div class="marquee-track">
             {%- for logo in press.logos -%}
@@ -115,19 +125,19 @@ layout: base.njk
             <img src="/uploads/about.jpg" alt="Konan David">
         </div>
         <div class="about-content">
-            <span class="about-label">About</span>
-            <h2>Creating powerful visual experiences through movement</h2>
-            <p>Born in Abidjan, Côte d'Ivoire, and raised in France, Konan David operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong>, and <strong>Vogue</strong>.</p>
-            <p>Specializing in artist development and movement coaching, Konan empowers performers to unlock their expressive potential. Alongside this expertise, he has worked with renowned artists such as <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, and <strong>Dadju</strong>.</p>
-            <p>His work is defined by meticulous attention to detail, raw attitude, and effortless flow. Driven by cinematic vision and cultural authenticity, Konan continuously explores new visual languages to elevate every artistic narrative.</p>
+            <span class="about-label" data-i18n="aboutLabel">About</span>
+            <h2 data-i18n="aboutTitle">Creating powerful visual experiences through movement</h2>
+            <p data-i18n="aboutP1">Born in Abidjan, Côte d'Ivoire, and raised in France, Konan David operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong>, and <strong>Vogue</strong>.</p>
+            <p data-i18n="aboutP2">Specializing in artist development and movement coaching, Konan empowers performers to unlock their expressive potential. Alongside this expertise, he has worked with renowned artists such as <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, and <strong>Dadju</strong>.</p>
+            <p data-i18n="aboutP3">His work is defined by meticulous attention to detail, raw attitude, and effortless flow. Driven by cinematic vision and cultural authenticity, Konan continuously explores new visual languages to elevate every artistic narrative.</p>
         </div>
     </div>
 </section>
 
 <!-- Contact Section -->
 <section class="contact-section" id="contact">
-    <span class="contact-label">Get in Touch</span>
-    <h2>Let's create something together</h2>
+    <span class="contact-label" data-i18n="contactLabel">Get in Touch</span>
+    <h2 data-i18n="contactTitle">Let's create something together</h2>
     <a href="mailto:{{ site.email }}" class="contact-email">{{ site.email }}</a>
     <div class="social-links">
         <a href="{{ site.instagram }}" target="_blank">Instagram</a>
@@ -137,6 +147,6 @@ layout: base.njk
 
 <!-- Footer -->
 <footer>
-    <span>© 2026 Konan David. All rights reserved.</span>
-    <span>Paris, France</span>
+    <span data-i18n="copyright">© 2026 Konan David. All rights reserved.</span>
+    <span data-i18n="location">Paris, France</span>
 </footer>
