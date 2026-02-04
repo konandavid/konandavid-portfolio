@@ -94,7 +94,7 @@
         .nav-right {
             display: flex;
             align-items: center;
-            gap: 36px;
+            gap: 32px;
         }
 
         .nav-links {
@@ -113,6 +113,40 @@
 
         .nav-links a:hover {
             color: var(--accent);
+        }
+
+        /* Language Toggle - Premium Style */
+        .lang-toggle {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 100px;
+            padding: 4px;
+            gap: 2px;
+        }
+
+        .lang-toggle button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 100px;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .lang-toggle button:hover {
+            color: var(--text-primary);
+        }
+
+        .lang-toggle button.active {
+            color: var(--text-primary);
+            background: rgba(255, 107, 53, 0.15);
         }
 
         .nav-contact {
@@ -194,6 +228,16 @@
 
         .mobile-menu a:hover {
             color: var(--accent);
+        }
+
+        .mobile-menu .lang-toggle {
+            margin-top: 20px;
+            padding: 6px;
+        }
+
+        .mobile-menu .lang-toggle button {
+            font-size: 14px;
+            padding: 10px 20px;
         }
 
         /* Hero */
@@ -408,48 +452,63 @@
             overflow: visible;
         }
 
-        /* Projects container */
+        /* Projects container - Safari compatible */
         .projects-container {
             display: flex;
             gap: 28px;
             overflow-x: scroll;
             overflow-y: hidden;
-            padding: 20px 0 30px;
+            padding: 20px 0 40px;
             margin: 0 -48px;
             padding-left: 48px;
             padding-right: 48px;
             scrollbar-width: none;
             -ms-overflow-style: none;
             scroll-snap-type: x mandatory;
+            -webkit-scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+            -webkit-scroll-behavior: smooth;
         }
 
         .projects-container::-webkit-scrollbar {
             display: none;
         }
 
-        /* Project Card */
+        /* Project Card - Premium smooth glow */
         .project-card {
             width: 400px;
             min-width: 400px;
+            flex: 0 0 400px;
             aspect-ratio: 4/5;
             border-radius: 16px;
             overflow: hidden;
             position: relative;
-            flex-shrink: 0;
             background: var(--bg-tertiary);
             scroll-snap-align: start;
+            -webkit-scroll-snap-align: start;
+            /* Multi-layer smooth glow */
             box-shadow: 
-                0 4px 20px rgba(0, 0, 0, 0.5),
-                0 8px 25px -5px rgba(255, 107, 53, 0.25);
-            transition: box-shadow 0.4s ease, transform 0.4s ease;
+                0 2px 8px rgba(0, 0, 0, 0.3),
+                0 8px 24px rgba(0, 0, 0, 0.4),
+                0 16px 48px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 107, 53, 0.03),
+                0 4px 24px -4px rgba(255, 107, 53, 0.15),
+                0 12px 48px -8px rgba(255, 107, 53, 0.12),
+                0 24px 80px -16px rgba(255, 107, 53, 0.08);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-card:hover {
+            transform: translateY(-8px);
             box-shadow: 
-                0 8px 30px rgba(0, 0, 0, 0.6),
-                0 12px 35px -5px rgba(255, 107, 53, 0.4);
-            transform: translateY(-4px);
+                0 4px 12px rgba(0, 0, 0, 0.3),
+                0 12px 32px rgba(0, 0, 0, 0.4),
+                0 24px 64px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 107, 53, 0.1),
+                0 8px 32px -4px rgba(255, 107, 53, 0.25),
+                0 20px 64px -8px rgba(255, 107, 53, 0.2),
+                0 32px 100px -16px rgba(255, 107, 53, 0.15);
         }
 
         .project-card::before {
@@ -458,27 +517,38 @@
             inset: 0;
             border-radius: 16px;
             padding: 1px;
-            background: rgba(255, 255, 255, 0.08);
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.02) 50%,
+                rgba(255, 107, 53, 0.05)
+            );
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             -webkit-mask-composite: xor;
             mask-composite: exclude;
             pointer-events: none;
             z-index: 5;
-            transition: background 0.4s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
         .project-card:hover::before {
-            background: var(--accent);
+            background: linear-gradient(
+                135deg,
+                rgba(255, 107, 53, 0.4),
+                rgba(255, 107, 53, 0.1) 50%,
+                rgba(255, 107, 53, 0.2)
+            );
         }
 
         .project-card img {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            transition: transform 0.8s ease;
+            transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
             pointer-events: none;
             user-select: none;
+            -webkit-user-select: none;
             -webkit-user-drag: none;
         }
 
@@ -507,6 +577,7 @@
             letter-spacing: 0.1em;
             padding: 6px 12px;
             background: rgba(255, 255, 255, 0.1);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border-radius: 20px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -520,6 +591,7 @@
             width: 70px;
             height: 70px;
             background: rgba(255, 255, 255, 0.2);
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border-radius: 50%;
             display: flex;
@@ -933,7 +1005,7 @@
         @media (max-width: 1024px) {
             .about-container { grid-template-columns: 1fr; gap: 50px; }
             .about-image { max-width: 280px; margin: 0 auto; }
-            .project-card { width: 340px; min-width: 340px; }
+            .project-card { width: 340px; min-width: 340px; flex: 0 0 340px; }
             .nav-contact span { display: none; }
             .nav-contact { padding: 10px; }
         }
@@ -941,9 +1013,10 @@
         @media (max-width: 768px) {
             nav { padding: 16px 24px; }
             nav.scrolled { padding: 14px 24px; }
-            .nav-links, .nav-contact { display: none; }
+            .nav-links, .nav-contact, .nav-right .lang-toggle { display: none; }
             .mobile-menu-btn { display: flex; }
             .mobile-menu { display: flex; }
+            .mobile-menu .lang-toggle { display: flex; }
             .hero { padding: 80px 24px 20px; }
             .hero-text h1 { font-size: 9px; letter-spacing: 0.08em; }
             .hero-text .separator { margin: 0 8px; font-size: 1em; }
@@ -954,7 +1027,7 @@
                 padding-right: 24px;
                 gap: 16px;
             }
-            .project-card { width: 280px; min-width: 280px; }
+            .project-card { width: 280px; min-width: 280px; flex: 0 0 280px; }
             .scroll-arrows { gap: 12px; }
             .scroll-arrow { width: 40px; height: 40px; }
             .about-section, .contact-section { padding: 80px 24px; }
@@ -979,7 +1052,86 @@
     </div>
 
     <script>
-        // Mobile Menu
+        // ===================
+        // TRANSLATIONS
+        // ===================
+        const translations = {
+            en: {
+                work: 'Work',
+                about: 'About',
+                contact: 'Contact',
+                selectedWork: 'Selected Work',
+                dragToExplore: 'Drag to explore',
+                featuredIn: 'Featured In & Collaborations',
+                aboutLabel: 'About',
+                aboutTitle: 'Creating powerful visual experiences through movement',
+                aboutP1: 'Born in Abidjan, Côte d\'Ivoire, and raised in France, Konan David operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong>, and <strong>Vogue</strong>.',
+                aboutP2: 'Specializing in artist development and movement coaching, Konan empowers performers to unlock their expressive potential. Alongside this expertise, he has worked with renowned artists such as <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, and <strong>Dadju</strong>.',
+                aboutP3: 'His work is defined by meticulous attention to detail, raw attitude, and effortless flow. Driven by cinematic vision and cultural authenticity, Konan continuously explores new visual languages to elevate every artistic narrative.',
+                contactLabel: 'Get in Touch',
+                contactTitle: 'Let\'s create something together',
+                copyright: '© 2026 Konan David. All rights reserved.',
+                location: 'Paris, France'
+            },
+            fr: {
+                work: 'Projets',
+                about: 'À propos',
+                contact: 'Contact',
+                selectedWork: 'Projets Sélectionnés',
+                dragToExplore: 'Glissez pour explorer',
+                featuredIn: 'Collaborations & Parutions',
+                aboutLabel: 'À propos',
+                aboutTitle: 'Créer des expériences visuelles puissantes à travers le mouvement',
+                aboutP1: 'Né à Abidjan, en Côte d\'Ivoire, et élevé en France, Konan David évolue à l\'intersection de la culture urbaine et de la production haut de gamme. Son travail comprend des tournées à guichets fermés, des films de danse, des clips musicaux et des collaborations mode avec des marques internationales telles que <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong> et <strong>Vogue</strong>.',
+                aboutP2: 'Spécialisé dans le développement artistique et le coaching de mouvement, Konan aide les artistes à libérer leur potentiel expressif. Fort de cette expertise, il a travaillé avec des artistes renommés tels que <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong> et <strong>Dadju</strong>.',
+                aboutP3: 'Son travail se distingue par une attention méticuleuse aux détails, une attitude brute et un flow naturel. Guidé par une vision cinématographique et une authenticité culturelle, Konan explore continuellement de nouveaux langages visuels pour sublimer chaque récit artistique.',
+                contactLabel: 'Contact',
+                contactTitle: 'Créons quelque chose ensemble',
+                copyright: '© 2026 Konan David. Tous droits réservés.',
+                location: 'Paris, France'
+            }
+        };
+
+        // ===================
+        // LANGUAGE SYSTEM
+        // ===================
+        let currentLang = localStorage.getItem('lang') || 'en';
+
+        function setLanguage(lang) {
+            currentLang = lang;
+            localStorage.setItem('lang', lang);
+            document.documentElement.lang = lang;
+            
+            // Update all translatable elements
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (translations[lang] && translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+            
+            // Update active state on all toggle buttons
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+        }
+
+        // Initialize language
+        document.addEventListener('DOMContentLoaded', () => {
+            setLanguage(currentLang);
+            
+            // Bind click handlers to all language buttons
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    setLanguage(btn.dataset.lang);
+                });
+            });
+        });
+
+        // ===================
+        // MOBILE MENU
+        // ===================
         const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
         const mobileMenu = document.querySelector('.mobile-menu');
         
@@ -997,7 +1149,9 @@
             });
         });
 
-        // Video Modal
+        // ===================
+        // VIDEO MODAL
+        // ===================
         const videoModal = document.getElementById('video-modal');
         const modalVideo = document.getElementById('modal-video');
         
@@ -1031,23 +1185,18 @@
             }
         });
 
-        // Hero elements fade based on scroll position
-        // Overlapping ranges for smooth transitions
+        // ===================
+        // HERO SCROLL EFFECTS
+        // ===================
         const heroShowreel = document.getElementById('hero-showreel');
         const heroText = document.getElementById('hero-text');
         const scrollIndicator = document.querySelector('.scroll-indicator');
 
         function handleScroll() {
             const y = window.scrollY;
-            const vh = window.innerHeight;
             
-            // Showreel: fades from 0 to 400px scroll
             const showreelOpacity = Math.max(0, 1 - (y / 400));
-            
-            // Title: fades from 200 to 500px (starts when showreel is at 50%)
             const titleOpacity = Math.max(0, Math.min(1, 1 - ((y - 200) / 300)));
-            
-            // Indicator: fades from 350 to 550px (starts when title is fading)
             const indicatorOpacity = Math.max(0, Math.min(1, 1 - ((y - 350) / 200)));
             
             if (heroShowreel) {
@@ -1063,23 +1212,27 @@
         window.addEventListener('scroll', handleScroll, { passive: true });
         handleScroll();
 
-        // Section reveal
+        // ===================
+        // SECTION REVEAL
+        // ===================
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
         }, { threshold: 0.1 });
 
         document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
 
-        // Horizontal scroll for projects - simple version
+        // ===================
+        // PROJECT SCROLL ARROWS
+        // ===================
         const container = document.querySelector('.projects-container');
         const leftArrow = document.getElementById('scroll-left');
         const rightArrow = document.getElementById('scroll-right');
 
-        // Just arrows, no wheel hijacking - let native scroll work
         leftArrow?.addEventListener('click', () => container.scrollBy({ left: -400, behavior: 'smooth' }));
         rightArrow?.addEventListener('click', () => container.scrollBy({ left: 400, behavior: 'smooth' }));
 
         function updateArrows() {
+            if (!container) return;
             if (leftArrow) leftArrow.disabled = container.scrollLeft <= 0;
             if (rightArrow) rightArrow.disabled = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
         }
@@ -1087,7 +1240,9 @@
         container?.addEventListener('scroll', updateArrows);
         updateArrows();
 
-        // Smooth scroll for nav links
+        // ===================
+        // SMOOTH SCROLL NAV
+        // ===================
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', (e) => {
                 e.preventDefault();
@@ -1095,7 +1250,9 @@
             });
         });
 
-        // Showreel sound
+        // ===================
+        // SHOWREEL SOUND
+        // ===================
         const heroVideo = document.getElementById('hero-video');
         let soundOn = false;
         heroShowreel?.addEventListener('click', () => {
