@@ -197,7 +197,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            padding: 100px 48px 40px;
+            padding: 100px 48px 20px;
             position: relative;
         }
 
@@ -217,7 +217,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 32px;
+            gap: 28px;
             width: 100%;
             max-width: 1200px;
             position: relative;
@@ -258,7 +258,7 @@
             border: none;
         }
 
-        /* Title - subtle glow only */
+        /* Title - with space between Movement and Direction */
         .hero-text h1 {
             font-size: clamp(12px, 1.5vw, 17px);
             font-weight: 500;
@@ -268,7 +268,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            white-space: nowrap;
+            flex-wrap: wrap;
+            gap: 6px;
         }
 
         .hero-text .title-block {
@@ -282,7 +283,7 @@
         }
 
         .hero-text .separator {
-            margin: 0 20px;
+            margin: 0 16px;
             color: var(--accent);
             font-size: 1.2em;
             font-weight: 600;
@@ -294,13 +295,12 @@
             transform: scale(1.2) rotate(90deg);
         }
 
-        /* Scroll indicator - clean animation */
+        /* Scroll indicator - line only, no text */
         .scroll-indicator {
-            margin-top: 40px;
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 12px;
             transition: opacity 0.5s ease;
         }
 
@@ -308,16 +308,9 @@
             opacity: 0;
         }
 
-        .scroll-indicator span {
-            font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 0.3em;
-            color: var(--text-muted);
-        }
-
         .scroll-line {
             width: 1px;
-            height: 60px;
+            height: 50px;
             background: rgba(255, 255, 255, 0.1);
             position: relative;
             overflow: hidden;
@@ -338,19 +331,19 @@
             0% { top: -20px; opacity: 0; }
             20% { opacity: 1; }
             80% { opacity: 1; }
-            100% { top: 60px; opacity: 0; }
+            100% { top: 50px; opacity: 0; }
         }
 
-        /* Work Section */
+        /* Work Section - reduced top padding */
         .work-section {
-            padding: 80px 48px 60px;
+            padding: 40px 48px 60px;
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            margin-bottom: 40px;
+            margin-bottom: 24px;
             opacity: 0;
             transform: translateY(20px);
             transition: all 0.6s ease;
@@ -367,23 +360,60 @@
             letter-spacing: -0.03em;
         }
 
-        .section-header span {
+        /* Drag indicator with horizontal line */
+        .drag-indicator {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 8px;
+        }
+
+        .drag-indicator span {
             font-size: 12px;
             color: var(--text-muted);
         }
 
-        /* Projects with arrows */
+        .drag-line {
+            width: 50px;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .drag-line::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 20px;
+            height: 100%;
+            background: linear-gradient(to right, transparent, var(--text-primary), transparent);
+            animation: dragMove 2s ease-in-out infinite;
+        }
+
+        @keyframes dragMove {
+            0% { left: -20px; opacity: 0; }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { left: 50px; opacity: 0; }
+        }
+
+        /* Projects with proper horizontal scroll */
         .projects-wrapper {
             position: relative;
         }
 
         .projects-container {
             overflow-x: auto;
-            overflow-y: visible;
+            overflow-y: hidden;
             margin: 0 -48px;
             padding: 20px 48px;
             scrollbar-width: none;
             scroll-behavior: smooth;
+            /* Prevent vertical scroll interference on mobile */
+            touch-action: pan-x;
+            -webkit-overflow-scrolling: touch;
         }
 
         .projects-container::-webkit-scrollbar {
@@ -435,7 +465,7 @@
             stroke-width: 2;
         }
 
-        /* Project Card - proper rounded glow */
+        /* Project Card - with orange glow shadow */
         .project-card {
             width: 400px;
             aspect-ratio: 4/5;
@@ -447,6 +477,10 @@
             opacity: 0;
             transform: translateY(60px);
             transition: all 0.6s ease;
+            /* Orange glow behind card */
+            box-shadow: 
+                0 20px 60px -20px rgba(0, 0, 0, 0.8),
+                0 10px 40px -10px rgba(255, 107, 53, 0.15);
         }
 
         .project-card.visible {
@@ -454,7 +488,13 @@
             transform: translateY(0);
         }
 
-        /* Proper border that follows rounded corners */
+        .project-card:hover {
+            box-shadow: 
+                0 30px 80px -20px rgba(0, 0, 0, 0.9),
+                0 20px 60px -10px rgba(255, 107, 53, 0.3);
+        }
+
+        /* Border that follows rounded corners */
         .project-card::before {
             content: '';
             position: absolute;
@@ -473,7 +513,6 @@
 
         .project-card:hover::before {
             background: var(--accent);
-            box-shadow: 0 0 30px var(--accent-glow);
         }
 
         .project-card img {
@@ -712,6 +751,10 @@
             cursor: grabbing;
         }
 
+        .marquee-track.dragging {
+            animation: none;
+        }
+
         @keyframes marqueeAnim {
             0% { transform: translateX(0); }
             100% { transform: translateX(-50%); }
@@ -733,18 +776,17 @@
         .about-section {
             padding: 100px 48px;
             background: var(--bg-secondary);
+            position: relative;
         }
 
         .about-section::before {
             content: '';
-            display: block;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
-            margin-bottom: 0;
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
         }
 
         .about-container {
@@ -923,10 +965,11 @@
             .nav-links, .nav-contact { display: none; }
             .mobile-menu-btn { display: flex; }
             .mobile-menu { display: flex; }
-            .hero { padding: 90px 24px 40px; }
+            .hero { padding: 90px 24px 20px; }
             .hero-text h1 { font-size: 10px; flex-wrap: wrap; gap: 4px; }
-            .hero-text .separator { margin: 0 12px; }
-            .work-section, .about-section, .contact-section { padding-left: 24px; padding-right: 24px; }
+            .hero-text .separator { margin: 0 10px; }
+            .work-section { padding: 30px 24px 60px; }
+            .about-section, .contact-section { padding-left: 24px; padding-right: 24px; }
             .projects-container { margin: 0 -24px; padding: 20px 24px; }
             .project-card { width: 300px; }
             .projects-grid { gap: 20px; }
@@ -1041,7 +1084,6 @@
         leftArrow?.addEventListener('click', () => container.scrollBy({ left: -scrollAmount, behavior: 'smooth' }));
         rightArrow?.addEventListener('click', () => container.scrollBy({ left: scrollAmount, behavior: 'smooth' }));
 
-        // Update arrow states
         function updateArrows() {
             if (leftArrow) leftArrow.disabled = container.scrollLeft <= 0;
             if (rightArrow) rightArrow.disabled = container.scrollLeft >= container.scrollWidth - container.clientWidth - 10;
@@ -1050,66 +1092,88 @@
         container?.addEventListener('scroll', updateArrows);
         updateArrows();
 
-        // Marquee drag with momentum
+        // Marquee - continuous drag without reset
         const marquee = document.querySelector('.marquee-track');
-        let isDragging = false, startX = 0, currentX = 0, velocity = 0;
+        if (marquee) {
+            let isDragging = false;
+            let startX = 0;
+            let scrollPos = 0;
 
-        function getX() {
-            return new DOMMatrix(getComputedStyle(marquee).transform).m41 || 0;
+            // Get current position from transform or animation
+            function getCurrentPos() {
+                const style = getComputedStyle(marquee);
+                const matrix = new DOMMatrix(style.transform);
+                return matrix.m41 || 0;
+            }
+
+            // Set position and handle wrapping
+            function setPos(x) {
+                const totalWidth = marquee.scrollWidth / 2;
+                // Wrap around
+                if (x > 0) x = x - totalWidth;
+                if (x < -totalWidth) x = x + totalWidth;
+                marquee.style.transform = `translateX(${x}px)`;
+            }
+
+            marquee.addEventListener('mousedown', (e) => {
+                isDragging = true;
+                startX = e.clientX;
+                scrollPos = getCurrentPos();
+                marquee.classList.add('dragging');
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+                const diff = e.clientX - startX;
+                setPos(scrollPos + diff);
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                // Continue from current position
+                const currentPos = getCurrentPos();
+                const totalWidth = marquee.scrollWidth / 2;
+                // Calculate what percentage through the animation we are
+                const progress = Math.abs(currentPos) / totalWidth;
+                // Resume animation from this point
+                marquee.style.animation = 'none';
+                marquee.offsetHeight; // Trigger reflow
+                marquee.style.transform = `translateX(${currentPos}px)`;
+                marquee.classList.remove('dragging');
+                
+                // Smoothly resume
+                setTimeout(() => {
+                    marquee.style.transition = 'none';
+                    marquee.style.animation = `marqueeAnim ${40 * (1 - progress)}s linear infinite`;
+                    marquee.style.animationDelay = '0s';
+                }, 50);
+            });
+
+            // Touch events
+            marquee.addEventListener('touchstart', (e) => {
+                isDragging = true;
+                startX = e.touches[0].clientX;
+                scrollPos = getCurrentPos();
+                marquee.classList.add('dragging');
+            }, { passive: true });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging) return;
+                const diff = e.touches[0].clientX - startX;
+                setPos(scrollPos + diff);
+            }, { passive: true });
+
+            document.addEventListener('touchend', () => {
+                if (!isDragging) return;
+                isDragging = false;
+                const currentPos = getCurrentPos();
+                marquee.classList.remove('dragging');
+                setTimeout(() => {
+                    marquee.style.animation = '';
+                }, 50);
+            });
         }
-
-        marquee?.addEventListener('mousedown', (e) => {
-            isDragging = true;
-            startX = e.clientX;
-            currentX = getX();
-            marquee.style.animation = 'none';
-            marquee.style.transform = `translateX(${currentX}px)`;
-        });
-
-        document.addEventListener('mousemove', (e) => {
-            if (!isDragging) return;
-            const diff = e.clientX - startX;
-            velocity = diff - (velocity || 0);
-            marquee.style.transform = `translateX(${currentX + diff}px)`;
-        });
-
-        document.addEventListener('mouseup', () => {
-            if (!isDragging) return;
-            isDragging = false;
-            // Let it coast then resume animation
-            const finalX = getX();
-            marquee.style.transform = `translateX(${finalX + velocity * 5}px)`;
-            marquee.style.transition = 'transform 0.5s ease-out';
-            setTimeout(() => {
-                marquee.style.transition = '';
-                marquee.style.transform = '';
-                marquee.style.animation = '';
-            }, 600);
-        });
-
-        // Touch support
-        marquee?.addEventListener('touchstart', (e) => {
-            isDragging = true;
-            startX = e.touches[0].clientX;
-            currentX = getX();
-            marquee.style.animation = 'none';
-            marquee.style.transform = `translateX(${currentX}px)`;
-        }, { passive: true });
-
-        document.addEventListener('touchmove', (e) => {
-            if (!isDragging) return;
-            const diff = e.touches[0].clientX - startX;
-            marquee.style.transform = `translateX(${currentX + diff}px)`;
-        }, { passive: true });
-
-        document.addEventListener('touchend', () => {
-            if (!isDragging) return;
-            isDragging = false;
-            setTimeout(() => {
-                marquee.style.transform = '';
-                marquee.style.animation = '';
-            }, 100);
-        });
 
         // Smooth scroll for anchors
         document.querySelectorAll('a[href^="#"]').forEach(a => {
