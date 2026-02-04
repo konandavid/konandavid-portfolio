@@ -48,6 +48,7 @@ layout: base.njk
                 <span class="title-block">Choreography</span>
                 <span class="separator">+</span>
                 <span class="title-block">Creative & Movement</span>
+                <span class="spacer"></span>
                 <span class="title-block">Direction</span>
             </h1>
         </div>
@@ -68,22 +69,20 @@ layout: base.njk
     </div>
     <div class="projects-wrapper">
         <div class="projects-container">
-            <div class="projects-grid">
-                {%- for project in collections.projects -%}
-                <article class="project-card" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
-                    <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
-                    {% if project.data.video %}<div class="project-play"></div>{% endif %}
-                    <div class="project-info">
-                        <span class="project-category">{{ project.data.category }}</span>
-                        <div class="project-text">
-                            <span class="project-artist">{{ project.data.artist }}</span>
-                            <h3 class="project-title">{{ project.data.title }}</h3>
-                            <p class="project-description">{{ project.data.description }}</p>
-                        </div>
+            {%- for project in collections.projects -%}
+            <article class="project-card" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
+                <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
+                {% if project.data.video %}<div class="project-play"></div>{% endif %}
+                <div class="project-info">
+                    <span class="project-category">{{ project.data.category }}</span>
+                    <div class="project-text">
+                        <span class="project-artist">{{ project.data.artist }}</span>
+                        <h3 class="project-title">{{ project.data.title }}</h3>
+                        <p class="project-description">{{ project.data.description }}</p>
                     </div>
-                </article>
-                {%- endfor -%}
-            </div>
+                </div>
+            </article>
+            {%- endfor -%}
         </div>
         <div class="scroll-arrows">
             <button class="scroll-arrow" id="scroll-left" aria-label="Previous">
