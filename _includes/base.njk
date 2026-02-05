@@ -1044,6 +1044,7 @@
             localStorage.setItem('lang', lang);
             document.documentElement.lang = lang;
             
+            // Toggle visibility of language-specific elements
             document.querySelectorAll('[data-lang-en]').forEach(el => {
                 el.style.display = lang === 'en' ? '' : 'none';
             });
@@ -1051,6 +1052,7 @@
                 el.style.display = lang === 'fr' ? '' : 'none';
             });
             
+            // Update static translations
             document.querySelectorAll('[data-i18n]').forEach(el => {
                 const key = el.dataset.i18n;
                 if (staticTranslations[lang] && staticTranslations[lang][key]) {
@@ -1058,11 +1060,13 @@
                 }
             });
             
+            // Update active state on all toggle buttons
             document.querySelectorAll('.lang-toggle button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
         }
 
+        // Static translations for UI elements
         const staticTranslations = {
             en: {
                 work: 'Work',
@@ -1086,8 +1090,11 @@
             }
         };
 
+        // Initialize language
         document.addEventListener('DOMContentLoaded', () => {
             setLanguage(currentLang);
+            
+            // Bind click handlers to all language buttons
             document.querySelectorAll('.lang-toggle button').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1161,6 +1168,7 @@
 
         function handleScroll() {
             const y = window.scrollY;
+            
             const showreelOpacity = Math.max(0, 1 - (y / 400));
             const titleOpacity = Math.max(0, Math.min(1, 1 - ((y - 200) / 300)));
             const indicatorOpacity = Math.max(0, Math.min(1, 1 - ((y - 350) / 200)));
@@ -1227,24 +1235,6 @@
                 soundOn = true;
             }
         });
-
-        // ===================
-        // FIX SAFARI SCROLL (MOLETTE)
-        // ===================
-        if (container) {
-            container.addEventListener('wheel', (e) => {
-                // Si c'est un scroll vertical dominant (souris classique)
-                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                    const isAtStart = container.scrollLeft <= 0 && e.deltaY < 0;
-                    const isAtEnd = container.scrollLeft >= (container.scrollWidth - container.clientWidth - 1) && e.deltaY > 0;
-
-                    if (!isAtStart && !isAtEnd) {
-                        e.preventDefault();
-                        container.scrollLeft += e.deltaY;
-                    }
-                }
-            }, { passive: false });
-        }
     </script>
 </body>
 </html>
