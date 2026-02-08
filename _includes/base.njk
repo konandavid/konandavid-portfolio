@@ -445,6 +445,40 @@
             100% { left: 50px; opacity: 0; }
         }
 
+        /* Filter bar */
+        .filter-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 24px;
+            flex-wrap: wrap;
+        }
+
+        .filter-btn {
+            padding: 8px 20px;
+            border-radius: 100px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: transparent;
+            color: var(--text-muted);
+            font-size: 12px;
+            font-weight: 500;
+            font-family: inherit;
+            letter-spacing: 0.02em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .filter-btn:hover {
+            border-color: rgba(255, 255, 255, 0.25);
+            color: var(--text-primary);
+        }
+
+        .filter-btn.active {
+            background: rgba(255, 107, 53, 0.15);
+            border-color: rgba(255, 107, 53, 0.4);
+            color: var(--text-primary);
+        }
+
         /* Projects wrapper */
         .projects-wrapper {
             position: relative;
@@ -477,6 +511,11 @@
             scroll-snap-type: none;
             user-select: none;
             -webkit-user-select: none;
+        }
+
+        /* Filtered state */
+        .project-card.filtered-out {
+            display: none;
         }
 
         /* Project Card - Light smooth glow */
@@ -1006,6 +1045,8 @@
             .hero-text h1 { font-size: 9px; letter-spacing: 0.08em; }
             .hero-text .separator { margin: 0 8px; font-size: 1em; }
             .work-section { padding: 30px 24px 60px; }
+            .filter-bar { gap: 6px; margin-bottom: 18px; }
+            .filter-btn { padding: 7px 14px; font-size: 11px; }
             .projects-container { 
                 margin: 0 -24px; 
                 padding-left: 24px; 
@@ -1079,7 +1120,11 @@
                 dragToExplore: 'Drag to explore',
                 featuredIn: 'Featured In & Collaborations',
                 copyright: '© 2026 Konan David. All rights reserved.',
-                location: 'Paris, France'
+                location: 'Paris, France',
+                filterAll: 'All',
+                filterLive: 'Live Show',
+                filterFilm: 'Film & MV',
+                filterCommercial: 'Commercial'
             },
             fr: {
                 work: 'Projets',
@@ -1089,7 +1134,11 @@
                 dragToExplore: 'Glissez pour explorer',
                 featuredIn: 'Collaborations & Parutions',
                 copyright: '© 2026 Konan David. Tous droits réservés.',
-                location: 'Paris, France'
+                location: 'Paris, France',
+                filterAll: 'Tous',
+                filterLive: 'Live Show',
+                filterFilm: 'Film & MV',
+                filterCommercial: 'Commercial'
             }
         };
 
@@ -1294,6 +1343,35 @@
                 staticTranslations.fr.dragToExplore = 'Swipez pour explorer';
             }
         })();
+
+        // ===================
+        // PROJECT FILTERS
+        // ===================
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const filter = btn.dataset.filter;
+                
+                // Update active state
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                
+                // Filter cards
+                const cards = document.querySelectorAll('.project-card');
+                cards.forEach(card => {
+                    if (filter === 'all' || card.dataset.category === filter) {
+                        card.classList.remove('filtered-out');
+                    } else {
+                        card.classList.add('filtered-out');
+                    }
+                });
+                
+                // Reset scroll position
+                if (container) {
+                    container.scrollLeft = 0;
+                    updateArrows();
+                }
+            });
+        });
 
         // ===================
         // SMOOTH SCROLL NAV
