@@ -384,7 +384,7 @@
         /* Work Section */
         .work-section {
             padding: 40px 48px 60px;
-            overflow: hidden;
+            overflow: clip;
         }
 
         .section-header {
@@ -467,8 +467,7 @@
             scroll-snap-type: x mandatory;
             -webkit-scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
-            scroll-behavior: smooth;
-            -webkit-scroll-behavior: smooth;
+            touch-action: pan-x pan-y;
         }
 
         .projects-container::-webkit-scrollbar {
@@ -1213,6 +1212,25 @@
         
         container?.addEventListener('scroll', updateArrows);
         updateArrows();
+
+        // ===================
+        // WHEEL → HORIZONTAL SCROLL (Safari fix)
+        // ===================
+        if (container) {
+            container.addEventListener('wheel', function(e) {
+                // Convert vertical wheel/trackpad to horizontal scroll
+                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
+                    const atStart = container.scrollLeft <= 0;
+                    const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 1;
+                    
+                    // Only intercept if we can still scroll in that direction
+                    if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
+                        e.preventDefault();
+                        container.scrollLeft += e.deltaY;
+                    }
+                }
+            }, { passive: false });
+        }
 
         // ===================
         // SMOOTH SCROLL NAV
