@@ -27,7 +27,7 @@
 
         html {
             scroll-behavior: smooth;
-            overflow-x: hidden;
+            overflow-x: clip;
         }
 
         body {
@@ -35,7 +35,7 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             line-height: 1.5;
-            overflow-x: hidden;
+            overflow-x: clip;
             -webkit-font-smoothing: antialiased;
             position: relative;
             width: 100%;
@@ -384,7 +384,6 @@
         /* Work Section */
         .work-section {
             padding: 40px 48px 60px;
-            overflow: clip;
         }
 
         .section-header {
@@ -456,7 +455,7 @@
         .projects-container {
             display: flex;
             gap: 28px;
-            overflow-x: scroll;
+            overflow-x: auto;
             overflow-y: hidden;
             padding: 20px 0 40px;
             margin: 0 -48px;
@@ -464,14 +463,20 @@
             padding-right: 48px;
             scrollbar-width: none;
             -ms-overflow-style: none;
-            scroll-snap-type: x mandatory;
-            -webkit-scroll-snap-type: x mandatory;
+            scroll-snap-type: x proximity;
             -webkit-overflow-scrolling: touch;
-            touch-action: pan-x pan-y;
+            cursor: grab;
         }
 
         .projects-container::-webkit-scrollbar {
             display: none;
+        }
+
+        .projects-container.dragging {
+            cursor: grabbing;
+            scroll-snap-type: none;
+            user-select: none;
+            -webkit-user-select: none;
         }
 
         /* Project Card - Light smooth glow */
@@ -485,7 +490,6 @@
             position: relative;
             background: var(--bg-tertiary);
             scroll-snap-align: start;
-            -webkit-scroll-snap-align: start;
             /* Light, smooth glow */
             box-shadow: 
                 0 4px 16px rgba(0, 0, 0, 0.4),
@@ -1214,23 +1218,82 @@
         updateArrows();
 
         // ===================
-        // WHEEL → HORIZONTAL SCROLL (Safari fix)
+        // WHEEL → HORIZONTAL SCROLL (Safari + all browsers)
         // ===================
         if (container) {
             container.addEventListener('wheel', function(e) {
-                // Convert vertical wheel/trackpad to horizontal scroll
+                // Only intercept vertical scrolling and convert to horizontal
                 if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
                     const atStart = container.scrollLeft <= 0;
-                    const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 1;
+                    const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 2;
                     
-                    // Only intercept if we can still scroll in that direction
                     if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
                         e.preventDefault();
+                        e.stopPropagation();
                         container.scrollLeft += e.deltaY;
+                        updateArrows();
                     }
                 }
             }, { passive: false });
         }
+
+        // ===================
+        // MOUSE DRAG TO SCROLL
+        // ===================
+        if (container) {
+            let isDragging = false;
+            let startX = 0;
+            let scrollStart = 0;
+            let hasMoved = false;
+
+            container.addEventListener('mousedown', function(e) {
+                // Don't interfere with play button clicks
+                if (e.target.closest('.project-play')) return;
+                isDragging = true;
+                hasMoved = false;
+                startX = e.pageX;
+                scrollStart = container.scrollLeft;
+                container.classList.add('dragging');
+                e.preventDefault();
+            });
+
+            window.addEventListener('mousemove', function(e) {
+                if (!isDragging) return;
+                const dx = e.pageX - startX;
+                if (Math.abs(dx) > 3) hasMoved = true;
+                container.scrollLeft = scrollStart - dx;
+                updateArrows();
+            });
+
+            window.addEventListener('mouseup', function() {
+                if (!isDragging) return;
+                isDragging = false;
+                container.classList.remove('dragging');
+            });
+
+            // Prevent click events after dragging (so cards don't trigger)
+            container.addEventListener('click', function(e) {
+                if (hasMoved) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+            }, true);
+        }
+
+        // ===================
+        // DRAG/SWIPE INDICATOR TEXT
+        // ===================
+        (function() {
+            const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+            if (isTouchDevice) {
+                document.querySelectorAll('[data-i18n="dragToExplore"]').forEach(el => {
+                    el.textContent = currentLang === 'fr' ? 'Swipez pour explorer' : 'Swipe to explore';
+                });
+                // Also update the translations so language switch works
+                staticTranslations.en.dragToExplore = 'Swipe to explore';
+                staticTranslations.fr.dragToExplore = 'Swipez pour explorer';
+            }
+        })();
 
         // ===================
         // SMOOTH SCROLL NAV
