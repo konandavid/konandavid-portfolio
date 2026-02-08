@@ -73,10 +73,16 @@ layout: base.njk
             <div class="drag-line"></div>
         </div>
     </div>
+    <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all" data-i18n="filterAll">All</button>
+        <button class="filter-btn" data-filter="Live Show" data-i18n="filterLive">Live Show</button>
+        <button class="filter-btn" data-filter="Film & Music Video" data-i18n="filterFilm">Film & MV</button>
+        <button class="filter-btn" data-filter="Commercial" data-i18n="filterCommercial">Commercial</button>
+    </div>
     <div class="projects-wrapper">
         <div class="projects-container">
             {%- for project in collections.projects -%}
-            <article class="project-card" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
+            <article class="project-card" data-category="{{ project.data.category }}" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
                 <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
                 {% if project.data.video %}<div class="project-play"></div>{% endif %}
                 <div class="project-info">
