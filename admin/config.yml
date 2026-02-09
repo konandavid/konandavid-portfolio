@@ -30,6 +30,7 @@ collections:
         fields:
           - { label: "Site Title", name: "title", widget: "string" }
           - { label: "Description", name: "description", widget: "string" }
+          - { label: "Favicon", name: "favicon", widget: "image", hint: "Image carrée 512x512 recommandée (PNG)" }
           - { label: "Email", name: "email", widget: "string" }
           - { label: "Instagram URL", name: "instagram", widget: "string" }
           - { label: "YouTube URL", name: "youtube", widget: "string" }
@@ -75,3 +76,14 @@ collections:
             fields:
               - { label: "Label", name: "label", widget: "string", default: "Contact" }
               - { label: "Title", name: "title", widget: "string", default: "Créons quelque chose ensemble" }
+
+      - name: "press"
+        label: "Press & Collaborations"
+        file: "_data/press.json"
+        fields:
+          - label: "Logos"
+            name: "logos"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Logo Image", name: "image", widget: "image" }
