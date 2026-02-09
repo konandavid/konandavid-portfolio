@@ -6,24 +6,27 @@ media_folder: "uploads"
 public_folder: "/uploads"
 
 collections:
-  - name: "projects"
-    label: "Projects"
-    folder: "content/projects"
-    create: true
-    sortable_fields: ["order", "title", "artist"]
-    fields:
-      - { label: "Order", name: "order", widget: "number", default: 10, hint: "Lower number = appears first" }
-      - { label: "Artist", name: "artist", widget: "string" }
-      - { label: "Title", name: "title", widget: "string" }
-      - { label: "Category", name: "category", widget: "select", options: ["Live Show", "Commercial", "Film & Music Video"] }
-      - { label: "Image", name: "image", widget: "image" }
-      - { label: "Description (English)", name: "description", widget: "text" }
-      - { label: "Description (Français)", name: "description_fr", widget: "text" }
-      - { label: "Video URL", name: "video", widget: "string", required: false }
-
   - name: "settings"
     label: "Site Settings"
     files:
+      - name: "projects"
+        label: "Projects"
+        file: "_data/projects.json"
+        fields:
+          - label: "Projects"
+            name: "items"
+            widget: "list"
+            label_singular: "Project"
+            summary: "{{fields.artist}} — {{fields.title}} ({{fields.category}})"
+            fields:
+              - { label: "Artist", name: "artist", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "select", options: ["Live Show", "Commercial", "Film & Music Video"] }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Description (English)", name: "description", widget: "text" }
+              - { label: "Description (Français)", name: "description_fr", widget: "text" }
+              - { label: "Video URL", name: "video", widget: "string", required: false }
+
       - name: "general"
         label: "General Settings"
         file: "_data/site.json"
