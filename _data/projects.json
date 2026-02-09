@@ -188,6 +188,14 @@
       "description": "Featured performer for a prime-time nationwide broadcast on France's premier music award show.",
       "description_fr": "Performeur pour une diffusion nationale en prime-time lors de la principale cérémonie musicale française.",
       "video": ""
+    },
+    {
+      "artist": "Gazo",
+      "title": "Paris La Défense Arena",
+      "category": "Live Show",
+      "image": "/uploads/896dfda32e86217.jpg",
+      "description": "Choreography and performance direction for this show in Europe's largest indoor venue, 40,000+ fans. Amplifying raw energy and choreographic variety to monumental scale.",
+      "description_fr": "Chorégraphie et direction de performance pour ce show dans la plus grande salle indoor d'Europe, devant plus de 40 000 personnes."
     }
   ]
 }
