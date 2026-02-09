@@ -10,15 +10,6 @@
       "video": ""
     },
     {
-      "artist": "Gazo",
-      "title": "Apocalypse Tour",
-      "category": "Live Show",
-      "image": "/uploads/896dfda32e86217.jpg",
-      "description": "Choreography and performance direction for massive national tour, including a landmark production at Paris La Défense Arena.",
-      "description_fr": "Chorégraphie et direction de performance pour une tournée nationale massive, incluant une production historique à Paris La Défense Arena.",
-      "video": ""
-    },
-    {
       "artist": "Dior x Rihanna",
       "title": "J'Adore Campaign",
       "category": "Commercial",
@@ -28,21 +19,29 @@
       "video": ""
     },
     {
-      "artist": "Nike",
-      "title": "Wemby Campaign",
-      "category": "Commercial",
-      "image": "/uploads/img_8347-2.jpg",
-      "description": "Performance for Victor Wembanyama's Nike campaign.",
-      "description_fr": "Performance pour la campagne Nike de Victor Wembanyama.",
+      "artist": "Gazo",
+      "title": "Paris La Défense Arena",
+      "category": "Live Show",
+      "image": "/uploads/896dfda32e86217.jpg",
+      "description": "Choreography and performance direction for this show in Europe's largest indoor venue, 40,000+ fans. Amplifying raw energy and choreographic variety to monumental scale.",
+      "description_fr": "Chorégraphie et direction de performance pour ce show dans la plus grande salle indoor d'Europe, devant plus de 40 000 personnes."
+    },
+    {
+      "artist": "Travis Scott",
+      "title": "Modern Jam (Circus Maximus)",
+      "category": "Film & Music Video",
+      "image": "/uploads/hf_20260202_132315_665a57a0-8abe-4f2b-915b-11ba1e7de7b7.png",
+      "description": "Performance in Gaspar Noé's segment for Utopia album.",
+      "description_fr": "Performance dans le segment réalisé par Gaspar Noé pour l'album Utopia.",
       "video": ""
     },
     {
-      "artist": "Aya Nakamura",
-      "title": "DNK Tour",
+      "artist": "Gazo",
+      "title": "Apocalypse Tour",
       "category": "Live Show",
-      "image": "/uploads/dsc_8363_littleshao_web.jpg",
-      "description": "Performance for triple sold-out Accor Arena residency and European tour.\nChoreography by Eva N'Diaye.",
-      "description_fr": "Performance pour la résidence à guichets fermés à l'Accor Arena et la tournée européenne.\nChorégraphie par Eva N'Diaye.",
+      "image": "/uploads/896dfda32e86217.jpg",
+      "description": "Choreography and performance direction for massive national tour, including a landmark production at Paris La Défense Arena.",
+      "description_fr": "Chorégraphie et direction de performance pour une tournée nationale massive, incluant une production historique à Paris La Défense Arena.",
       "video": ""
     },
     {
@@ -55,12 +54,39 @@
       "video": ""
     },
     {
-      "artist": "Travis Scott",
-      "title": "Modern Jam (Circus Maximus)",
-      "category": "Film & Music Video",
-      "image": "/uploads/hf_20260202_132315_665a57a0-8abe-4f2b-915b-11ba1e7de7b7.png",
-      "description": "Performance in Gaspar Noé's segment for Utopia album.",
-      "description_fr": "Performance dans le segment réalisé par Gaspar Noé pour l'album Utopia.",
+      "artist": "Nike",
+      "title": "Wemby Campaign",
+      "category": "Commercial",
+      "image": "/uploads/img_8347-2.jpg",
+      "description": "Performance for Victor Wembanyama's Nike campaign.",
+      "description_fr": "Performance pour la campagne Nike de Victor Wembanyama.",
+      "video": ""
+    },
+    {
+      "artist": "Gazo",
+      "title": "Golden Coast Festival 2025",
+      "category": "Live Show",
+      "image": "/uploads/photo-emma-buoncristiani-1757204915.jpg",
+      "description": "Choreographed and directed performance for the main headliner set, 50000+ fans at France's defining rap festival.",
+      "description_fr": "Chorégraphe du set tête d'affiche, devant 50 000 fans au festival rap de référence en France.",
+      "video": "https://www.youtube.com/watch?v=C3CQsJqxQFE&list=RDC3CQsJqxQFE&start_radio=1"
+    },
+    {
+      "artist": "Gazo",
+      "title": "Les Ardentes Festival 2025",
+      "category": "Live Show",
+      "image": "/uploads/hq720-3.jpg",
+      "description": "Choreographing the headline set for 100,000 fans.",
+      "description_fr": "Chorégraphe du show tête d'affiche devant 100 000 fans.",
+      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1"
+    },
+    {
+      "artist": "Aya Nakamura",
+      "title": "DNK Tour",
+      "category": "Live Show",
+      "image": "/uploads/dsc_8363_littleshao_web.jpg",
+      "description": "Performance for triple sold-out Accor Arena residency and European tour.\nChoreography by Eva N'Diaye.",
+      "description_fr": "Performance pour la résidence à guichets fermés à l'Accor Arena et la tournée européenne.\nChorégraphie par Eva N'Diaye.",
       "video": ""
     },
     {
@@ -83,7 +109,7 @@
     },
     {
       "artist": "Dadju",
-      "title": "Parc des Princes",
+      "title": "Parc des Princes 2022",
       "category": "Live Show",
       "image": "/uploads/f4d0e4eedf61f20e.jpg",
       "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa.",
@@ -92,7 +118,7 @@
     },
     {
       "artist": "Laylow",
-      "title": "Accor Arena",
+      "title": "Accor Arena 2022",
       "category": "Live Show",
       "image": "/uploads/f17ddfe5fb7682bc.jpg",
       "description": "Back-to-back sold-out shows at Paris's iconic Accor Arena for Trinity Tour.",
@@ -173,7 +199,7 @@
     },
     {
       "artist": "Shy'm",
-      "title": "Agape Tour",
+      "title": "Agape Tour 2019",
       "category": "Live Show",
       "image": "/uploads/415614-shy-m-en-concert-au-palais-des-sports-dome-de-paris-en-juin-2019.jpg",
       "description": "Featured performer for this national arena tour, contributing to the live visual identity and stage production.",
@@ -188,14 +214,6 @@
       "description": "Featured performer for a prime-time nationwide broadcast on France's premier music award show.",
       "description_fr": "Performeur pour une diffusion nationale en prime-time lors de la principale cérémonie musicale française.",
       "video": ""
-    },
-    {
-      "artist": "Gazo",
-      "title": "Paris La Défense Arena",
-      "category": "Live Show",
-      "image": "/uploads/896dfda32e86217.jpg",
-      "description": "Choreography and performance direction for this show in Europe's largest indoor venue, 40,000+ fans. Amplifying raw energy and choreographic variety to monumental scale.",
-      "description_fr": "Chorégraphie et direction de performance pour ce show dans la plus grande salle indoor d'Europe, devant plus de 40 000 personnes."
     }
   ]
 }
