@@ -81,20 +81,20 @@ layout: base.njk
     </div>
     <div class="projects-wrapper">
         <div class="projects-container">
-            {%- for project in collections.projects -%}
-            <article class="project-card" data-category="{{ project.data.category }}" {% if project.data.video %}data-video="{{ project.data.video }}"{% endif %}>
-                <img src="{{ project.data.image }}" alt="{{ project.data.title }}" loading="lazy">
-                {% if project.data.video %}<div class="project-play"></div>{% endif %}
+            {%- for project in projects.items -%}
+            <article class="project-card" data-category="{{ project.category }}" {% if project.video %}data-video="{{ project.video }}"{% endif %}>
+                <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy">
+                {% if project.video %}<div class="project-play"></div>{% endif %}
                 <div class="project-info">
-                    <span class="project-category">{{ project.data.category }}</span>
+                    <span class="project-category">{{ project.category }}</span>
                     <div class="project-text">
-                        <span class="project-artist">{{ project.data.artist }}</span>
-                        <h3 class="project-title">{{ project.data.title }}</h3>
-                        <p class="project-description" data-lang-en>{{ project.data.description }}</p>
-                        {% if project.data.description_fr %}
-                        <p class="project-description" data-lang-fr style="display: none;">{{ project.data.description_fr }}</p>
+                        <span class="project-artist">{{ project.artist }}</span>
+                        <h3 class="project-title">{{ project.title }}</h3>
+                        <p class="project-description" data-lang-en>{{ project.description }}</p>
+                        {% if project.description_fr %}
+                        <p class="project-description" data-lang-fr style="display: none;">{{ project.description_fr }}</p>
                         {% else %}
-                        <p class="project-description" data-lang-fr style="display: none;">{{ project.data.description }}</p>
+                        <p class="project-description" data-lang-fr style="display: none;">{{ project.description }}</p>
                         {% endif %}
                     </div>
                 </div>
