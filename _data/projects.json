@@ -37,6 +37,24 @@
     },
     {
       "artist": "Gazo",
+      "title": "Golden Coast Festival 2025",
+      "category": "Live Show",
+      "image": "/uploads/photo-emma-buoncristiani-1757204915.jpg",
+      "description": "Choreographed and directed performance for the main headliner set, 50000+ fans at France's defining rap festival.",
+      "description_fr": "Chorégraphe du set tête d'affiche, devant 50 000 fans au festival rap de référence en France.",
+      "video": "https://www.youtube.com/watch?v=C3CQsJqxQFE&list=RDC3CQsJqxQFE&start_radio=1"
+    },
+    {
+      "artist": "Gazo",
+      "title": "Les Ardentes Festival 2025",
+      "category": "Live Show",
+      "image": "/uploads/hq720-3.jpg",
+      "description": "Choreographing the headline set for 100,000 fans.",
+      "description_fr": "Chorégraphe du show tête d'affiche devant 100 000 fans.",
+      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1"
+    },
+    {
+      "artist": "Gazo",
       "title": "Apocalypse Tour",
       "category": "Live Show",
       "image": "/uploads/img_9574.jpg",
@@ -61,24 +79,6 @@
       "description": "Performance for Victor Wembanyama's Nike campaign.",
       "description_fr": "Performance pour la campagne Nike de Victor Wembanyama.",
       "video": ""
-    },
-    {
-      "artist": "Gazo",
-      "title": "Golden Coast Festival 2025",
-      "category": "Live Show",
-      "image": "/uploads/photo-emma-buoncristiani-1757204915.jpg",
-      "description": "Choreographed and directed performance for the main headliner set, 50000+ fans at France's defining rap festival.",
-      "description_fr": "Chorégraphe du set tête d'affiche, devant 50 000 fans au festival rap de référence en France.",
-      "video": "https://www.youtube.com/watch?v=C3CQsJqxQFE&list=RDC3CQsJqxQFE&start_radio=1"
-    },
-    {
-      "artist": "Gazo",
-      "title": "Les Ardentes Festival 2025",
-      "category": "Live Show",
-      "image": "/uploads/hq720-3.jpg",
-      "description": "Choreographing the headline set for 100,000 fans.",
-      "description_fr": "Chorégraphe du show tête d'affiche devant 100 000 fans.",
-      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1"
     },
     {
       "artist": "Aya Nakamura",
