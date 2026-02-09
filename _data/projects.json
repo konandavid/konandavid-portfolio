@@ -46,21 +46,21 @@
     },
     {
       "artist": "Gazo",
-      "title": "Les Ardentes Festival 2025",
-      "category": "Live Show",
-      "image": "/uploads/hq720-3.jpg",
-      "description": "Choreographing the headline set for 100,000 fans.",
-      "description_fr": "Chorégraphe du show tête d'affiche devant 100 000 fans.",
-      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1"
-    },
-    {
-      "artist": "Gazo",
       "title": "Apocalypse Tour",
       "category": "Live Show",
       "image": "/uploads/img_9574.jpg",
       "description": "Choreography and performance direction for massive national tour, including a landmark production at Paris La Défense Arena.",
       "description_fr": "Chorégraphie et direction de performance pour une tournée nationale massive, incluant une production historique à Paris La Défense Arena.",
       "video": ""
+    },
+    {
+      "artist": "Gazo",
+      "title": "Les Ardentes Festival 2025",
+      "category": "Live Show",
+      "image": "/uploads/hq720-3.jpg",
+      "description": "Choreographing the headline set for 100,000 fans.",
+      "description_fr": "Chorégraphe du show tête d'affiche devant 100 000 fans.",
+      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1"
     },
     {
       "artist": "Vogue",
