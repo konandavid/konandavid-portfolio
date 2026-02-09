@@ -499,7 +499,12 @@
             -ms-overflow-style: none;
             scroll-snap-type: x proximity;
             -webkit-overflow-scrolling: touch;
-            cursor: grab;
+        }
+
+        @media (hover: hover) and (pointer: fine) {
+            .projects-container {
+                cursor: grab;
+            }
         }
 
         .projects-container::-webkit-scrollbar {
@@ -1267,66 +1272,47 @@
         updateArrows();
 
         // ===================
-        // WHEEL → HORIZONTAL SCROLL (Safari + all browsers)
+        // MOUSE DRAG TO SCROLL (desktop only, not touch)
         // ===================
         if (container) {
-            container.addEventListener('wheel', function(e) {
-                // Only intercept vertical scrolling and convert to horizontal
-                if (Math.abs(e.deltaY) > Math.abs(e.deltaX)) {
-                    const atStart = container.scrollLeft <= 0;
-                    const atEnd = container.scrollLeft >= container.scrollWidth - container.clientWidth - 2;
-                    
-                    if ((e.deltaY > 0 && !atEnd) || (e.deltaY < 0 && !atStart)) {
-                        e.preventDefault();
-                        e.stopPropagation();
-                        container.scrollLeft += e.deltaY;
-                        updateArrows();
-                    }
-                }
-            }, { passive: false });
-        }
-
-        // ===================
-        // MOUSE DRAG TO SCROLL
-        // ===================
-        if (container) {
+            const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
             let isDragging = false;
             let startX = 0;
             let scrollStart = 0;
             let hasMoved = false;
 
-            container.addEventListener('mousedown', function(e) {
-                // Don't interfere with play button clicks
-                if (e.target.closest('.project-play')) return;
-                isDragging = true;
-                hasMoved = false;
-                startX = e.pageX;
-                scrollStart = container.scrollLeft;
-                container.classList.add('dragging');
-                e.preventDefault();
-            });
-
-            window.addEventListener('mousemove', function(e) {
-                if (!isDragging) return;
-                const dx = e.pageX - startX;
-                if (Math.abs(dx) > 3) hasMoved = true;
-                container.scrollLeft = scrollStart - dx;
-                updateArrows();
-            });
-
-            window.addEventListener('mouseup', function() {
-                if (!isDragging) return;
-                isDragging = false;
-                container.classList.remove('dragging');
-            });
-
-            // Prevent click events after dragging (so cards don't trigger)
-            container.addEventListener('click', function(e) {
-                if (hasMoved) {
+            if (!isTouchDevice) {
+                container.addEventListener('mousedown', function(e) {
+                    if (e.target.closest('.project-play')) return;
+                    isDragging = true;
+                    hasMoved = false;
+                    startX = e.pageX;
+                    scrollStart = container.scrollLeft;
+                    container.classList.add('dragging');
                     e.preventDefault();
-                    e.stopPropagation();
-                }
-            }, true);
+                });
+
+                window.addEventListener('mousemove', function(e) {
+                    if (!isDragging) return;
+                    const dx = e.pageX - startX;
+                    if (Math.abs(dx) > 3) hasMoved = true;
+                    container.scrollLeft = scrollStart - dx;
+                    updateArrows();
+                });
+
+                window.addEventListener('mouseup', function() {
+                    if (!isDragging) return;
+                    isDragging = false;
+                    container.classList.remove('dragging');
+                });
+
+                container.addEventListener('click', function(e) {
+                    if (hasMoved) {
+                        e.preventDefault();
+                        e.stopPropagation();
+                    }
+                }, true);
+            }
         }
 
         // ===================
