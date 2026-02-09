@@ -1,7 +1,7 @@
 ---
 order: 3
 artist: Gazo
-title: Golden Coast
+title: Golden Coast 2025
 category: Live Show
 image: /uploads/photo-emma-buoncristiani-1757204915.jpg
 description: >+
