@@ -1094,7 +1094,8 @@
 
         .mobile-instagram {
             display: none;
-            color: var(--text-primary);
+            color: var(--text-primary) !important;
+            text-decoration: none;
         }
 
         /* Mobile lang — texte simple sans pill */
@@ -1126,6 +1127,14 @@
             font-size: 10px;
         }
 
+        .scroll-label {
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
         /* Mobile */
         @media (max-width: 1024px) {
             .about-container { grid-template-columns: 1fr; gap: 50px; }
@@ -1144,7 +1153,7 @@
             .mobile-menu .lang-toggle { display: flex; }
             .mobile-lang { display: flex; }
             .mobile-instagram { display: flex; }
-            .hero { padding: 80px 24px 20px; }
+            .hero { padding: 80px 24px 20px; min-height: auto; }
             .hero-text h1 { font-size: 9px; letter-spacing: 0.08em; }
             .hero-text .separator { margin: 0 8px; font-size: 1em; }
             .work-section { padding: 10px 24px 60px; }
