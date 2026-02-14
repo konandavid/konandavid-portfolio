@@ -360,17 +360,25 @@
         }
 
         .rotating-word-track {
-            display: inline-flex;
-            flex-direction: column;
+            display: inline-block;
             overflow: hidden;
             height: 1.2em;
-            vertical-align: middle;
+            line-height: 1.2em;
+            vertical-align: text-bottom;
             position: relative;
             margin-right: 0.25em;
+            /* Force Safari GPU layer to respect overflow */
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            transition: width 0.6s cubic-bezier(0.76, 0, 0.24, 1);
         }
 
         .rotating-word {
             display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
             height: 1.2em;
             line-height: 1.2em;
             transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
@@ -1415,34 +1423,51 @@
         // ROTATING WORD HERO
         // ===================
         (function() {
+            const track = document.querySelector('.rotating-word-track');
             const words = document.querySelectorAll('.rotating-word');
-            if (!words.length) return;
+            if (!words.length || !track) return;
 
             const total = words.length;
             let current = 0;
 
-            function rotateTo(index) {
-                const offset = -index * 1.2; // em units matching height
-                words.forEach((w) => {
-                    w.style.transform = `translateY(${offset}em)`;
-                });
-            }
-
-            // Init — no transition on first render
-            words.forEach(w => w.style.transition = 'none');
-            rotateTo(0);
-
-            // Re-enable transition after first paint
-            requestAnimationFrame(() => {
-                requestAnimationFrame(() => {
-                    words.forEach(w => w.style.transition = 'transform 0.6s cubic-bezier(0.76, 0, 0.24, 1)');
-                });
+            // Disable transitions to measure widths accurately
+            words.forEach(w => {
+                w.style.transition = 'none';
+                w.style.transform = 'translateY(0)';
             });
+            track.style.transition = 'none';
 
-            setInterval(() => {
-                current = (current + 1) % total;
-                rotateTo(current);
-            }, 2200);
+            // Measure each word width after layout
+            requestAnimationFrame(() => {
+                const widths = Array.from(words).map(w => w.offsetWidth);
+
+                function rotateTo(index) {
+                    const offset = -index * 1.2;
+                    words.forEach(w => {
+                        w.style.transform = `translateY(${offset}em)`;
+                    });
+                    track.style.width = widths[index] + 'px';
+                }
+
+                // Set initial state without animation
+                track.style.width = widths[0] + 'px';
+                rotateTo(0);
+
+                // Re-enable transitions after first paint
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        words.forEach(w => {
+                            w.style.transition = 'transform 0.6s cubic-bezier(0.76, 0, 0.24, 1)';
+                        });
+                        track.style.transition = 'width 0.6s cubic-bezier(0.76, 0, 0.24, 1)';
+                    });
+                });
+
+                setInterval(() => {
+                    current = (current + 1) % total;
+                    rotateTo(current);
+                }, 2200);
+            });
         })();
     </script>
 </body>
