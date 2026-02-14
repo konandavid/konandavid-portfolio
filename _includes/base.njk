@@ -1157,8 +1157,8 @@
             .hero-text h1 { font-size: 9px; letter-spacing: 0.08em; }
             .hero-text .separator { margin: 0 8px; font-size: 1em; }
             .work-section { padding: 10px 24px 60px; }
-            .section-header h2 { font-size: 22px; white-space: nowrap; }
-            .drag-indicator span { white-space: nowrap; font-size: 11px; }
+            .section-header h2 { font-size: 18px; white-space: nowrap; }
+            .drag-indicator span { white-space: nowrap; font-size: 10px; }
             .filter-bar { gap: 6px; margin-bottom: 18px; }
             .filter-btn { padding: 7px 14px; font-size: 11px; }
             .projects-container { 
@@ -1168,6 +1168,8 @@
                 gap: 16px;
             }
             .project-card { width: 280px; min-width: 280px; flex: 0 0 280px; }
+            .project-title { font-size: 18px; }
+            .project-artist { font-size: 11px; }
             .scroll-arrows { gap: 12px; }
             .scroll-arrow { width: 40px; height: 40px; }
             .about-section, .contact-section { padding: 80px 24px; }
@@ -1197,6 +1199,19 @@
         // ===================
         let currentLang = localStorage.getItem('lang') || 'en';
 
+        const categoryTranslations = {
+            fr: {
+                'Live Show': 'Scène & Tournée',
+                'Film & Music Video': 'Film & Clip',
+                'Commercial': 'Publicité'
+            },
+            en: {
+                'Live Show': 'Live Show',
+                'Film & Music Video': 'Film & MV',
+                'Commercial': 'Commercial'
+            }
+        };
+
         function setLanguage(lang) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
@@ -1221,6 +1236,15 @@
             // Update active state on all toggle buttons
             document.querySelectorAll('.lang-toggle button, .mobile-lang button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Translate category labels on cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                const rawCategory = card.dataset.category;
+                const label = card.querySelector('.project-category');
+                if (label && categoryTranslations[lang] && categoryTranslations[lang][rawCategory]) {
+                    label.textContent = categoryTranslations[lang][rawCategory];
+                }
             });
         }
 
