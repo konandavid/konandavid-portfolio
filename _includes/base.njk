@@ -1066,12 +1066,12 @@
             overflow: hidden;
         }
 
-        .mobile-instagram {
-            display: none;
+        .nav-instagram {
+            display: flex;
             align-items: center;
             justify-content: center;
-            width: 36px;
-            height: 36px;
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
             border: 1px solid rgba(255, 255, 255, 0.15);
             color: var(--text-secondary);
@@ -1079,17 +1079,50 @@
             text-decoration: none;
         }
 
-        .mobile-instagram:hover {
+        .nav-instagram:hover {
             border-color: var(--accent);
             color: var(--accent);
         }
 
-        .mobile-instagram svg {
+        .nav-instagram svg {
             width: 16px;
             height: 16px;
             stroke: currentColor;
             fill: none;
             stroke-width: 1.5;
+        }
+
+        .mobile-instagram {
+            display: none;
+        }
+
+        /* Mobile lang — texte simple sans pill */
+        .mobile-lang {
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .mobile-lang button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            padding: 4px 2px;
+            font-family: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-lang button.active {
+            color: var(--text-primary);
+        }
+
+        .mobile-lang .ml-sep {
+            color: var(--text-muted);
+            font-size: 10px;
         }
 
         /* Mobile */
@@ -1104,11 +1137,11 @@
         @media (max-width: 768px) {
             nav { padding: 16px 24px; }
             nav.scrolled { padding: 14px 24px; }
-            .nav-links, .nav-contact { display: none; }
-            .nav-right .lang-toggle { display: flex; }
+            .nav-links, .nav-contact, .nav-right .lang-toggle, .nav-instagram { display: none; }
             .mobile-menu-btn { display: flex; }
             .mobile-menu { display: flex; }
             .mobile-menu .lang-toggle { display: flex; }
+            .mobile-lang { display: flex; }
             .mobile-instagram { display: flex; }
             .hero { padding: 80px 24px 20px; }
             .hero-text h1 { font-size: 9px; letter-spacing: 0.08em; }
@@ -1174,7 +1207,7 @@
             });
             
             // Update active state on all toggle buttons
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+            document.querySelectorAll('.lang-toggle button, .mobile-lang button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
             });
         }
@@ -1215,8 +1248,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             setLanguage(currentLang);
             
-            // Bind click handlers to all language buttons
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+            // Bind click handlers to all language buttons (including mobile-lang)
+            document.querySelectorAll('.lang-toggle button, .mobile-lang button').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
                     setLanguage(btn.dataset.lang);
