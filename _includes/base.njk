@@ -1074,6 +1074,31 @@
                 padding: 24px;
             }
         }
+/* Rotating word hero */
+.title-rotating-wrapper {
+    display: inline-flex;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.rotating-word-track {
+    display: inline-flex;
+    flex-direction: column;
+    overflow: hidden;
+    height: 1.2em;
+    vertical-align: middle;
+    position: relative;
+    margin-right: 0.25em;
+}
+
+.rotating-word {
+    display: block;
+    height: 1.2em;
+    line-height: 1.2em;
+    color: var(--accent);
+    transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1), opacity 0.6s ease;
+    will-change: transform;
+}
     </style>
 </head>
 <body>
@@ -1385,6 +1410,31 @@
                 soundOn = true;
             }
         });
+// ===================
+// ROTATING WORD HERO
+// ===================
+(function() {
+    const words = document.querySelectorAll('.rotating-word');
+    if (!words.length) return;
+    
+    const total = words.length;
+    let current = 0;
+
+    function rotateTo(index) {
+        const offset = -index * 1.2; // em units matching height
+        words.forEach((w, i) => {
+            w.style.transform = `translateY(${offset}em)`;
+        });
+    }
+
+    // Init
+    rotateTo(0);
+
+    setInterval(() => {
+        current = (current + 1) % total;
+        rotateTo(current);
+    }, 2200);
+})();
     </script>
 </body>
 </html>
