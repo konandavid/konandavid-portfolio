@@ -1430,30 +1430,32 @@
             const total = words.length;
             let current = 0;
 
-            // Disable transitions to measure widths accurately
+            // Disable transitions to measure + set initial state
             words.forEach(w => {
                 w.style.transition = 'none';
-                w.style.transform = 'translateY(0)';
             });
             track.style.transition = 'none';
 
-            // Measure each word width after layout
             requestAnimationFrame(() => {
                 const widths = Array.from(words).map(w => w.offsetWidth);
 
+                // Stack words below each other from the start
+                words.forEach((w, i) => {
+                    w.style.transform = `translateY(${i * 1.2}em)`;
+                });
+
+                // Track width = first word
+                track.style.width = widths[0] + 'px';
+
                 function rotateTo(index) {
-                    const offset = -index * 1.2;
-                    words.forEach(w => {
-                        w.style.transform = `translateY(${offset}em)`;
+                    // Shift all words up so current word sits at 0
+                    words.forEach((w, i) => {
+                        w.style.transform = `translateY(${(i - index) * 1.2}em)`;
                     });
                     track.style.width = widths[index] + 'px';
                 }
 
-                // Set initial state without animation
-                track.style.width = widths[0] + 'px';
-                rotateTo(0);
-
-                // Re-enable transitions after first paint
+                // Enable transitions after first paint
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         words.forEach(w => {
