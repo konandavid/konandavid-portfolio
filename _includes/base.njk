@@ -4,210 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site.title }} — {{ site.description }}</title>
-    
-    <!-- SEO Meta Tags -->
-    <meta name="description" content="Konan David is a choreographer and creative director from Abidjan, Côte d'Ivoire, based in Paris. Specializing in live shows, music videos, and brand campaigns for Dior, Nike, Vogue, Rabanne, Gazo, Aya Nakamura, Bad Bunny, and Dadju.">
-    <meta name="keywords" content="Konan David, choreographer Paris, creative director, movement director, Ivorian choreographer, Abidjan, dance director France, Dior choreographer, Nike campaign, Vogue Paris, Gazo tour, Aya Nakamura, live show choreography, music video choreography, La Défense Arena, Accor Arena">
-    <meta name="author" content="Konan David">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://konandavid.com">
-    
-    <!-- Open Graph / Facebook / LinkedIn -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://konandavid.com">
-    <meta property="og:site_name" content="Konan David">
-    <meta property="og:title" content="Konan David — Choreographer & Creative Director | Dior, Nike, Vogue">
-    <meta property="og:description" content="Award-winning choreographer from Abidjan, specializing in arena tours, fashion campaigns, and music videos. Worked with Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny.">
-    <meta property="og:image" content="https://konandavid.com/uploads/og-share.jpg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt" content="Konan David - Choreographer & Creative Director">
-    <meta property="og:locale" content="en_US">
-    <meta property="og:locale:alternate" content="fr_FR">
-    
-    <!-- Twitter Card -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:url" content="https://konandavid.com">
-    <meta name="twitter:title" content="Konan David — Choreographer & Creative Director">
-    <meta name="twitter:description" content="From Abidjan to Paris arenas. Choreography for Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny.">
-    <meta name="twitter:image" content="https://konandavid.com/uploads/og-share.jpg">
-    <meta name="twitter:image:alt" content="Konan David - Choreographer & Creative Director">
-    <meta name="twitter:creator" content="@konanraw">
-    
-    <!-- Favicon -->
     {% set faviconUrl = site.favicon if site.favicon else '/uploads/favicon.png' %}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ faviconUrl }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ faviconUrl }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ faviconUrl }}">
     <meta name="theme-color" content="#000000">
-    
-    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link rel="preconnect" href="https://player.vimeo.com">
-    <link rel="preconnect" href="https://www.youtube.com">
-    <link rel="dns-prefetch" href="https://player.vimeo.com">
-    <link rel="dns-prefetch" href="https://www.youtube.com">
-    
-    <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Konan David",
-      "alternateName": "Konan Raw",
-      "jobTitle": "Choreographer & Creative Director",
-      "description": "Award-winning choreographer and creative director specializing in live shows, music videos, and brand campaigns",
-      "url": "https://konandavid.com",
-      "image": "https://konandavid.com/uploads/about.jpg",
-      "sameAs": [
-        "{{ site.instagram }}",
-        "{{ site.youtube }}"
-      ],
-      "email": "{{ site.email }}",
-      "birthPlace": {
-        "@type": "Place",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Abidjan",
-          "addressCountry": "Côte d'Ivoire"
-        }
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Paris",
-        "addressRegion": "Île-de-France",
-        "addressCountry": "FR"
-      },
-      "nationality": {
-        "@type": "Country",
-        "name": "Côte d'Ivoire"
-      },
-      "knowsAbout": [
-        "Choreography",
-        "Creative Direction",
-        "Movement Direction",
-        "Live Show Production",
-        "Music Video Direction",
-        "Fashion Campaign Choreography",
-        "Artist Development",
-        "Performance Coaching"
-      ],
-      "hasOccupation": {
-        "@type": "Occupation",
-        "name": "Choreographer",
-        "occupationLocation": {
-          "@type": "City",
-          "name": "Paris"
-        }
-      },
-      "worksFor": [
-        {
-          "@type": "Organization",
-          "name": "Dior"
-        },
-        {
-          "@type": "Organization",
-          "name": "Nike"
-        },
-        {
-          "@type": "Organization",
-          "name": "Vogue"
-        },
-        {
-          "@type": "Organization",
-          "name": "Rabanne"
-        }
-      ],
-      "colleague": [
-        {
-          "@type": "Person",
-          "name": "Gazo"
-        },
-        {
-          "@type": "Person",
-          "name": "Aya Nakamura"
-        },
-        {
-          "@type": "Person",
-          "name": "Bad Bunny"
-        },
-        {
-          "@type": "Person",
-          "name": "Dadju"
-        },
-        {
-          "@type": "Person",
-          "name": "Gigi Hadid"
-        },
-        {
-          "@type": "Person",
-          "name": "Rihanna"
-        },
-        {
-          "@type": "Person",
-          "name": "Travis Scott"
-        },
-        {
-          "@type": "Person",
-          "name": "Parris Goebel"
-        }
-      ],
-      "performerIn": [
-        {
-          "@type": "Event",
-          "name": "Vogue World Paris",
-          "location": {
-            "@type": "Place",
-            "name": "Place Vendôme",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Paris",
-              "addressCountry": "FR"
-            }
-          },
-          "startDate": "2024-06-23"
-        },
-        {
-          "@type": "Event",
-          "name": "Gazo - Paris La Défense Arena",
-          "location": {
-            "@type": "Place",
-            "name": "Paris La Défense Arena",
-            "address": {
-              "@type": "PostalAddress",
-              "addressLocality": "Paris",
-              "addressCountry": "FR"
-            }
-          },
-          "audience": {
-            "@type": "Audience",
-            "audienceType": "40000+ fans"
-          }
-        },
-        {
-          "@type": "Event",
-          "name": "Les Ardentes Festival",
-          "location": {
-            "@type": "Place",
-            "name": "Les Ardentes Festival",
-            "address": {
-              "@type": "PostalAddress",
-              "addressCountry": "BE"
-            }
-          },
-          "audience": {
-            "@type": "Audience",
-            "audienceType": "100000 fans"
-          }
-        }
-      ]
-    }
-    </script>
-    
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
         :root {
             --bg-primary: #000000;
@@ -524,6 +329,7 @@
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
+            line-height: 1.2;
         }
 
         .hero-text .title-block {
@@ -546,6 +352,36 @@
 
         .hero-text .separator:hover {
             transform: scale(1.2) rotate(90deg);
+        }
+
+        /* Rotating word hero */
+        .title-rotating-wrapper {
+            display: flex;
+            align-items: center;
+            white-space: nowrap;
+        }
+
+        .rotating-word-track {
+            display: block;
+            overflow: hidden;
+            height: 1.2em;
+            position: relative;
+            margin-right: 0.25em;
+            -webkit-transform: translateZ(0);
+            transform: translateZ(0);
+            transition: width 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+        }
+
+        .rotating-word {
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            white-space: nowrap;
+            height: 1.2em;
+            line-height: 1.2em;
+            transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
+            will-change: transform;
         }
 
         /* Scroll indicator */
@@ -1231,6 +1067,75 @@
             overflow: hidden;
         }
 
+        .nav-instagram {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .nav-instagram:hover {
+            border-color: var(--accent);
+            color: var(--accent);
+        }
+
+        .nav-instagram svg {
+            width: 16px;
+            height: 16px;
+            stroke: currentColor;
+            fill: none;
+            stroke-width: 1.5;
+        }
+
+        .mobile-instagram {
+            display: none;
+            color: var(--text-primary) !important;
+            text-decoration: none;
+        }
+
+        /* Mobile lang — texte simple sans pill */
+        .mobile-lang {
+            display: none;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .mobile-lang button {
+            background: transparent;
+            border: none;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            padding: 4px 2px;
+            font-family: inherit;
+            transition: color 0.3s ease;
+        }
+
+        .mobile-lang button.active {
+            color: var(--text-primary);
+        }
+
+        .mobile-lang .ml-sep {
+            color: var(--text-muted);
+            font-size: 10px;
+        }
+
+        .scroll-label {
+            font-size: 9px;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-top: 8px;
+        }
+
         /* Mobile */
         @media (max-width: 1024px) {
             .about-container { grid-template-columns: 1fr; gap: 50px; }
@@ -1243,15 +1148,20 @@
         @media (max-width: 768px) {
             nav { padding: 16px 24px; }
             nav.scrolled { padding: 14px 24px; }
-            .nav-links, .nav-contact, .nav-right .lang-toggle { display: none; }
+            .nav-links, .nav-contact, .nav-right .lang-toggle, .nav-instagram { display: none; }
             .mobile-menu-btn { display: flex; }
             .mobile-menu { display: flex; }
             .mobile-menu .lang-toggle { display: flex; }
-            .hero { padding: 80px 24px 20px; }
+            .mobile-lang { display: flex; }
+            .mobile-instagram { display: flex; }
+            .hero { padding: 80px 24px 20px; min-height: 100svh; }
             .hero-text h1 { font-size: 9px; letter-spacing: 0.08em; }
             .hero-text .separator { margin: 0 8px; font-size: 1em; }
-            .work-section { padding: 30px 24px 60px; }
-            .filter-bar { gap: 6px; margin-bottom: 18px; }
+            .work-section { padding: 10px 24px 60px; }
+            .section-header h2 { font-size: 18px; white-space: nowrap; }
+            .drag-indicator span { white-space: nowrap; font-size: 10px; }
+            .filter-bar { gap: 5px; margin-bottom: 18px; flex-wrap: nowrap; }
+            .filter-btn { padding: 6px 10px; font-size: 10px; white-space: nowrap; }
             .filter-btn { padding: 7px 14px; font-size: 11px; }
             .projects-container { 
                 margin: 0 -24px; 
@@ -1260,6 +1170,8 @@
                 gap: 16px;
             }
             .project-card { width: 280px; min-width: 280px; flex: 0 0 280px; }
+            .project-title { font-size: 18px; }
+            .project-artist { font-size: 11px; }
             .scroll-arrows { gap: 12px; }
             .scroll-arrow { width: 40px; height: 40px; }
             .about-section, .contact-section { padding: 80px 24px; }
@@ -1289,6 +1201,19 @@
         // ===================
         let currentLang = localStorage.getItem('lang') || 'en';
 
+        const categoryTranslations = {
+            fr: {
+                'Live Show': 'Scène & Tournée',
+                'Film & Music Video': 'Film & Clip',
+                'Commercial': 'Publicité'
+            },
+            en: {
+                'Live Show': 'Live Show',
+                'Film & Music Video': 'Film & MV',
+                'Commercial': 'Commercial'
+            }
+        };
+
         function setLanguage(lang) {
             currentLang = lang;
             localStorage.setItem('lang', lang);
@@ -1311,8 +1236,17 @@
             });
             
             // Update active state on all toggle buttons
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+            document.querySelectorAll('.lang-toggle button, .mobile-lang button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            // Translate category labels on cards
+            document.querySelectorAll('.project-card').forEach(card => {
+                const rawCategory = card.dataset.category;
+                const label = card.querySelector('.project-category');
+                if (label && categoryTranslations[lang] && categoryTranslations[lang][rawCategory]) {
+                    label.textContent = categoryTranslations[lang][rawCategory];
+                }
             });
         }
 
@@ -1342,9 +1276,9 @@
                 copyright: '© 2026 Konan David. Tous droits réservés.',
                 location: 'Paris, France',
                 filterAll: 'Tous',
-                filterLive: 'Live Show',
-                filterFilm: 'Film & MV',
-                filterCommercial: 'Commercial'
+                filterLive: 'Scène & Tournée',
+                filterFilm: 'Film & Clip',
+                filterCommercial: 'Publicité'
             }
         };
 
@@ -1352,8 +1286,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             setLanguage(currentLang);
             
-            // Bind click handlers to all language buttons
-            document.querySelectorAll('.lang-toggle button').forEach(btn => {
+            // Bind click handlers to all language buttons (including mobile-lang)
+            document.querySelectorAll('.lang-toggle button, .mobile-lang button').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
                     setLanguage(btn.dataset.lang);
@@ -1581,6 +1515,72 @@
                 soundOn = true;
             }
         });
+
+        // ===================
+        // ROTATING WORD HERO
+        // ===================
+        (function() {
+            const track = document.querySelector('.rotating-word-track');
+            const words = document.querySelectorAll('.rotating-word');
+            if (!words.length || !track) return;
+
+            const total = words.length;
+            let current = 0;
+
+            // Disable transitions to measure + set initial state
+            words.forEach(w => {
+                w.style.transition = 'none';
+            });
+            track.style.transition = 'none';
+
+            requestAnimationFrame(() => {
+                const widths = Array.from(words).map(w => w.offsetWidth);
+
+                // Stack words below each other from the start
+                words.forEach((w, i) => {
+                    w.style.transform = `translateY(${i * 1.2}em)`;
+                });
+
+                // Track width = first word
+                track.style.width = widths[0] + 'px';
+
+                function rotateTo(index) {
+                    // Shift all words up so current word sits at 0
+                    words.forEach((w, i) => {
+                        w.style.transform = `translateY(${(i - index) * 1.2}em)`;
+                    });
+                    track.style.width = widths[index] + 'px';
+                }
+
+                // Enable transitions after first paint
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        words.forEach(w => {
+                            w.style.transition = 'transform 0.6s cubic-bezier(0.76, 0, 0.24, 1)';
+                        });
+                        track.style.transition = 'width 0.6s cubic-bezier(0.76, 0, 0.24, 1)';
+                    });
+                });
+
+                setInterval(() => {
+                    current = (current + 1) % total;
+                    rotateTo(current);
+                }, 1300);
+            });
+        })();
+    </script>
+
+    <!-- Netlify Identity Redirect -->
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => {
+                        document.location.href = "/admin/";
+                    });
+                }
+            });
+        }
     </script>
 </body>
 </html>
