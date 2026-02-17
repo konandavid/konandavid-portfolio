@@ -54,7 +54,7 @@
             --bg-tertiary: #111111;
             --text-primary: #f5f5f7;
             --text-secondary: #a1a1a6;
-            --text-muted: #6e6e73;
+            --text-muted: #86868b;
             --accent: #FF6B35;
             --accent-glow: rgba(255, 107, 53, 0.4);
         }
@@ -1162,6 +1162,164 @@
             font-size: 10px;
         }
 
+        /* ===== PAGE LOAD ANIMATION ===== */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        nav {
+            animation: fadeIn 0.8s ease 0.1s both;
+        }
+
+        .hero-showreel {
+            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+        }
+
+        .hero-text {
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+        }
+
+        .scroll-indicator {
+            animation: fadeIn 1s ease 1s both;
+        }
+
+        /* ===== VIMEO FACADE ===== */
+        .vimeo-facade {
+            position: absolute;
+            inset: 0;
+            cursor: pointer;
+            z-index: 3;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-tertiary);
+        }
+
+        .vimeo-facade::after {
+            content: '';
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            transition: all 0.4s ease;
+            /* play triangle via clip-path trick — use box-shadow instead */
+        }
+
+        .vimeo-facade .facade-play {
+            position: absolute;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 14px 0 14px 24px;
+            border-color: transparent transparent transparent white;
+            margin-left: 4px;
+            z-index: 1;
+            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
+        }
+
+        .vimeo-facade:hover::after {
+            background: rgba(255, 107, 53, 0.6);
+            transform: scale(1.08);
+        }
+
+        .vimeo-facade.loaded {
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.6s ease;
+        }
+
+        /* ===== SCROLL REVEAL — PROJECT CARDS ===== */
+        .project-card {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .project-card.revealed {
+            opacity: 1;
+            transform: translateY(0);
+            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* ===== SCROLL REVEAL — ABOUT SECTION ===== */
+        .about-image {
+            opacity: 0;
+            transform: translateX(-40px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .about-image.revealed {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .about-content {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+        }
+
+        .about-content.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== SCROLL REVEAL — CONTACT ===== */
+        .contact-section {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .contact-section.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ===== SCROLL REVEAL — PRESS ===== */
+        .press-section {
+            opacity: 0;
+            transition: opacity 0.8s ease;
+        }
+
+        .press-section.revealed {
+            opacity: 1;
+        }
+
+        /* ===== MOBILE CONTACT CTA ===== */
+        .mobile-menu .mobile-contact {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            padding: 14px 32px;
+            border: 1px solid rgba(255, 107, 53, 0.5);
+            border-radius: 100px;
+            background: rgba(255, 107, 53, 0.1);
+            transition: all 0.3s ease;
+            margin-top: 8px;
+        }
+
+        .mobile-menu .mobile-contact:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
         .scroll-label {
             font-size: 9px;
             letter-spacing: 0.2em;
@@ -1202,8 +1360,9 @@
                 padding-left: 24px; 
                 padding-right: 24px;
                 gap: 16px;
+                scroll-snap-type: x mandatory;
             }
-            .project-card { width: 280px; min-width: 280px; flex: 0 0 280px; }
+            .project-card { width: 85vw; min-width: 85vw; flex: 0 0 85vw; }
             .project-title { font-size: 18px; }
             .project-artist { font-size: 11px; }
             .scroll-arrows { gap: 12px; }
@@ -1431,6 +1590,13 @@
                     document.body.style.overflow = 'hidden';
                 }
             });
+            // Keyboard support
+            btn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    btn.click();
+                }
+            });
         });
 
         document.getElementById('modal-close')?.addEventListener('click', () => {
@@ -1475,13 +1641,43 @@
         handleScroll();
 
         // ===================
-        // SECTION REVEAL
+        // SCROLL REVEAL SYSTEM
         // ===================
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('visible');
+                    e.target.classList.add('revealed');
+                }
+            });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
+        // Section headers
+        document.querySelectorAll('.section-header').forEach(el => revealObserver.observe(el));
+
+        // About elements
+        document.querySelectorAll('.about-image, .about-content').forEach(el => revealObserver.observe(el));
+
+        // Contact & Press sections
+        document.querySelectorAll('.contact-section, .press-section').forEach(el => revealObserver.observe(el));
+
+        // Project cards — staggered reveal
+        const cardObserver = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    // Find card index among visible siblings for stagger
+                    const card = e.target;
+                    const allCards = Array.from(card.parentElement.children).filter(c => !c.classList.contains('filtered-out'));
+                    const idx = allCards.indexOf(card);
+                    const delay = Math.min(idx * 80, 400); // cap at 400ms
+                    card.style.transitionDelay = delay + 'ms';
+                    card.classList.add('revealed');
+                    cardObserver.unobserve(card);
+                }
+            });
+        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.project-card').forEach(card => cardObserver.observe(card));
 
         // ===================
         // PROJECT SCROLL ARROWS
@@ -1568,9 +1764,13 @@
             btn.addEventListener('click', () => {
                 const filter = btn.dataset.filter;
                 
-                // Update active state
-                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                // Update active state + aria
+                document.querySelectorAll('.filter-btn').forEach(b => {
+                    b.classList.remove('active');
+                    b.setAttribute('aria-pressed', 'false');
+                });
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
                 
                 // Filter cards
                 const cards = document.querySelectorAll('.project-card');
@@ -1582,11 +1782,18 @@
                     }
                 });
                 
-                // Reset scroll position
+                // Reset scroll position + re-observe cards for reveal
                 if (container) {
                     container.scrollLeft = 0;
                     updateArrows();
                 }
+                
+                // Re-trigger reveal on newly visible cards
+                cards.forEach(card => {
+                    if (!card.classList.contains('filtered-out') && !card.classList.contains('revealed')) {
+                        cardObserver.observe(card);
+                    }
+                });
             });
         });
 
@@ -1601,15 +1808,57 @@
         });
 
         // ===================
-        // SHOWREEL SOUND
+        // VIMEO FACADE (lazy load)
         // ===================
-        const heroVideo = document.getElementById('hero-video');
-        let soundOn = false;
-        heroShowreel?.addEventListener('click', () => {
-            if (!soundOn && heroVideo) {
-                heroVideo.src = heroVideo.src.replace('muted=1', 'muted=0');
-                soundOn = true;
+        (function() {
+            const facade = document.querySelector('.vimeo-facade');
+            const showreel = document.getElementById('hero-showreel');
+            if (!facade || !showreel) return;
+
+            const vimeoUrl = facade.dataset.src;
+            let loaded = false;
+
+            function loadVimeo() {
+                if (loaded) return;
+                loaded = true;
+                const iframe = document.createElement('iframe');
+                iframe.id = 'hero-video';
+                iframe.src = vimeoUrl;
+                iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+                iframe.allowFullscreen = true;
+                iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
+                showreel.appendChild(iframe);
+                // Fade out facade after iframe starts
+                setTimeout(() => facade.classList.add('loaded'), 600);
             }
+
+            // Load on click
+            facade.addEventListener('click', loadVimeo);
+
+            // Also auto-load when visible (IntersectionObserver)
+            const io = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    loadVimeo();
+                    io.disconnect();
+                }
+            }, { threshold: 0.3 });
+            io.observe(showreel);
+        })();
+
+        // ===================
+        // MODAL KEYBOARD + FOCUS
+        // ===================
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal?.classList.contains('active')) {
+                videoModal.classList.remove('active');
+                modalVideo.src = '';
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Add aria-pressed to filter buttons
+        document.querySelectorAll('.filter-btn').forEach(btn => {
+            btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
         });
 
         // ===================
