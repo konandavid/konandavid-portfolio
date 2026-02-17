@@ -7,6 +7,9 @@ module.exports = function(eleventyConfig) {
   
   // Copy uploads folder
   eleventyConfig.addPassthroughCopy("uploads");
+  
+  // Copy robots.txt for SEO
+  eleventyConfig.addPassthroughCopy("robots.txt");
 
   // Create collection from projects
   eleventyConfig.addCollection("projects", function(collectionApi) {
