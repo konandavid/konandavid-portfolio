@@ -6,8 +6,8 @@
     <title>{{ site.title }} — {{ site.description }}</title>
     
     <!-- SEO Meta Tags -->
-    <meta name="description" content="Konan David is a choreographer and creative director from Abidjan, Côte d'Ivoire, based in Paris. Worked with Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny, Travis Scott, and more on live shows, music videos, and brand campaigns.">
-    <meta name="keywords" content="Konan David, choreographer Paris, creative director, movement director, Ivorian choreographer, Abidjan, Côte d'Ivoire, dance director France, choreographer Gazo, Dior campaign, Nike campaign, Vogue Paris, Aya Nakamura, Bad Bunny, Travis Scott, live show choreography, music video choreography, La Défense Arena, Accor Arena, Dadju, Ama Lou, performance director">
+    <meta name="description" content="Konan David is a choreographer and creative director from Abidjan, Côte d'Ivoire, based in Paris. Specializing in live shows, music videos, and brand campaigns for Dior, Nike, Vogue, Rabanne, Gazo, Aya Nakamura, Bad Bunny, and Dadju.">
+    <meta name="keywords" content="Konan David, choreographer Paris, creative director, movement director, Ivorian choreographer, Abidjan, dance director France, Dior choreographer, Nike campaign, Vogue Paris, Gazo tour, Aya Nakamura, live show choreography, music video choreography, La Défense Arena, Accor Arena">
     <meta name="author" content="Konan David">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://konandavid.com">
@@ -17,7 +17,7 @@
     <meta property="og:url" content="https://konandavid.com">
     <meta property="og:site_name" content="Konan David">
     <meta property="og:title" content="Konan David — Choreographer & Creative Director | Dior, Nike, Vogue">
-    <meta property="og:description" content="Choreographer and creative director from Abidjan to Paris arenas. Worked with Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny, Travis Scott on live shows and brand campaigns.">
+    <meta property="og:description" content="Award-winning choreographer from Abidjan, specializing in arena tours, fashion campaigns, and music videos. Worked with Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny.">
     <meta property="og:image" content="https://konandavid.com/uploads/og-share.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -29,24 +29,185 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://konandavid.com">
     <meta name="twitter:title" content="Konan David — Choreographer & Creative Director">
-    <meta name="twitter:description" content="From Abidjan to Paris arenas. Worked with Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny, Travis Scott.">
+    <meta name="twitter:description" content="From Abidjan to Paris arenas. Choreography for Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny.">
     <meta name="twitter:image" content="https://konandavid.com/uploads/og-share.jpg">
-    <meta property="twitter:image:alt" content="Konan David - Choreographer & Creative Director">
+    <meta name="twitter:image:alt" content="Konan David - Choreographer & Creative Director">
     <meta name="twitter:creator" content="@konanraw">
     
+    <!-- Favicon -->
     {% set faviconUrl = site.favicon if site.favicon else '/uploads/favicon.png' %}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ faviconUrl }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ faviconUrl }}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{ faviconUrl }}">
     <meta name="theme-color" content="#000000">
+    
+    <!-- Preconnect -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="preconnect" href="https://player.vimeo.com">
     <link rel="preconnect" href="https://www.youtube.com">
     <link rel="dns-prefetch" href="https://player.vimeo.com">
     <link rel="dns-prefetch" href="https://www.youtube.com">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Konan David",
+      "alternateName": "Konan Raw",
+      "jobTitle": "Choreographer & Creative Director",
+      "description": "Award-winning choreographer and creative director specializing in live shows, music videos, and brand campaigns",
+      "url": "https://konandavid.com",
+      "image": "https://konandavid.com/uploads/about.jpg",
+      "sameAs": [
+        "{{ site.instagram }}",
+        "{{ site.youtube }}"
+      ],
+      "email": "{{ site.email }}",
+      "birthPlace": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Abidjan",
+          "addressCountry": "Côte d'Ivoire"
+        }
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Paris",
+        "addressRegion": "Île-de-France",
+        "addressCountry": "FR"
+      },
+      "nationality": {
+        "@type": "Country",
+        "name": "Côte d'Ivoire"
+      },
+      "knowsAbout": [
+        "Choreography",
+        "Creative Direction",
+        "Movement Direction",
+        "Live Show Production",
+        "Music Video Direction",
+        "Fashion Campaign Choreography",
+        "Artist Development",
+        "Performance Coaching"
+      ],
+      "hasOccupation": {
+        "@type": "Occupation",
+        "name": "Choreographer",
+        "occupationLocation": {
+          "@type": "City",
+          "name": "Paris"
+        }
+      },
+      "worksFor": [
+        {
+          "@type": "Organization",
+          "name": "Dior"
+        },
+        {
+          "@type": "Organization",
+          "name": "Nike"
+        },
+        {
+          "@type": "Organization",
+          "name": "Vogue"
+        },
+        {
+          "@type": "Organization",
+          "name": "Rabanne"
+        }
+      ],
+      "colleague": [
+        {
+          "@type": "Person",
+          "name": "Gazo"
+        },
+        {
+          "@type": "Person",
+          "name": "Aya Nakamura"
+        },
+        {
+          "@type": "Person",
+          "name": "Bad Bunny"
+        },
+        {
+          "@type": "Person",
+          "name": "Dadju"
+        },
+        {
+          "@type": "Person",
+          "name": "Gigi Hadid"
+        },
+        {
+          "@type": "Person",
+          "name": "Rihanna"
+        },
+        {
+          "@type": "Person",
+          "name": "Travis Scott"
+        },
+        {
+          "@type": "Person",
+          "name": "Parris Goebel"
+        }
+      ],
+      "performerIn": [
+        {
+          "@type": "Event",
+          "name": "Vogue World Paris",
+          "location": {
+            "@type": "Place",
+            "name": "Place Vendôme",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Paris",
+              "addressCountry": "FR"
+            }
+          },
+          "startDate": "2024-06-23"
+        },
+        {
+          "@type": "Event",
+          "name": "Gazo - Paris La Défense Arena",
+          "location": {
+            "@type": "Place",
+            "name": "Paris La Défense Arena",
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": "Paris",
+              "addressCountry": "FR"
+            }
+          },
+          "audience": {
+            "@type": "Audience",
+            "audienceType": "40000+ fans"
+          }
+        },
+        {
+          "@type": "Event",
+          "name": "Les Ardentes Festival",
+          "location": {
+            "@type": "Place",
+            "name": "Les Ardentes Festival",
+            "address": {
+              "@type": "PostalAddress",
+              "addressCountry": "BE"
+            }
+          },
+          "audience": {
+            "@type": "Audience",
+            "audienceType": "100000 fans"
+          }
+        }
+      ]
+    }
+    </script>
+    
     <style>
         :root {
             --bg-primary: #000000;
@@ -54,7 +215,7 @@
             --bg-tertiary: #111111;
             --text-primary: #f5f5f7;
             --text-secondary: #a1a1a6;
-            --text-muted: #86868b;
+            --text-muted: #6e6e73;
             --accent: #FF6B35;
             --accent-glow: rgba(255, 107, 53, 0.4);
         }
@@ -363,7 +524,6 @@
             align-items: center;
             justify-content: center;
             flex-wrap: wrap;
-            line-height: 1.2;
         }
 
         .hero-text .title-block {
@@ -386,36 +546,6 @@
 
         .hero-text .separator:hover {
             transform: scale(1.2) rotate(90deg);
-        }
-
-        /* Rotating word hero */
-        .title-rotating-wrapper {
-            display: flex;
-            align-items: center;
-            white-space: nowrap;
-        }
-
-        .rotating-word-track {
-            display: block;
-            overflow: hidden;
-            height: 1.2em;
-            position: relative;
-            margin-right: 0.25em;
-            -webkit-transform: translateZ(0);
-            transform: translateZ(0);
-            transition: width 0.6s cubic-bezier(0.76, 0, 0.24, 1);
-        }
-
-        .rotating-word {
-            display: block;
-            position: absolute;
-            top: 0;
-            left: 0;
-            white-space: nowrap;
-            height: 1.2em;
-            line-height: 1.2em;
-            transition: transform 0.6s cubic-bezier(0.76, 0, 0.24, 1);
-            will-change: transform;
         }
 
         /* Scroll indicator */
@@ -1101,233 +1231,6 @@
             overflow: hidden;
         }
 
-        .nav-instagram {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            color: var(--text-secondary);
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-
-        .nav-instagram:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .nav-instagram svg {
-            width: 16px;
-            height: 16px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 1.5;
-        }
-
-        .mobile-instagram {
-            display: none;
-            color: var(--text-primary) !important;
-            text-decoration: none;
-        }
-
-        /* Mobile lang — texte simple sans pill */
-        .mobile-lang {
-            display: none;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .mobile-lang button {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-size: 11px;
-            font-weight: 600;
-            letter-spacing: 0.05em;
-            cursor: pointer;
-            padding: 4px 2px;
-            font-family: inherit;
-            transition: color 0.3s ease;
-        }
-
-        .mobile-lang button.active {
-            color: var(--text-primary);
-        }
-
-        .mobile-lang .ml-sep {
-            color: var(--text-muted);
-            font-size: 10px;
-        }
-
-        /* ===== PAGE LOAD ANIMATION ===== */
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(24px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        nav {
-            animation: fadeIn 0.8s ease 0.1s both;
-        }
-
-        .hero-showreel {
-            animation: fadeInUp 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
-        }
-
-        .hero-text {
-            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
-        }
-
-        .scroll-indicator {
-            animation: fadeIn 1s ease 1s both;
-        }
-
-        /* ===== VIMEO FACADE ===== */
-        .vimeo-facade {
-            position: absolute;
-            inset: 0;
-            cursor: pointer;
-            z-index: 3;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--bg-tertiary);
-        }
-
-        .vimeo-facade::after {
-            content: '';
-            width: 72px;
-            height: 72px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.25);
-            transition: all 0.4s ease;
-            /* play triangle via clip-path trick — use box-shadow instead */
-        }
-
-        .vimeo-facade .facade-play {
-            position: absolute;
-            width: 0;
-            height: 0;
-            border-style: solid;
-            border-width: 14px 0 14px 24px;
-            border-color: transparent transparent transparent white;
-            margin-left: 4px;
-            z-index: 1;
-            filter: drop-shadow(0 2px 8px rgba(0,0,0,0.3));
-        }
-
-        .vimeo-facade:hover::after {
-            background: rgba(255, 107, 53, 0.6);
-            transform: scale(1.08);
-        }
-
-        .vimeo-facade.loaded {
-            opacity: 0;
-            pointer-events: none;
-            transition: opacity 0.6s ease;
-        }
-
-        /* ===== SCROLL REVEAL — PROJECT CARDS ===== */
-        .project-card {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .project-card.revealed {
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        /* ===== SCROLL REVEAL — ABOUT SECTION ===== */
-        .about-image {
-            opacity: 0;
-            transform: translateX(-40px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .about-image.revealed {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .about-content {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s,
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
-        }
-
-        .about-content.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== SCROLL REVEAL — CONTACT ===== */
-        .contact-section {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                        transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .contact-section.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ===== SCROLL REVEAL — PRESS ===== */
-        .press-section {
-            opacity: 0;
-            transition: opacity 0.8s ease;
-        }
-
-        .press-section.revealed {
-            opacity: 1;
-        }
-
-        /* ===== MOBILE CONTACT CTA ===== */
-        .mobile-menu .mobile-contact {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            color: var(--text-primary);
-            text-decoration: none;
-            padding: 14px 32px;
-            border: 1px solid rgba(255, 107, 53, 0.5);
-            border-radius: 100px;
-            background: rgba(255, 107, 53, 0.1);
-            transition: all 0.3s ease;
-            margin-top: 8px;
-        }
-
-        .mobile-menu .mobile-contact:hover {
-            background: var(--accent);
-            border-color: var(--accent);
-        }
-
-        .scroll-label {
-            font-size: 9px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--text-muted);
-            margin-top: 8px;
-        }
-
         /* Mobile */
         @media (max-width: 1024px) {
             .about-container { grid-template-columns: 1fr; gap: 50px; }
@@ -1340,31 +1243,23 @@
         @media (max-width: 768px) {
             nav { padding: 16px 24px; }
             nav.scrolled { padding: 14px 24px; }
-            .nav-links, .nav-contact, .nav-right .lang-toggle, .nav-instagram { display: none; }
+            .nav-links, .nav-contact, .nav-right .lang-toggle { display: none; }
             .mobile-menu-btn { display: flex; }
             .mobile-menu { display: flex; }
             .mobile-menu .lang-toggle { display: flex; }
-            .mobile-lang { display: flex; }
-            .mobile-instagram { display: flex; }
-            .hero { padding: 80px 24px 20px; min-height: 100svh; }
+            .hero { padding: 80px 24px 20px; }
             .hero-text h1 { font-size: 9px; letter-spacing: 0.08em; }
             .hero-text .separator { margin: 0 8px; font-size: 1em; }
-            .work-section { padding: 10px 24px 60px; }
-            .section-header h2 { font-size: 18px; white-space: nowrap; }
-            .drag-indicator span { white-space: nowrap; font-size: 10px; }
-            .filter-bar { gap: 5px; margin-bottom: 18px; flex-wrap: nowrap; }
-            .filter-btn { padding: 6px 10px; font-size: 10px; white-space: nowrap; }
+            .work-section { padding: 30px 24px 60px; }
+            .filter-bar { gap: 6px; margin-bottom: 18px; }
             .filter-btn { padding: 7px 14px; font-size: 11px; }
             .projects-container { 
                 margin: 0 -24px; 
                 padding-left: 24px; 
                 padding-right: 24px;
                 gap: 16px;
-                scroll-snap-type: x mandatory;
             }
-            .project-card { width: 85vw; min-width: 85vw; flex: 0 0 85vw; }
-            .project-title { font-size: 18px; }
-            .project-artist { font-size: 11px; }
+            .project-card { width: 280px; min-width: 280px; flex: 0 0 280px; }
             .scroll-arrows { gap: 12px; }
             .scroll-arrow { width: 40px; height: 40px; }
             .about-section, .contact-section { padding: 80px 24px; }
@@ -1376,68 +1271,6 @@
             }
         }
     </style>
-    
-    <!-- Structured Data (JSON-LD) for SEO -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Konan David",
-      "alternateName": "Konan Raw",
-      "jobTitle": "Choreographer & Creative Director",
-      "description": "Choreographer and creative director specializing in live shows, music videos, and brand campaigns",
-      "url": "https://konandavid.com",
-      "image": "https://konandavid.com/uploads/about.jpg",
-      "sameAs": [
-        "{{ site.instagram }}",
-        "{{ site.youtube }}"
-      ],
-      "email": "{{ site.email }}",
-      "birthPlace": {
-        "@type": "Place",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Abidjan",
-          "addressCountry": "Côte d'Ivoire"
-        }
-      },
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Paris",
-        "addressRegion": "Île-de-France",
-        "addressCountry": "FR"
-      },
-      "nationality": {
-        "@type": "Country",
-        "name": "Côte d'Ivoire"
-      },
-      "knowsAbout": [
-        "Choreography",
-        "Creative Direction",
-        "Movement Direction",
-        "Live Show Production",
-        "Music Video Direction",
-        "Fashion Campaign Direction",
-        "Performance Direction"
-      ],
-      "worksFor": [
-        {"@type": "Organization", "name": "Dior"},
-        {"@type": "Organization", "name": "Nike"},
-        {"@type": "Organization", "name": "Vogue"},
-        {"@type": "Organization", "name": "Rabanne"}
-      ],
-      "colleague": [
-        {"@type": "Person", "name": "Gazo"},
-        {"@type": "Person", "name": "Aya Nakamura"},
-        {"@type": "Person", "name": "Bad Bunny"},
-        {"@type": "Person", "name": "Dadju"},
-        {"@type": "Person", "name": "Travis Scott"},
-        {"@type": "Person", "name": "Ama Lou"},
-        {"@type": "Person", "name": "Rihanna"},
-        {"@type": "Person", "name": "Gigi Hadid"}
-      ]
-    }
-    </script>
 </head>
 <body>
     {{ content | safe }}
@@ -1455,19 +1288,6 @@
         // LANGUAGE SYSTEM
         // ===================
         let currentLang = localStorage.getItem('lang') || 'en';
-
-        const categoryTranslations = {
-            fr: {
-                'Live Show': 'Scène & Tournée',
-                'Film & Music Video': 'Film & Clip',
-                'Commercial': 'Publicité'
-            },
-            en: {
-                'Live Show': 'Live Show',
-                'Film & Music Video': 'Film & MV',
-                'Commercial': 'Commercial'
-            }
-        };
 
         function setLanguage(lang) {
             currentLang = lang;
@@ -1491,17 +1311,8 @@
             });
             
             // Update active state on all toggle buttons
-            document.querySelectorAll('.lang-toggle button, .mobile-lang button').forEach(btn => {
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-
-            // Translate category labels on cards
-            document.querySelectorAll('.project-card').forEach(card => {
-                const rawCategory = card.dataset.category;
-                const label = card.querySelector('.project-category');
-                if (label && categoryTranslations[lang] && categoryTranslations[lang][rawCategory]) {
-                    label.textContent = categoryTranslations[lang][rawCategory];
-                }
             });
         }
 
@@ -1531,9 +1342,9 @@
                 copyright: '© 2026 Konan David. Tous droits réservés.',
                 location: 'Paris, France',
                 filterAll: 'Tous',
-                filterLive: 'Scène & Tournée',
-                filterFilm: 'Film & Clip',
-                filterCommercial: 'Publicité'
+                filterLive: 'Live Show',
+                filterFilm: 'Film & MV',
+                filterCommercial: 'Commercial'
             }
         };
 
@@ -1541,8 +1352,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             setLanguage(currentLang);
             
-            // Bind click handlers to all language buttons (including mobile-lang)
-            document.querySelectorAll('.lang-toggle button, .mobile-lang button').forEach(btn => {
+            // Bind click handlers to all language buttons
+            document.querySelectorAll('.lang-toggle button').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     e.preventDefault();
                     setLanguage(btn.dataset.lang);
@@ -1590,13 +1401,6 @@
                     document.body.style.overflow = 'hidden';
                 }
             });
-            // Keyboard support
-            btn.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    btn.click();
-                }
-            });
         });
 
         document.getElementById('modal-close')?.addEventListener('click', () => {
@@ -1641,43 +1445,13 @@
         handleScroll();
 
         // ===================
-        // SCROLL REVEAL SYSTEM
+        // SECTION REVEAL
         // ===================
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    e.target.classList.add('visible');
-                    e.target.classList.add('revealed');
-                }
-            });
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => e.isIntersecting && e.target.classList.add('visible'));
         }, { threshold: 0.1 });
 
-        // Section headers
-        document.querySelectorAll('.section-header').forEach(el => revealObserver.observe(el));
-
-        // About elements
-        document.querySelectorAll('.about-image, .about-content').forEach(el => revealObserver.observe(el));
-
-        // Contact & Press sections
-        document.querySelectorAll('.contact-section, .press-section').forEach(el => revealObserver.observe(el));
-
-        // Project cards — staggered reveal
-        const cardObserver = new IntersectionObserver((entries) => {
-            entries.forEach(e => {
-                if (e.isIntersecting) {
-                    // Find card index among visible siblings for stagger
-                    const card = e.target;
-                    const allCards = Array.from(card.parentElement.children).filter(c => !c.classList.contains('filtered-out'));
-                    const idx = allCards.indexOf(card);
-                    const delay = Math.min(idx * 80, 400); // cap at 400ms
-                    card.style.transitionDelay = delay + 'ms';
-                    card.classList.add('revealed');
-                    cardObserver.unobserve(card);
-                }
-            });
-        }, { threshold: 0.15, rootMargin: '0px 0px -50px 0px' });
-
-        document.querySelectorAll('.project-card').forEach(card => cardObserver.observe(card));
+        document.querySelectorAll('.section-header').forEach(el => observer.observe(el));
 
         // ===================
         // PROJECT SCROLL ARROWS
@@ -1764,13 +1538,9 @@
             btn.addEventListener('click', () => {
                 const filter = btn.dataset.filter;
                 
-                // Update active state + aria
-                document.querySelectorAll('.filter-btn').forEach(b => {
-                    b.classList.remove('active');
-                    b.setAttribute('aria-pressed', 'false');
-                });
+                // Update active state
+                document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                btn.setAttribute('aria-pressed', 'true');
                 
                 // Filter cards
                 const cards = document.querySelectorAll('.project-card');
@@ -1782,18 +1552,11 @@
                     }
                 });
                 
-                // Reset scroll position + re-observe cards for reveal
+                // Reset scroll position
                 if (container) {
                     container.scrollLeft = 0;
                     updateArrows();
                 }
-                
-                // Re-trigger reveal on newly visible cards
-                cards.forEach(card => {
-                    if (!card.classList.contains('filtered-out') && !card.classList.contains('revealed')) {
-                        cardObserver.observe(card);
-                    }
-                });
             });
         });
 
@@ -1808,124 +1571,16 @@
         });
 
         // ===================
-        // VIMEO FACADE (lazy load)
+        // SHOWREEL SOUND
         // ===================
-        (function() {
-            const facade = document.querySelector('.vimeo-facade');
-            const showreel = document.getElementById('hero-showreel');
-            if (!facade || !showreel) return;
-
-            const vimeoUrl = facade.dataset.src;
-            let loaded = false;
-
-            function loadVimeo() {
-                if (loaded) return;
-                loaded = true;
-                const iframe = document.createElement('iframe');
-                iframe.id = 'hero-video';
-                iframe.src = vimeoUrl;
-                iframe.allow = 'autoplay; fullscreen; picture-in-picture';
-                iframe.allowFullscreen = true;
-                iframe.style.cssText = 'position:absolute;inset:0;width:100%;height:100%;border:none;';
-                showreel.appendChild(iframe);
-                // Fade out facade after iframe starts
-                setTimeout(() => facade.classList.add('loaded'), 600);
-            }
-
-            // Load on click
-            facade.addEventListener('click', loadVimeo);
-
-            // Also auto-load when visible (IntersectionObserver)
-            const io = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting) {
-                    loadVimeo();
-                    io.disconnect();
-                }
-            }, { threshold: 0.3 });
-            io.observe(showreel);
-        })();
-
-        // ===================
-        // MODAL KEYBOARD + FOCUS
-        // ===================
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && videoModal?.classList.contains('active')) {
-                videoModal.classList.remove('active');
-                modalVideo.src = '';
-                document.body.style.overflow = '';
+        const heroVideo = document.getElementById('hero-video');
+        let soundOn = false;
+        heroShowreel?.addEventListener('click', () => {
+            if (!soundOn && heroVideo) {
+                heroVideo.src = heroVideo.src.replace('muted=1', 'muted=0');
+                soundOn = true;
             }
         });
-
-        // Add aria-pressed to filter buttons
-        document.querySelectorAll('.filter-btn').forEach(btn => {
-            btn.setAttribute('aria-pressed', btn.classList.contains('active') ? 'true' : 'false');
-        });
-
-        // ===================
-        // ROTATING WORD HERO
-        // ===================
-        (function() {
-            const track = document.querySelector('.rotating-word-track');
-            const words = document.querySelectorAll('.rotating-word');
-            if (!words.length || !track) return;
-
-            const total = words.length;
-            let current = 0;
-
-            // Disable transitions to measure + set initial state
-            words.forEach(w => {
-                w.style.transition = 'none';
-            });
-            track.style.transition = 'none';
-
-            requestAnimationFrame(() => {
-                const widths = Array.from(words).map(w => w.offsetWidth);
-
-                // Stack words below each other from the start
-                words.forEach((w, i) => {
-                    w.style.transform = `translateY(${i * 1.2}em)`;
-                });
-
-                // Track width = first word
-                track.style.width = widths[0] + 'px';
-
-                function rotateTo(index) {
-                    // Shift all words up so current word sits at 0
-                    words.forEach((w, i) => {
-                        w.style.transform = `translateY(${(i - index) * 1.2}em)`;
-                    });
-                    track.style.width = widths[index] + 'px';
-                }
-
-                // Enable transitions after first paint
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        words.forEach(w => {
-                            w.style.transition = 'transform 0.6s cubic-bezier(0.76, 0, 0.24, 1)';
-                        });
-                        track.style.transition = 'width 0.6s cubic-bezier(0.76, 0, 0.24, 1)';
-                    });
-                });
-
-                setInterval(() => {
-                    current = (current + 1) % total;
-                    rotateTo(current);
-                }, 1300);
-            });
-        })();
-    </script>
-
-    <!-- Netlify Identity Redirect -->
-    <script>
-        if (window.netlifyIdentity) {
-            window.netlifyIdentity.on("init", user => {
-                if (!user) {
-                    window.netlifyIdentity.on("login", () => {
-                        document.location.href = "/admin/";
-                    });
-                }
-            });
-        }
     </script>
 </body>
 </html>
