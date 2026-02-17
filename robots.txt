@@ -1,0 +1,15 @@
+# Robots.txt for konandavid.com
+# Allow all crawlers
+
+User-agent: *
+Allow: /
+
+# Disallow admin areas
+Disallow: /admin/
+Disallow: /_site/
+
+# Sitemap
+Sitemap: https://konandavid.com/sitemap.xml
+
+# Crawl-delay (optional, prevents aggressive crawling)
+Crawl-delay: 1
