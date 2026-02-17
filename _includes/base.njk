@@ -4,6 +4,36 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ site.title }} — {{ site.description }}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Konan David is a choreographer and creative director from Abidjan, Côte d'Ivoire, based in Paris. Worked with Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny, Travis Scott, and more on live shows, music videos, and brand campaigns.">
+    <meta name="keywords" content="Konan David, choreographer Paris, creative director, movement director, Ivorian choreographer, Abidjan, Côte d'Ivoire, dance director France, choreographer Gazo, Dior campaign, Nike campaign, Vogue Paris, Aya Nakamura, Bad Bunny, Travis Scott, live show choreography, music video choreography, La Défense Arena, Accor Arena, Dadju, Ama Lou, performance director">
+    <meta name="author" content="Konan David">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://konandavid.com">
+    
+    <!-- Open Graph / Facebook / LinkedIn -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://konandavid.com">
+    <meta property="og:site_name" content="Konan David">
+    <meta property="og:title" content="Konan David — Choreographer & Creative Director | Dior, Nike, Vogue">
+    <meta property="og:description" content="Choreographer and creative director from Abidjan to Paris arenas. Worked with Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny, Travis Scott on live shows and brand campaigns.">
+    <meta property="og:image" content="https://konandavid.com/uploads/og-share.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="Konan David - Choreographer & Creative Director">
+    <meta property="og:locale" content="en_US">
+    <meta property="og:locale:alternate" content="fr_FR">
+    
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://konandavid.com">
+    <meta name="twitter:title" content="Konan David — Choreographer & Creative Director">
+    <meta name="twitter:description" content="From Abidjan to Paris arenas. Worked with Dior, Nike, Vogue, Gazo, Aya Nakamura, Bad Bunny, Travis Scott.">
+    <meta name="twitter:image" content="https://konandavid.com/uploads/og-share.jpg">
+    <meta property="twitter:image:alt" content="Konan David - Choreographer & Creative Director">
+    <meta name="twitter:creator" content="@konanraw">
+    
     {% set faviconUrl = site.favicon if site.favicon else '/uploads/favicon.png' %}
     <link rel="icon" type="image/png" sizes="32x32" href="{{ faviconUrl }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ faviconUrl }}">
@@ -12,6 +42,10 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://player.vimeo.com">
+    <link rel="preconnect" href="https://www.youtube.com">
+    <link rel="dns-prefetch" href="https://player.vimeo.com">
+    <link rel="dns-prefetch" href="https://www.youtube.com">
     <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
     <style>
         :root {
@@ -1183,6 +1217,68 @@
             }
         }
     </style>
+    
+    <!-- Structured Data (JSON-LD) for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Konan David",
+      "alternateName": "Konan Raw",
+      "jobTitle": "Choreographer & Creative Director",
+      "description": "Choreographer and creative director specializing in live shows, music videos, and brand campaigns",
+      "url": "https://konandavid.com",
+      "image": "https://konandavid.com/uploads/about.jpg",
+      "sameAs": [
+        "{{ site.instagram }}",
+        "{{ site.youtube }}"
+      ],
+      "email": "{{ site.email }}",
+      "birthPlace": {
+        "@type": "Place",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Abidjan",
+          "addressCountry": "Côte d'Ivoire"
+        }
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Paris",
+        "addressRegion": "Île-de-France",
+        "addressCountry": "FR"
+      },
+      "nationality": {
+        "@type": "Country",
+        "name": "Côte d'Ivoire"
+      },
+      "knowsAbout": [
+        "Choreography",
+        "Creative Direction",
+        "Movement Direction",
+        "Live Show Production",
+        "Music Video Direction",
+        "Fashion Campaign Direction",
+        "Performance Direction"
+      ],
+      "worksFor": [
+        {"@type": "Organization", "name": "Dior"},
+        {"@type": "Organization", "name": "Nike"},
+        {"@type": "Organization", "name": "Vogue"},
+        {"@type": "Organization", "name": "Rabanne"}
+      ],
+      "colleague": [
+        {"@type": "Person", "name": "Gazo"},
+        {"@type": "Person", "name": "Aya Nakamura"},
+        {"@type": "Person", "name": "Bad Bunny"},
+        {"@type": "Person", "name": "Dadju"},
+        {"@type": "Person", "name": "Travis Scott"},
+        {"@type": "Person", "name": "Ama Lou"},
+        {"@type": "Person", "name": "Rihanna"},
+        {"@type": "Person", "name": "Gigi Hadid"}
+      ]
+    }
+    </script>
 </head>
 <body>
     {{ content | safe }}
