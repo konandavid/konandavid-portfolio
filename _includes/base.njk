@@ -601,6 +601,10 @@ overscroll-behavior-x: contain;
             display: none;
         }
 
+        .projects-container.wheeling {
+            scroll-snap-type: none;
+        }
+
         .projects-container.dragging {
             cursor: grabbing;
             scroll-snap-type: none;
@@ -752,7 +756,9 @@ overscroll-behavior-x: contain;
             .project-card.show-info .project-description {
                 opacity: 1;
                 max-height: 200px;
+        
             }
+            .project-card:hover img { transform: none; }
         }
 
         .project-artist {
@@ -1554,7 +1560,10 @@ overscroll-behavior-x: contain;
             const max = container.scrollWidth - container.clientWidth;
             if ((e.deltaY > 0 && container.scrollLeft < max - 1) || (e.deltaY < 0 && container.scrollLeft > 1)) {
                 e.preventDefault();
+                container.classList.add('wheeling');
                 container.scrollLeft = Math.max(0, Math.min(max, container.scrollLeft + e.deltaY));
+                clearTimeout(container._wheelTimer);
+                container._wheelTimer = setTimeout(function() { container.classList.remove('wheeling'); }, 200);
                 updateArrows();
             }
         }, { passive: false });
@@ -1565,7 +1574,7 @@ overscroll-behavior-x: contain;
             document.querySelectorAll('.project-card').forEach(card => {
                 card.addEventListener('click', (e) => {
                     if (e.target.closest('.project-play')) return;
-                    card.classList.toggle('show-info');
+                    document.querySelectorAll('.project-card.show-info').forEach(function(c) { if (c !== card) c.classList.remove('show-info'); }); card.classList.toggle('show-info');
                 });
             });
         }
