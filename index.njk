@@ -64,6 +64,7 @@ layout: base.njk
 <section class="hero" id="hero">
     <div class="hero-content">
         <div class="hero-showreel" id="hero-showreel">
+            <img class="hero-poster" src="/uploads/896dfda32e86217.jpg" alt="" aria-hidden="true">
             <iframe 
                 id="hero-video"
                 src="{{ site.vimeoShowreel }}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
@@ -76,8 +77,8 @@ layout: base.njk
                 <span class="title-block title-rotating-wrapper">
                     <span class="rotating-word-track">
                         <span class="rotating-word">Movement</span>
-                        <span class="rotating-word">Creative</span>
-                        <span class="rotating-word">Choreography</span>
+                        <span class="rotating-word">Visual</span>
+                        <span class="rotating-word">Performance</span>
                         <span class="rotating-word"></span>
                     </span>
                     &nbsp;Direction
@@ -109,6 +110,7 @@ layout: base.njk
     <div class="projects-wrapper">
         <div class="projects-container">
             {%- for project in projects.items -%}
+{% if not project.hidden %}
             <article class="project-card" data-category="{{ project.category }}" {% if project.video %}data-video="{{ project.video }}"{% endif %}>
                 <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy">
                 {% if project.video %}<div class="project-play"></div>{% endif %}
@@ -130,6 +132,7 @@ layout: base.njk
                     </div>
                 </div>
             </article>
+{% endif %}
             {%- endfor -%}
         </div>
         <div class="scroll-arrows">
