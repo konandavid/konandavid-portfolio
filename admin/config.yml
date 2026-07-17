@@ -24,6 +24,7 @@ collections:
               - { label: "Category", name: "category", widget: "select", options: ["Live Show", "Commercial", "Film & Music Video"] }
               - { label: "Role (English)", name: "role", widget: "string", required: false, hint: "Ex: Choreographer, Performer, Movement Director" }
               - { label: "Rôle (Français)", name: "role_fr", widget: "string", required: false, hint: "Ex: Chorégraphe, Performeur" }
+              - { label: "Masquer le projet", name: "hidden", widget: "boolean", required: false, default: false, hint: "Cache le projet du site sans le supprimer" }
               - { label: "Image", name: "image", widget: "image" }
               - { label: "Description (English)", name: "description", widget: "text" }
               - { label: "Description (Français)", name: "description_fr", widget: "text" }
