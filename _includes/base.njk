@@ -352,6 +352,24 @@
             border: none;
         }
 
+        /* Hero poster + iframe fade-in */
+        .hero-poster {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-showreel iframe {
+            opacity: 0;
+            transition: opacity 1.2s ease;
+        }
+
+        .hero-showreel iframe.ready {
+            opacity: 1;
+        }
+
         /* Title */
         .hero-text h1 {
             font-size: clamp(11px, 1.4vw, 16px);
@@ -570,6 +588,7 @@
             -ms-overflow-style: none;
             scroll-snap-type: x proximity;
             -webkit-overflow-scrolling: touch;
+overscroll-behavior-x: contain;
         }
 
         @media (hover: hover) and (pointer: fine) {
@@ -720,6 +739,20 @@
 
         .project-play:hover {
             background: var(--accent);
+        }
+
+        /* Touch devices: play always visible, tap reveals info */
+        @media (hover: none) {
+            .project-play {
+                opacity: 1;
+                transform: translate(-50%, -50%) scale(0.9);
+                width: 54px;
+                height: 54px;
+            }
+            .project-card.show-info .project-description {
+                opacity: 1;
+                max-height: 200px;
+            }
         }
 
         .project-artist {
@@ -1237,7 +1270,7 @@
       "@context": "https://schema.org",
       "@type": "Person",
       "name": "Konan David",
-      "alternateName": "Konanraw", "Konan Raw", "Konan Markosy", "David Markosy", "Konan David Markosy", "David Konan Markosy"
+      "alternateName": ["Konanraw", "Konan Raw", "Konan Markosy", "David Markosy", "Konan David Markosy", "David Konan Markosy"],
       "jobTitle": "Choreographer & Creative Director",
       "description": "Choreographer and creative director specializing in live shows, music videos, and brand campaigns",
       "url": "https://konandavid.com",
@@ -1514,6 +1547,34 @@
         }
         
         container?.addEventListener('scroll', updateArrows);
+
+        // Wheel: vertical scroll over the cards moves them horizontally
+        container?.addEventListener('wheel', function(e) {
+            if (Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return;
+            const max = container.scrollWidth - container.clientWidth;
+            if ((e.deltaY > 0 && container.scrollLeft < max - 1) || (e.deltaY < 0 && container.scrollLeft > 1)) {
+                e.preventDefault();
+                container.scrollLeft = Math.max(0, Math.min(max, container.scrollLeft + e.deltaY));
+                updateArrows();
+            }
+        }, { passive: false });
+        updateArrows();
+
+        // Touch: tap a card to reveal its description
+        if (('ontouchstart' in window) || navigator.maxTouchPoints > 0) {
+            document.querySelectorAll('.project-card').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.project-play')) return;
+                    card.classList.toggle('show-info');
+                });
+            });
+        }
+
+        // Hero iframe fade-in over the poster
+        const heroIframe = document.getElementById('hero-video');
+        heroIframe?.addEventListener('load', () => {
+            setTimeout(() => heroIframe.classList.add('ready'), 900);
+        });
         updateArrows();
 
         // ===================
