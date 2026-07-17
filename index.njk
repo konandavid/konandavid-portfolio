@@ -64,7 +64,7 @@ layout: base.njk
 <section class="hero" id="hero">
     <div class="hero-content">
         <div class="hero-showreel" id="hero-showreel">
-            <img class="hero-poster" src="/uploads/896dfda32e86217.jpg" alt="" aria-hidden="true">
+            <img class="hero-poster" src="{% if site.heroPoster %}{{ site.heroPoster }}{% else %}/uploads/896dfda32e86217.jpg{% endif %}" alt="" aria-hidden="true">
             <iframe 
                 id="hero-video"
                 src="{{ site.vimeoShowreel }}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
@@ -79,6 +79,7 @@ layout: base.njk
                         <span class="rotating-word">Movement</span>
                         <span class="rotating-word">Visual</span>
                         <span class="rotating-word">Performance</span>
+                        <span class="rotating-word">Choreographic</span>
                     </span>
                     &nbsp;Direction
                 </span>
