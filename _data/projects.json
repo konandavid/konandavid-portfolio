@@ -265,6 +265,7 @@
     },
     {
       "artist": "Soprano",
+      "hidden": true,
       "description_fr": "Performeur pour une diffusion nationale en prime-time lors de la principale cérémonie musicale française.",
       "role_fr": "Performeur",
       "role": "Performer",
