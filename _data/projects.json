@@ -4,7 +4,7 @@
       "artist": "Konan David",
       "description_fr": "Six hommes d'horizons différents, du calme patient jusqu'à l'explosion. Une montée portée par la résilience, la détermination et l'unité. \nRéalisé par Konan David.",
       "role_fr": "Réalisateur & Chorégraphe",
-      "role": "Director & Choreographer",
+      "role": "Director + Choreographer",
       "title": "Against All Odds",
       "video": "https://www.youtube.com/watch?v=714IfiYRuJQ",
       "image": "/uploads/14-_dsc2209.jpg",
@@ -46,7 +46,7 @@
     {
       "artist": "Travis Scott",
       "description_fr": "Performance dans le segment réalisé par Gaspar Noé pour l'album Utopia.",
-      "role_fr": "Performeur",
+      "role_fr": "Danseur + Acteur",
       "role": "Movement Artist",
       "title": "Modern Jam (Circus Maximus)",
       "video": "https://youtu.be/g8IvO7OwdaM?si=AW24MIJhWQOSNQnS",
@@ -78,7 +78,7 @@
     },
     {
       "artist": "Ama Lou",
-      "description_fr": "Performer pour le clip de l'artiste internationale Ama Lou. Produit par Omar Films.",
+      "description_fr": "Performer pour le clip de l'artiste internationale Ama Lou.",
       "role_fr": "Performeur",
       "role": "Performer",
       "title": "My Girl ",
@@ -144,24 +144,24 @@
     },
     {
       "artist": "Dadju",
-      "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places.",
+      "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places. Chorégraphie par Batchily & Ambre Obela.",
       "role_fr": "Performeur",
       "role": "Performer",
       "title": "Parc des Princes 2022",
       "video": "",
       "image": "/uploads/f4d0e4eedf61f20e.jpg",
-      "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa.",
+      "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa. Choreography by Batchily & Ambre Obela.",
       "category": "Live Show"
     },
     {
       "artist": "Laylow",
-      "description_fr": "Deux dates à guichets fermés consécutives à l'Accor Arena pour la Trinity Tour.",
+      "description_fr": "Deux dates à guichets fermés consécutives à l'Accor Arena pour la Trinity Tour. Chorégraphie par Leo Walk.",
       "role_fr": "Performeur",
       "role": "Performer",
       "title": "Accor Arena 2022",
       "video": "",
       "image": "/uploads/f17ddfe5fb7682bc.jpg",
-      "description": "Back-to-back sold-out shows at Paris's iconic Accor Arena for Trinity Tour.",
+      "description": "Back-to-back sold-out shows at Paris's iconic Accor Arena for Trinity Tour. Choreography by Leo Walk.",
       "category": "Live Show"
     },
     {
@@ -243,24 +243,24 @@
     },
     {
       "artist": "Lous & The Yakuza",
-      "description_fr": "Performance live télévisée pour l'un des principaux talk-shows français.",
+      "description_fr": "Performance live télévisée pour l'un des principaux talk-shows français. Chorégraphie par Kevin Bago & Sarah Magassa.",
       "role_fr": "Performeur",
       "role": "Performer",
       "title": "Quotidien",
       "video": "",
       "image": "/uploads/a8c320c41a1edcb5.jpg",
-      "description": "Live televised performance for one of France's premier talk shows.",
+      "description": "Live televised performance for one of France's premier talk shows. Choreography by Kevin Bago & Sarah Magassa.",
       "category": "Live Show"
     },
     {
       "artist": "Shy'm",
-      "description_fr": "Performeur pour cette tournée nationale, contribuant à l'identité visuelle live et à la production scénique.",
+      "description_fr": "Performeur pour cette tournée nationale, contribuant à l'identité visuelle live et à la production scénique. Chorégraphie par Jerky Jessy.",
       "role_fr": "Performeur",
       "role": "Performer",
       "title": "Agape Tour 2019",
       "video": "https://www.youtube.com/watch?v=FerF2a9NSbI",
       "image": "/uploads/415614-shy-m-en-concert-au-palais-des-sports-dome-de-paris-en-juin-2019.jpg",
-      "description": "Featured performer for this national arena tour, contributing to the live visual identity and stage production.",
+      "description": "Featured performer for this national arena tour, contributing to the live visual identity and stage production. Choreography by Jerky Jessy.",
       "category": "Live Show"
     },
     {
