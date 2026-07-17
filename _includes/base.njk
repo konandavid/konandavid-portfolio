@@ -384,6 +384,20 @@
             padding-bottom: 10px;
         }
 
+        .title-word {
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .title-word:hover {
+            color: var(--text-primary);
+            text-shadow: 0 0 24px rgba(255, 255, 255, 0.35);
+        }
+
+        .title-sep {
+            opacity: 0.5;
+        }
+        }
+
         .title-star::after {
             content: '';
             position: absolute;
@@ -1592,19 +1606,7 @@ overscroll-behavior-x: contain;
         
         container?.addEventListener('scroll', updateArrows);
 
-        // Wheel: vertical scroll over the cards moves them horizontally
-        container?.addEventListener('wheel', function(e) {
-            if (Math.abs(e.deltaX) >= Math.abs(e.deltaY)) return;
-            const max = container.scrollWidth - container.clientWidth;
-            if ((e.deltaY > 0 && container.scrollLeft < max - 1) || (e.deltaY < 0 && container.scrollLeft > 1)) {
-                e.preventDefault();
-                container.classList.add('wheeling');
-                container.scrollLeft = Math.max(0, Math.min(max, container.scrollLeft + e.deltaY));
-                clearTimeout(container._wheelTimer);
-                container._wheelTimer = setTimeout(function() { container.classList.remove('wheeling'); }, 200);
-                updateArrows();
-            }
-        }, { passive: false });
+        // Cards: horizontal scroll via drag, arrows or horizontal trackpad gesture; vertical wheel scrolls the page
         updateArrows();
 
         // Touch: tap a card to reveal its description
