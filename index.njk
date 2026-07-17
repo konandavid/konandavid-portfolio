@@ -118,6 +118,10 @@ layout: base.njk
                     <div class="project-text">
                         <span class="project-artist">{{ project.artist }}</span>
                         <h3 class="project-title">{{ project.title }}</h3>
+                        {% if project.role %}
+                        <span class="project-role" data-lang-en>{{ project.role }}</span>
+                        <span class="project-role" data-lang-fr style="display: none;">{% if project.role_fr %}{{ project.role_fr }}{% else %}{{ project.role }}{% endif %}</span>
+                        {% endif %}
                         <p class="project-description" data-lang-en>{{ project.description }}</p>
                         {% if project.description_fr %}
                         <p class="project-description" data-lang-fr style="display: none;">{{ project.description_fr }}</p>
