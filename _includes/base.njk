@@ -370,6 +370,44 @@
             opacity: 1;
         }
 
+        .hero-poster {
+            transition: opacity 1.2s ease;
+        }
+
+        .hero-poster.hidden {
+            opacity: 0;
+        }
+
+        /* Shooting star underline on hero title */
+        .title-star {
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .title-star::after {
+            content: '';
+            position: absolute;
+            left: 30%;
+            bottom: 0;
+            width: 40%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--accent), transparent);
+            box-shadow: 0 0 10px rgba(255, 107, 53, 0.8);
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .title-star:hover::after {
+            animation: shootingStar 0.9s ease-out;
+        }
+
+        @keyframes shootingStar {
+            0% { opacity: 0; transform: translateX(-120%); }
+            20% { opacity: 1; }
+            80% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(120%); }
+        }
+
         /* Title */
         .hero-text h1 {
             font-size: clamp(11px, 1.4vw, 16px);
@@ -1582,7 +1620,7 @@ overscroll-behavior-x: contain;
         // Hero iframe fade-in over the poster
         const heroIframe = document.getElementById('hero-video');
         heroIframe?.addEventListener('load', () => {
-            setTimeout(() => heroIframe.classList.add('ready'), 900);
+            setTimeout(() => { heroIframe.classList.add('ready'); document.querySelector('.hero-poster')?.classList.add('hidden'); }, 900);
         });
         updateArrows();
 
