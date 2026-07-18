@@ -12,6 +12,16 @@
       "category": "Film & Music Video"
     },
     {
+      "artist": "Gazo",
+      "title": "Paris La Défense Arena",
+      "category": "Live Show",
+      "role": "Performance Director",
+      "role_fr": "Chorégraphe",
+      "image": "/uploads/photo-emma-buoncristiani-1757204915.jpg",
+      "description": "Choreography and performance direction for this show in Europe's largest indoor venue, 40,000+ fans. Raw energy and choreographic variety to monumental scale.",
+      "description_fr": "Chorégraphie et mise en scène pour ce show dans la plus grande salle indoor d'Europe, devant 40 000 personnes."
+    },
+    {
       "artist": "Dior x Rihanna",
       "description_fr": "Campagne de Steven Klein tournée au Château de Versailles.",
       "role_fr": "Performeur",
@@ -23,16 +33,6 @@
       "category": "Commercial"
     },
     {
-      "artist": "Gazo",
-      "title": "Paris La Défense Arena",
-      "category": "Live Show",
-      "role": "Performance Director",
-      "role_fr": "Chorégraphe",
-      "image": "/uploads/photo-emma-buoncristiani-1757204915.jpg",
-      "description": "Choreography and performance direction for this show in Europe's largest indoor venue, 40,000+ fans. Raw energy and choreographic variety to monumental scale.",
-      "description_fr": "Chorégraphie et mise en scène pour ce show dans la plus grande salle indoor d'Europe, devant 40 000 personnes."
-    },
-    {
       "artist": "Travis Scott",
       "description_fr": "Performance dans le segment réalisé par Gaspar Noé pour l'album Utopia.",
       "role_fr": "Danseur + Acteur",
@@ -42,17 +42,6 @@
       "image": "/uploads/hf_20260202_132315_665a57a0-8abe-4f2b-915b-11ba1e7de7b7.png",
       "description": "Performance in Gaspar Noé's segment for Utopia album.",
       "category": "Film & Music Video"
-    },
-    {
-      "artist": "Gazo",
-      "description_fr": "Chorégraphie des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
-      "role_fr": "Chorégraphe",
-      "role": "Performance Director",
-      "title": "Summer Festivals 2025",
-      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1",
-      "image": "/uploads/img_9283.jpg",
-      "description": "Choreography for headline festival sets throughout a full summer season, including Les Ardentes, Golden Coast and Yardland, for crowds of up to 100,000.",
-      "category": "Live Show"
     },
     {
       "artist": "Vogue",
@@ -67,13 +56,13 @@
     },
     {
       "artist": "Gazo",
-      "description_fr": "Chorégraphie et mise en scène pour l’Apocalypse Tour et Zénith Tour de Gazo, deux volets d’une année de tournée à travers la France, la Belgique et la Suisse.\n\n",
+      "description_fr": "Chorégraphie des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
       "role_fr": "Chorégraphe",
-      "role": "Choreographer",
-      "title": "National Tour 2025",
-      "video": "",
-      "image": "/uploads/img_9574.jpg",
-      "description": "Choreography and performance direction for Gazo’s 2025 Apocalypse Tour and Zénith Tour - two chapters of a year-long live run across France, Belgium, Suisse.",
+      "role": "Performance Director",
+      "title": "Summer Festivals 2025",
+      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1",
+      "image": "/uploads/img_9283.jpg",
+      "description": "Choreography for headline festival sets throughout a full summer season, including Les Ardentes, Golden Coast and Yardland, for crowds of up to 100,000.",
       "category": "Live Show"
     },
     {
@@ -86,6 +75,17 @@
       "image": "/uploads/channels4_profile-2.jpg",
       "description": "Performance for official music video for My Girl by Ama.",
       "category": "Film & Music Video"
+    },
+    {
+      "artist": "Gazo",
+      "description_fr": "Chorégraphie et mise en scène pour l’Apocalypse Tour et Zénith Tour de Gazo, deux volets d’une année de tournée à travers la France, la Belgique et la Suisse.\n\n",
+      "role_fr": "Chorégraphe",
+      "role": "Choreographer",
+      "title": "National Tour 2025",
+      "video": "",
+      "image": "/uploads/img_9574.jpg",
+      "description": "Choreography and performance direction for Gazo’s 2025 Apocalypse Tour and Zénith Tour - two chapters of a year-long live run across France, Belgium, Suisse.",
+      "category": "Live Show"
     },
     {
       "artist": "Nike",
