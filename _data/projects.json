@@ -12,27 +12,15 @@
       "category": "Film & Music Video"
     },
     {
-      "artist": "Gazo",
-      "hidden": true,
-      "description_fr": "Chorégraphie et mise en scène pour la tournée nationale des Zéniths.",
-      "role_fr": "Chorégraphe",
-      "role": "Choreographer",
-      "title": "National Tour 2025",
+      "artist": "Dior x Rihanna",
+      "description_fr": "Campagne de Steven Klein tournée au Château de Versailles.",
+      "role_fr": "Performeur",
+      "role": "Movement Artist",
+      "title": "J'Adore Campaign",
       "video": "",
-      "image": "/uploads/img_8548.jpg",
-      "description": "Choreography and performance direction for Gazo’s 2025 Apocalypse Tour and Zénith Tour - two chapters of a year-long live run across France and Belgium.\n\n",
-      "category": "Live Show"
-    },
-    {
-      "artist": "Gazo",
-      "description_fr": "Chorégraphie des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
-      "role_fr": "Chorégraphe",
-      "role": "Performance Director",
-      "title": "Summer Festivals 2025",
-      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1",
-      "image": "/uploads/img_9283.jpg",
-      "description": "Choreography for headline festival sets throughout a full summer season, including Les Ardentes, Golden Coast and Yardland, for crowds of up to 100,000.",
-      "category": "Live Show"
+      "image": "/uploads/hq720-2.jpg",
+      "description": "Movement artist for Steven Klein's campaign shot at Versailles. Movement direction by Parris Goebel.",
+      "category": "Commercial"
     },
     {
       "artist": "Gazo",
@@ -56,15 +44,26 @@
       "category": "Film & Music Video"
     },
     {
-      "artist": "Dior x Rihanna",
-      "description_fr": "Campagne de Steven Klein tournée au Château de Versailles.",
+      "artist": "Gazo",
+      "description_fr": "Chorégraphie des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
+      "role_fr": "Chorégraphe",
+      "role": "Performance Director",
+      "title": "Summer Festivals 2025",
+      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1",
+      "image": "/uploads/img_9283.jpg",
+      "description": "Choreography for headline festival sets throughout a full summer season, including Les Ardentes, Golden Coast and Yardland, for crowds of up to 100,000.",
+      "category": "Live Show"
+    },
+    {
+      "artist": "Vogue",
+      "description_fr": "Performance Place Vendôme aux côtés de Bad Bunny, Teyana Taylor et plus. Chorégraphie et direction créative par Parris Goebel.",
       "role_fr": "Performeur",
-      "role": "Movement Artist",
-      "title": "J'Adore Campaign",
-      "video": "",
-      "image": "/uploads/hq720-2.jpg",
-      "description": "Movement artist for Steven Klein's campaign shot at Versailles. Movement direction by Parris Goebel.",
-      "category": "Commercial"
+      "role": "Performer",
+      "title": "World Paris",
+      "video": "https://www.youtube.com/watch?v=gQ3idFZXiHo",
+      "image": "/uploads/channels4_profile.jpg",
+      "description": "Performance at Place Vendôme alongside Bad Bunny, Teyana Taylor & more. Choreography & Creative direction by Parris Goebel.",
+      "category": "Live Show"
     },
     {
       "artist": "Gazo",
@@ -78,18 +77,6 @@
       "category": "Live Show"
     },
     {
-      "artist": "Gazo",
-      "hidden": true,
-      "description_fr": "Chorégraphe du set tête d'affiche, devant 50 000 fans au festival rap de référence en France.",
-      "role_fr": "Chorégraphe",
-      "role": "Choreographer",
-      "title": "Golden Coast Festival 2025",
-      "video": "https://www.youtube.com/watch?v=C3CQsJqxQFE&list=RDC3CQsJqxQFE&start_radio=1",
-      "image": "/uploads/photo-emma-buoncristiani-1757204915.jpg",
-      "description": "Choreographed and directed performance for the main headliner set, 50000+ fans at France's defining rap festival.",
-      "category": "Live Show"
-    },
-    {
       "artist": "Ama Lou",
       "description_fr": "Performer pour le clip de l'artiste internationale Ama Lou.",
       "role_fr": "Performeur",
@@ -99,17 +86,6 @@
       "image": "/uploads/channels4_profile-2.jpg",
       "description": "Performance for official music video for My Girl by Ama.",
       "category": "Film & Music Video"
-    },
-    {
-      "artist": "Vogue",
-      "description_fr": "Performance Place Vendôme aux côtés de Bad Bunny, Teyana Taylor et plus. Chorégraphie et direction créative par Parris Goebel.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "World Paris",
-      "video": "https://www.youtube.com/watch?v=gQ3idFZXiHo",
-      "image": "/uploads/channels4_profile.jpg",
-      "description": "Performance at Place Vendôme alongside Bad Bunny, Teyana Taylor & more. Choreography & Creative direction by Parris Goebel.",
-      "category": "Live Show"
     },
     {
       "artist": "Nike",
@@ -223,6 +199,7 @@
     },
     {
       "artist": "Hippoh",
+      "hidden": true,
       "description_fr": "Direction artistique pour des événements célébrant l'énergie et l'impact culturel du hip-hop.",
       "role_fr": "Directeur créatif & chorégraphe",
       "role": "Creative Director + Choreographer",
@@ -234,17 +211,19 @@
     },
     {
       "artist": "Dadju",
+      "hidden": false,
       "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places. Chorégraphie par Batchily & Ambre Obela.",
       "role_fr": "Performeur",
       "role": "Performer",
       "title": "Parc des Princes 2022",
       "video": "",
       "image": "/uploads/f4d0e4eedf61f20e.jpg",
-      "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa. Choreography by Batchily & Ambre Obela.",
+      "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa. ",
       "category": "Live Show"
     },
     {
       "artist": "Lous & The Yakuza",
+      "hidden": true,
       "description_fr": "Performance live télévisée pour l'un des principaux talk-shows français. Chorégraphie par Kevin Bago & Sarah Magassa.",
       "role_fr": "Performeur",
       "role": "Performer",
