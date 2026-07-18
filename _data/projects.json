@@ -89,13 +89,13 @@
     },
     {
       "artist": "Gazo",
-      "description_fr": "Chorégraphe du show tête d'affiche devant 100 000 fans.",
+      "description_fr": "Chorégraphie des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
       "role_fr": "Chorégraphe",
       "role": "Performance Director",
-      "title": "Les Ardentes Festival 2025",
+      "title": "Summer Festivals 2025",
       "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1",
       "image": "/uploads/img_9283.jpg",
-      "description": "Choreographing the headline set for 100,000 fans.",
+      "description": "Choreography for headline festival sets throughout a full summer season, including Les Ardentes, Golden Coast and Yardland, for crowds of up to 100,000.",
       "category": "Live Show"
     },
     {
@@ -143,17 +143,6 @@
       "category": "Film & Music Video"
     },
     {
-      "artist": "Dadju",
-      "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places. Chorégraphie par Batchily & Ambre Obela.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "Parc des Princes 2022",
-      "video": "",
-      "image": "/uploads/f4d0e4eedf61f20e.jpg",
-      "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa. Choreography by Batchily & Ambre Obela.",
-      "category": "Live Show"
-    },
-    {
       "artist": "Laylow",
       "description_fr": "Deux dates à guichets fermés consécutives à l'Accor Arena pour la Trinity Tour. Chorégraphie par Leo Walk.",
       "role_fr": "Performeur",
@@ -187,17 +176,6 @@
       "category": "Commercial"
     },
     {
-      "artist": "Hippoh",
-      "description_fr": "Direction artistique pour des événements célébrant l'énergie et l'impact culturel du hip-hop.",
-      "role_fr": "Directeur créatif & chorégraphe",
-      "role": "Creative Director + Choreographer",
-      "title": "Hippoh x La Place",
-      "video": "",
-      "image": "/uploads/d25713923ae037f3.jpg",
-      "description": "Directed artistic vision and live performances celebrating energy and cultural impact of hip-hop.",
-      "category": "Live Show"
-    },
-    {
       "artist": "Konan David",
       "description_fr": "Une exploration multidisciplinaire, alliant réalisation et performance pour créer un voyage viscéral à travers le mouvement.",
       "role_fr": "Réalisateur",
@@ -220,6 +198,17 @@
       "category": "Film & Music Video"
     },
     {
+      "artist": "Konan David",
+      "description_fr": "Court-métrage primé avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
+      "role_fr": "Réalisateur",
+      "role": "Director + Choreographer",
+      "title": "No Lie",
+      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
+      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
+      "description": "Award-winning short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement. Directed, edited, movement directed by Konan David.",
+      "category": "Film & Music Video"
+    },
+    {
       "artist": "Oordaya",
       "description_fr": "Coaching et direction de mouvement, créant une histoire expressive à travers l'art de la silhouette.",
       "role_fr": "Directeur de mouvement",
@@ -231,15 +220,26 @@
       "category": "Film & Music Video"
     },
     {
-      "artist": "Konan David",
-      "description_fr": "Court-métrage primé avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
-      "role_fr": "Réalisateur",
-      "role": "Director + Choreographer",
-      "title": "No Lie",
-      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
-      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
-      "description": "Award-winning short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement. Directed, edited, movement directed by Konan David.",
-      "category": "Film & Music Video"
+      "artist": "Hippoh",
+      "description_fr": "Direction artistique pour des événements célébrant l'énergie et l'impact culturel du hip-hop.",
+      "role_fr": "Directeur créatif & chorégraphe",
+      "role": "Creative Director + Choreographer",
+      "title": "Hippoh x La Place",
+      "video": "",
+      "image": "/uploads/d25713923ae037f3.jpg",
+      "description": "Directed artistic vision and live performances celebrating energy and cultural impact of hip-hop.",
+      "category": "Live Show"
+    },
+    {
+      "artist": "Dadju",
+      "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places. Chorégraphie par Batchily & Ambre Obela.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "Parc des Princes 2022",
+      "video": "",
+      "image": "/uploads/f4d0e4eedf61f20e.jpg",
+      "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa. Choreography by Batchily & Ambre Obela.",
+      "category": "Live Show"
     },
     {
       "artist": "Lous & The Yakuza",
@@ -254,6 +254,7 @@
     },
     {
       "artist": "Shy'm",
+      "hidden": true,
       "description_fr": "Performeur pour cette tournée nationale, contribuant à l'identité visuelle live et à la production scénique. Chorégraphie par Jerky Jessy.",
       "role_fr": "Performeur",
       "role": "Performer",
