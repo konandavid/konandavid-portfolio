@@ -13,11 +13,11 @@
     },
     {
       "artist": "Gazo",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Chorégraphie et mise en scène pour la tournée nationale des Zéniths.",
       "role_fr": "Chorégraphe",
       "role": "Choreographer",
-      "title": "Zenith National Tour",
+      "title": "National Tour 2025",
       "video": "",
       "image": "/uploads/img_8548.jpg",
       "description": "Choreography and performance direction for Gazo’s 2025 Apocalypse Tour and Zénith Tour - two chapters of a year-long live run across France and Belgium.\n\n",
@@ -57,7 +57,7 @@
     },
     {
       "artist": "Gazo",
-      "hidden": false,
+      "hidden": true,
       "description_fr": "Chorégraphe du set tête d'affiche, devant 50 000 fans au festival rap de référence en France.",
       "role_fr": "Chorégraphe",
       "role": "Choreographer",
