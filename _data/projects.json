@@ -121,26 +121,15 @@
       "category": "Film & Music Video"
     },
     {
-      "artist": "Laylow",
-      "description_fr": "Deux dates à guichets fermés consécutives à l'Accor Arena pour la Trinity Tour. Chorégraphie par Leo Walk.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "Accor Arena 2022",
-      "video": "",
-      "image": "/uploads/f17ddfe5fb7682bc.jpg",
-      "description": "Back-to-back sold-out shows at Paris's iconic Accor Arena for Trinity Tour. Choreography by Leo Walk.",
-      "category": "Live Show"
-    },
-    {
-      "artist": "Hippoh",
-      "description_fr": "Direction créative pour une expérience live immersive dans un lieu culturel de renommée.",
-      "role_fr": "Directeur créatif et chorégraphe",
-      "role": "Creative Director + Choreographer ",
-      "title": "Grand Palais Immersif",
-      "video": "",
-      "image": "/uploads/loading-gpi-didier-plowy-hippodanceclub-bannière-2.jpg",
-      "description": "Creative & Show Direction for immersive live experience, overseeing artistic vision within world-class cultural venue.",
-      "category": "Live Show"
+      "artist": "Konan David",
+      "description_fr": "Une exploration multidisciplinaire, alliant réalisation et performance pour créer un voyage viscéral à travers le mouvement.",
+      "role_fr": "Réalisateur",
+      "role": "Director",
+      "title": "Anhedonia",
+      "video": "https://youtu.be/dDmfYRA2jX0?si=s0GjfKZa1ZtYK0ho",
+      "image": "/uploads/anhedonia-insta.png",
+      "description": "A multidisciplinary exploration, spanning direction and performance to craft a visceral journey through movement. Directed, Edited, Performed by Konan David.",
+      "category": "Film & Music Video"
     },
     {
       "artist": "Rabanne",
@@ -155,13 +144,13 @@
     },
     {
       "artist": "Konan David",
-      "description_fr": "Une exploration multidisciplinaire, alliant réalisation et performance pour créer un voyage viscéral à travers le mouvement.",
+      "description_fr": "Court-métrage primé avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
       "role_fr": "Réalisateur",
-      "role": "Director",
-      "title": "Anhedonia",
-      "video": "https://youtu.be/dDmfYRA2jX0?si=s0GjfKZa1ZtYK0ho",
-      "image": "/uploads/anhedonia-insta.png",
-      "description": "A multidisciplinary exploration, spanning direction and performance to craft a visceral journey through movement. Directed, Edited, Performed by Konan David.",
+      "role": "Director + Choreographer",
+      "title": "No Lie",
+      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
+      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
+      "description": "Award-winning short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement. Directed, edited, movement directed by Konan David.",
       "category": "Film & Music Video"
     },
     {
@@ -176,15 +165,15 @@
       "category": "Film & Music Video"
     },
     {
-      "artist": "Konan David",
-      "description_fr": "Court-métrage primé avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
-      "role_fr": "Réalisateur",
-      "role": "Director + Choreographer",
-      "title": "No Lie",
-      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
-      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
-      "description": "Award-winning short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement. Directed, edited, movement directed by Konan David.",
-      "category": "Film & Music Video"
+      "artist": "Laylow",
+      "description_fr": "Deux dates à guichets fermés consécutives à l'Accor Arena pour la Trinity Tour. Chorégraphie par Leo Walk.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "Accor Arena 2022",
+      "video": "",
+      "image": "/uploads/f17ddfe5fb7682bc.jpg",
+      "description": "Back-to-back sold-out shows at Paris's iconic Accor Arena for Trinity Tour. Choreography by Leo Walk.",
+      "category": "Live Show"
     },
     {
       "artist": "Oordaya",
@@ -196,6 +185,29 @@
       "image": "/uploads/197856351962bfcc.png",
       "description": "Coaching and movement direction, crafting an expressive story through the art of silhouette.",
       "category": "Film & Music Video"
+    },
+    {
+      "artist": "Hippoh",
+      "description_fr": "Direction créative pour une expérience live immersive dans un lieu culturel de renommée.",
+      "role_fr": "Directeur créatif et chorégraphe",
+      "role": "Creative Director + Choreographer ",
+      "title": "Grand Palais Immersif",
+      "video": "",
+      "image": "/uploads/loading-gpi-didier-plowy-hippodanceclub-bannière-2.jpg",
+      "description": "Creative & Show Direction for immersive live experience, overseeing artistic vision within world-class cultural venue.",
+      "category": "Live Show"
+    },
+    {
+      "artist": "Lous & The Yakuza",
+      "hidden": false,
+      "description_fr": "Performance live télévisée pour l'un des principaux talk-shows français. Chorégraphie par Kevin Bago & Sarah Magassa.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "Prime-Time Live",
+      "video": "",
+      "image": "/uploads/enfnts-terribles-lous-and-the-yakuza-gore-album-01-683x1024.jpg",
+      "description": "Live televised performance for one of France's premier talk shows. Choreography by Kevin Bago & Sarah Magassa.",
+      "category": "Live Show"
     },
     {
       "artist": "Hippoh",
@@ -219,18 +231,6 @@
       "video": "",
       "image": "/uploads/f4d0e4eedf61f20e.jpg",
       "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa. ",
-      "category": "Live Show"
-    },
-    {
-      "artist": "Lous & The Yakuza",
-      "hidden": true,
-      "description_fr": "Performance live télévisée pour l'un des principaux talk-shows français. Chorégraphie par Kevin Bago & Sarah Magassa.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "Quotidien",
-      "video": "",
-      "image": "/uploads/a8c320c41a1edcb5.jpg",
-      "description": "Live televised performance for one of France's premier talk shows. Choreography by Kevin Bago & Sarah Magassa.",
       "category": "Live Show"
     },
     {
