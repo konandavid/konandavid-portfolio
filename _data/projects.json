@@ -44,17 +44,6 @@
       "category": "Film & Music Video"
     },
     {
-      "artist": "Vogue",
-      "description_fr": "Performance Place Vendôme aux côtés de Bad Bunny, Teyana Taylor et plus. Chorégraphie et direction créative par Parris Goebel.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "World Paris",
-      "video": "https://www.youtube.com/watch?v=gQ3idFZXiHo",
-      "image": "/uploads/channels4_profile.jpg",
-      "description": "Performance at Place Vendôme alongside Bad Bunny, Teyana Taylor & more. Choreography & Creative direction by Parris Goebel.",
-      "category": "Live Show"
-    },
-    {
       "artist": "Gazo",
       "description_fr": "Chorégraphie des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
       "role_fr": "Chorégraphe",
@@ -63,6 +52,17 @@
       "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1",
       "image": "/uploads/img_9283.jpg",
       "description": "Choreography for headline festival sets throughout a full summer season, including Les Ardentes, Golden Coast and Yardland, for crowds of up to 100,000.",
+      "category": "Live Show"
+    },
+    {
+      "artist": "Vogue",
+      "description_fr": "Performance Place Vendôme aux côtés de Bad Bunny, Teyana Taylor et plus. Chorégraphie et direction créative par Parris Goebel.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "World Paris",
+      "video": "https://www.youtube.com/watch?v=gQ3idFZXiHo",
+      "image": "/uploads/channels4_profile.jpg",
+      "description": "Performance at Place Vendôme alongside Bad Bunny, Teyana Taylor & more. Choreography & Creative direction by Parris Goebel.",
       "category": "Live Show"
     },
     {
@@ -177,6 +177,7 @@
     },
     {
       "artist": "Oordaya",
+      "hidden": false,
       "description_fr": "Coaching et direction de mouvement, créant une histoire expressive à travers l'art de la silhouette.",
       "role_fr": "Directeur de mouvement",
       "role": "Movement Director",
@@ -223,7 +224,7 @@
     },
     {
       "artist": "Dadju",
-      "hidden": false,
+      "hidden": true,
       "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places. Chorégraphie par Batchily & Ambre Obela.",
       "role_fr": "Performeur",
       "role": "Performer",
