@@ -13,13 +13,14 @@
     },
     {
       "artist": "Gazo",
+      "hidden": true,
       "description_fr": "Chorégraphie et mise en scène pour la tournée nationale des Zéniths.",
       "role_fr": "Chorégraphe",
       "role": "Choreographer",
       "title": "Zenith National Tour",
       "video": "",
       "image": "/uploads/img_8548.jpg",
-      "description": "Choreography and performance direction for national french tour, high-energy stage presence for major arena production.",
+      "description": "Choreography and performance direction for Gazo’s 2025 Apocalypse Tour and Zénith Tour - two chapters of a year-long live run across France and Belgium.\n\n",
       "category": "Live Show"
     },
     {
@@ -56,6 +57,7 @@
     },
     {
       "artist": "Gazo",
+      "hidden": false,
       "description_fr": "Chorégraphe du set tête d'affiche, devant 50 000 fans au festival rap de référence en France.",
       "role_fr": "Chorégraphe",
       "role": "Choreographer",
@@ -67,13 +69,24 @@
     },
     {
       "artist": "Gazo",
-      "description_fr": "Chorégraphie et mise en scène pour une tournée nationale.",
+      "description_fr": "Chorégraphie des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
+      "role_fr": "Chorégraphe",
+      "role": "Performance Director",
+      "title": "Summer Festivals 2025",
+      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1",
+      "image": "/uploads/img_9283.jpg",
+      "description": "Choreography for headline festival sets throughout a full summer season, including Les Ardentes, Golden Coast and Yardland, for crowds of up to 100,000.",
+      "category": "Live Show"
+    },
+    {
+      "artist": "Gazo",
+      "description_fr": "Chorégraphie et direction de performance pour l’Apocalypse Tour et le Zénith Tour de Gazo en 2025 — deux volets d’une année de tournée à travers la France, la Belgique et la Suisse.\n\n",
       "role_fr": "Chorégraphe",
       "role": "Choreographer",
       "title": "Apocalypse Tour",
       "video": "",
       "image": "/uploads/img_9574.jpg",
-      "description": "Choreography and performance direction for massive French national tour.",
+      "description": "Choreography and performance direction for Gazo’s 2025 Apocalypse Tour and Zénith Tour - two chapters of a year-long live run across France, Belgium, Suisse.",
       "category": "Live Show"
     },
     {
@@ -86,17 +99,6 @@
       "image": "/uploads/channels4_profile-2.jpg",
       "description": "Performance for official music video for My Girl by Ama.",
       "category": "Film & Music Video"
-    },
-    {
-      "artist": "Gazo",
-      "description_fr": "Chorégraphie des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
-      "role_fr": "Chorégraphe",
-      "role": "Performance Director",
-      "title": "Summer Festivals 2025",
-      "video": "https://www.youtube.com/watch?v=gdWlBcPOT1Y&list=RDgdWlBcPOT1Y&start_radio=1",
-      "image": "/uploads/img_9283.jpg",
-      "description": "Choreography for headline festival sets throughout a full summer season, including Les Ardentes, Golden Coast and Yardland, for crowds of up to 100,000.",
-      "category": "Live Show"
     },
     {
       "artist": "Vogue",
