@@ -224,7 +224,7 @@
     },
     {
       "artist": "Dadju",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places. Chorégraphie par Batchily & Ambre Obela.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -236,7 +236,7 @@
     },
     {
       "artist": "Shy'm",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Performeur pour cette tournée nationale, contribuant à l'identité visuelle live et à la production scénique. Chorégraphie par Jerky Jessy.",
       "role_fr": "Performeur",
       "role": "Performer",
