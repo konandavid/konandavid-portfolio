@@ -64,10 +64,11 @@ layout: base.njk
 <section class="hero" id="hero">
     <div class="hero-content">
         <div class="hero-showreel" id="hero-showreel">
-            <img class="hero-poster" src="{% if site.heroPoster %}{{ site.heroPoster }}{% else %}/uploads/896dfda32e86217.jpg{% endif %}" alt="" aria-hidden="true">
+            <img class="hero-poster" src="{% if site.heroPoster %}{{ site.heroPoster }}{% else %}/uploads/896dfda32e86217.jpg{% endif %}" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
             <iframe 
                 id="hero-video"
-                src="{{ site.vimeoShowreel }}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                data-src="{{ site.vimeoShowreel }}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
+                title="Showreel Konan David"
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen>
             </iframe>
@@ -104,7 +105,7 @@ layout: base.njk
             {%- for project in projects.items -%}
 {% if not project.hidden %}
             <article class="project-card" data-category="{{ project.category }}" {% if project.video %}data-video="{{ project.video }}"{% endif %}>
-                <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy">
+                <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy" decoding="async">
                 {% if project.video %}<div class="project-play"></div>{% endif %}
                 <div class="project-info">
                     <span class="project-category">{{ project.category }}</span>
@@ -144,10 +145,10 @@ layout: base.njk
     <div class="marquee-wrapper">
         <div class="marquee-track">
             {%- for logo in press.logos -%}
-            <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo">
+            <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo" loading="lazy" decoding="async">
             {%- endfor -%}
             {%- for logo in press.logos -%}
-            <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo">
+            <img src="{{ logo.image }}" alt="{{ logo.name }}" class="press-logo" loading="lazy" decoding="async">
             {%- endfor -%}
         </div>
     </div>
@@ -158,9 +159,9 @@ layout: base.njk
     <div class="about-container">
         <div class="about-image">
             {% if about.image %}
-            <img src="{{ about.image }}" alt="Konan David">
+            <img src="{{ about.image }}" alt="Konan David" loading="lazy" decoding="async">
             {% else %}
-            <img src="/uploads/about.jpg" alt="Konan David">
+            <img src="/uploads/about.jpg" alt="Konan David" loading="lazy" decoding="async">
             {% endif %}
         </div>
         <div class="about-content">

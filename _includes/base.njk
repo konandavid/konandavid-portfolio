@@ -41,12 +41,16 @@
     <meta name="theme-color" content="#000000">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="preconnect" href="https://player.vimeo.com">
-    <link rel="preconnect" href="https://www.youtube.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    {% if site.heroPoster %}<link rel="preload" as="image" href="{{ site.heroPoster }}" fetchpriority="high">{% endif %}
     <link rel="dns-prefetch" href="https://player.vimeo.com">
     <link rel="dns-prefetch" href="https://www.youtube.com">
-    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+    <!-- Netlify Identity: only loaded when arriving from an invite / password-reset email link (not for regular visitors) -->
+    <script>
+        if (/(invite_token|recovery_token|confirmation_token|email_change_token|access_token)=/.test(location.hash)) {
+            document.write('<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"><\/script>');
+        }
+    </script>
     <style>
         :root {
             --bg-primary: #000000;
@@ -411,16 +415,6 @@
             pointer-events: none;
         }
 
-        .title-star:hover::after {
-            animation: shootingStar 0.9s ease-out;
-        }
-
-        @keyframes shootingStar {
-            0% { opacity: 0; transform: translateX(-120%); }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(120%); }
-        }
 
         /* Title */
         .hero-text h1 {
@@ -512,14 +506,7 @@
             width: 100%;
             height: 20px;
             background: linear-gradient(to bottom, transparent, var(--text-primary), transparent);
-            animation: scrollMove 2s ease-in-out infinite;
-        }
-
-        @keyframes scrollMove {
-            0% { top: -20px; opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { top: 50px; opacity: 0; }
+            display: none;
         }
 
         /* Work Section */
@@ -576,14 +563,7 @@
             width: 20px;
             height: 100%;
             background: linear-gradient(to right, transparent, var(--text-primary), transparent);
-            animation: dragMove 2s ease-in-out infinite;
-        }
-
-        @keyframes dragMove {
-            0% { left: -20px; opacity: 0; }
-            20% { opacity: 1; }
-            80% { opacity: 1; }
-            100% { left: 50px; opacity: 0; }
+            display: none;
         }
 
         /* Filter bar */
@@ -1619,11 +1599,19 @@ overscroll-behavior-x: contain;
             });
         }
 
-        // Hero iframe fade-in over the poster
+        // Hero showreel: the poster shows instantly, the Vimeo player loads only once the page is ready
         const heroIframe = document.getElementById('hero-video');
         heroIframe?.addEventListener('load', () => {
+            if (!heroIframe.getAttribute('src')) return;
             setTimeout(() => { heroIframe.classList.add('ready'); document.querySelector('.hero-poster')?.classList.add('hidden'); }, 900);
         });
+        function loadHeroVideo() {
+            if (heroIframe && !heroIframe.getAttribute('src') && heroIframe.dataset.src) {
+                heroIframe.src = heroIframe.dataset.src;
+            }
+        }
+        if (document.readyState === 'complete') setTimeout(loadHeroVideo, 300);
+        else window.addEventListener('load', () => setTimeout(loadHeroVideo, 300));
         updateArrows();
 
         // ===================
@@ -1731,7 +1719,7 @@ overscroll-behavior-x: contain;
         let soundOn = false;
         heroShowreel?.addEventListener('click', () => {
             if (!soundOn && heroVideo) {
-                heroVideo.src = heroVideo.src.replace('muted=1', 'muted=0');
+                heroVideo.src = (heroVideo.getAttribute('src') || heroVideo.dataset.src).replace('muted=1', 'muted=0');
                 soundOn = true;
             }
         });
