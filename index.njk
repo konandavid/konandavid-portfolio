@@ -74,9 +74,8 @@ layout: base.njk
             </iframe>
         </div>
         <div class="hero-text" id="hero-text">
-            <h1>
-                <span class="title-star"><span class="title-word">Movement</span><span class="title-sep">&nbsp;·&nbsp;</span><span class="title-word">Performance</span><span class="title-sep">&nbsp;·&nbsp;</span><span class="title-word">Film</span></span>
-            </h1>
+            <h1 class="hero-name">Konan David<span class="sr-only"> — Choreographer, Creative &amp; Movement Director, Paris</span></h1>
+            <p class="hero-role"><span>Creative Direction</span><span class="hero-dot"></span><span>Movement</span><span class="hero-dot"></span><span>On Screen</span></p>
         </div>
         <div class="scroll-indicator">
             <div class="scroll-line"></div>
@@ -89,22 +88,23 @@ layout: base.njk
 <section class="work-section" id="work">
     <div class="section-header">
         <h2 data-i18n="selectedWork">Selected Work</h2>
-        <div class="drag-indicator">
-            <span data-i18n="dragToExplore">Drag to explore</span>
-            <div class="drag-line"></div>
-        </div>
     </div>
     <div class="filter-bar">
-        <button class="filter-btn active" data-filter="all" data-i18n="filterAll">All</button>
-        <button class="filter-btn" data-filter="Live Show" data-i18n="filterLive">Live Show</button>
-        <button class="filter-btn" data-filter="Film & Music Video" data-i18n="filterFilm">Film & MV</button>
-        <button class="filter-btn" data-filter="Commercial" data-i18n="filterCommercial">Commercial</button>
+        <button class="filter-btn active" data-filter="all" data-i18n="filterAll">All Work</button>
+        <button class="filter-btn" data-filter="direction" data-i18n="filterDirection">Direction</button>
+        <button class="filter-btn" data-filter="Live Show" data-i18n="filterLive">Stage</button>
+        <button class="filter-btn" data-filter="Film & Music Video" data-i18n="filterFilm">Film</button>
+        <button class="filter-btn" data-filter="Commercial" data-i18n="filterCommercial">Campaigns</button>
     </div>
     <div class="projects-wrapper">
         <div class="projects-container">
+            {#- Direction / choreography work first, then performance work -#}
+            {%- for pass in ['direction', 'performance'] -%}
             {%- for project in projects.items -%}
-{% if not project.hidden %}
-            <article class="project-card" data-category="{{ project.category }}" {% if project.video %}data-video="{{ project.video }}"{% endif %}>
+            {%- set roleText = project.role if project.role else '' -%}
+            {%- set isDirection = ('Direct' in roleText) or ('Choreograph' in roleText) -%}
+{% if not project.hidden and ((pass == 'direction' and isDirection) or (pass == 'performance' and not isDirection)) %}
+            <article class="project-card" data-category="{{ project.category }}" data-direction="{{ '1' if isDirection else '0' }}" {% if project.video %}data-video="{{ project.video }}"{% endif %}>
                 <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy" decoding="async">
                 {% if project.video %}<div class="project-play"></div>{% endif %}
                 <div class="project-info">
@@ -127,14 +127,7 @@ layout: base.njk
             </article>
 {% endif %}
             {%- endfor -%}
-        </div>
-        <div class="scroll-arrows">
-            <button class="scroll-arrow" id="scroll-left" aria-label="Previous">
-                <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"></polyline></svg>
-            </button>
-            <button class="scroll-arrow" id="scroll-right" aria-label="Next">
-                <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"></polyline></svg>
-            </button>
+            {%- endfor -%}
         </div>
     </div>
 </section>

@@ -1060,6 +1060,7 @@ overscroll-behavior-x: contain;
         .about-image {
             border-radius: 16px;
             overflow: hidden;
+            width: 100%;
             max-width: 320px;
             aspect-ratio: 3/4;
         }
@@ -1300,6 +1301,147 @@ overscroll-behavior-x: contain;
                 padding: 24px;
             }
         }
+        /* =========================================================
+           REDESIGN 2026-09 — hero identity + vertical project grid
+           (placed last so it overrides the older carousel rules)
+           ========================================================= */
+
+        /* Hero: name + role (main H1 for Google) */
+        .hero-text { text-align: center; }
+        .hero-text .hero-name {
+            display: block;
+            text-transform: none;
+            font-size: clamp(34px, 5.2vw, 64px);
+            font-weight: 600;
+            letter-spacing: -0.035em;
+            line-height: 1;
+            color: var(--text-primary);
+        }
+        .hero-role {
+            margin-top: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            font-size: clamp(10px, 1.1vw, 13px);
+            font-weight: 500;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--text-secondary);
+        }
+        .hero-dot {
+            width: 4px;
+            height: 4px;
+            border-radius: 50%;
+            background: var(--accent);
+            box-shadow: 0 0 10px var(--accent-glow);
+        }
+
+        /* Work: every project visible, vertical grid */
+        .work-section { padding: 60px 48px 80px; max-width: 1400px; margin: 0 auto; }
+        .projects-container {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 20px;
+            overflow: visible;
+            margin: 0;
+            padding: 8px 0 0;
+            scroll-snap-type: none;
+            cursor: auto;
+        }
+        .project-card {
+            width: auto;
+            min-width: 0;
+            flex: none;
+            scroll-snap-align: none;
+        }
+        .project-card[data-video] { cursor: pointer; }
+        .project-card:hover img { transform: scale(1.04); }
+
+        /* Filters stay reachable while scrolling through the grid */
+        .filter-bar {
+            position: sticky;
+            top: 64px;
+            z-index: 50;
+            padding: 12px 0;
+            margin: 0 0 8px;
+            background: linear-gradient(to bottom, var(--bg-primary) 75%, rgba(0,0,0,0));
+        }
+
+        /* Soft fade-in (only when JS is running) */
+        .reveal-on .project-card { opacity: 0; transform: translateY(18px); }
+        .reveal-on .project-card.in {
+            opacity: 1;
+            transform: none;
+            transition: opacity 0.7s ease, transform 0.7s ease, box-shadow 0.4s ease;
+        }
+        .reveal-on .project-card.in:hover { transform: translateY(-4px); }
+
+        /* Card text sized for the 4-column grid */
+        .project-info { padding: 20px; }
+        .project-category { top: 16px; left: 16px; font-size: 9px; padding: 5px 10px; }
+        .project-artist { font-size: 11px; letter-spacing: 0.06em; }
+        .project-title { font-size: 18px; line-height: 1.2; letter-spacing: -0.01em; }
+        .project-role { font-size: 9px; padding: 3px 10px; margin-top: 8px; }
+        .project-description { font-size: 12px; }
+        .project-play { width: 56px; height: 56px; }
+        .project-play::before { border-width: 10px 0 10px 16px; }
+
+        /* Visible to Google and screen readers, not on screen */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        @media (max-width: 1280px) {
+            .projects-container { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 960px) {
+            .projects-container { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        }
+
+        @media (max-width: 768px) {
+            .hero-text .hero-name { font-size: 34px; letter-spacing: -0.03em; }
+            .hero-role { font-size: 9.5px; letter-spacing: 0.14em; gap: 8px; margin-top: 10px; }
+            .work-section { padding: 30px 16px 60px; }
+            .section-header { margin-bottom: 12px; }
+            .section-header h2 { font-size: 24px; }
+            .filter-bar {
+                top: 56px;
+                margin: 0 -16px 6px;
+                padding: 10px 16px;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+            .filter-bar::-webkit-scrollbar { display: none; }
+            .projects-container { gap: 10px; margin: 0; padding: 4px 0 0; }
+            .project-card { border-radius: 12px; }
+            .project-card::before { border-radius: 12px; }
+            .project-info { padding: 12px; }
+            .project-category { display: none; }
+            .project-artist { font-size: 9.5px; letter-spacing: 0.06em; }
+            .project-title { font-size: 14px; line-height: 1.2; margin-top: 2px; }
+            .project-role {
+                margin-top: 6px;
+                padding: 0;
+                border: none;
+                font-size: 8.5px;
+                letter-spacing: 0.1em;
+                color: var(--accent);
+            }
+            .project-description { font-size: 11px; margin-top: 6px; }
+            .project-play { width: 38px; height: 38px; top: 38%; }
+            .project-play::before { border-width: 8px 0 8px 13px; margin-left: 3px; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -1309,7 +1451,7 @@ overscroll-behavior-x: contain;
       "@type": "Person",
       "name": "Konan David",
       "alternateName": ["Konanraw", "Konan Raw", "Konan Markosy", "David Markosy", "Konan David Markosy", "David Konan Markosy"],
-      "jobTitle": "Choreographer & Creative Director",
+      "jobTitle": "Choreographer, Creative & Movement Director",
       "description": "Choreographer and creative director specializing in live shows, music videos, and brand campaigns",
       "url": "https://konandavid.com",
       "image": "https://konandavid.com/uploads/about.jpg",
@@ -1384,14 +1526,14 @@ overscroll-behavior-x: contain;
 
         const categoryTranslations = {
             fr: {
-                'Live Show': 'Scène & Tournée',
-                'Film & Music Video': 'Film & Clip',
-                'Commercial': 'Publicité'
+                'Live Show': 'Scène',
+                'Film & Music Video': 'Film',
+                'Commercial': 'Campagne'
             },
             en: {
-                'Live Show': 'Live Show',
-                'Film & Music Video': 'Film & MV',
-                'Commercial': 'Commercial'
+                'Live Show': 'Stage',
+                'Film & Music Video': 'Film',
+                'Commercial': 'Campaign'
             }
         };
 
@@ -1442,10 +1584,11 @@ overscroll-behavior-x: contain;
                 featuredIn: 'Featured In & Collaborations',
                 copyright: '© 2026 Konan David. All rights reserved.',
                 location: 'Paris, France',
-                filterAll: 'All',
-                filterLive: 'Live Show',
-                filterFilm: 'Film & MV',
-                filterCommercial: 'Commercial'
+                filterAll: 'All Work',
+                filterDirection: 'Direction',
+                filterLive: 'Stage',
+                filterFilm: 'Film',
+                filterCommercial: 'Campaigns'
             },
             fr: {
                 work: 'Projets',
@@ -1456,10 +1599,11 @@ overscroll-behavior-x: contain;
                 featuredIn: 'Collaborations & Parutions',
                 copyright: '© 2026 Konan David. Tous droits réservés.',
                 location: 'Paris, France',
-                filterAll: 'Tous',
-                filterLive: 'Scène & Tournée',
-                filterFilm: 'Film & Clip',
-                filterCommercial: 'Publicité'
+                filterAll: 'Tout voir',
+                filterDirection: 'Direction',
+                filterLive: 'Scène',
+                filterFilm: 'Film',
+                filterCommercial: 'Campagnes'
             }
         };
 
@@ -1599,6 +1743,25 @@ overscroll-behavior-x: contain;
             });
         }
 
+        // Desktop: clicking anywhere on a card opens its video
+        if (!(('ontouchstart' in window) || navigator.maxTouchPoints > 0)) {
+            document.querySelectorAll('.project-card[data-video]').forEach(card => {
+                card.addEventListener('click', (e) => {
+                    if (e.target.closest('.project-play')) return;
+                    card.querySelector('.project-play')?.click();
+                });
+            });
+        }
+
+        // Cards fade in softly as they enter the screen
+        if ('IntersectionObserver' in window) {
+            document.documentElement.classList.add('reveal-on');
+            const cardObserver = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); cardObserver.unobserve(e.target); } });
+            }, { rootMargin: '0px 0px -8% 0px' });
+            document.querySelectorAll('.project-card').forEach(c => cardObserver.observe(c));
+        }
+
         // Hero showreel: the poster shows instantly, the Vimeo player loads only once the page is ready
         const heroIframe = document.getElementById('hero-video');
         heroIframe?.addEventListener('load', () => {
@@ -1617,7 +1780,8 @@ overscroll-behavior-x: contain;
         // ===================
         // MOUSE DRAG TO SCROLL (desktop only, not touch)
         // ===================
-        if (container) {
+        // (Disabled: projects are now a vertical grid, no horizontal drag needed)
+        if (false && container) {
             const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
             let isDragging = false;
             let startX = 0;
@@ -1687,18 +1851,16 @@ overscroll-behavior-x: contain;
                 // Filter cards
                 const cards = document.querySelectorAll('.project-card');
                 cards.forEach(card => {
-                    if (filter === 'all' || card.dataset.category === filter) {
+                    if (filter === 'all' || card.dataset.category === filter || (filter === 'direction' && card.dataset.direction === '1')) {
                         card.classList.remove('filtered-out');
                     } else {
                         card.classList.add('filtered-out');
                     }
                 });
                 
-                // Reset scroll position
-                if (container) {
-                    container.scrollLeft = 0;
-                    updateArrows();
-                }
+                // Bring the top of the grid back into view if the visitor had scrolled past it
+                const workTop = document.getElementById('work').getBoundingClientRect().top;
+                if (workTop < 0) document.getElementById('work').scrollIntoView({ behavior: 'smooth' });
             });
         });
 
