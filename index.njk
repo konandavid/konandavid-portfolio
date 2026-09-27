@@ -98,12 +98,12 @@ layout: base.njk
     </div>
     <div class="projects-wrapper">
         <div class="projects-container">
-            {#- Direction / choreography work first, then performance work -#}
-            {%- for pass in ['direction', 'performance'] -%}
+            {#- Order = order of the list in /admin (drag projects to reorder) -#}
+            {%- for pass in ['all'] -%}
             {%- for project in projects.items -%}
             {%- set roleText = project.role if project.role else '' -%}
             {%- set isDirection = ('Direct' in roleText) or ('Choreograph' in roleText) -%}
-{% if not project.hidden and ((pass == 'direction' and isDirection) or (pass == 'performance' and not isDirection)) %}
+{% if not project.hidden %}
             <article class="project-card" data-category="{{ project.category }}" data-direction="{{ '1' if isDirection else '0' }}" {% if project.video %}data-video="{{ project.video }}"{% endif %}>
                 <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy" decoding="async">
                 {% if project.video %}<div class="project-play"></div>{% endif %}
@@ -206,11 +206,9 @@ layout: base.njk
 <section class="contact-section" id="contact">
     <div data-lang-en>
         <span class="contact-label">{% if contact.en.label %}{{ contact.en.label }}{% else %}Get in Touch{% endif %}</span>
-        <h2>{% if contact.en.title %}{{ contact.en.title }}{% else %}Let's create something together{% endif %}</h2>
     </div>
     <div data-lang-fr style="display: none;">
         <span class="contact-label">{% if contact.fr.label %}{{ contact.fr.label }}{% else %}Contact{% endif %}</span>
-        <h2>{% if contact.fr.title %}{{ contact.fr.title }}{% else %}Créons quelque chose ensemble{% endif %}</h2>
     </div>
     <a href="mailto:{{ site.email }}" class="contact-email">{{ site.email }}</a>
     <div class="social-links">
