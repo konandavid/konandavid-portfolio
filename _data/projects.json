@@ -112,7 +112,7 @@
     {
       "artist": "Lea Esmaili",
       "description_fr": "Direction de mouvement pour un court-métrage expérimental traitant de la rivalité.",
-      "role_fr": "Directeur de mouvement",
+      "role_fr": "Movement Director",
       "role": "Movement Director",
       "title": "The Art Of Competition",
       "video": "https://vimeo.com/917498620",
@@ -156,7 +156,7 @@
     {
       "artist": "Oordaya",
       "description_fr": "Direction du mouvement et de la performance de l'artiste, mêlant narration physique expressive et visuels minimalistes saisissants.",
-      "role_fr": "Directeur de mouvement",
+      "role_fr": "Movement Director",
       "role": "Movement Director",
       "title": "De l'Amour à la Haine",
       "video": "https://youtu.be/ljSKM88mtCY?si=lw3YqU24mrtzaMFc",
@@ -179,7 +179,7 @@
       "artist": "Oordaya",
       "hidden": false,
       "description_fr": "Coaching et direction de mouvement, créant une histoire expressive à travers l'art de la silhouette.",
-      "role_fr": "Directeur de mouvement",
+      "role_fr": "Movement Director",
       "role": "Movement Director",
       "title": "Une Vie",
       "video": "https://youtu.be/hctz7SPAOsU?si=URWNGpdq57buyqYU",
@@ -190,7 +190,7 @@
     {
       "artist": "Hippoh",
       "description_fr": "Direction créative pour une expérience live immersive dans un lieu culturel de renommée.",
-      "role_fr": "Directeur créatif",
+      "role_fr": "Directeur Artistique",
       "role": "Creative Director",
       "title": "Grand Palais Immersif",
       "video": "",
@@ -212,7 +212,7 @@
     },
     {
       "artist": "Hippoh",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Direction artistique pour des événements célébrant l'énergie et l'impact culturel du hip-hop.",
       "role_fr": "Metteur en scène",
       "role": "Creative Director",
