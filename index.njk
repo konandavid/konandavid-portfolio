@@ -161,7 +161,6 @@ layout: base.njk
             <!-- English -->
             <div data-lang-en>
                 <span class="about-label">{% if about.en.label %}{{ about.en.label }}{% else %}About{% endif %}</span>
-                <h2>{% if about.en.title %}{{ about.en.title }}{% else %}Creating powerful visual experiences through movement{% endif %}</h2>
                 {% if about.en.p1 %}
                 <p>{{ about.en.p1 | safe }}</p>
                 {% else %}
@@ -181,7 +180,6 @@ layout: base.njk
             <!-- French -->
             <div data-lang-fr style="display: none;">
                 <span class="about-label">{% if about.fr.label %}{{ about.fr.label }}{% else %}À propos{% endif %}</span>
-                <h2>{% if about.fr.title %}{{ about.fr.title }}{% else %}Créer des expériences visuelles puissantes à travers le mouvement{% endif %}</h2>
                 {% if about.fr.p1 %}
                 <p>{{ about.fr.p1 | safe }}</p>
                 {% else %}
