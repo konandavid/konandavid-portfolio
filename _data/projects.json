@@ -45,7 +45,7 @@
     },
     {
       "artist": "Gazo",
-      "description_fr": "Chorégraphie des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
+      "description_fr": "Chorégraphie et mise en scène des headliners set tout au long de la saison des festivals, incluant Les Ardentes, Golden Coast et Yardland, devant des foules allant jusqu’à 100 000 personnes.",
       "role_fr": "Chorégraphe",
       "role": "Performance Director",
       "title": "Summer Festivals 2025",
@@ -134,7 +134,7 @@
     {
       "artist": "Rabanne",
       "description_fr": "Direction de mouvement et performance pour la campagne digitale Rabanne Invictus.",
-      "role_fr": "Chorégraphe & Performeur",
+      "role_fr": "Movement Director",
       "role": "Movement Director",
       "title": "Invictus Victory Campaign",
       "video": "",
@@ -214,8 +214,8 @@
       "artist": "Hippoh",
       "hidden": true,
       "description_fr": "Direction artistique pour des événements célébrant l'énergie et l'impact culturel du hip-hop.",
-      "role_fr": "Directeur créatif & chorégraphe",
-      "role": "Creative Director + Choreographer",
+      "role_fr": "Metteur en scène",
+      "role": "Creative Director",
       "title": "Hippoh x La Place",
       "video": "",
       "image": "/uploads/d25713923ae037f3.jpg",
