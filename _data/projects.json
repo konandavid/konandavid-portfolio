@@ -38,7 +38,7 @@
       "role_fr": "Danseur + Acteur",
       "role": "Movement Artist",
       "title": "Modern Jam (Circus Maximus)",
-      "video": "https://youtu.be/g8IvO7OwdaM?si=AW24MIJhWQOSNQnS",
+      "video": "https://www.youtube.com/watch?v=g8IvO7OwdaM",
       "image": "/uploads/hf_20260202_132315_665a57a0-8abe-4f2b-915b-11ba1e7de7b7.jpg",
       "description": "Performance in Gaspar Noé's segment for Utopia album.",
       "category": "Film & Music Video"
@@ -121,12 +121,23 @@
       "category": "Film & Music Video"
     },
     {
+      "artist": "Boss CKM",
+      "description_fr": "Performeur pour le clip officiel et la promo live du single sur T-Pop Stage. Bangkok, Thaïlande.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "Too Busy",
+      "video": "https://www.youtube.com/watch?v=8YvEpU8FuG0",
+      "image": "/uploads/boss-ckm-too-busy.jpg",
+      "description": "Performer for the official music video and the single's live promo on T-Pop Stage. Bangkok, Thailand.",
+      "category": "Film & Music Video"
+    },
+    {
       "artist": "Konan David",
       "description_fr": "Une exploration multidisciplinaire, alliant réalisation et performance pour créer un voyage viscéral à travers le mouvement.",
       "role_fr": "Réalisateur",
       "role": "Director",
       "title": "Anhedonia",
-      "video": "https://youtu.be/dDmfYRA2jX0?si=s0GjfKZa1ZtYK0ho",
+      "video": "https://www.youtube.com/watch?v=dDmfYRA2jX0",
       "image": "/uploads/anhedonia-insta.jpg",
       "description": "A multidisciplinary exploration, spanning direction and performance to craft a visceral journey through movement. Directed, Edited, Performed by Konan David.",
       "category": "Film & Music Video"
@@ -159,7 +170,7 @@
       "role_fr": "Movement Director",
       "role": "Movement Director",
       "title": "De l'Amour à la Haine",
-      "video": "https://youtu.be/ljSKM88mtCY?si=lw3YqU24mrtzaMFc",
+      "video": "https://www.youtube.com/watch?v=ljSKM88mtCY",
       "image": "/uploads/29a966e9b91b2fdd.jpg",
       "description": "Directed artist's movement and performance, blending expressive physical narrative with minimalist, striking visuals.",
       "category": "Film & Music Video"
@@ -182,7 +193,7 @@
       "role_fr": "Movement Director",
       "role": "Movement Director",
       "title": "Une Vie",
-      "video": "https://youtu.be/hctz7SPAOsU?si=URWNGpdq57buyqYU",
+      "video": "https://www.youtube.com/watch?v=hctz7SPAOsU",
       "image": "/uploads/197856351962bfcc.png",
       "description": "Coaching and movement direction, crafting an expressive story through the art of silhouette.",
       "category": "Film & Music Video"
