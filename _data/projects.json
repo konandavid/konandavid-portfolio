@@ -66,6 +66,17 @@
       "category": "Commercial"
     },
     {
+      "artist": "Boss CKM",
+      "description_fr": "Performeur pour le clip officiel et la promo live du single sur T-Pop Stage. Bangkok, Thaïlande.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "Too Busy",
+      "video": "https://www.youtube.com/watch?v=8YvEpU8FuG0",
+      "image": "/uploads/boss-ckm-too-busy.jpg",
+      "description": "Performer for the official MV and the single's live promo on T-Pop Stage. Bangkok, Thailand.",
+      "category": "Film & Music Video"
+    },
+    {
       "artist": "Ama Lou",
       "description_fr": "Performer pour le clip de l'artiste internationale Ama Lou.",
       "role_fr": "Performeur",
@@ -118,17 +129,6 @@
       "video": "https://vimeo.com/917498620",
       "image": "/uploads/7eafd11b561b1d52.jpeg",
       "description": "Movement direction for experimental short film translating the psychology of rivalry into raw, kinetic language.",
-      "category": "Film & Music Video"
-    },
-    {
-      "artist": "Boss CKM",
-      "description_fr": "Performeur pour le clip officiel et la promo live du single sur T-Pop Stage. Bangkok, Thaïlande.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "Too Busy",
-      "video": "https://www.youtube.com/watch?v=8YvEpU8FuG0",
-      "image": "/uploads/boss-ckm-too-busy.jpg",
-      "description": "Performer for the official music video and the single's live promo on T-Pop Stage. Bangkok, Thailand.",
       "category": "Film & Music Video"
     },
     {
