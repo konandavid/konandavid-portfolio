@@ -1860,6 +1860,14 @@ overscroll-behavior-x: contain;
                         card.classList.add('filtered-out');
                     }
                 });
+
+                // Per-tab order: "Position" fields from /admin win, otherwise the list order
+                cards.forEach(card => {
+                    const pos = filter === 'all' ? null : (filter === 'direction' ? card.dataset.orderDirection : card.dataset.orderCategory);
+                    card.style.order = filter === 'all' ? '' : String(pos ? Number(pos) : 1000 + Number(card.dataset.index || 0));
+                });
+                const grid = document.querySelector('.projects-container');
+                if (grid) grid.scrollLeft = 0;
                 
                 // Bring the top of the grid back into view if the visitor had scrolled past it
                 const workTop = document.getElementById('work').getBoundingClientRect().top;

@@ -104,7 +104,7 @@ layout: base.njk
             {%- set roleText = project.role if project.role else '' -%}
             {%- set isDirection = ('Direct' in roleText) or ('Choreograph' in roleText) -%}
 {% if not project.hidden %}
-            <article class="project-card" data-category="{{ project.category }}" data-direction="{{ '1' if isDirection else '0' }}" {% if project.video %}data-video="{{ project.video }}"{% endif %}>
+            <article class="project-card" data-category="{{ project.category }}" data-direction="{{ '1' if isDirection else '0' }}" data-index="{{ loop.index }}"{% if project.order_category %} data-order-category="{{ project.order_category }}"{% endif %}{% if project.order_direction %} data-order-direction="{{ project.order_direction }}"{% endif %} {% if project.video %}data-video="{{ project.video }}"{% endif %}>
                 <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy" decoding="async">
                 {% if project.video %}<div class="project-play"></div>{% endif %}
                 <div class="project-info">
