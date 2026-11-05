@@ -24,13 +24,36 @@ collections:
               - { label: "Category", name: "category", widget: "select", options: ["Live Show", "Commercial", "Film & Music Video"] }
               - { label: "Role (English)", name: "role", widget: "string", required: false, hint: "Ex: Choreographer, Performer, Movement Director" }
               - { label: "Rôle (Français)", name: "role_fr", widget: "string", required: false, hint: "Ex: Chorégraphe, Performeur" }
-              - { label: "Position dans sa catégorie", name: "order_category", widget: "number", value_type: "int", min: 1, required: false, hint: "Ordre dans l'onglet Stage / Film / Campaigns (1 = en premier). Vide = ordre de la liste." }
-              - { label: "Position dans Direction", name: "order_direction", widget: "number", value_type: "int", min: 1, required: false, hint: "Ordre dans l'onglet Direction (1 = en premier). Vide = ordre de la liste." }
               - { label: "Masquer le projet", name: "hidden", widget: "boolean", required: false, default: false, hint: "Cache le projet du site sans le supprimer" }
               - { label: "Image", name: "image", widget: "image" }
               - { label: "Description (English)", name: "description", widget: "text" }
               - { label: "Description (Français)", name: "description_fr", widget: "text" }
               - { label: "Video URL", name: "video", widget: "string", required: false }
+
+      - name: "order"
+        label: "Ordre des projets par onglet"
+        file: "_data/projectOrder.json"
+        fields:
+          - label: "Direction"
+            name: "direction"
+            widget: "list"
+            hint: "Glisse les projets pour changer l'ordre dans cet onglet. Un projet absent de la liste passe à la fin."
+            field: { label: "Projet", name: "project", widget: "relation", collection: "settings", file: "projects", search_fields: ["items.*.title", "items.*.artist"], value_field: "items.*.title", display_fields: ["items.*.title"] }
+          - label: "Stage"
+            name: "live"
+            widget: "list"
+            hint: "Glisse les projets pour changer l'ordre dans cet onglet. Un projet absent de la liste passe à la fin."
+            field: { label: "Projet", name: "project", widget: "relation", collection: "settings", file: "projects", search_fields: ["items.*.title", "items.*.artist"], value_field: "items.*.title", display_fields: ["items.*.title"] }
+          - label: "Film"
+            name: "film"
+            widget: "list"
+            hint: "Glisse les projets pour changer l'ordre dans cet onglet. Un projet absent de la liste passe à la fin."
+            field: { label: "Projet", name: "project", widget: "relation", collection: "settings", file: "projects", search_fields: ["items.*.title", "items.*.artist"], value_field: "items.*.title", display_fields: ["items.*.title"] }
+          - label: "Campaigns"
+            name: "commercial"
+            widget: "list"
+            hint: "Glisse les projets pour changer l'ordre dans cet onglet. Un projet absent de la liste passe à la fin."
+            field: { label: "Projet", name: "project", widget: "relation", collection: "settings", file: "projects", search_fields: ["items.*.title", "items.*.artist"], value_field: "items.*.title", display_fields: ["items.*.title"] }
 
       - name: "general"
         label: "General Settings"
