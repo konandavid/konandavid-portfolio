@@ -1654,8 +1654,9 @@ overscroll-behavior-x: contain;
                 const url = btn.closest('.project-card')?.dataset.video;
                 if (url) {
                     let embed = url;
-                    if (url.includes('youtube.com/watch')) embed = `https://www.youtube.com/embed/${url.split('v=')[1]?.split('&')[0]}?autoplay=1`;
-                    else if (url.includes('youtu.be/')) embed = `https://www.youtube.com/embed/${url.split('youtu.be/')[1]}?autoplay=1`;
+                    const yt = url.match(/(?:youtube\.com\/watch\?(?:.*&)?v=|youtu\.be\/)([\w-]{11})/);
+                    const ytStart = (url.match(/[?&](?:t|start)=(\d+)/) || [])[1];
+                    if (yt) embed = `https://www.youtube.com/embed/${yt[1]}?autoplay=1${ytStart ? `&start=${ytStart}` : ''}`;
                     else if (url.includes('vimeo.com/')) embed = `https://player.vimeo.com/video/${url.split('vimeo.com/')[1]}?autoplay=1`;
                     modalVideo.src = embed;
                     videoModal.classList.add('active');
