@@ -27,7 +27,11 @@
                         var size = LABELS[p.size] ? p.size : 'standard';
                         var img = p.image ? String(self.props.getAsset(p.image)) : '';
                         return h('div', { className: 'm-card m-' + size, key: i },
-                            img ? h('img', { src: img, alt: '' }) : null,
+                            img ? h('img', { src: img, alt: '', style: {
+                                objectPosition: (p.pos_x != null ? p.pos_x : 50) + '% ' + (p.pos_y != null ? p.pos_y : 50) + '%',
+                                transformOrigin: (p.pos_x != null ? p.pos_x : 50) + '% ' + (p.pos_y != null ? p.pos_y : 50) + '%',
+                                transform: 'scale(' + (p.zoom || 1) + ')'
+                            } }) : null,
                             h('span', { className: 'm-badge' }, (i + 1) + ' · ' + LABELS[size]),
                             h('div', { className: 'm-label' },
                                 h('span', { className: 'm-artist' }, p.artist || ''),

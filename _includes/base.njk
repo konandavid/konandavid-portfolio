@@ -1446,12 +1446,9 @@ overscroll-behavior-x: contain;
             .project-artist { font-size: 9.5px; letter-spacing: 0.06em; }
             .project-title { font-size: 14px; line-height: 1.2; margin-top: 2px; }
             .project-role {
-                margin-top: 6px;
-                padding: 0;
-                border: none;
-                font-size: 8.5px;
-                letter-spacing: 0.1em;
-                color: var(--accent);
+                margin-top: 8px;
+                padding: 3px 10px;
+                font-size: 9px;
             }
             .project-description { font-size: 11px; margin-top: 6px; }
             .project-play { width: 38px; height: 38px; top: 38%; }
@@ -1543,6 +1540,15 @@ overscroll-behavior-x: contain;
             .project-card.show-info .project-description { opacity: 1; max-height: 200px; }
             .project-card:hover, .reveal-on .project-card.in:hover, .project-card:hover img { transform: none; }
         }
+
+        /* Cover framing from /admin: zoom + focus point per project (CSS variables set on the img) */
+        .project-card img {
+            object-position: var(--pos-x, 50%) var(--pos-y, 50%);
+            transform-origin: var(--pos-x, 50%) var(--pos-y, 50%);
+            transform: scale(var(--zoom, 1));
+        }
+        .project-card:hover img { transform: scale(calc(var(--zoom, 1) * 1.04)); }
+        @media (hover: none) { .project-card:hover img { transform: scale(var(--zoom, 1)); } }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
