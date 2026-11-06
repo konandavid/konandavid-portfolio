@@ -1608,6 +1608,15 @@ overscroll-behavior-x: contain;
         .project-card .project-play { z-index: 3; }
         .project-card:hover .project-artist { color: rgba(255,255,255,0.75); }
         @media (hover: none) { .project-overlay { display: none; } }
+
+        /* Stage / Film & Commercials: plain 3-column grid, every card the same size */
+        @media (min-width: 769px) {
+            .projects-container.is-filtered .project-card,
+            .projects-container.is-filtered .project-card.size-large.size-large,
+            .projects-container.is-filtered .project-card.as-large.as-large { grid-column: span 2; grid-row: auto; }
+            .projects-container.is-filtered .project-card .project-media,
+            .projects-container.is-filtered .project-card.size-large .project-media { aspect-ratio: 4 / 3; height: auto; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -2047,7 +2056,7 @@ overscroll-behavior-x: contain;
             const visible = cards.filter(c => !c.classList.contains('filtered-out'))
                 .sort((a, b) => (Number(a.style.order) || 0) - (Number(b.style.order) || 0));
             const filtered = grid.classList.contains('is-filtered');
-            if (!filtered) return; // Selected Work keeps its own order: Grand + 1 Petit, then rows of 3
+            return; // Selected Work keeps its own order; tabs are a plain 3-column grid (no card bigger than the others)
             const isFull = c => !filtered && c.classList.contains('size-large');
             const larges = visible.filter(c => c.classList.contains('size-large') && !isFull(c)).length;
             const smalls = visible.filter(c => !c.classList.contains('size-large'));
