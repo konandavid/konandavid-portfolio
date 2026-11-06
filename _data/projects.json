@@ -1,6 +1,7 @@
 {
   "items": [
     {
+      "size": "large",
       "artist": "Konan David",
       "description_fr": "Court-métrage de danse en noir et blanc. Un projet multidisciplinaire alliant réalisation et chorégraphie.",
       "role_fr": "Réalisateur & Chorégraphe",
@@ -9,33 +10,21 @@
       "video": "https://www.youtube.com/watch?v=714IfiYRuJQ",
       "image": "/uploads/14-_dsc2209.jpg",
       "description": "Black-and-white dance short film. A multidisciplinary project spanning direction and choreography.",
-      "category": "Film & Music Video",
-      "size": "large"
+      "category": "Film & Music Video"
     },
     {
+      "size": "large",
       "artist": "Gazo",
-      "title": "Paris La Défense Arena",
-      "category": "Live Show",
-      "role": "Choreographer",
+      "description_fr": "Chorégraphie et mise en scène pour ce show dans la plus grande salle indoor d'Europe, devant 40 000 personnes.",
       "role_fr": "Chorégraphe",
+      "role": "Choreographer",
+      "title": "Paris La Défense Arena",
       "image": "/uploads/photo-emma-buoncristiani-1757204915.jpg",
       "description": "Choreography for this show in Europe's largest indoor venue, 40,000+ fans. Raw energy and choreographic variety to monumental scale.",
-      "description_fr": "Chorégraphie et mise en scène pour ce show dans la plus grande salle indoor d'Europe, devant 40 000 personnes.",
-      "size": "wide"
+      "category": "Live Show"
     },
     {
-      "artist": "Oordaya",
-      "description_fr": "Direction du mouvement et de la performance de l'artiste, mêlant narration physique expressive et visuels minimalistes saisissants.",
-      "role_fr": "Movement Director",
-      "role": "Movement Director",
-      "title": "De l'Amour à la Haine",
-      "video": "https://www.youtube.com/watch?v=ljSKM88mtCY",
-      "image": "/uploads/29a966e9b91b2fdd.jpg",
-      "description": "Directed artist's movement and performance, blending expressive physical narrative with minimalist, striking visuals.",
-      "category": "Film & Music Video",
-      "size": "wide"
-    },
-    {
+      "size": "wide",
       "artist": "Gazo",
       "description_fr": "Chorégraphie et mise en scène de la saison live 2025 de Gazo : Apocalypse Tour, Zénith Tour et headline sets en festivals (Les Ardentes, Golden Coast, Yardland), en France, Belgique et Suisse, devant jusqu'à 100 000 personnes.",
       "role_fr": "Chorégraphe",
@@ -44,58 +33,22 @@
       "video": "https://youtu.be/gdWlBcPOT1Y?t=317",
       "image": "/uploads/img_9283.jpg",
       "description": "Choreography and performance direction for Gazo's 2025 live season: Apocalypse Tour, Zénith Tour and headline festival sets (Les Ardentes, Golden Coast, Yardland), across France, Belgium and Switzerland, for crowds of up to 100,000.",
-      "category": "Live Show",
-      "size": "wide"
+      "category": "Live Show"
     },
     {
-      "artist": "Rabanne",
-      "description_fr": "Direction de mouvement et performance pour la campagne digitale Rabanne Invictus.",
+      "size": "wide",
+      "artist": "Oordaya",
+      "description_fr": "Direction du mouvement et de la performance de l'artiste, mêlant narration physique expressive et visuels minimalistes saisissants.",
       "role_fr": "Movement Director",
       "role": "Movement Director",
-      "title": "Invictus Victory Campaign",
-      "video": "",
-      "image": "/uploads/446139318693a585.jpg",
-      "description": "Movement direction and performance for Rabanne Invictus digital campaign.",
-      "category": "Commercial",
-      "size": "standard"
+      "title": "De l'Amour à la Haine",
+      "video": "https://www.youtube.com/watch?v=ljSKM88mtCY",
+      "image": "/uploads/29a966e9b91b2fdd.jpg",
+      "description": "Directed artist's movement and performance, blending expressive physical narrative with minimalist, striking visuals.",
+      "category": "Film & Music Video"
     },
     {
-      "artist": "Konan David",
-      "description_fr": "Une exploration multidisciplinaire, alliant réalisation et performance pour créer un voyage viscéral à travers le mouvement.",
-      "role_fr": "Réalisateur & Performeur",
-      "role": "Director & Performer",
-      "title": "Anhedonia",
-      "video": "https://www.youtube.com/watch?v=dDmfYRA2jX0",
-      "image": "/uploads/anhedonia-insta.jpg",
-      "description": "A multidisciplinary exploration, spanning direction and performance to craft a visceral journey through movement. Directed, Edited, Performed by Konan David.",
-      "category": "Film & Music Video",
-      "size": "standard"
-    },
-    {
-      "artist": "Konan David",
-      "description_fr": "Court-métrage avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
-      "role_fr": "Réalisateur & Movement Director",
-      "role": "Director & Movement Director",
-      "title": "No Lie",
-      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
-      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
-      "description": "Short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement.",
-      "category": "Film & Music Video",
-      "size": "standard"
-    },
-    {
-      "artist": "Hippoh",
-      "description_fr": "Direction créative pour une expérience live immersive dans un lieu culturel de renommée.",
-      "role_fr": "Directeur Artistique",
-      "role": "Creative Director",
-      "title": "Grand Palais Immersif",
-      "video": "",
-      "image": "/uploads/loading-gpi-didier-plowy-hippodanceclub-bannière-2.jpg",
-      "description": "Creative & Show Direction for immersive live experience, overseeing artistic vision within world-class cultural venue.",
-      "category": "Live Show",
-      "size": "standard"
-    },
-    {
+      "size": "standard",
       "artist": "Oordaya",
       "hidden": false,
       "description_fr": "Coaching et direction de mouvement, créant une histoire expressive à travers l'art de la silhouette.",
@@ -105,10 +58,22 @@
       "video": "https://www.youtube.com/watch?v=hctz7SPAOsU",
       "image": "/uploads/197856351962bfcc.png",
       "description": "Coaching and movement direction, crafting an expressive story through the art of silhouette.",
-      "category": "Film & Music Video",
-      "size": "wide"
+      "category": "Film & Music Video"
     },
     {
+      "size": "standard",
+      "artist": "Hippoh",
+      "description_fr": "Direction créative pour une expérience live immersive dans un lieu culturel de renommée.",
+      "role_fr": "Directeur Artistique",
+      "role": "Creative Director",
+      "title": "Grand Palais Immersif",
+      "video": "",
+      "image": "/uploads/loading-gpi-didier-plowy-hippodanceclub-bannière-2.jpg",
+      "description": "Creative & Show Direction for immersive live experience, overseeing artistic vision within world-class cultural venue.",
+      "category": "Live Show"
+    },
+    {
+      "size": "wide",
       "artist": "Dior x Rihanna",
       "description_fr": "Campagne de Steven Klein tournée au Château de Versailles.",
       "role_fr": "Performeur",
@@ -117,22 +82,46 @@
       "video": "",
       "image": "/uploads/hq720-2.jpg",
       "description": "Movement artist for Dior J'adore campaign directed by Steven Klein shot at Versailles. Movement direction by Parris Goebel.",
-      "category": "Commercial",
-      "size": "wide"
+      "category": "Commercial"
     },
     {
-      "artist": "Travis Scott",
-      "description_fr": "Performance dans le segment réalisé par Gaspar Noé pour l'album Utopia.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "Modern Jam (Circus Maximus)",
-      "video": "https://www.youtube.com/watch?v=g8IvO7OwdaM",
-      "image": "/uploads/hf_20260202_132315_665a57a0-8abe-4f2b-915b-11ba1e7de7b7.jpg",
-      "description": "Performance in Gaspar Noé's segment for Utopia album.",
-      "category": "Film & Music Video",
-      "size": "wide"
+      "size": "standard",
+      "artist": "Konan David",
+      "description_fr": "Une exploration multidisciplinaire, alliant réalisation et performance pour créer un voyage viscéral à travers le mouvement.",
+      "role_fr": "Réalisateur & Performeur",
+      "role": "Director & Performer",
+      "title": "Anhedonia",
+      "video": "https://www.youtube.com/watch?v=dDmfYRA2jX0",
+      "image": "/uploads/anhedonia-insta.jpg",
+      "description": "A multidisciplinary exploration, spanning direction and performance to craft a visceral journey through movement. Directed, Edited, Performed by Konan David.",
+      "category": "Film & Music Video"
     },
     {
+      "size": "standard",
+      "artist": "Konan David",
+      "description_fr": "Court-métrage avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
+      "role_fr": "Réalisateur & Movement Director",
+      "role": "Director & Movement Director",
+      "title": "No Lie",
+      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
+      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
+      "description": "Short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement.",
+      "category": "Film & Music Video"
+    },
+    {
+      "size": "standard",
+      "artist": "Rabanne",
+      "description_fr": "Direction de mouvement et performance pour la campagne digitale Rabanne Invictus.",
+      "role_fr": "Movement Director",
+      "role": "Movement Director",
+      "title": "Invictus Victory Campaign",
+      "video": "",
+      "image": "/uploads/446139318693a585.jpg",
+      "description": "Movement direction and performance for Rabanne Invictus digital campaign.",
+      "category": "Commercial"
+    },
+    {
+      "size": "standard",
       "artist": "Vogue",
       "description_fr": "Performance Place Vendôme aux côtés de Bad Bunny, Teyana Taylor et plus. Chorégraphie et direction créative par Parris Goebel.",
       "role_fr": "Performeur",
@@ -141,10 +130,10 @@
       "video": "https://www.youtube.com/watch?v=gQ3idFZXiHo",
       "image": "/uploads/channels4_profile.jpg",
       "description": "Performance at Place Vendôme alongside Bad Bunny, Teyana Taylor & more. Choreography & Creative direction by Parris Goebel.",
-      "category": "Commercial",
-      "size": "wide"
+      "category": "Commercial"
     },
     {
+      "size": "standard",
       "artist": "Nike",
       "description_fr": "Performance pour la campagne Nike de Victor Wembanyama.",
       "role_fr": "Performeur",
@@ -153,10 +142,22 @@
       "video": "",
       "image": "/uploads/135821-2.jpg",
       "description": "Performance for Victor Wembanyama's Nike campaign.",
-      "category": "Commercial",
-      "size": "standard"
+      "category": "Commercial"
     },
     {
+      "size": "wide",
+      "artist": "Travis Scott",
+      "description_fr": "Performance dans le segment réalisé par Gaspar Noé pour l'album Utopia.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "Modern Jam (Circus Maximus)",
+      "video": "https://www.youtube.com/watch?v=g8IvO7OwdaM",
+      "image": "/uploads/hf_20260202_132315_665a57a0-8abe-4f2b-915b-11ba1e7de7b7.jpg",
+      "description": "Performance in Gaspar Noé's segment for Utopia album.",
+      "category": "Film & Music Video"
+    },
+    {
+      "size": "standard",
       "artist": "Aya Nakamura",
       "description_fr": "Performance pour la résidence à guichets fermés à l'Accor Arena et la tournée européenne.\nChorégraphie par Eva N'Diaye.",
       "role_fr": "Performeur",
@@ -165,11 +166,12 @@
       "video": "",
       "image": "/uploads/dsc_8363_littleshao_web.jpg",
       "description": "Performance for triple sold-out Accor Arena residency and European tour.\nChoreography by Eva N'Diaye.",
-      "category": "Live Show",
-      "size": "standard"
+      "category": "Live Show"
     },
     {
+      "size": "standard",
       "artist": "Boss CKM",
+      "hidden": true,
       "description_fr": "Performeur pour le clip officiel et la promo live du single sur T-Pop Stage. Bangkok, Thaïlande.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -177,12 +179,12 @@
       "video": "https://www.youtube.com/watch?v=8YvEpU8FuG0",
       "image": "/uploads/boss-ckm-too-busy.jpg",
       "description": "Performer for the official MV and the single's live promo on T-Pop Stage. Bangkok, Thailand.",
-      "category": "Film & Music Video",
-      "hidden": true,
-      "size": "standard"
+      "category": "Film & Music Video"
     },
     {
+      "size": "standard",
       "artist": "Ama Lou",
+      "hidden": true,
       "description_fr": "Performer pour le clip de l'artiste internationale Ama Lou.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -190,12 +192,12 @@
       "video": "https://www.youtube.com/watch?v=oTjt0Hi35Z4",
       "image": "/uploads/channels4_profile-2.jpg",
       "description": "Performance for official music video for My Girl by Ama.",
-      "category": "Film & Music Video",
-      "hidden": true,
-      "size": "standard"
+      "category": "Film & Music Video"
     },
     {
+      "size": "standard",
       "artist": "Lea Esmaili",
+      "hidden": true,
       "description_fr": "Direction de mouvement pour un court-métrage expérimental traitant de la rivalité.",
       "role_fr": "Movement Director",
       "role": "Movement Director",
@@ -203,12 +205,12 @@
       "video": "",
       "image": "/uploads/7eafd11b561b1d52.jpeg",
       "description": "Movement direction for experimental short film translating the psychology of rivalry into raw, kinetic language.",
-      "category": "Film & Music Video",
-      "hidden": true,
-      "size": "standard"
+      "category": "Film & Music Video"
     },
     {
+      "size": "standard",
       "artist": "Laylow",
+      "hidden": true,
       "description_fr": "Deux dates à guichets fermés consécutives à l'Accor Arena pour la Trinity Tour. Chorégraphie par Leo Walk.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -216,11 +218,10 @@
       "video": "",
       "image": "/uploads/f17ddfe5fb7682bc.jpg",
       "description": "Back-to-back sold-out shows at Paris's iconic Accor Arena for Trinity Tour. Choreography by Leo Walk.",
-      "category": "Live Show",
-      "hidden": true,
-      "size": "standard"
+      "category": "Live Show"
     },
     {
+      "size": "standard",
       "artist": "Lous & The Yakuza",
       "hidden": true,
       "description_fr": "Performance live télévisée pour l'un des principaux talk-shows français. Chorégraphie par Kevin Bago & Sarah Magassa.",
@@ -230,10 +231,10 @@
       "video": "",
       "image": "/uploads/enfnts-terribles-lous-and-the-yakuza-gore-album-01-683x1024.jpg",
       "description": "Live televised performance for one of France's premier talk shows. Choreography by Kevin Bago & Sarah Magassa.",
-      "category": "Live Show",
-      "size": "standard"
+      "category": "Live Show"
     },
     {
+      "size": "standard",
       "artist": "Hippoh",
       "hidden": true,
       "description_fr": "Direction artistique pour des événements célébrant l'énergie et l'impact culturel du hip-hop.",
@@ -243,10 +244,10 @@
       "video": "",
       "image": "/uploads/d25713923ae037f3.jpg",
       "description": "Directed artistic vision and live performances celebrating energy and cultural impact of hip-hop.",
-      "category": "Live Show",
-      "size": "standard"
+      "category": "Live Show"
     },
     {
+      "size": "standard",
       "artist": "Dadju",
       "hidden": true,
       "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places. Chorégraphie par Batchily & Ambre Obela.",
@@ -256,10 +257,10 @@
       "video": "",
       "image": "/uploads/f4d0e4eedf61f20e.jpg",
       "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa. ",
-      "category": "Live Show",
-      "size": "standard"
+      "category": "Live Show"
     },
     {
+      "size": "standard",
       "artist": "Shy'm",
       "hidden": true,
       "description_fr": "Performeur pour cette tournée nationale, contribuant à l'identité visuelle live et à la production scénique. Chorégraphie par Jerky Jessy.",
@@ -269,10 +270,10 @@
       "video": "https://www.youtube.com/watch?v=FerF2a9NSbI",
       "image": "/uploads/415614-shy-m-en-concert-au-palais-des-sports-dome-de-paris-en-juin-2019.jpg",
       "description": "Featured performer for this national arena tour, contributing to the live visual identity and stage production. Choreography by Jerky Jessy.",
-      "category": "Live Show",
-      "size": "standard"
+      "category": "Live Show"
     },
     {
+      "size": "standard",
       "artist": "Soprano",
       "hidden": true,
       "description_fr": "Performeur pour une diffusion nationale en prime-time lors de la principale cérémonie musicale française.",
@@ -282,8 +283,7 @@
       "video": "",
       "image": "/uploads/57ff0040145982c8.jpeg",
       "description": "Featured performer for a prime-time nationwide broadcast on France's premier music award show.",
-      "category": "Live Show",
-      "size": "standard"
+      "category": "Live Show"
     }
   ]
 }
