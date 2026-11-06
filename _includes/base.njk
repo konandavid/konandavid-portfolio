@@ -1484,6 +1484,8 @@ overscroll-behavior-x: contain;
             .projects-container { --gap: 10px; --ratio: 1; }
             .projects-container .project-card.size-wide { grid-column: auto; }
             .projects-container .project-card.size-large { grid-row: span 1; }
+            .projects-container .project-card.fill-row { grid-column: span 2; }
+            .projects-container.is-filtered .project-card.fill-row { aspect-ratio: 2 / 1; }
             .project-card.size-large .project-title { font-size: 18px; }
             .project-card.size-wide .project-title { font-size: 14px; }
             .project-card.size-large .project-title { font-size: 20px; }
@@ -1914,6 +1916,22 @@ overscroll-behavior-x: contain;
             }
         })();
 
+        // Phone, 2 columns: if the visible cards leave one empty slot at the end, let the last card fill the row
+        function fillMobileGrid() {
+            const grid = document.querySelector('.projects-container');
+            if (!grid) return;
+            const cards = [...grid.querySelectorAll('.project-card')];
+            cards.forEach(c => c.classList.remove('fill-row'));
+            if (!window.matchMedia('(max-width: 768px)').matches) return;
+            const visible = cards.filter(c => !c.classList.contains('filtered-out'))
+                .sort((a, b) => (Number(a.style.order) || 0) - (Number(b.style.order) || 0));
+            const filtered = grid.classList.contains('is-filtered');
+            const cells = visible.reduce((n, c) => n + (!filtered && c.classList.contains('size-large') ? 2 : 1), 0);
+            if (cells % 2 === 1 && visible.length) visible[visible.length - 1].classList.add('fill-row');
+        }
+        fillMobileGrid();
+        window.addEventListener('resize', fillMobileGrid);
+
         // ===================
         // PROJECT FILTERS
         // ===================
@@ -1942,6 +1960,7 @@ overscroll-behavior-x: contain;
                 });
                 const grid = document.querySelector('.projects-container');
                 if (grid) { grid.scrollLeft = 0; grid.classList.toggle('is-filtered', filter !== 'all'); }
+                fillMobileGrid();
                 
                 // Bring the top of the grid back into view if the visitor had scrolled past it
                 const workTop = document.getElementById('work').getBoundingClientRect().top;
