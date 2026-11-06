@@ -28,7 +28,7 @@
       "hidden": false
     },
     {
-      "size": "standard",
+      "size": "large",
       "artist": "Gazo",
       "description_fr": "Chorégraphie et mise en scène de la saison live 2025 de Gazo : Apocalypse Tour, Zénith Tour et headline sets en festivals (Les Ardentes, Golden Coast, Yardland), en France, Belgique et Suisse, devant jusqu'à 100 000 personnes.",
       "role_fr": "Chorégraphe",
@@ -42,7 +42,7 @@
       "hidden": false
     },
     {
-      "size": "standard",
+      "size": "large",
       "artist": "Oordaya",
       "description_fr": "Direction du mouvement et de la performance de l'artiste, mêlant narration physique expressive et visuels minimalistes saisissants.",
       "role_fr": "Movement Director",
@@ -71,6 +71,34 @@
     },
     {
       "size": "standard",
+      "artist": "Oordaya",
+      "hidden": false,
+      "description_fr": "Coaching et direction de mouvement, créant une histoire expressive à travers l'art de la silhouette.",
+      "role_fr": "Movement Director",
+      "role": "Movement Director",
+      "title": "Une Vie",
+      "video": "https://www.youtube.com/watch?v=hctz7SPAOsU",
+      "image": "/uploads/197856351962bfcc.png",
+      "description": "Coaching and movement direction, crafting an expressive story through the art of silhouette.",
+      "category": "Film & Music Video",
+      "featured": true
+    },
+    {
+      "size": "standard",
+      "artist": "Konan David",
+      "description_fr": "Court-métrage avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
+      "role_fr": "Réalisateur & Movement Director",
+      "role": "Director & Movement Director",
+      "title": "No Lie",
+      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
+      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
+      "description": "Short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement.",
+      "category": "Film & Music Video",
+      "featured": true,
+      "hidden": false
+    },
+    {
+      "size": "standard",
       "artist": "Hippoh",
       "description_fr": "Direction créative pour une expérience live immersive dans un lieu culturel de renommée.",
       "role_fr": "Directeur Artistique",
@@ -93,7 +121,7 @@
       "image": "https://www.datocms-assets.com/84101/1741698787-1737552023407.jpg?auto=format&fit=crop&w=1600&h=960",
       "description": "Performance for Victor Wembanyama's Nike campaign.",
       "category": "Commercial",
-      "featured": true,
+      "featured": false,
       "hidden": false
     },
     {
@@ -107,7 +135,7 @@
       "image": "/uploads/hq720-2.jpg",
       "description": "Movement artist for Dior J'adore campaign directed by Steven Klein shot at Versailles. Movement direction by Parris Goebel.",
       "category": "Commercial",
-      "featured": true,
+      "featured": false,
       "hidden": false
     },
     {
@@ -121,35 +149,8 @@
       "image": "/uploads/hf_20260202_132315_665a57a0-8abe-4f2b-915b-11ba1e7de7b7.jpg",
       "description": "Performance in Gaspar Noé's segment for Utopia album.",
       "category": "Film & Music Video",
-      "featured": true,
+      "featured": false,
       "hidden": false
-    },
-    {
-      "size": "standard",
-      "artist": "Oordaya",
-      "hidden": false,
-      "description_fr": "Coaching et direction de mouvement, créant une histoire expressive à travers l'art de la silhouette.",
-      "role_fr": "Movement Director",
-      "role": "Movement Director",
-      "title": "Une Vie",
-      "video": "https://www.youtube.com/watch?v=hctz7SPAOsU",
-      "image": "/uploads/197856351962bfcc.png",
-      "description": "Coaching and movement direction, crafting an expressive story through the art of silhouette.",
-      "category": "Film & Music Video",
-      "featured": false
-    },
-    {
-      "size": "standard",
-      "artist": "Konan David",
-      "description_fr": "Court-métrage avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
-      "role_fr": "Réalisateur & Movement Director",
-      "role": "Director & Movement Director",
-      "title": "No Lie",
-      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
-      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
-      "description": "Short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement.",
-      "category": "Film & Music Video",
-      "featured": false
     },
     {
       "size": "standard",
