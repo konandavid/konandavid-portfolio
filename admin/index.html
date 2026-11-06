@@ -27,11 +27,7 @@
                         var size = LABELS[p.size] ? p.size : 'standard';
                         var img = p.image ? String(self.props.getAsset(p.image)) : '';
                         return h('div', { className: 'm-card m-' + size, key: i },
-                            img ? h('img', { src: img, alt: '', style: {
-                                objectPosition: (p.pos_x != null ? p.pos_x : 50) + '% ' + (p.pos_y != null ? p.pos_y : 50) + '%',
-                                transformOrigin: (p.pos_x != null ? p.pos_x : 50) + '% ' + (p.pos_y != null ? p.pos_y : 50) + '%',
-                                transform: 'scale(' + (p.zoom || 1) + ')'
-                            } }) : null,
+                            img ? h('img', { src: img, alt: '', style: framingStyle(p) }) : null,
                             h('span', { className: 'm-badge' }, (i + 1) + ' · ' + LABELS[size]),
                             h('div', { className: 'm-label' },
                                 h('span', { className: 'm-artist' }, p.artist || ''),
@@ -69,6 +65,106 @@
                 '.m-large .m-label strong{font-size:18px}',
                 { raw: true }
             );
+        })();
+    </script>
+    <script>
+        // Reads "x y zoom" (Cadrage widget) or the older pos_x / pos_y / zoom fields
+        function parseFraming(p) {
+            if (p && p.framing) {
+                var a = String(p.framing).split(' ');
+                return { x: isNaN(parseFloat(a[0])) ? 50 : parseFloat(a[0]), y: isNaN(parseFloat(a[1])) ? 50 : parseFloat(a[1]), z: parseFloat(a[2]) || 1 };
+            }
+            return { x: p && p.pos_x != null ? p.pos_x : 50, y: p && p.pos_y != null ? p.pos_y : 50, z: (p && p.zoom) || 1 };
+        }
+        function framingStyle(p) {
+            var f = parseFraming(p);
+            return { objectPosition: f.x + '% ' + f.y + '%', transformOrigin: f.x + '% ' + f.y + '%', transform: 'scale(' + f.z + ')' };
+        }
+
+        // "Cadrage" widget: drag the image inside the frame to choose what shows, slider to zoom
+        (function () {
+            var h = window.h, createClass = window.createClass;
+            var FramingControl = createClass({
+                getInitialState: function () { return { src: '', large: false }; },
+                componentDidMount: function () {
+                    var self = this;
+                    this.findImage();
+                    this.timer = setInterval(function () { self.findImage(); }, 800);
+                },
+                componentWillUnmount: function () { clearInterval(this.timer); },
+                // Reuse the thumbnail shown by the "Image" field of the same project
+                findImage: function () {
+                    var root = this.rootEl; if (!root) return;
+                    var node = root.parentElement, src = '';
+                    // stop before reaching another project's fields (it would hold another Cadrage widget)
+                    while (node && !src && node.querySelectorAll('.kd-root').length === 1) {
+                        var imgs = node.querySelectorAll('img');
+                        for (var i = 0; i < imgs.length; i++) { if (!root.contains(imgs[i])) { src = imgs[i].getAttribute('src'); break; } }
+                        node = node.parentElement;
+                    }
+                    // Format de la carte (Grand / Petit) of the same project, read from its select
+                    var large = false;
+                    if (node) {
+                        var els = node.querySelectorAll('div');
+                        for (var j = 0; j < els.length; j++) { if (!els[j].children.length && els[j].textContent === 'Grand') { large = true; break; } }
+                    }
+                    if ((src && src !== this.state.src) || large !== this.state.large) this.setState({ src: src || this.state.src, large: large });
+                },
+                values: function () {
+                    var f = parseFraming({ framing: this.props.value || '50 50 1' });
+                    return { x: f.x, y: f.y, z: f.z };
+                },
+                save: function (x, y, z) {
+                    var c = function (v) { return Math.round(Math.max(0, Math.min(100, v))); };
+                    this.props.onChange(c(x) + ' ' + c(y) + ' ' + (Math.round(z * 100) / 100));
+                },
+                onDown: function (e) {
+                    e.preventDefault();
+                    var v = this.values(), box = e.currentTarget.getBoundingClientRect(), self = this;
+                    var sx = e.clientX, sy = e.clientY;
+                    var move = function (ev) {
+                        // dragging the image right reveals more of its left side
+                        var dx = (ev.clientX - sx) / box.width * 100 * 1.5 / v.z;
+                        var dy = (ev.clientY - sy) / box.height * 100 * 1.5 / v.z;
+                        self.save(v.x - dx, v.y - dy, v.z);
+                    };
+                    var up = function () { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+                    window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
+                },
+                render: function () {
+                    var self = this, v = this.values();
+                    return h('div', { ref: function (el) { self.rootEl = el; }, className: 'kd-root ' + (this.props.classNameWrapper || ''), style: { padding: '14px' } },
+                        this.state.src ? h('div', { style: { display: 'flex', gap: '14px', alignItems: 'flex-end', flexWrap: 'wrap' } },
+                            [
+                                { label: this.state.large ? 'Ordinateur (Grand)' : 'Ordinateur', ratio: this.state.large ? '2.7 / 1' : '4 / 3', w: this.state.large ? '440px' : '320px' },
+                                { label: 'Téléphone', ratio: '3 / 2', w: '210px' }
+                            ].map(function (f, i) {
+                                return h('div', { key: i },
+                                    h('div', { style: { fontSize: '11px', color: '#798291', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '.04em' } }, f.label),
+                                    h('div', {
+                                        className: 'kd-frame',
+                                        onPointerDown: self.onDown,
+                                        style: { position: 'relative', width: f.w, maxWidth: '100%', aspectRatio: f.ratio, overflow: 'hidden', borderRadius: '8px', cursor: 'grab', background: '#111', touchAction: 'none' }
+                                    },
+                                        h('img', { src: self.state.src, draggable: false, style: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: v.x + '% ' + v.y + '%', transformOrigin: v.x + '% ' + v.y + '%', transform: 'scale(' + v.z + ')', pointerEvents: 'none', userSelect: 'none' } }),
+                                        i === 0 ? h('div', { style: { position: 'absolute', left: '8px', bottom: '8px', fontSize: '11px', padding: '3px 8px', borderRadius: '999px', background: 'rgba(0,0,0,.6)', color: '#fff', pointerEvents: 'none' } }, 'Glisse pour recadrer') : null
+                                    )
+                                );
+                            })
+                        ) : h('p', { style: { fontSize: '13px', color: '#798291' } }, 'Ajoute une image au-dessus pour pouvoir la recadrer.'),
+                        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', marginTop: '12px', maxWidth: '440px' } },
+                            h('span', { style: { fontSize: '13px' } }, 'Zoom'),
+                            h('input', { type: 'range', className: 'kd-zoom', min: 1, max: 3, step: 0.05, value: v.z, style: { flex: 1 },
+                                onChange: function (e) { self.save(v.x, v.y, parseFloat(e.target.value)); } }),
+                            h('span', { style: { fontSize: '13px', width: '42px' } }, Math.round(v.z * 100) + '%'),
+                            h('button', { type: 'button', onClick: function () { self.save(50, 50, 1); },
+                                style: { fontSize: '12px', padding: '4px 10px', borderRadius: '6px', border: '1px solid #ccc', background: '#fff', cursor: 'pointer' } }, 'Réinitialiser')
+                        )
+                    );
+                }
+            });
+            var FramingPreview = createClass({ render: function () { return h('span', null, this.props.value || ''); } });
+            CMS.registerWidget('framing', FramingControl, FramingPreview);
         })();
     </script>
 </body>
