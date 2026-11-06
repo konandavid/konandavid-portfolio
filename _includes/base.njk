@@ -1497,37 +1497,40 @@ overscroll-behavior-x: contain;
             .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 14px; }
         }
 
-        /* ===== Grid v3 =====
-           Desktop, Selected Work: 6-column grid; "Grand" = 3:2 (2 per row), "Petit" = 4:3 (3 per row).
-           Desktop, Stage / Film & Commercials: 2 columns of 5:3 cards.
+        /* ===== Grid v4: one system in every tab =====
+           Desktop: 6-column grid. "Grand" = 3:2, 2 per row. "Petit" = 4:3, 3 per row.
+           JS (balanceGrid) promotes the last few "Petit" cards to "Grand" when needed so rows are always complete.
            Phone: one project per line, 3:2. */
-        .projects-container { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: auto; grid-auto-flow: row dense; }
+        .projects-container,
+        .projects-container.is-filtered { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: auto; grid-auto-flow: row; }
+        .projects-container .project-card { min-height: 0 !important; }
         .projects-container .project-card,
-        .projects-container .project-card.size-large,
-        .projects-container .project-card.size-wide { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; height: auto; }
-        .projects-container .project-card.size-large.size-large { grid-column: span 3; aspect-ratio: 3 / 2; }
-        .projects-container.is-filtered { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; grid-auto-flow: row; }
         .projects-container.is-filtered .project-card,
+        .projects-container.is-filtered .project-card[data-direction="1"],
+        .projects-container .project-card.size-wide { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; height: auto; }
+        .projects-container .project-card.size-large.size-large,
+        .projects-container .project-card.as-large.as-large,
         .projects-container.is-filtered .project-card.size-large.size-large,
-        .projects-container.is-filtered .project-card[data-direction="1"] { grid-column: auto; aspect-ratio: 5 / 3; }
-        .projects-container.is-filtered .project-card.fill-full.fill-full { grid-column: 1 / -1; aspect-ratio: 12 / 5; }
+        .projects-container.is-filtered .project-card.as-large.as-large { grid-column: span 3; aspect-ratio: 3 / 2; }
         .project-category { display: none !important; }
         .projects-container .project-card .project-title,
         .projects-container.is-filtered .project-card .project-title,
         .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 20px; }
         .projects-container .project-card.size-large .project-title,
-        .projects-container.is-filtered .project-card .project-title { font-size: 24px; }
+        .projects-container .project-card.as-large .project-title { font-size: 24px; }
         @media (max-width: 768px) {
             .projects-container,
             .projects-container.is-filtered { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
             .projects-container .project-card,
-            .projects-container .project-card.size-large.size-large,
             .projects-container.is-filtered .project-card,
             .projects-container.is-filtered .project-card[data-direction="1"],
-            .projects-container.is-filtered .project-card.fill-full.fill-full,
-            .projects-container.is-filtered .project-card.size-large.size-large { grid-column: auto; aspect-ratio: 3 / 2; }
+            .projects-container .project-card.size-large.size-large,
+            .projects-container .project-card.as-large.as-large,
+            .projects-container.is-filtered .project-card.size-large.size-large,
+            .projects-container.is-filtered .project-card.as-large.as-large { grid-column: auto; aspect-ratio: 3 / 2; }
             .projects-container .project-card .project-title,
             .projects-container .project-card.size-large .project-title,
+            .projects-container .project-card.as-large .project-title,
             .projects-container.is-filtered .project-card .project-title,
             .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 20px; }
         }
@@ -1968,18 +1971,31 @@ overscroll-behavior-x: contain;
             }
         })();
 
-        // Keep rows complete: in a 2-column grid, a lone last card becomes full width
+        // Keep rows complete in the 6-column grid: Grands go 2 per row, Petits 3 per row.
+        // If the counts don't fit, the last Petits (in display order) are shown as Grands.
         function fillMobileGrid() {
             const grid = document.querySelector('.projects-container');
             if (!grid) return;
             const cards = [...grid.querySelectorAll('.project-card')];
-            cards.forEach(c => { c.classList.remove('fill-full'); c.style.gridColumn = ''; });
-            const filtered = grid.classList.contains('is-filtered');
-            if (!filtered || window.matchMedia('(max-width: 768px)').matches) return;
+            cards.forEach(c => { c.classList.remove('as-large', 'fill-full'); c.style.gridColumn = ''; });
             const visible = cards.filter(c => !c.classList.contains('filtered-out'))
                 .sort((a, b) => (Number(a.style.order) || 0) - (Number(b.style.order) || 0));
-            const halves = visible.filter(c => filtered || !c.classList.contains('size-large'));
-            if (halves.length % 2 === 1) halves[halves.length - 1].classList.add('fill-full');
+            const larges = visible.filter(c => c.classList.contains('size-large')).length;
+            const smalls = visible.filter(c => !c.classList.contains('size-large'));
+            let k = 0;
+            while (k <= smalls.length && !(((larges + k) % 2 === 0) && ((smalls.length - k) % 3 === 0))) k++;
+            if (k > smalls.length) k = 0;
+            smalls.slice(smalls.length - k).forEach(c => c.classList.add('as-large'));
+            // Group into full rows (2 Grands or 3 Petits), keeping the chosen order as much as possible
+            if (window.matchMedia('(max-width: 768px)').matches) return;
+            const isBig = c => c.classList.contains('size-large') || c.classList.contains('as-large');
+            const rows = []; let L = [], S = [];
+            visible.forEach(c => {
+                if (isBig(c)) { L.push(c); if (L.length === 2) { rows.push(L); L = []; } }
+                else { S.push(c); if (S.length === 3) { rows.push(S); S = []; } }
+            });
+            if (L.length) rows.push(L); if (S.length) rows.push(S);
+            let i = 0; rows.flat().forEach(c => { c.style.order = String(i++); });
         }
         fillMobileGrid();
         let fillTimer;
