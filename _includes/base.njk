@@ -43,7 +43,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     {% if site.heroPoster %}<link rel="preload" as="image" href="{{ site.heroPoster }}" fetchpriority="high">{% endif %}
-    <link rel="dns-prefetch" href="https://player.vimeo.com">
+    <link rel="preconnect" href="https://player.vimeo.com">
+    <link rel="preconnect" href="https://i.vimeocdn.com">
+    <link rel="preconnect" href="https://f.vimeocdn.com">
+    <link rel="preconnect" href="https://vod-adaptive-ak.vimeocdn.com">
     <link rel="dns-prefetch" href="https://www.youtube.com">
     <!-- Netlify Identity: only loaded when arriving from an invite / password-reset email link (not for regular visitors) -->
     <script>
@@ -1767,17 +1770,34 @@ overscroll-behavior-x: contain;
 
         // Hero showreel: the poster shows instantly, the Vimeo player loads only once the page is ready
         const heroIframe = document.getElementById('hero-video');
+        // Reveal the video the moment Vimeo reports it is actually playing (no black frame, no fixed wait)
+        let heroRevealed = false;
+        function revealHeroVideo() {
+            if (heroRevealed || !heroIframe) return;
+            heroRevealed = true;
+            heroIframe.classList.add('ready');
+            document.querySelector('.hero-poster')?.classList.add('hidden');
+        }
+        window.addEventListener('message', (e) => {
+            if (!heroIframe || e.source !== heroIframe.contentWindow || !/vimeo\.com$/.test(new URL(e.origin).hostname)) return;
+            let data = e.data;
+            try { if (typeof data === 'string') data = JSON.parse(data); } catch (err) { return; }
+            if (data.event === 'ready') {
+                ['play', 'playProgress', 'timeupdate'].forEach(ev => heroIframe.contentWindow.postMessage(JSON.stringify({ method: 'addEventListener', value: ev }), e.origin));
+            } else if (data.event === 'play' || data.event === 'playProgress' || data.event === 'timeupdate') {
+                revealHeroVideo();
+            }
+        });
         heroIframe?.addEventListener('load', () => {
             if (!heroIframe.getAttribute('src')) return;
-            setTimeout(() => { heroIframe.classList.add('ready'); document.querySelector('.hero-poster')?.classList.add('hidden'); }, 900);
+            setTimeout(revealHeroVideo, 2500); // safety net if Vimeo events don't arrive
         });
         function loadHeroVideo() {
             if (heroIframe && !heroIframe.getAttribute('src') && heroIframe.dataset.src) {
                 heroIframe.src = heroIframe.dataset.src;
             }
         }
-        if (document.readyState === 'complete') setTimeout(loadHeroVideo, 300);
-        else window.addEventListener('load', () => setTimeout(loadHeroVideo, 300));
+        loadHeroVideo(); // start loading right away instead of waiting for the whole page
         updateArrows();
 
         // ===================
