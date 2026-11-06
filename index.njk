@@ -64,7 +64,7 @@ layout: base.njk
 <section class="hero" id="hero">
     <div class="hero-content">
         <div class="hero-showreel" id="hero-showreel">
-            <img class="hero-poster" src="{% if site.heroPoster %}{{ site.heroPoster }}{% else %}/uploads/896dfda32e86217.jpg{% endif %}" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+            {% if not site.heroVideo %}<img class="hero-poster" src="{% if site.heroPoster %}{{ site.heroPoster }}{% else %}/uploads/896dfda32e86217.jpg{% endif %}" alt="" aria-hidden="true" fetchpriority="high" decoding="async">{% endif %}
             {%- set heroPosterSrc = site.heroPoster if site.heroPoster else '/uploads/896dfda32e86217.jpg' -%}
             {% if site.heroVideo %}
             <video id="hero-video" autoplay muted loop playsinline preload="auto" poster="{{ heroPosterSrc }}" aria-label="Showreel Konan David">

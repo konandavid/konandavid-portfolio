@@ -385,6 +385,12 @@
             transition: opacity 0.5s ease;
         }
 
+        /* Self-hosted showreel: visible from the very first frame, no fade */
+        .hero-showreel video {
+            opacity: 1;
+            transition: none;
+        }
+
         .hero-poster.hidden {
             opacity: 0;
         }
