@@ -193,7 +193,7 @@
     {
       "size": "standard",
       "artist": "Boss CKM",
-      "hidden": false,
+      "hidden": true,
       "description_fr": "Performeur pour le clip officiel et la promo live du single sur T-Pop Stage. Bangkok, Thaïlande.",
       "role_fr": "Performeur",
       "role": "Performer",
