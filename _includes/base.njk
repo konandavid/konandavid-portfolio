@@ -1497,41 +1497,38 @@ overscroll-behavior-x: contain;
             .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 14px; }
         }
 
-        /* ===== Unified grid (v2): one system everywhere =====
-           2 columns of 5:3 cards; "Grande" = full-width 12:5 banner (Selected Work only);
-           a lone last card becomes full-width too, so rows are always complete. */
-        .projects-container,
-        .projects-container.is-filtered {
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            grid-auto-rows: auto;
-            grid-auto-flow: row;
-        }
+        /* ===== Grid v3 =====
+           Desktop, Selected Work: 6-column grid; "Grand" = 3:2 (2 per row), "Petit" = 4:3 (3 per row).
+           Desktop, Stage / Film & Commercials: 2 columns of 5:3 cards.
+           Phone: one project per line, 3:2. */
+        .projects-container { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: auto; grid-auto-flow: row dense; }
         .projects-container .project-card,
-        .projects-container.is-filtered .project-card,
-        .projects-container.is-filtered .project-card[data-direction="1"] {
-            aspect-ratio: 5 / 3; height: auto; grid-column: auto; grid-row: auto;
-        }
         .projects-container .project-card.size-large,
-        .projects-container .project-card.size-wide { grid-column: auto; grid-row: auto; }
-        .projects-container:not(.is-filtered) .project-card.size-large.size-large,
-        .projects-container .project-card.fill-full.fill-full { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 12 / 5; height: auto; }
+        .projects-container .project-card.size-wide { grid-column: span 2; grid-row: auto; aspect-ratio: 4 / 3; height: auto; }
+        .projects-container .project-card.size-large.size-large { grid-column: span 3; aspect-ratio: 3 / 2; }
+        .projects-container.is-filtered { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; grid-auto-flow: row; }
+        .projects-container.is-filtered .project-card,
+        .projects-container.is-filtered .project-card.size-large.size-large,
+        .projects-container.is-filtered .project-card[data-direction="1"] { grid-column: auto; aspect-ratio: 5 / 3; }
+        .projects-container.is-filtered .project-card.fill-full.fill-full { grid-column: 1 / -1; aspect-ratio: 12 / 5; }
         .project-category { display: none !important; }
         .projects-container .project-card .project-title,
         .projects-container.is-filtered .project-card .project-title,
-        .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 24px; }
+        .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 20px; }
         .projects-container .project-card.size-large .project-title,
-        .projects-container .project-card.fill-full .project-title { font-size: 32px; }
+        .projects-container.is-filtered .project-card .project-title { font-size: 24px; }
         @media (max-width: 768px) {
+            .projects-container,
+            .projects-container.is-filtered { grid-template-columns: minmax(0, 1fr); grid-auto-rows: auto; }
             .projects-container .project-card,
+            .projects-container .project-card.size-large.size-large,
             .projects-container.is-filtered .project-card,
-            .projects-container.is-filtered .project-card[data-direction="1"] { aspect-ratio: 1 / 1; }
-            .projects-container:not(.is-filtered) .project-card.size-large.size-large,
-            .projects-container .project-card.fill-full.fill-full { aspect-ratio: 2 / 1; }
+            .projects-container.is-filtered .project-card[data-direction="1"],
+            .projects-container.is-filtered .project-card.fill-full.fill-full { grid-column: auto; aspect-ratio: 3 / 2; }
             .projects-container .project-card .project-title,
-            .projects-container.is-filtered .project-card .project-title,
-            .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 14px; }
             .projects-container .project-card.size-large .project-title,
-            .projects-container .project-card.fill-full .project-title { font-size: 20px; }
+            .projects-container.is-filtered .project-card .project-title,
+            .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 20px; }
         }
     </style>
     
@@ -1963,6 +1960,7 @@ overscroll-behavior-x: contain;
             const cards = [...grid.querySelectorAll('.project-card')];
             cards.forEach(c => { c.classList.remove('fill-full'); c.style.gridColumn = ''; });
             const filtered = grid.classList.contains('is-filtered');
+            if (!filtered || window.matchMedia('(max-width: 768px)').matches) return;
             const visible = cards.filter(c => !c.classList.contains('filtered-out'))
                 .sort((a, b) => (Number(a.style.order) || 0) - (Number(b.style.order) || 0));
             const halves = visible.filter(c => filtered || !c.classList.contains('size-large'));

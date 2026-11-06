@@ -1,7 +1,7 @@
 {
   "items": [
     {
-      "size": "standard",
+      "size": "large",
       "artist": "Konan David",
       "description_fr": "Court-métrage de danse en noir et blanc. Un projet multidisciplinaire alliant réalisation et chorégraphie.",
       "role_fr": "Réalisateur & Chorégraphe",
@@ -15,7 +15,7 @@
       "hidden": false
     },
     {
-      "size": "standard",
+      "size": "large",
       "artist": "Gazo",
       "description_fr": "Chorégraphie et mise en scène pour ce show dans la plus grande salle indoor d'Europe, devant 40 000 personnes.",
       "role_fr": "Chorégraphe",

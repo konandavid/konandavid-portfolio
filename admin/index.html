@@ -13,7 +13,7 @@
         // updating as projects are dragged or their format is changed.
         (function () {
             var h = window.h, createClass = window.createClass;
-            var LABELS = { large: 'Pleine largeur', wide: 'Normal', standard: 'Normal' };
+            var LABELS = { large: 'Grand', wide: 'Petit', standard: 'Petit' };
 
             var MosaicPreview = createClass({
                 render: function () {
@@ -38,7 +38,7 @@
 
                     return h('div', { className: 'm-wrap' },
                         h('p', { className: 'm-hint' },
-                            'Aperçu de Selected Work. Glisse les projets à gauche pour changer l’ordre. Garde un nombre pair de projets pour des lignes complètes.' +
+                            'Aperçu de Selected Work. Glisse les projets à gauche pour changer l’ordre. Pour des lignes complètes : les Grands vont par 2, les Petits par 3.' +
                             (hiddenCount ? ' ' + hiddenCount + ' projet(s) masqué(s) ou hors Selected Work ne sont pas affichés ici.' : '')
                         ),
                         h('div', { className: 'm-grid' }, cards)
@@ -51,11 +51,11 @@
                 'body{margin:0;background:#0a0a0a;font-family:Inter,system-ui,sans-serif;color:#fff}' +
                 '.m-wrap{padding:20px}' +
                 '.m-hint{font-size:13px;color:#aaa;margin:0 0 16px;line-height:1.5}' +
-                '.m-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}' +
-                '.m-card{position:relative;border-radius:12px;overflow:hidden;background:#1c1c1c;border:1px solid rgba(255,255,255,.08);aspect-ratio:5/3}' +
+                '.m-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:row dense;gap:10px}' +
+                '.m-card{position:relative;border-radius:12px;overflow:hidden;background:#1c1c1c;border:1px solid rgba(255,255,255,.08);aspect-ratio:4/3;grid-column:span 2}' +
                 '.m-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}' +
                 '.m-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 60%)}' +
-                '.m-large{grid-column:1 / -1;aspect-ratio:12/5}' +
+                '.m-large{grid-column:span 3;aspect-ratio:3/2}' +
                 
                 '.m-badge{position:absolute;top:8px;left:8px;z-index:2;font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff}' +
                 '.m-large .m-badge{background:#ff6b35}' +
