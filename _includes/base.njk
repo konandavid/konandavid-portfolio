@@ -1885,7 +1885,8 @@ overscroll-behavior-x: contain;
             document.querySelectorAll('.project-card').forEach(card => {
                 card.addEventListener('click', (e) => {
                     if (e.target.closest('.project-play')) return;
-                    document.querySelectorAll('.project-card.show-info').forEach(function(c) { if (c !== card) c.classList.remove('show-info'); }); card.classList.toggle('show-info');
+                    // Captions are under the image now: a tap on the card opens its video
+                    card.querySelector('.project-play')?.click();
                 });
             });
             // Tap anywhere outside a card closes the open description
