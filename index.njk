@@ -65,6 +65,13 @@ layout: base.njk
     <div class="hero-content">
         <div class="hero-showreel" id="hero-showreel">
             <img class="hero-poster" src="{% if site.heroPoster %}{{ site.heroPoster }}{% else %}/uploads/896dfda32e86217.jpg{% endif %}" alt="" aria-hidden="true" fetchpriority="high" decoding="async">
+            {%- set heroPosterSrc = site.heroPoster if site.heroPoster else '/uploads/896dfda32e86217.jpg' -%}
+            {% if site.heroVideo %}
+            <video id="hero-video" autoplay muted loop playsinline preload="auto" poster="{{ heroPosterSrc }}" aria-label="Showreel Konan David">
+                {% if site.heroVideoMobile %}<source src="{{ site.heroVideoMobile }}" type="video/mp4" media="(max-width: 900px)">{% endif %}
+                <source src="{{ site.heroVideo }}" type="video/mp4">
+            </video>
+            {% else %}
             <iframe 
                 id="hero-video"
                 data-src="{{ site.vimeoShowreel }}?background=1&autoplay=1&loop=1&byline=0&title=0&muted=1"
@@ -72,6 +79,7 @@ layout: base.njk
                 allow="autoplay; fullscreen; picture-in-picture"
                 allowfullscreen>
             </iframe>
+            {% endif %}
         </div>
         <div class="hero-text" id="hero-text">
             <h1 class="hero-name">Konan David<span class="sr-only"> — Choreographer, Creative &amp; Movement Director, Paris</span></h1>

@@ -65,7 +65,9 @@ collections:
           - { label: "Email", name: "email", widget: "string" }
           - { label: "Instagram URL", name: "instagram", widget: "string" }
           - { label: "YouTube URL", name: "youtube", widget: "string" }
-          - { label: "Vimeo Showreel URL", name: "vimeoShowreel", widget: "string", hint: "Use embed URL: https://player.vimeo.com/video/XXXXXX" }
+          - { label: "Showreel (vidéo MP4, ordinateur)", name: "heroVideo", widget: "file", required: false, hint: "Vidéo du hero hébergée sur le site : démarre tout de suite. MP4 compressé (~1080p, moins de 10 Mo). Si vide, le lien Vimeo ci-dessous est utilisé." }
+          - { label: "Showreel (vidéo MP4, mobile)", name: "heroVideoMobile", widget: "file", required: false, hint: "Version plus légère (~720p, ~5 Mo) pour les téléphones. Optionnel." }
+          - { label: "Vimeo Showreel URL (secours)", name: "vimeoShowreel", widget: "string", required: false, hint: "Utilisé seulement si aucune vidéo MP4 n'est mise ci-dessus. Format : https://player.vimeo.com/video/XXXXXX" }
           - { label: "Image de fond du showreel", name: "heroPoster", widget: "image", required: false, hint: "Affichée avant le chargement de la vidéo" }
 
       - name: "about"

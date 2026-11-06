@@ -351,12 +351,14 @@
             z-index: 2;
         }
 
-        .hero-showreel iframe {
+        .hero-showreel iframe,
+        .hero-showreel video {
             position: absolute;
             inset: 0;
             width: 100%;
             height: 100%;
             border: none;
+            object-fit: cover;
         }
 
         /* Hero poster + iframe fade-in */
@@ -368,17 +370,19 @@
             object-fit: cover;
         }
 
-        .hero-showreel iframe {
+        .hero-showreel iframe,
+        .hero-showreel video {
             opacity: 0;
-            transition: opacity 1.2s ease;
+            transition: opacity 0.5s ease;
         }
 
-        .hero-showreel iframe.ready {
+        .hero-showreel iframe.ready,
+        .hero-showreel video.ready {
             opacity: 1;
         }
 
         .hero-poster {
-            transition: opacity 1.2s ease;
+            transition: opacity 0.5s ease;
         }
 
         .hero-poster.hidden {
@@ -1788,8 +1792,14 @@ overscroll-behavior-x: contain;
                 revealHeroVideo();
             }
         });
+        if (heroIframe && heroIframe.tagName === 'VIDEO') {
+            // Self-hosted showreel: show it as soon as the first frames play
+            heroIframe.addEventListener('playing', revealHeroVideo, { once: true });
+            if (!heroIframe.paused && heroIframe.readyState >= 3) revealHeroVideo();
+            heroIframe.play?.().catch(() => {});
+        }
         heroIframe?.addEventListener('load', () => {
-            if (!heroIframe.getAttribute('src')) return;
+            if (heroIframe.tagName === 'VIDEO' || !heroIframe.getAttribute('src')) return;
             setTimeout(revealHeroVideo, 2500); // safety net if Vimeo events don't arrive
         });
         function loadHeroVideo() {
@@ -1911,6 +1921,11 @@ overscroll-behavior-x: contain;
         const heroVideo = document.getElementById('hero-video');
         let soundOn = false;
         heroShowreel?.addEventListener('click', () => {
+            if (heroVideo && heroVideo.tagName === 'VIDEO') {
+                heroVideo.muted = !heroVideo.muted;
+                if (!heroVideo.muted) heroVideo.play().catch(() => {});
+                return;
+            }
             if (!soundOn && heroVideo) {
                 heroVideo.src = (heroVideo.getAttribute('src') || heroVideo.dataset.src).replace('muted=1', 'muted=0');
                 soundOn = true;
