@@ -1547,6 +1547,8 @@ overscroll-behavior-x: contain;
     }
     </script>
 <!-- Konan David Markosy — choreographer and creative director -->
+    <!-- Umami analytics (cookieless, CNIL-exempt): visits, sources, and the clicks tracked below. Only counts on konandavid.com -->
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="4c3bf198-761a-4aaf-95c7-7ed80522c52e" data-domains="konandavid.com,www.konandavid.com"></script>
 </head>
 <body>
     {{ content | safe }}
@@ -2029,6 +2031,33 @@ overscroll-behavior-x: contain;
                 }
             });
         }
+    </script>
+    <script>
+        // ===================
+        // ANALYTICS EVENTS (Umami) — what visitors click
+        // ===================
+        document.addEventListener('click', function (e) {
+            var track = function (name, data) { try { if (window.umami) window.umami.track(name, data); } catch (err) {} };
+            var t = e.target;
+            var card = t.closest && t.closest('.project-card');
+            if (card) {
+                var title = (card.querySelector('img') || {}).alt || '';
+                track(t.closest('.project-play') ? 'Video play' : 'Project click', { project: title });
+                return;
+            }
+            var filter = t.closest('.filter-btn');
+            if (filter) { track('Filter tab', { tab: filter.textContent.trim() }); return; }
+            var lang = t.closest('[data-lang]');
+            if (lang) { track('Language', { lang: lang.dataset.lang }); return; }
+            if (t.closest('#hero-showreel')) { track('Showreel click'); return; }
+            var a = t.closest('a[href]');
+            if (!a) return;
+            var href = a.getAttribute('href') || '';
+            if (href.indexOf('mailto:') === 0) track('Contact email');
+            else if (href.indexOf('instagram.com') !== -1) track('Instagram click');
+            else if (href.indexOf('youtube.com') !== -1 || href.indexOf('youtu.be') !== -1) track('YouTube click');
+            else if (href === '#contact') track('Contact button');
+        }, true);
     </script>
 </body>
 </html>
