@@ -90,7 +90,7 @@
       "role": "Performer",
       "title": "Wemby Campaign",
       "video": "https://vimeo.com/1064676168",
-      "image": "/uploads/135821-2.jpg",
+      "image": "https://www.datocms-assets.com/84101/1741698689-1737552023027.jpg?auto=format&fit=crop&w=1600&h=960",
       "description": "Performance for Victor Wembanyama's Nike campaign.",
       "category": "Commercial",
       "featured": true,
@@ -263,7 +263,7 @@
     {
       "size": "standard",
       "artist": "Hippoh",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Direction artistique pour des événements célébrant l'énergie et l'impact culturel du hip-hop.",
       "role_fr": "Metteur en scène",
       "role": "Creative Director",
