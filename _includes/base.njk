@@ -1530,6 +1530,15 @@ overscroll-behavior-x: contain;
             .projects-container.is-filtered .project-card .project-title,
             .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 20px; }
         }
+
+        /* Images always fill the whole card (no strip at the bottom) */
+        .project-card img { display: block; position: absolute; inset: 0; width: 100%; height: 100%; }
+        /* Touch screens: no "sticky hover" after a tap — the description only follows the tap toggle */
+        @media (hover: none) {
+            .project-card:hover .project-description { opacity: 0; max-height: 0; }
+            .project-card.show-info .project-description { opacity: 1; max-height: 200px; }
+            .project-card:hover, .reveal-on .project-card.in:hover, .project-card:hover img { transform: none; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -1833,6 +1842,11 @@ overscroll-behavior-x: contain;
                     if (e.target.closest('.project-play')) return;
                     document.querySelectorAll('.project-card.show-info').forEach(function(c) { if (c !== card) c.classList.remove('show-info'); }); card.classList.toggle('show-info');
                 });
+            });
+            // Tap anywhere outside a card closes the open description
+            document.addEventListener('click', (e) => {
+                if (e.target.closest('.project-card')) return;
+                document.querySelectorAll('.project-card.show-info').forEach(c => c.classList.remove('show-info'));
             });
         }
 
