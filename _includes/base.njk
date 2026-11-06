@@ -1496,6 +1496,43 @@ overscroll-behavior-x: contain;
             .projects-container.is-filtered .project-card .project-title,
             .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 14px; }
         }
+
+        /* ===== Unified grid (v2): one system everywhere =====
+           2 columns of 5:3 cards; "Grande" = full-width 12:5 banner (Selected Work only);
+           a lone last card becomes full-width too, so rows are always complete. */
+        .projects-container,
+        .projects-container.is-filtered {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            grid-auto-rows: auto;
+            grid-auto-flow: row;
+        }
+        .projects-container .project-card,
+        .projects-container.is-filtered .project-card,
+        .projects-container.is-filtered .project-card[data-direction="1"] {
+            aspect-ratio: 5 / 3; height: auto; grid-column: auto; grid-row: auto;
+        }
+        .projects-container .project-card.size-large,
+        .projects-container .project-card.size-wide { grid-column: auto; grid-row: auto; }
+        .projects-container:not(.is-filtered) .project-card.size-large.size-large,
+        .projects-container .project-card.fill-full.fill-full { grid-column: 1 / -1; grid-row: auto; aspect-ratio: 12 / 5; height: auto; }
+        .project-category { display: none !important; }
+        .projects-container .project-card .project-title,
+        .projects-container.is-filtered .project-card .project-title,
+        .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 24px; }
+        .projects-container .project-card.size-large .project-title,
+        .projects-container .project-card.fill-full .project-title { font-size: 32px; }
+        @media (max-width: 768px) {
+            .projects-container .project-card,
+            .projects-container.is-filtered .project-card,
+            .projects-container.is-filtered .project-card[data-direction="1"] { aspect-ratio: 1 / 1; }
+            .projects-container:not(.is-filtered) .project-card.size-large.size-large,
+            .projects-container .project-card.fill-full.fill-full { aspect-ratio: 2 / 1; }
+            .projects-container .project-card .project-title,
+            .projects-container.is-filtered .project-card .project-title,
+            .projects-container.is-filtered .project-card[data-direction="1"] .project-title { font-size: 14px; }
+            .projects-container .project-card.size-large .project-title,
+            .projects-container .project-card.fill-full .project-title { font-size: 20px; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -1919,29 +1956,17 @@ overscroll-behavior-x: contain;
             }
         })();
 
-        // Keep the grid "justified": if the last row has empty slots, widen the last card to fill it
+        // Keep rows complete: in a 2-column grid, a lone last card becomes full width
         function fillMobileGrid() {
             const grid = document.querySelector('.projects-container');
             if (!grid) return;
             const cards = [...grid.querySelectorAll('.project-card')];
-            cards.forEach(c => { c.style.gridColumn = ''; });
-            const visible = cards.filter(c => !c.classList.contains('filtered-out'));
-            if (!visible.length) return;
-            const cs = getComputedStyle(grid);
-            const cols = cs.gridTemplateColumns.split(' ').filter(Boolean).length;
-            const gap = parseFloat(cs.columnGap) || 0;
-            const W = grid.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight);
-            const colW = (W - (cols - 1) * gap) / cols;
-            const rects = visible.map(c => ({ c, r: c.getBoundingClientRect() }));
-            const lastTop = Math.max(...rects.map(x => Math.round(x.r.top)));
-            const lastRow = rects.filter(x => Math.abs(Math.round(x.r.top) - lastTop) < 2);
-            const used = lastRow.reduce((n, x) => n + Math.round((x.r.width + gap) / (colW + gap)), 0);
-            const missing = cols - used;
-            if (missing > 0 && missing < cols) {
-                const last = lastRow.sort((a, b) => b.r.left - a.r.left)[0];
-                const span = Math.round((last.r.width + gap) / (colW + gap));
-                last.c.style.gridColumn = 'span ' + (span + missing);
-            }
+            cards.forEach(c => { c.classList.remove('fill-full'); c.style.gridColumn = ''; });
+            const filtered = grid.classList.contains('is-filtered');
+            const visible = cards.filter(c => !c.classList.contains('filtered-out'))
+                .sort((a, b) => (Number(a.style.order) || 0) - (Number(b.style.order) || 0));
+            const halves = visible.filter(c => filtered || !c.classList.contains('size-large'));
+            if (halves.length % 2 === 1) halves[halves.length - 1].classList.add('fill-full');
         }
         fillMobileGrid();
         let fillTimer;
