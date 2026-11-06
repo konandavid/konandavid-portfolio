@@ -171,7 +171,7 @@
     {
       "size": "standard",
       "artist": "Boss CKM",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Performeur pour le clip officiel et la promo live du single sur T-Pop Stage. Bangkok, Thaïlande.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -179,12 +179,13 @@
       "video": "https://www.youtube.com/watch?v=8YvEpU8FuG0",
       "image": "/uploads/boss-ckm-too-busy.jpg",
       "description": "Performer for the official MV and the single's live promo on T-Pop Stage. Bangkok, Thailand.",
-      "category": "Film & Music Video"
+      "category": "Film & Music Video",
+      "featured": false
     },
     {
       "size": "standard",
       "artist": "Ama Lou",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Performer pour le clip de l'artiste internationale Ama Lou.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -192,12 +193,13 @@
       "video": "https://www.youtube.com/watch?v=oTjt0Hi35Z4",
       "image": "/uploads/channels4_profile-2.jpg",
       "description": "Performance for official music video for My Girl by Ama.",
-      "category": "Film & Music Video"
+      "category": "Film & Music Video",
+      "featured": false
     },
     {
       "size": "standard",
       "artist": "Lea Esmaili",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Direction de mouvement pour un court-métrage expérimental traitant de la rivalité.",
       "role_fr": "Movement Director",
       "role": "Movement Director",
@@ -205,12 +207,13 @@
       "video": "",
       "image": "/uploads/7eafd11b561b1d52.jpeg",
       "description": "Movement direction for experimental short film translating the psychology of rivalry into raw, kinetic language.",
-      "category": "Film & Music Video"
+      "category": "Film & Music Video",
+      "featured": false
     },
     {
       "size": "standard",
       "artist": "Laylow",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Deux dates à guichets fermés consécutives à l'Accor Arena pour la Trinity Tour. Chorégraphie par Leo Walk.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -218,12 +221,13 @@
       "video": "",
       "image": "/uploads/f17ddfe5fb7682bc.jpg",
       "description": "Back-to-back sold-out shows at Paris's iconic Accor Arena for Trinity Tour. Choreography by Leo Walk.",
-      "category": "Live Show"
+      "category": "Live Show",
+      "featured": false
     },
     {
       "size": "standard",
       "artist": "Lous & The Yakuza",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Performance live télévisée pour l'un des principaux talk-shows français. Chorégraphie par Kevin Bago & Sarah Magassa.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -231,12 +235,13 @@
       "video": "",
       "image": "/uploads/enfnts-terribles-lous-and-the-yakuza-gore-album-01-683x1024.jpg",
       "description": "Live televised performance for one of France's premier talk shows. Choreography by Kevin Bago & Sarah Magassa.",
-      "category": "Live Show"
+      "category": "Live Show",
+      "featured": false
     },
     {
       "size": "standard",
       "artist": "Hippoh",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Direction artistique pour des événements célébrant l'énergie et l'impact culturel du hip-hop.",
       "role_fr": "Metteur en scène",
       "role": "Creative Director",
@@ -244,12 +249,13 @@
       "video": "",
       "image": "/uploads/d25713923ae037f3.jpg",
       "description": "Directed artistic vision and live performances celebrating energy and cultural impact of hip-hop.",
-      "category": "Live Show"
+      "category": "Live Show",
+      "featured": false
     },
     {
       "size": "standard",
       "artist": "Dadju",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places. Chorégraphie par Batchily & Ambre Obela.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -257,12 +263,13 @@
       "video": "",
       "image": "/uploads/f4d0e4eedf61f20e.jpg",
       "description": "Stage performer for historic sold-out concert, 50,000-capacity stadium broadcast across France and Francophone Africa. ",
-      "category": "Live Show"
+      "category": "Live Show",
+      "featured": false
     },
     {
       "size": "standard",
       "artist": "Shy'm",
-      "hidden": true,
+      "hidden": false,
       "description_fr": "Performeur pour cette tournée nationale, contribuant à l'identité visuelle live et à la production scénique. Chorégraphie par Jerky Jessy.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -270,7 +277,8 @@
       "video": "https://www.youtube.com/watch?v=FerF2a9NSbI",
       "image": "/uploads/415614-shy-m-en-concert-au-palais-des-sports-dome-de-paris-en-juin-2019.jpg",
       "description": "Featured performer for this national arena tour, contributing to the live visual identity and stage production. Choreography by Jerky Jessy.",
-      "category": "Live Show"
+      "category": "Live Show",
+      "featured": false
     },
     {
       "size": "standard",
