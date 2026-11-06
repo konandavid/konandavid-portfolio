@@ -24,14 +24,14 @@
       "size": "wide"
     },
     {
-      "artist": "Konan David",
-      "description_fr": "Court-métrage primé avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
-      "role_fr": "Réalisateur & Movement Director",
-      "role": "Director & Movement Director",
-      "title": "No Lie",
-      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
-      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
-      "description": "Award-winning short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement. Directed, edited, movement directed by Konan David.",
+      "artist": "Oordaya",
+      "description_fr": "Direction du mouvement et de la performance de l'artiste, mêlant narration physique expressive et visuels minimalistes saisissants.",
+      "role_fr": "Movement Director",
+      "role": "Movement Director",
+      "title": "De l'Amour à la Haine",
+      "video": "https://www.youtube.com/watch?v=ljSKM88mtCY",
+      "image": "/uploads/29a966e9b91b2fdd.jpg",
+      "description": "Directed artist's movement and performance, blending expressive physical narrative with minimalist, striking visuals.",
       "category": "Film & Music Video",
       "size": "wide"
     },
@@ -60,18 +60,6 @@
       "size": "standard"
     },
     {
-      "artist": "Oordaya",
-      "description_fr": "Direction du mouvement et de la performance de l'artiste, mêlant narration physique expressive et visuels minimalistes saisissants.",
-      "role_fr": "Movement Director",
-      "role": "Movement Director",
-      "title": "De l'Amour à la Haine",
-      "video": "https://www.youtube.com/watch?v=ljSKM88mtCY",
-      "image": "/uploads/29a966e9b91b2fdd.jpg",
-      "description": "Directed artist's movement and performance, blending expressive physical narrative with minimalist, striking visuals.",
-      "category": "Film & Music Video",
-      "size": "standard"
-    },
-    {
       "artist": "Konan David",
       "description_fr": "Une exploration multidisciplinaire, alliant réalisation et performance pour créer un voyage viscéral à travers le mouvement.",
       "role_fr": "Réalisateur & Performeur",
@@ -81,6 +69,30 @@
       "image": "/uploads/anhedonia-insta.jpg",
       "description": "A multidisciplinary exploration, spanning direction and performance to craft a visceral journey through movement. Directed, Edited, Performed by Konan David.",
       "category": "Film & Music Video",
+      "size": "standard"
+    },
+    {
+      "artist": "Konan David",
+      "description_fr": "Court-métrage primé avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
+      "role_fr": "Réalisateur & Movement Director",
+      "role": "Director & Movement Director",
+      "title": "No Lie",
+      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
+      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
+      "description": "Award-winning short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement. Directed, edited, movement directed by Konan David.",
+      "category": "Film & Music Video",
+      "size": "standard"
+    },
+    {
+      "artist": "Hippoh",
+      "description_fr": "Direction créative pour une expérience live immersive dans un lieu culturel de renommée.",
+      "role_fr": "Directeur Artistique",
+      "role": "Creative Director",
+      "title": "Grand Palais Immersif",
+      "video": "",
+      "image": "/uploads/loading-gpi-didier-plowy-hippodanceclub-bannière-2.jpg",
+      "description": "Creative & Show Direction for immersive live experience, overseeing artistic vision within world-class cultural venue.",
+      "category": "Live Show",
       "size": "standard"
     },
     {
@@ -94,7 +106,7 @@
       "image": "/uploads/197856351962bfcc.png",
       "description": "Coaching and movement direction, crafting an expressive story through the art of silhouette.",
       "category": "Film & Music Video",
-      "size": "standard"
+      "size": "wide"
     },
     {
       "artist": "Dior x Rihanna",
@@ -121,16 +133,16 @@
       "size": "wide"
     },
     {
-      "artist": "Hippoh",
-      "description_fr": "Direction créative pour une expérience live immersive dans un lieu culturel de renommée.",
-      "role_fr": "Directeur Artistique",
-      "role": "Creative Director",
-      "title": "Grand Palais Immersif",
-      "video": "",
-      "image": "/uploads/loading-gpi-didier-plowy-hippodanceclub-bannière-2.jpg",
-      "description": "Creative & Show Direction for immersive live experience, overseeing artistic vision within world-class cultural venue.",
-      "category": "Live Show",
-      "size": "standard"
+      "artist": "Vogue",
+      "description_fr": "Performance Place Vendôme aux côtés de Bad Bunny, Teyana Taylor et plus. Chorégraphie et direction créative par Parris Goebel.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "World Paris",
+      "video": "https://www.youtube.com/watch?v=gQ3idFZXiHo",
+      "image": "/uploads/channels4_profile.jpg",
+      "description": "Performance at Place Vendôme alongside Bad Bunny, Teyana Taylor & more. Choreography & Creative direction by Parris Goebel.",
+      "category": "Commercial",
+      "size": "wide"
     },
     {
       "artist": "Nike",
@@ -145,18 +157,6 @@
       "size": "standard"
     },
     {
-      "artist": "Vogue",
-      "description_fr": "Performance Place Vendôme aux côtés de Bad Bunny, Teyana Taylor et plus. Chorégraphie et direction créative par Parris Goebel.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "World Paris",
-      "video": "https://www.youtube.com/watch?v=gQ3idFZXiHo",
-      "image": "/uploads/channels4_profile.jpg",
-      "description": "Performance at Place Vendôme alongside Bad Bunny, Teyana Taylor & more. Choreography & Creative direction by Parris Goebel.",
-      "category": "Commercial",
-      "size": "wide"
-    },
-    {
       "artist": "Aya Nakamura",
       "description_fr": "Performance pour la résidence à guichets fermés à l'Accor Arena et la tournée européenne.\nChorégraphie par Eva N'Diaye.",
       "role_fr": "Performeur",
@@ -166,7 +166,7 @@
       "image": "/uploads/dsc_8363_littleshao_web.jpg",
       "description": "Performance for triple sold-out Accor Arena residency and European tour.\nChoreography by Eva N'Diaye.",
       "category": "Live Show",
-      "size": "wide"
+      "size": "standard"
     },
     {
       "artist": "Boss CKM",
