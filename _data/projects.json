@@ -21,7 +21,19 @@
       "image": "/uploads/photo-emma-buoncristiani-1757204915.jpg",
       "description": "Choreography for this show in Europe's largest indoor venue, 40,000+ fans. Raw energy and choreographic variety to monumental scale.",
       "description_fr": "Chorégraphie et mise en scène pour ce show dans la plus grande salle indoor d'Europe, devant 40 000 personnes.",
-      "size": "large"
+      "size": "wide"
+    },
+    {
+      "artist": "Konan David",
+      "description_fr": "Court-métrage primé avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
+      "role_fr": "Réalisateur & Movement Director",
+      "role": "Director & Movement Director",
+      "title": "No Lie",
+      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
+      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
+      "description": "Award-winning short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement. Directed, edited, movement directed by Konan David.",
+      "category": "Film & Music Video",
+      "size": "wide"
     },
     {
       "artist": "Gazo",
@@ -36,15 +48,15 @@
       "size": "wide"
     },
     {
-      "artist": "Konan David",
-      "description_fr": "Court-métrage primé avec un casting de danseurs et comédiens. Un projet multidisciplinaire alliant réalisation et mouvement.",
-      "role_fr": "Réalisateur & Movement Director",
-      "role": "Director & Movement Director",
-      "title": "No Lie",
-      "video": "https://www.youtube.com/watch?v=TzVRk1q5vy0",
-      "image": "/uploads/2d9a9faa-a596-4050-8927-1ed1688bfda6-2.jpg",
-      "description": "Award-winning short film featuring a cast of dancers and actors. A multidisciplinary project spanning direction and movement. Directed, edited, movement directed by Konan David.",
-      "category": "Film & Music Video",
+      "artist": "Rabanne",
+      "description_fr": "Direction de mouvement et performance pour la campagne digitale Rabanne Invictus.",
+      "role_fr": "Movement Director",
+      "role": "Movement Director",
+      "title": "Invictus Victory Campaign",
+      "video": "",
+      "image": "/uploads/446139318693a585.jpg",
+      "description": "Movement direction and performance for Rabanne Invictus digital campaign.",
+      "category": "Commercial",
       "size": "standard"
     },
     {
@@ -60,18 +72,6 @@
       "size": "standard"
     },
     {
-      "artist": "Rabanne",
-      "description_fr": "Direction de mouvement et performance pour la campagne digitale Rabanne Invictus.",
-      "role_fr": "Movement Director",
-      "role": "Movement Director",
-      "title": "Invictus Victory Campaign",
-      "video": "",
-      "image": "/uploads/446139318693a585.jpg",
-      "description": "Movement direction and performance for Rabanne Invictus digital campaign.",
-      "category": "Commercial",
-      "size": "standard"
-    },
-    {
       "artist": "Konan David",
       "description_fr": "Une exploration multidisciplinaire, alliant réalisation et performance pour créer un voyage viscéral à travers le mouvement.",
       "role_fr": "Réalisateur & Performeur",
@@ -80,6 +80,19 @@
       "video": "https://www.youtube.com/watch?v=dDmfYRA2jX0",
       "image": "/uploads/anhedonia-insta.jpg",
       "description": "A multidisciplinary exploration, spanning direction and performance to craft a visceral journey through movement. Directed, Edited, Performed by Konan David.",
+      "category": "Film & Music Video",
+      "size": "standard"
+    },
+    {
+      "artist": "Oordaya",
+      "hidden": false,
+      "description_fr": "Coaching et direction de mouvement, créant une histoire expressive à travers l'art de la silhouette.",
+      "role_fr": "Movement Director",
+      "role": "Movement Director",
+      "title": "Une Vie",
+      "video": "https://www.youtube.com/watch?v=hctz7SPAOsU",
+      "image": "/uploads/197856351962bfcc.png",
+      "description": "Coaching and movement direction, crafting an expressive story through the art of silhouette.",
       "category": "Film & Music Video",
       "size": "standard"
     },
@@ -108,43 +121,6 @@
       "size": "wide"
     },
     {
-      "artist": "Nike",
-      "description_fr": "Performance pour la campagne Nike de Victor Wembanyama.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "Wemby Campaign",
-      "video": "",
-      "image": "/uploads/135821-2.jpg",
-      "description": "Performance for Victor Wembanyama's Nike campaign.",
-      "category": "Commercial",
-      "size": "standard"
-    },
-    {
-      "artist": "Aya Nakamura",
-      "description_fr": "Performance pour la résidence à guichets fermés à l'Accor Arena et la tournée européenne.\nChorégraphie par Eva N'Diaye.",
-      "role_fr": "Performeur",
-      "role": "Performer",
-      "title": "DNK Tour",
-      "video": "",
-      "image": "/uploads/dsc_8363_littleshao_web.jpg",
-      "description": "Performance for triple sold-out Accor Arena residency and European tour.\nChoreography by Eva N'Diaye.",
-      "category": "Live Show",
-      "size": "standard"
-    },
-    {
-      "artist": "Oordaya",
-      "hidden": false,
-      "description_fr": "Coaching et direction de mouvement, créant une histoire expressive à travers l'art de la silhouette.",
-      "role_fr": "Movement Director",
-      "role": "Movement Director",
-      "title": "Une Vie",
-      "video": "https://www.youtube.com/watch?v=hctz7SPAOsU",
-      "image": "/uploads/197856351962bfcc.png",
-      "description": "Coaching and movement direction, crafting an expressive story through the art of silhouette.",
-      "category": "Film & Music Video",
-      "size": "standard"
-    },
-    {
       "artist": "Hippoh",
       "description_fr": "Direction créative pour une expérience live immersive dans un lieu culturel de renommée.",
       "role_fr": "Directeur Artistique",
@@ -157,6 +133,18 @@
       "size": "standard"
     },
     {
+      "artist": "Nike",
+      "description_fr": "Performance pour la campagne Nike de Victor Wembanyama.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "Wemby Campaign",
+      "video": "",
+      "image": "/uploads/135821-2.jpg",
+      "description": "Performance for Victor Wembanyama's Nike campaign.",
+      "category": "Commercial",
+      "size": "standard"
+    },
+    {
       "artist": "Vogue",
       "description_fr": "Performance Place Vendôme aux côtés de Bad Bunny, Teyana Taylor et plus. Chorégraphie et direction créative par Parris Goebel.",
       "role_fr": "Performeur",
@@ -166,6 +154,18 @@
       "image": "/uploads/channels4_profile.jpg",
       "description": "Performance at Place Vendôme alongside Bad Bunny, Teyana Taylor & more. Choreography & Creative direction by Parris Goebel.",
       "category": "Commercial",
+      "size": "wide"
+    },
+    {
+      "artist": "Aya Nakamura",
+      "description_fr": "Performance pour la résidence à guichets fermés à l'Accor Arena et la tournée européenne.\nChorégraphie par Eva N'Diaye.",
+      "role_fr": "Performeur",
+      "role": "Performer",
+      "title": "DNK Tour",
+      "video": "",
+      "image": "/uploads/dsc_8363_littleshao_web.jpg",
+      "description": "Performance for triple sold-out Accor Arena residency and European tour.\nChoreography by Eva N'Diaye.",
+      "category": "Live Show",
       "size": "wide"
     },
     {
