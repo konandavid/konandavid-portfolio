@@ -15,7 +15,7 @@
       "hidden": false
     },
     {
-      "size": "large",
+      "size": "standard",
       "artist": "Gazo",
       "description_fr": "Chorégraphie et mise en scène pour ce show dans la plus grande salle indoor d'Europe, devant 40 000 personnes.",
       "role_fr": "Chorégraphe",
@@ -28,7 +28,7 @@
       "hidden": false
     },
     {
-      "size": "large",
+      "size": "standard",
       "artist": "Gazo",
       "description_fr": "Chorégraphie et mise en scène de la saison live 2025 de Gazo : Apocalypse Tour, Zénith Tour et headline sets en festivals (Les Ardentes, Golden Coast, Yardland), en France, Belgique et Suisse, devant jusqu'à 100 000 personnes.",
       "role_fr": "Chorégraphe",
@@ -42,7 +42,7 @@
       "hidden": false
     },
     {
-      "size": "large",
+      "size": "standard",
       "artist": "Oordaya",
       "description_fr": "Direction du mouvement et de la performance de l'artiste, mêlant narration physique expressive et visuels minimalistes saisissants.",
       "role_fr": "Movement Director",

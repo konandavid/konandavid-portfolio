@@ -1584,6 +1584,27 @@ overscroll-behavior-x: contain;
         }
         body.bw .project-media img { filter: grayscale(1); transition: filter 0.5s ease, transform 0.8s ease; }
         body.bw .project-card:hover .project-media img { filter: none; }
+
+        /* Selected Work (desktop): "Grand" = one full-width banner, everything else the same size */
+        @media (min-width: 769px) {
+            .projects-container:not(.is-filtered) .project-card.size-large.size-large { grid-column: 1 / -1; }
+            .projects-container:not(.is-filtered) .project-card.size-large .project-media { aspect-ratio: 3 / 1; }
+        }
+        /* Description on hover, over the image */
+        .project-overlay {
+            position: absolute; inset: 0; z-index: 2;
+            display: flex; align-items: flex-end; padding: 22px;
+            background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.35) 55%, rgba(0,0,0,0.1) 100%);
+            opacity: 0; transition: opacity 0.4s ease; pointer-events: none;
+        }
+        .project-overlay p {
+            margin: 0; max-width: 560px; font-size: 13px; line-height: 1.55; color: rgba(255,255,255,0.88);
+            display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden;
+        }
+        .project-card:hover .project-overlay { opacity: 1; }
+        .project-card .project-play { z-index: 3; }
+        .project-card:hover .project-artist { color: rgba(255,255,255,0.75); }
+        @media (hover: none) { .project-overlay { display: none; } }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -2022,17 +2043,28 @@ overscroll-behavior-x: contain;
             cards.forEach(c => { c.classList.remove('as-large', 'fill-full'); c.style.gridColumn = ''; });
             const visible = cards.filter(c => !c.classList.contains('filtered-out'))
                 .sort((a, b) => (Number(a.style.order) || 0) - (Number(b.style.order) || 0));
-            const larges = visible.filter(c => c.classList.contains('size-large')).length;
+            const filtered = grid.classList.contains('is-filtered');
+            const isFull = c => !filtered && c.classList.contains('size-large');
+            const larges = visible.filter(c => c.classList.contains('size-large') && !isFull(c)).length;
             const smalls = visible.filter(c => !c.classList.contains('size-large'));
             let k = 0;
             while (k <= smalls.length && !(((larges + k) % 2 === 0) && ((smalls.length - k) % 3 === 0))) k++;
             if (k > smalls.length) k = 0;
-            smalls.slice(smalls.length - k).forEach(c => c.classList.add('as-large'));
+            // An unpaired Grand gets the Petit right after it as its partner (keeps it near its place), the rest come from the end
+            if (k > 0 && larges % 2 === 1) {
+                const bigs = visible.filter(c => c.classList.contains('size-large') && !isFull(c));
+                const lastBig = bigs[bigs.length - 1];
+                const after = visible.slice(visible.indexOf(lastBig) + 1).find(c => !c.classList.contains('size-large'));
+                const partner = after || smalls[smalls.length - 1];
+                partner.classList.add('as-large'); k--;
+            }
+            smalls.filter(c => !c.classList.contains('as-large')).slice(-k || smalls.length).slice(0, k).forEach(c => c.classList.add('as-large'));
             // Group into full rows (2 Grands or 3 Petits), keeping the chosen order as much as possible
             if (window.matchMedia('(max-width: 768px)').matches) return;
             const isBig = c => c.classList.contains('size-large') || c.classList.contains('as-large');
             const rows = []; let L = [], S = [];
             visible.forEach(c => {
+                if (isFull(c)) { rows.push([c]); return; }
                 if (isBig(c)) { L.push(c); if (L.length === 2) { rows.push(L); L = []; } }
                 else { S.push(c); if (S.length === 3) { rows.push(S); S = []; } }
             });
