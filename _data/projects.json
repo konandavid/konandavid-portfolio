@@ -199,7 +199,7 @@
     {
       "size": "standard",
       "artist": "Lea Esmaili",
-      "hidden": false,
+      "hidden": true,
       "description_fr": "Direction de mouvement pour un court-métrage expérimental traitant de la rivalité.",
       "role_fr": "Movement Director",
       "role": "Movement Director",
@@ -213,7 +213,7 @@
     {
       "size": "standard",
       "artist": "Laylow",
-      "hidden": false,
+      "hidden": true,
       "description_fr": "Deux dates à guichets fermés consécutives à l'Accor Arena pour la Trinity Tour. Chorégraphie par Leo Walk.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -227,7 +227,7 @@
     {
       "size": "standard",
       "artist": "Lous & The Yakuza",
-      "hidden": false,
+      "hidden": true,
       "description_fr": "Performance live télévisée pour l'un des principaux talk-shows français. Chorégraphie par Kevin Bago & Sarah Magassa.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -241,7 +241,7 @@
     {
       "size": "standard",
       "artist": "Hippoh",
-      "hidden": false,
+      "hidden": true,
       "description_fr": "Direction artistique pour des événements célébrant l'énergie et l'impact culturel du hip-hop.",
       "role_fr": "Metteur en scène",
       "role": "Creative Director",
@@ -255,7 +255,7 @@
     {
       "size": "standard",
       "artist": "Dadju",
-      "hidden": false,
+      "hidden": true,
       "description_fr": "Performer pour ce concert historique, diffusé en France et Afrique francophone dans un stade de 50 000 places. Chorégraphie par Batchily & Ambre Obela.",
       "role_fr": "Performeur",
       "role": "Performer",
@@ -269,7 +269,7 @@
     {
       "size": "standard",
       "artist": "Shy'm",
-      "hidden": false,
+      "hidden": true,
       "description_fr": "Performeur pour cette tournée nationale, contribuant à l'identité visuelle live et à la production scénique. Chorégraphie par Jerky Jessy.",
       "role_fr": "Performeur",
       "role": "Performer",
