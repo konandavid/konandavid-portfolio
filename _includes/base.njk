@@ -1457,6 +1457,32 @@ overscroll-behavior-x: contain;
             .project-play { width: 38px; height: 38px; top: 38%; }
             .project-play::before { border-width: 8px 0 8px 13px; margin-left: 3px; }
         }
+
+        /* ===== Mosaic (All Work): large 2x2, wide 2x1, standard 1x1, holes auto-filled ===== */
+        .projects-wrapper { container-type: inline-size; }
+        .projects-container {
+            --cols: 4; --gap: 20px;
+            grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+            gap: var(--gap);
+            grid-auto-rows: calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * 1.25);
+            grid-auto-flow: row dense;
+        }
+        .projects-container .project-card { aspect-ratio: auto; height: 100%; }
+        .projects-container .project-card.size-large { grid-column: span 2; grid-row: span 2; }
+        .projects-container .project-card.size-wide { grid-column: span 2; }
+        .project-card.size-large .project-title { font-size: 28px; }
+        .project-card.size-large .project-artist { font-size: 12px; }
+        .project-card.size-wide .project-title { font-size: 22px; }
+        .projects-container.is-filtered .project-card { grid-column: auto; grid-row: auto; }
+        .projects-container.is-filtered .project-card .project-title { font-size: 18px; }
+        @media (max-width: 1280px) { .projects-container { --cols: 3; } }
+        @media (max-width: 960px) { .projects-container { --cols: 2; } }
+        @media (max-width: 768px) {
+            .projects-container { --gap: 10px; }
+            .project-card.size-large .project-title { font-size: 20px; }
+            .project-card.size-wide .project-title { font-size: 16px; }
+            .projects-container.is-filtered .project-card .project-title { font-size: 14px; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -1903,7 +1929,7 @@ overscroll-behavior-x: contain;
                     card.style.order = filter === 'all' ? '' : String(pos ? Number(pos) : 1000 + Number(card.dataset.index || 0));
                 });
                 const grid = document.querySelector('.projects-container');
-                if (grid) grid.scrollLeft = 0;
+                if (grid) { grid.scrollLeft = 0; grid.classList.toggle('is-filtered', filter !== 'all'); }
                 
                 // Bring the top of the grid back into view if the visitor had scrolled past it
                 const workTop = document.getElementById('work').getBoundingClientRect().top;

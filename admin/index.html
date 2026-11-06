@@ -8,5 +8,64 @@
 </head>
 <body>
     <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+        // Live mosaic preview for "Projects": shows All Work exactly as it will look,
+        // updating as projects are dragged or their format is changed.
+        (function () {
+            var h = window.h, createClass = window.createClass;
+            var LABELS = { large: 'Grande', wide: 'Large', standard: 'Standard' };
+
+            var MosaicPreview = createClass({
+                render: function () {
+                    var self = this;
+                    var items = this.props.entry.getIn(['data', 'items']);
+                    var list = items && items.toJS ? items.toJS() : [];
+                    var visible = list.filter(function (p) { return p && !p.hidden; });
+                    var hiddenCount = list.length - visible.length;
+
+                    var cards = visible.map(function (p, i) {
+                        var size = LABELS[p.size] ? p.size : 'standard';
+                        var img = p.image ? String(self.props.getAsset(p.image)) : '';
+                        return h('div', { className: 'm-card m-' + size, key: i },
+                            img ? h('img', { src: img, alt: '' }) : null,
+                            h('span', { className: 'm-badge' }, (i + 1) + ' · ' + LABELS[size]),
+                            h('div', { className: 'm-label' },
+                                h('span', { className: 'm-artist' }, p.artist || ''),
+                                h('strong', null, p.title || '')
+                            )
+                        );
+                    });
+
+                    return h('div', { className: 'm-wrap' },
+                        h('p', { className: 'm-hint' },
+                            'Aperçu de All Work. Glisse les projets à gauche pour changer l’ordre, et choisis leur format dans « Format dans la mosaïque ».' +
+                            (hiddenCount ? ' ' + hiddenCount + ' projet(s) masqué(s) ne sont pas affichés.' : '')
+                        ),
+                        h('div', { className: 'm-grid' }, cards)
+                    );
+                }
+            });
+
+            CMS.registerPreviewTemplate('projects', MosaicPreview);
+            CMS.registerPreviewStyle(
+                'body{margin:0;background:#0a0a0a;font-family:Inter,system-ui,sans-serif;color:#fff}' +
+                '.m-wrap{padding:20px}' +
+                '.m-hint{font-size:13px;color:#aaa;margin:0 0 16px;line-height:1.5}' +
+                '.m-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:150px;grid-auto-flow:row dense;gap:10px}' +
+                '.m-card{position:relative;border-radius:12px;overflow:hidden;background:#1c1c1c;border:1px solid rgba(255,255,255,.08)}' +
+                '.m-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}' +
+                '.m-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 60%)}' +
+                '.m-large{grid-column:span 2;grid-row:span 2}' +
+                '.m-wide{grid-column:span 2}' +
+                '.m-badge{position:absolute;top:8px;left:8px;z-index:2;font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff}' +
+                '.m-large .m-badge{background:#ff6b35}' +
+                '.m-label{position:absolute;left:10px;right:10px;bottom:8px;z-index:2;display:flex;flex-direction:column;gap:2px}' +
+                '.m-artist{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#bbb}' +
+                '.m-label strong{font-size:13px;font-weight:600}' +
+                '.m-large .m-label strong{font-size:18px}',
+                { raw: true }
+            );
+        })();
+    </script>
 </body>
 </html>

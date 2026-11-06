@@ -17,10 +17,11 @@ collections:
             name: "items"
             widget: "list"
             label_singular: "Project"
-            summary: "{{fields.artist}} — {{fields.title}} ({{fields.category}})"
+            summary: "{{fields.artist}} — {{fields.title}} · {{fields.size}}"
             fields:
               - { label: "Artist", name: "artist", widget: "string" }
               - { label: "Title", name: "title", widget: "string" }
+              - { label: "Format dans la mosaïque", name: "size", widget: "select", default: "standard", required: false, options: [{ label: "Grande (2 × 2)", value: "large" }, { label: "Large (2 × 1)", value: "wide" }, { label: "Standard (1 case)", value: "standard" }], hint: "Taille de la carte dans All Work. Pour une mosaïque sans trou, garde environ 2 grandes, 4 larges et le reste en standard." }
               - { label: "Category", name: "category", widget: "select", options: ["Live Show", "Commercial", "Film & Music Video"] }
               - { label: "Role (English)", name: "role", widget: "string", required: false, hint: "Ex: Choreographer, Performer, Movement Director" }
               - { label: "Rôle (Français)", name: "role_fr", widget: "string", required: false, hint: "Ex: Chorégraphe, Performeur" }
