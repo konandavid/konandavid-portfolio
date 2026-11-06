@@ -1480,6 +1480,8 @@ overscroll-behavior-x: contain;
         @media (max-width: 768px) {
             .projects-container { --gap: 10px; --ratio: 1; }
             .projects-container .project-card.size-wide { grid-column: auto; }
+            .projects-container .project-card.size-large { grid-row: span 1; }
+            .project-card.size-large .project-title { font-size: 18px; }
             .project-card.size-wide .project-title { font-size: 14px; }
             .project-card.size-large .project-title { font-size: 20px; }
             .project-card.size-wide .project-title { font-size: 16px; }
@@ -1633,7 +1635,8 @@ overscroll-behavior-x: contain;
                 filterDirection: 'Direction',
                 filterLive: 'Stage',
                 filterFilm: 'Film',
-                filterCommercial: 'Campaigns'
+                filterCommercial: 'Campaigns',
+                filterScreen: 'Film & Campaigns'
             },
             fr: {
                 work: 'Projets',
@@ -1648,7 +1651,8 @@ overscroll-behavior-x: contain;
                 filterDirection: 'Direction',
                 filterLive: 'Scène',
                 filterFilm: 'Film',
-                filterCommercial: 'Campagnes'
+                filterCommercial: 'Campagnes',
+                filterScreen: 'Films & Campagnes'
             }
         };
 
@@ -1920,7 +1924,7 @@ overscroll-behavior-x: contain;
                 // Filter cards
                 const cards = document.querySelectorAll('.project-card');
                 cards.forEach(card => {
-                    if ((filter === 'all' && card.dataset.featured === '1') || card.dataset.category === filter || (filter === 'direction' && card.dataset.direction === '1')) {
+                    if ((filter === 'all' && card.dataset.featured === '1') || card.dataset.category === filter || (filter === 'screen' && card.dataset.screen === '1') || (filter === 'direction' && card.dataset.direction === '1')) {
                         card.classList.remove('filtered-out');
                     } else {
                         card.classList.add('filtered-out');
@@ -1929,7 +1933,7 @@ overscroll-behavior-x: contain;
 
                 // Per-tab order: "Position" fields from /admin win, otherwise the list order
                 cards.forEach(card => {
-                    const pos = filter === 'all' ? null : (filter === 'direction' ? card.dataset.orderDirection : card.dataset.orderCategory);
+                    const pos = filter === 'all' ? null : (filter === 'direction' ? card.dataset.orderDirection : filter === 'screen' ? card.dataset.orderScreen : card.dataset.orderCategory);
                     card.style.order = filter === 'all' ? '' : String(pos ? Number(pos) : 1000 + Number(card.dataset.index || 0));
                 });
                 const grid = document.querySelector('.projects-container');

@@ -100,8 +100,7 @@ layout: base.njk
     <div class="filter-bar">
         <button class="filter-btn active" data-filter="all" data-i18n="filterAll">Selected Work</button>
         <button class="filter-btn" data-filter="Live Show" data-i18n="filterLive">Stage</button>
-        <button class="filter-btn" data-filter="Film & Music Video" data-i18n="filterFilm">Film</button>
-        <button class="filter-btn" data-filter="Commercial" data-i18n="filterCommercial">Campaigns</button>
+        <button class="filter-btn" data-filter="screen" data-i18n="filterScreen">Film &amp; Campaigns</button>
     </div>
     <div class="projects-wrapper">
         <div class="projects-container">
@@ -114,7 +113,7 @@ layout: base.njk
             {%- set isDirection = ('Direct' in roleText) or ('Choreograph' in roleText) -%}
 {% if not project.hidden %}
             {%- set isFeatured = project.featured !== false -%}
-            <article class="project-card size-{{ project.size or 'standard' }}{% if not isFeatured %} filtered-out{% endif %}" data-featured="{{ '1' if isFeatured else '0' }}" data-category="{{ project.category }}" data-direction="{{ '1' if isDirection else '0' }}" data-index="{{ loop.index }}"{% set posCat = (ord[catKeys[project.category]] or []).indexOf(project.title) + 1 %}{% set posDir = (ord.direction or []).indexOf(project.title) + 1 %}{% if posCat > 0 %} data-order-category="{{ posCat }}"{% endif %}{% if posDir > 0 %} data-order-direction="{{ posDir }}"{% endif %} {% if project.video %}data-video="{{ project.video }}"{% endif %}>
+            <article class="project-card size-{{ project.size or 'standard' }}{% if not isFeatured %} filtered-out{% endif %}" data-featured="{{ '1' if isFeatured else '0' }}" data-category="{{ project.category }}" data-direction="{{ '1' if isDirection else '0' }}" data-index="{{ loop.index }}"{% set posCat = (ord[catKeys[project.category]] or []).indexOf(project.title) + 1 %}{% set posDir = (ord.direction or []).indexOf(project.title) + 1 %}{% if posCat > 0 %} data-order-category="{{ posCat }}"{% endif %}{% set isScreen = project.category == 'Film & Music Video' or project.category == 'Commercial' %}{% if isScreen %} data-screen="1"{% set posScr = (ord.screen or []).indexOf(project.title) + 1 %}{% if posScr > 0 %} data-order-screen="{{ posScr }}"{% endif %}{% endif %}{% if posDir > 0 %} data-order-direction="{{ posDir }}"{% endif %} {% if project.video %}data-video="{{ project.video }}"{% endif %}>
                 <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy" decoding="async">
                 {% if project.video %}<div class="project-play"></div>{% endif %}
                 <div class="project-info">
