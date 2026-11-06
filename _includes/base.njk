@@ -1474,9 +1474,9 @@ overscroll-behavior-x: contain;
         .project-card.size-large .project-artist { font-size: 12px; }
         .project-card.size-wide .project-title { font-size: 22px; }
         .projects-container.is-filtered .project-card { grid-column: auto; grid-row: auto; }
-        /* Stage / Film & Commercials tabs: 2 big columns, 3:2 cards */
+        /* Stage / Film & Commercials tabs: 2 big columns, 5:3 cards */
         .projects-container.is-filtered { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-auto-rows: auto; }
-        .projects-container.is-filtered .project-card { aspect-ratio: 3 / 2; height: auto; }
+        .projects-container.is-filtered .project-card { aspect-ratio: 5 / 3; height: auto; }
         .projects-container.is-filtered .project-card .project-title { font-size: 24px; }
         @media (max-width: 1280px) { .projects-container { --cols: 3; } }
         @media (max-width: 960px) { .projects-container { --cols: 2; } }
