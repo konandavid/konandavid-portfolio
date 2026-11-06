@@ -110,18 +110,6 @@
     },
     {
       "size": "standard",
-      "artist": "Rabanne",
-      "description_fr": "Direction de mouvement et performance pour la campagne digitale Rabanne Invictus.",
-      "role_fr": "Movement Director",
-      "role": "Movement Director",
-      "title": "Invictus Victory Campaign",
-      "video": "",
-      "image": "/uploads/446139318693a585.jpg",
-      "description": "Movement direction and performance for Rabanne Invictus digital campaign.",
-      "category": "Commercial"
-    },
-    {
-      "size": "standard",
       "artist": "Vogue",
       "description_fr": "Performance Place Vendôme aux côtés de Bad Bunny, Teyana Taylor et plus. Chorégraphie et direction créative par Parris Goebel.",
       "role_fr": "Performeur",
@@ -130,6 +118,18 @@
       "video": "https://www.youtube.com/watch?v=gQ3idFZXiHo",
       "image": "/uploads/channels4_profile.jpg",
       "description": "Performance at Place Vendôme alongside Bad Bunny, Teyana Taylor & more. Choreography & Creative direction by Parris Goebel.",
+      "category": "Commercial"
+    },
+    {
+      "size": "standard",
+      "artist": "Rabanne",
+      "description_fr": "Direction de mouvement et performance pour la campagne digitale Rabanne Invictus.",
+      "role_fr": "Movement Director",
+      "role": "Movement Director",
+      "title": "Invictus Victory Campaign",
+      "video": "",
+      "image": "/uploads/446139318693a585.jpg",
+      "description": "Movement direction and performance for Rabanne Invictus digital campaign.",
       "category": "Commercial"
     },
     {
