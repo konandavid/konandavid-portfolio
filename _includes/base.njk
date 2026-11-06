@@ -1461,10 +1461,10 @@ overscroll-behavior-x: contain;
         /* ===== Mosaic (All Work): large 2x2, wide 2x1, standard 1x1, holes auto-filled ===== */
         .projects-wrapper { container-type: inline-size; }
         .projects-container {
-            --cols: 4; --gap: 20px; --ratio: 0.9;
+            --cols: 4; --gap: 20px; --ratio: 0.75;
             grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
             gap: var(--gap);
-            grid-auto-rows: min(calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * var(--ratio)), 300px);
+            grid-auto-rows: min(calc((100cqw - (var(--cols) - 1) * var(--gap)) / var(--cols) * var(--ratio)), 250px);
             grid-auto-flow: row dense;
         }
         .projects-container .project-card { aspect-ratio: auto; height: 100%; }
@@ -1478,7 +1478,9 @@ overscroll-behavior-x: contain;
         @media (max-width: 1280px) { .projects-container { --cols: 3; } }
         @media (max-width: 960px) { .projects-container { --cols: 2; } }
         @media (max-width: 768px) {
-            .projects-container { --gap: 10px; --ratio: 1.15; }
+            .projects-container { --gap: 10px; --ratio: 1; }
+            .projects-container .project-card.size-wide { grid-column: auto; }
+            .project-card.size-wide .project-title { font-size: 14px; }
             .project-card.size-large .project-title { font-size: 20px; }
             .project-card.size-wide .project-title { font-size: 16px; }
             .projects-container.is-filtered .project-card .project-title { font-size: 14px; }
@@ -1627,7 +1629,7 @@ overscroll-behavior-x: contain;
                 featuredIn: 'Featured In & Collaborations',
                 copyright: '© 2026 Konan David. All rights reserved.',
                 location: 'Paris, France',
-                filterAll: 'All Work',
+                filterAll: 'Selected Work',
                 filterDirection: 'Direction',
                 filterLive: 'Stage',
                 filterFilm: 'Film',
@@ -1642,7 +1644,7 @@ overscroll-behavior-x: contain;
                 featuredIn: 'Collaborations & Parutions',
                 copyright: '© 2026 Konan David. Tous droits réservés.',
                 location: 'Paris, France',
-                filterAll: 'Tout voir',
+                filterAll: 'Sélection',
                 filterDirection: 'Direction',
                 filterLive: 'Scène',
                 filterFilm: 'Film',
@@ -1918,7 +1920,7 @@ overscroll-behavior-x: contain;
                 // Filter cards
                 const cards = document.querySelectorAll('.project-card');
                 cards.forEach(card => {
-                    if (filter === 'all' || card.dataset.category === filter || (filter === 'direction' && card.dataset.direction === '1')) {
+                    if ((filter === 'all' && card.dataset.featured === '1') || card.dataset.category === filter || (filter === 'direction' && card.dataset.direction === '1')) {
                         card.classList.remove('filtered-out');
                     } else {
                         card.classList.add('filtered-out');

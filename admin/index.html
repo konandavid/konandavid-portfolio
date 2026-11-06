@@ -20,7 +20,7 @@
                     var self = this;
                     var items = this.props.entry.getIn(['data', 'items']);
                     var list = items && items.toJS ? items.toJS() : [];
-                    var visible = list.filter(function (p) { return p && !p.hidden; });
+                    var visible = list.filter(function (p) { return p && !p.hidden && p.featured !== false; });
                     var hiddenCount = list.length - visible.length;
 
                     var cards = visible.map(function (p, i) {
@@ -39,7 +39,7 @@
                     return h('div', { className: 'm-wrap' },
                         h('p', { className: 'm-hint' },
                             'Aperçu de All Work. Glisse les projets à gauche pour changer l’ordre, et choisis leur format dans « Format dans la mosaïque ».' +
-                            (hiddenCount ? ' ' + hiddenCount + ' projet(s) masqué(s) ne sont pas affichés.' : '')
+                            (hiddenCount ? ' ' + hiddenCount + ' projet(s) masqué(s) ou hors Selected Work ne sont pas affichés ici.' : '')
                         ),
                         h('div', { className: 'm-grid' }, cards)
                     );
