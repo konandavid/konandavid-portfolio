@@ -1508,7 +1508,7 @@ overscroll-behavior-x: contain;
         .projects-container .project-card.size-large.size-large,
         .projects-container .project-card.as-large.as-large,
         .projects-container.is-filtered .project-card.size-large.size-large,
-        .projects-container.is-filtered .project-card.as-large.as-large { grid-column: span 3; aspect-ratio: 3 / 2; }
+        .projects-container.is-filtered .project-card.as-large.as-large { grid-column: span 3; grid-row: auto; aspect-ratio: 3 / 2; }
         .project-category { display: none !important; }
         .projects-container .project-card .project-title,
         .projects-container.is-filtered .project-card .project-title,
@@ -1585,10 +1585,13 @@ overscroll-behavior-x: contain;
         body.bw .project-media img { filter: grayscale(1); transition: filter 0.5s ease, transform 0.8s ease; }
         body.bw .project-card:hover .project-media img { filter: none; }
 
-        /* Selected Work (desktop): "Grand" = one full-width banner, everything else the same size */
+        /* Selected Work (desktop): "Grand" = 2/3 of the first row (same height as the 4:3 cards), one 4:3 card beside it, then 3 per row */
         @media (min-width: 769px) {
-            .projects-container:not(.is-filtered) .project-card.size-large.size-large { grid-column: 1 / -1; }
-            .projects-container:not(.is-filtered) .project-card.size-large .project-media { aspect-ratio: 3 / 1; }
+            .projects-container:not(.is-filtered) .project-card.size-large.size-large { grid-column: span 4; grid-row: auto; }
+            .projects-container:not(.is-filtered) .project-card.size-large .project-media {
+                aspect-ratio: auto;
+                height: calc(((100cqw - 5 * 28px) / 6 * 2 + 28px) * 0.75);
+            }
         }
         /* Description on hover, over the image */
         .project-overlay {
@@ -2044,6 +2047,7 @@ overscroll-behavior-x: contain;
             const visible = cards.filter(c => !c.classList.contains('filtered-out'))
                 .sort((a, b) => (Number(a.style.order) || 0) - (Number(b.style.order) || 0));
             const filtered = grid.classList.contains('is-filtered');
+            if (!filtered) return; // Selected Work keeps its own order: Grand + 1 Petit, then rows of 3
             const isFull = c => !filtered && c.classList.contains('size-large');
             const larges = visible.filter(c => c.classList.contains('size-large') && !isFull(c)).length;
             const smalls = visible.filter(c => !c.classList.contains('size-large'));
