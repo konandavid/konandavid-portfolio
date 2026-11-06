@@ -41,7 +41,7 @@ collections:
             widget: "list"
             hint: "Glisse les projets pour changer l'ordre dans cet onglet. Un projet absent de la liste passe à la fin."
             field: { label: "Projet", name: "project", widget: "relation", collection: "settings", file: "projects", search_fields: ["items.*.title", "items.*.artist"], value_field: "items.*.title", display_fields: ["items.*.title"] }
-          - label: "Film & Campaigns"
+          - label: "Film & Commercials"
             name: "screen"
             widget: "list"
             hint: "Glisse les projets pour changer l'ordre dans cet onglet. Un projet absent de la liste passe à la fin."
