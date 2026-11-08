@@ -20,11 +20,10 @@ collections:
             name: "items"
             widget: "list"
             label_singular: "Project"
-            summary: "{{fields.artist}} — {{fields.title}} · {{fields.size}}"
+            summary: "{{fields.artist}} — {{fields.title}}"
             fields:
               - { label: "Artist", name: "artist", widget: "string" }
               - { label: "Title", name: "title", widget: "string" }
-              - { label: "Format de la carte", name: "size", widget: "select", default: "standard", required: false, options: [{ label: "Petit (4:3)", value: "standard" }, { label: "Grand", value: "large" }], hint: "Selected Work : un seul Grand (les 2/3 de la 1re ligne, avec le projet suivant a sa droite), puis les Petits vont par 3. Dans les onglets, la grille s ajuste toute seule." }
               - { label: "Category", name: "category", widget: "select", options: ["Live Show", "Commercial", "Film & Music Video"] }
               - { label: "Role (English)", name: "role", widget: "string", required: false, hint: "Ex: Choreographer, Performer, Movement Director" }
               - { label: "Rôle (Français)", name: "role_fr", widget: "string", required: false, hint: "Ex: Chorégraphe, Performeur" }

@@ -24,7 +24,7 @@
                     var hiddenCount = list.length - visible.length;
 
                     var cards = visible.map(function (p, i) {
-                        var size = LABELS[p.size] ? p.size : 'standard';
+                        var size = i < 2 ? 'large' : 'standard';
                         var img = p.image ? String(self.props.getAsset(p.image)) : '';
                         return h('div', { className: 'm-card m-' + size, key: i },
                             img ? h('img', { src: img, alt: '', style: framingStyle(p) }) : null,
@@ -38,7 +38,7 @@
 
                     return h('div', { className: 'm-wrap' },
                         h('p', { className: 'm-hint' },
-                            'Aperçu de Selected Work. Glisse les projets à gauche pour changer l’ordre. Pour des lignes complètes : les Grands vont par 2, les Petits par 3.' +
+                            'Aperçu de Selected Work. Glisse les projets à gauche pour changer l’ordre : les 2 premiers sont affichés en grand, côte à côte, puis les autres vont par 3. Avec 8 projets, toutes les lignes sont pleines.' +
                             (hiddenCount ? ' ' + hiddenCount + ' projet(s) masqué(s) ou hors Selected Work ne sont pas affichés ici.' : '')
                         ),
                         h('div', { className: 'm-grid' }, cards)
@@ -136,8 +136,8 @@
                     return h('div', { ref: function (el) { self.rootEl = el; }, className: 'kd-root ' + (this.props.classNameWrapper || ''), style: { padding: '14px' } },
                         this.state.src ? h('div', { style: { display: 'flex', gap: '14px', alignItems: 'flex-end', flexWrap: 'wrap' } },
                             [
-                                { label: this.state.large ? 'Ordinateur (Grand)' : 'Ordinateur', ratio: this.state.large ? '2.7 / 1' : '4 / 3', w: this.state.large ? '440px' : '320px' },
-                                { label: 'Téléphone', ratio: '3 / 2', w: '210px' }
+                                { label: 'Ordinateur', ratio: '4 / 3', w: '300px' },
+                                { label: 'Téléphone + 2 premiers projets', ratio: '3 / 2', w: '300px' }
                             ].map(function (f, i) {
                                 return h('div', { key: i },
                                     h('div', { style: { fontSize: '11px', color: '#798291', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '.04em' } }, f.label),

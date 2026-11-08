@@ -1585,13 +1585,13 @@ overscroll-behavior-x: contain;
         body.bw .project-media img { filter: grayscale(1); transition: filter 0.5s ease, transform 0.8s ease; }
         body.bw .project-card:hover .project-media img { filter: none; }
 
-        /* Selected Work (desktop): "Grand" = 2/3 of the first row (same height as the 4:3 cards), one 4:3 card beside it, then 3 per row */
+        /* Selected Work (desktop): first 2 projects big side by side (3:2), then 3 per row (4:3) */
         @media (min-width: 769px) {
-            .projects-container:not(.is-filtered) .project-card.size-large.size-large { grid-column: span 4; grid-row: auto; }
-            .projects-container:not(.is-filtered) .project-card.size-large .project-media {
-                aspect-ratio: auto;
-                height: calc(((100cqw - 5 * 28px) / 6 * 2 + 28px) * 0.75);
-            }
+            .projects-container:not(.is-filtered) .project-card.project-card { grid-column: span 2; grid-row: auto; }
+            .projects-container:not(.is-filtered) .project-card .project-media { aspect-ratio: 4 / 3; height: auto; }
+            .projects-container:not(.is-filtered) .project-card.sw-top.sw-top { grid-column: span 3; }
+            .projects-container:not(.is-filtered) .project-card.sw-top .project-media { aspect-ratio: 3 / 2; }
+            .projects-container:not(.is-filtered) .project-card.sw-top .project-title { font-size: 20px !important; }
         }
         /* Description on hover, over the image */
         .project-overlay {
@@ -2046,43 +2046,17 @@ overscroll-behavior-x: contain;
             }
         })();
 
-        // Keep rows complete in the 6-column grid: Grands go 2 per row, Petits 3 per row.
-        // If the counts don't fit, the last Petits (in display order) are shown as Grands.
+        // Selected Work: the first 2 projects (in the order set in the admin) are shown big, side by side; the rest go 3 per row.
+        // Tabs (Stage, Film & Commercials): every card the same size.
         function fillMobileGrid() {
             const grid = document.querySelector('.projects-container');
             if (!grid) return;
             const cards = [...grid.querySelectorAll('.project-card')];
-            cards.forEach(c => { c.classList.remove('as-large', 'fill-full'); c.style.gridColumn = ''; });
+            cards.forEach(c => { c.classList.remove('as-large', 'fill-full', 'sw-top'); c.style.gridColumn = ''; });
+            if (grid.classList.contains('is-filtered')) return;
             const visible = cards.filter(c => !c.classList.contains('filtered-out'))
                 .sort((a, b) => (Number(a.style.order) || 0) - (Number(b.style.order) || 0));
-            const filtered = grid.classList.contains('is-filtered');
-            return; // Selected Work keeps its own order; tabs are a plain 3-column grid (no card bigger than the others)
-            const isFull = c => !filtered && c.classList.contains('size-large');
-            const larges = visible.filter(c => c.classList.contains('size-large') && !isFull(c)).length;
-            const smalls = visible.filter(c => !c.classList.contains('size-large'));
-            let k = 0;
-            while (k <= smalls.length && !(((larges + k) % 2 === 0) && ((smalls.length - k) % 3 === 0))) k++;
-            if (k > smalls.length) k = 0;
-            // An unpaired Grand gets the Petit right after it as its partner (keeps it near its place), the rest come from the end
-            if (k > 0 && larges % 2 === 1) {
-                const bigs = visible.filter(c => c.classList.contains('size-large') && !isFull(c));
-                const lastBig = bigs[bigs.length - 1];
-                const after = visible.slice(visible.indexOf(lastBig) + 1).find(c => !c.classList.contains('size-large'));
-                const partner = after || smalls[smalls.length - 1];
-                partner.classList.add('as-large'); k--;
-            }
-            smalls.filter(c => !c.classList.contains('as-large')).slice(-k || smalls.length).slice(0, k).forEach(c => c.classList.add('as-large'));
-            // Group into full rows (2 Grands or 3 Petits), keeping the chosen order as much as possible
-            if (window.matchMedia('(max-width: 768px)').matches) return;
-            const isBig = c => c.classList.contains('size-large') || c.classList.contains('as-large');
-            const rows = []; let L = [], S = [];
-            visible.forEach(c => {
-                if (isFull(c)) { rows.push([c]); return; }
-                if (isBig(c)) { L.push(c); if (L.length === 2) { rows.push(L); L = []; } }
-                else { S.push(c); if (S.length === 3) { rows.push(S); S = []; } }
-            });
-            if (L.length) rows.push(L); if (S.length) rows.push(S);
-            let i = 0; rows.flat().forEach(c => { c.style.order = String(i++); });
+            visible.slice(0, 2).forEach(c => c.classList.add('sw-top'));
         }
         fillMobileGrid();
         let fillTimer;
