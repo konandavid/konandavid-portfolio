@@ -1621,25 +1621,27 @@ overscroll-behavior-x: contain;
         /* ===== Descriptions: never written over the image ===== */
         .project-card .project-overlay { display: none !important; }
         .project-aside { display: none; }
-        /* Stage / Film & Commercials (desktop): description slides in beside the image on hover */
-        @media (hover: hover) and (pointer: fine) and (min-width: 769px) {
-            .projects-container.is-filtered .project-card { position: relative; }
-            .projects-container.is-filtered .project-card:hover { z-index: 40; }
-            .projects-container.is-filtered .project-aside {
-                display: flex; flex-direction: column; gap: 6px;
-                position: absolute; top: 0; left: calc(100% + 14px); width: 290px;
-                min-height: var(--media-h, auto); box-sizing: border-box; padding: 22px 22px 24px;
-                background: rgba(14,14,14,0.97); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px;
-                box-shadow: 0 24px 60px rgba(0,0,0,0.55);
-                opacity: 0; transform: translateX(-10px); pointer-events: none;
-                transition: opacity 0.35s ease, transform 0.35s ease;
-            }
-            .projects-container.is-filtered .project-card.aside-left .project-aside { left: auto; right: calc(100% + 14px); transform: translateX(10px); }
-            .projects-container.is-filtered .project-card:hover .project-aside { opacity: 1; transform: none; }
-            .project-aside .aside-artist { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-            .project-aside .aside-title { font-size: 19px; font-weight: 500; letter-spacing: -0.01em; color: #fff; line-height: 1.2; }
-            .project-aside .aside-role { font-size: 11px; letter-spacing: 0.08em; color: var(--accent); }
-            .project-aside .aside-desc { margin: auto 0 0; padding-top: 18px; font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.78); }
+        /* Click on a project: video (or cover) in the modal, description underneath */
+        .project-card[data-info] { cursor: pointer; }
+        .video-modal { overflow-y: auto; padding: 70px 0 40px; align-items: flex-start; }
+        .video-modal-content { aspect-ratio: auto; width: min(90%, 1100px, calc((100vh - 300px) * 16 / 9)); min-width: min(90%, 560px); margin: auto; }
+        .video-modal-content iframe { display: block; height: auto; aspect-ratio: 16 / 9; }
+        .video-modal-content iframe[hidden] { display: none; }
+        .modal-cover { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; }
+        .modal-cover[hidden] { display: none; }
+        .modal-info { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 32px; padding: 26px 4px 0; }
+        .modal-info[hidden] { display: none; }
+        .modal-info .aside-artist { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+        .modal-info .aside-title { display: block; margin-top: 8px; font-size: 22px; font-weight: 500; letter-spacing: -0.01em; color: #fff; line-height: 1.2; }
+        .modal-info .aside-role { display: block; margin-top: 8px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+        .modal-info .aside-desc { margin: 0; font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.78); }
+        .modal-info .aside-desc[style*="none"] { display: none; }
+        @media (max-width: 768px) {
+            .video-modal { padding: 80px 0 32px; }
+            .video-modal-content { width: calc(100% - 32px); min-width: 0; }
+            .modal-info { grid-template-columns: 1fr; gap: 14px; padding-top: 20px; }
+            .modal-info .aside-title { font-size: 19px; }
+            .modal-info .aside-desc { font-size: 13.5px; }
         }
         /* Phone: play button centred on the image */
         @media (max-width: 768px) {
@@ -1720,6 +1722,8 @@ overscroll-behavior-x: contain;
         <div class="video-modal-content">
             <button class="video-modal-close" id="modal-close"></button>
             <iframe id="modal-video" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <img id="modal-cover" class="modal-cover" alt="" hidden>
+            <div id="modal-info" class="modal-info" hidden></div>
         </div>
     </div>
 
@@ -1852,6 +1856,38 @@ overscroll-behavior-x: contain;
         // ===================
         const videoModal = document.getElementById('video-modal');
         const modalVideo = document.getElementById('modal-video');
+        const modalCover = document.getElementById('modal-cover');
+        const modalInfo = document.getElementById('modal-info');
+
+        // Description of the clicked project, shown under the video (or under the cover if there is no video)
+        function fillModalInfo(card) {
+            const aside = card && card.querySelector('.project-aside');
+            if (!modalInfo) return;
+            if (!aside) { modalInfo.hidden = true; modalInfo.innerHTML = ''; return; }
+            const head = document.createElement('div');
+            const body = document.createElement('div');
+            aside.querySelectorAll('.aside-artist, .aside-title, .aside-role').forEach(el => head.appendChild(el.cloneNode(true)));
+            aside.querySelectorAll('.aside-desc').forEach(el => body.appendChild(el.cloneNode(true)));
+            modalInfo.innerHTML = '';
+            modalInfo.append(head, body);
+            modalInfo.hidden = false;
+        }
+        function closeModal() {
+            videoModal.classList.remove('active');
+            modalVideo.src = '';
+            if (modalCover) { modalCover.hidden = true; modalCover.removeAttribute('src'); }
+            document.body.style.overflow = '';
+        }
+        function openCoverOnly(card) {
+            const img = card.querySelector('.project-media img');
+            modalVideo.src = '';
+            modalVideo.hidden = true;
+            if (modalCover && img) { modalCover.src = img.currentSrc || img.src; modalCover.alt = img.alt; modalCover.hidden = false; }
+            fillModalInfo(card);
+            videoModal.scrollTop = 0;
+            videoModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
         
         document.querySelectorAll('.project-play').forEach(btn => {
             btn.addEventListener('click', (e) => {
@@ -1863,25 +1899,31 @@ overscroll-behavior-x: contain;
                     const ytStart = (url.match(/[?&](?:t|start)=(\d+)/) || [])[1];
                     if (yt) embed = `https://www.youtube.com/embed/${yt[1]}?autoplay=1${ytStart ? `&start=${ytStart}` : ''}`;
                     else if (url.includes('vimeo.com/')) embed = `https://player.vimeo.com/video/${url.split('vimeo.com/')[1]}?autoplay=1`;
+                    modalVideo.hidden = false;
+                    if (modalCover) modalCover.hidden = true;
                     modalVideo.src = embed;
+                    fillModalInfo(btn.closest('.project-card'));
+                    videoModal.scrollTop = 0;
                     videoModal.classList.add('active');
                     document.body.style.overflow = 'hidden';
                 }
             });
         });
 
-        document.getElementById('modal-close')?.addEventListener('click', () => {
-            videoModal.classList.remove('active');
-            modalVideo.src = '';
-            document.body.style.overflow = '';
-        });
+        document.getElementById('modal-close')?.addEventListener('click', closeModal);
 
         videoModal?.addEventListener('click', (e) => {
-            if (e.target === videoModal) {
-                videoModal.classList.remove('active');
-                modalVideo.src = '';
-                document.body.style.overflow = '';
-            }
+            if (e.target === videoModal) closeModal();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal?.classList.contains('active')) closeModal();
+        });
+
+        // Projects without a video: a click opens the cover with the description underneath
+        document.querySelectorAll('.project-card:not([data-video])').forEach(card => {
+            if (!card.querySelector('.project-aside')) return;
+            card.setAttribute('data-info', '');
+            card.addEventListener('click', () => openCoverOnly(card));
         });
 
         // ===================
@@ -2245,19 +2287,6 @@ overscroll-behavior-x: contain;
             else if (href.indexOf('youtube.com') !== -1 || href.indexOf('youtu.be') !== -1) track('YouTube click');
             else if (href === '#contact') track('Contact button');
         }, true);
-    </script>
-    <script>
-        // Side description (Stage / Film tabs): match the image height, open towards the side with room
-        document.querySelectorAll('.project-card').forEach(function (card) {
-            card.addEventListener('mouseenter', function () {
-                var aside = card.querySelector('.project-aside');
-                var media = card.querySelector('.project-media');
-                if (!aside || !media) return;
-                var r = media.getBoundingClientRect();
-                card.style.setProperty('--media-h', r.height + 'px');
-                card.classList.toggle('aside-left', r.right + 14 + 290 > document.documentElement.clientWidth - 8);
-            });
-        });
     </script>
 </body>
 </html>
