@@ -1629,6 +1629,30 @@ overscroll-behavior-x: contain;
         .video-modal-content iframe[hidden] { display: none; }
         .modal-cover { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 12px; }
         .modal-cover[hidden] { display: none; }
+        /* Photo slideshow (projects without video) */
+        .modal-slides { position: relative; width: 100%; aspect-ratio: 16 / 9; border-radius: 12px; overflow: hidden; background: #050505; touch-action: pan-y; }
+        .modal-slides[hidden] { display: none; }
+        .modal-slides .slide { position: absolute; inset: 0; opacity: 0; transition: opacity 0.9s ease; }
+        .modal-slides .slide.is-active { opacity: 1; }
+        .modal-slides .slide img { position: absolute; inset: 0; width: 100%; height: 100%; }
+        .modal-slides .slide .slide-bg { object-fit: cover; filter: blur(28px) brightness(0.45); transform: scale(1.15); }
+        .modal-slides .slide .slide-fg { object-fit: contain; }
+        .slides-nav { position: absolute; top: 50%; z-index: 2; width: 44px; height: 44px; margin-top: -22px; border: none; border-radius: 50%; background: rgba(0,0,0,0.45); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); cursor: pointer; opacity: 0; transition: opacity 0.3s ease, background 0.3s ease; }
+        .modal-slides:hover .slides-nav { opacity: 1; }
+        .slides-nav:hover { background: var(--accent); }
+        .slides-nav::before { content: ''; position: absolute; top: 50%; left: 50%; width: 10px; height: 10px; border-top: 2px solid #fff; border-right: 2px solid #fff; }
+        .slides-prev { left: 16px; } .slides-prev::before { transform: translate(-30%, -50%) rotate(-135deg); }
+        .slides-next { right: 16px; } .slides-next::before { transform: translate(-70%, -50%) rotate(45deg); }
+        .slides-count { position: absolute; right: 16px; bottom: 14px; z-index: 2; padding: 5px 10px; border-radius: 999px; background: rgba(0,0,0,0.5); font-size: 11px; letter-spacing: 0.08em; color: rgba(255,255,255,0.85); }
+        @media (hover: none) { .slides-nav { opacity: 1; width: 36px; height: 36px; margin-top: -18px; } }
+        /* Card badge for projects with a photo slideshow */
+        .project-photos { position: absolute; top: 50%; left: 50%; z-index: 3; width: 70px; height: 70px; transform: translate(-50%, -50%) scale(0.8); border-radius: 50%; background: rgba(255,255,255,0.2); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); border: 1px solid rgba(255,255,255,0.3); opacity: 0; transition: all 0.4s ease; pointer-events: none; }
+        .project-photos span { display: none; }
+        .project-photos::before, .project-photos::after { content: ''; position: absolute; top: 50%; left: 50%; width: 20px; height: 15px; border: 2px solid #fff; border-radius: 2px; }
+        .project-photos::before { transform: translate(-40%, -40%); }
+        .project-photos::after { transform: translate(-65%, -65%); border-color: rgba(255,255,255,0.55); border-right-color: transparent; border-bottom-color: transparent; }
+        .project-card:hover .project-photos { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        @media (hover: none) { .project-photos { opacity: 0.9; transform: translate(-50%, -50%) scale(0.75); } }
         .modal-info { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 32px; padding: 26px 4px 0; }
         .modal-info[hidden] { display: none; }
         .modal-info .aside-artist { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
@@ -1723,6 +1747,12 @@ overscroll-behavior-x: contain;
             <button class="video-modal-close" id="modal-close"></button>
             <iframe id="modal-video" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
             <img id="modal-cover" class="modal-cover" alt="" hidden>
+            <div id="modal-slides" class="modal-slides" hidden>
+                <div class="slides-track"></div>
+                <button class="slides-nav slides-prev" type="button" aria-label="Previous photo"></button>
+                <button class="slides-nav slides-next" type="button" aria-label="Next photo"></button>
+                <div class="slides-count"></div>
+            </div>
             <div id="modal-info" class="modal-info" hidden></div>
         </div>
     </div>
@@ -1872,23 +1902,78 @@ overscroll-behavior-x: contain;
             modalInfo.append(head, body);
             modalInfo.hidden = false;
         }
+        const modalSlides = document.getElementById('modal-slides');
+        const slides = { imgs: [], i: 0, timer: null };
+        function showSlide(n) {
+            if (!slides.imgs.length) return;
+            slides.i = (n + slides.imgs.length) % slides.imgs.length;
+            slides.imgs.forEach((im, k) => im.classList.toggle('is-active', k === slides.i));
+            const count = modalSlides.querySelector('.slides-count');
+            if (count) count.textContent = (slides.i + 1) + ' / ' + slides.imgs.length;
+        }
+        function restartSlides() {
+            clearInterval(slides.timer);
+            if (slides.imgs.length > 1) slides.timer = setInterval(() => showSlide(slides.i + 1), 3500);
+        }
+        function stopSlides() {
+            clearInterval(slides.timer); slides.timer = null; slides.imgs = [];
+            if (modalSlides) { modalSlides.hidden = true; modalSlides.querySelector('.slides-track').innerHTML = ''; }
+        }
         function closeModal() {
             videoModal.classList.remove('active');
             modalVideo.src = '';
             if (modalCover) { modalCover.hidden = true; modalCover.removeAttribute('src'); }
+            stopSlides();
             document.body.style.overflow = '';
         }
         function openCoverOnly(card) {
             const img = card.querySelector('.project-media img');
             modalVideo.src = '';
             modalVideo.hidden = true;
-            if (modalCover && img) { modalCover.src = img.currentSrc || img.src; modalCover.alt = img.alt; modalCover.hidden = false; }
+            if (modalCover) modalCover.hidden = true;
+            stopSlides();
+            const gallery = (card.dataset.gallery || '').split('|').filter(Boolean);
+            if (gallery.length && modalSlides) {
+                const cover = img ? img.getAttribute('src') : null;
+                const list = cover && !gallery.includes(cover) ? [cover, ...gallery] : gallery;
+                const track = modalSlides.querySelector('.slides-track');
+                slides.imgs = list.map((src, k) => {
+                    const slide = document.createElement('div');
+                    slide.className = 'slide';
+                    const bg = document.createElement('img');
+                    bg.className = 'slide-bg'; bg.src = src; bg.alt = ''; bg.setAttribute('aria-hidden', 'true');
+                    const fg = document.createElement('img');
+                    fg.className = 'slide-fg'; fg.src = src; fg.alt = (img ? img.alt : '') + ' — ' + (k + 1);
+                    slide.append(bg, fg);
+                    track.appendChild(slide);
+                    return slide;
+                });
+                modalSlides.querySelectorAll('.slides-nav').forEach(b => b.hidden = slides.imgs.length < 2);
+                modalSlides.hidden = false;
+                showSlide(0);
+                restartSlides();
+            } else if (modalCover && img) {
+                modalCover.src = img.currentSrc || img.src; modalCover.alt = img.alt; modalCover.hidden = false;
+            }
             fillModalInfo(card);
             videoModal.scrollTop = 0;
             videoModal.classList.add('active');
             document.body.style.overflow = 'hidden';
         }
-        
+        modalSlides?.querySelector('.slides-prev')?.addEventListener('click', (e) => { e.stopPropagation(); showSlide(slides.i - 1); restartSlides(); });
+        modalSlides?.querySelector('.slides-next')?.addEventListener('click', (e) => { e.stopPropagation(); showSlide(slides.i + 1); restartSlides(); });
+        document.addEventListener('keydown', (e) => {
+            if (!videoModal?.classList.contains('active') || !slides.imgs.length) return;
+            if (e.key === 'ArrowRight') { showSlide(slides.i + 1); restartSlides(); }
+            if (e.key === 'ArrowLeft') { showSlide(slides.i - 1); restartSlides(); }
+        });
+        let touchX = null;
+        modalSlides?.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; }, { passive: true });
+        modalSlides?.addEventListener('touchend', (e) => {
+            if (touchX === null) return;
+            const dx = e.changedTouches[0].clientX - touchX; touchX = null;
+            if (Math.abs(dx) > 40) { showSlide(slides.i + (dx < 0 ? 1 : -1)); restartSlides(); }
+        });
         document.querySelectorAll('.project-play').forEach(btn => {
             btn.addEventListener('click', (e) => {
                 e.stopPropagation();
@@ -1901,6 +1986,7 @@ overscroll-behavior-x: contain;
                     else if (url.includes('vimeo.com/')) embed = `https://player.vimeo.com/video/${url.split('vimeo.com/')[1]}?autoplay=1`;
                     modalVideo.hidden = false;
                     if (modalCover) modalCover.hidden = true;
+                    stopSlides();
                     modalVideo.src = embed;
                     fillModalInfo(btn.closest('.project-card'));
                     videoModal.scrollTop = 0;
@@ -1921,7 +2007,7 @@ overscroll-behavior-x: contain;
 
         // Projects without a video: a click opens the cover with the description underneath
         document.querySelectorAll('.project-card:not([data-video])').forEach(card => {
-            if (!card.querySelector('.project-aside')) return;
+            if (!card.querySelector('.project-aside') && !card.dataset.gallery) return;
             card.setAttribute('data-info', '');
             card.addEventListener('click', () => openCoverOnly(card));
         });

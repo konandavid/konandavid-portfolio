@@ -34,6 +34,7 @@ collections:
               - { label: "Description (English)", name: "description", widget: "text" }
               - { label: "Description (Français)", name: "description_fr", widget: "text" }
               - { label: "Video URL", name: "video", widget: "string", required: false }
+              - { label: "Photos (slideshow)", name: "gallery", widget: "list", required: false, field: { label: "Photo", name: "photo", widget: "image" }, hint: "Pour un projet sans vidéo : ajoute plusieurs photos, elles défilent toutes seules quand on clique sur le projet (flèches du clavier ou swipe pour changer). Glisse les photos pour changer l'ordre." }
 
       - name: "order"
         label: "Ordre des projets par onglet"
