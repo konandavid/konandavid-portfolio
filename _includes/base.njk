@@ -1689,6 +1689,20 @@ overscroll-behavior-x: contain;
         .marquee-wrapper.is-live { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
         .marquee-wrapper.is-live.dragging { cursor: grabbing; }
         .marquee-wrapper.is-live .press-logo { -webkit-user-drag: none; pointer-events: none; }
+
+        /* Hero = one screen, "Scroll" sits fully visible at its bottom edge, the work starts right after */
+        .hero.hero { min-height: 100vh; min-height: 100svh; padding-bottom: 18px; justify-content: flex-start; }
+        .hero .hero-content { flex: 1 0 auto; }
+        .hero .hero-showreel { margin-top: auto; }
+        @media (min-width: 769px) { .hero .hero-showreel { width: min(100%, 900px, calc((100vh - 370px) * 16 / 9)); width: min(100%, 900px, calc((100svh - 370px) * 16 / 9)); min-width: 480px; } }
+        .hero .scroll-indicator { margin-top: auto; padding-top: 8px; }
+        .hero .scroll-line { height: 40px; }
+        .work-section.work-section { padding-top: 22px; }
+        @media (max-width: 768px) {
+            .hero.hero { padding-bottom: 14px; }
+            .hero .scroll-line { height: 32px; }
+            .work-section.work-section { padding-top: 14px; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
