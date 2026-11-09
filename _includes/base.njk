@@ -1683,6 +1683,12 @@ overscroll-behavior-x: contain;
         @media (max-width: 768px) {
             .project-card .project-media .project-play { top: 50%; left: 50%; }
         }
+
+        /* Logos marquee: driven by JS (drag, flick, scroll boost); CSS animation only as fallback */
+        .marquee-track.is-live { animation: none; will-change: transform; }
+        .marquee-wrapper.is-live { cursor: grab; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+        .marquee-wrapper.is-live.dragging { cursor: grabbing; }
+        .marquee-wrapper.is-live .press-logo { -webkit-user-drag: none; pointer-events: none; }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -2391,6 +2397,74 @@ overscroll-behavior-x: contain;
             else if (href.indexOf('youtube.com') !== -1 || href.indexOf('youtu.be') !== -1) track('YouTube click');
             else if (href === '#contact') track('Contact button');
         }, true);
+    </script>
+    <script>
+        // Logos marquee: runs on its own, speeds up with page scroll, can be dragged or flicked left/right
+        (function () {
+            const wrap = document.querySelector('.marquee-wrapper');
+            const track = wrap && wrap.querySelector('.marquee-track');
+            if (!track || !window.requestAnimationFrame) return;
+            const reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            wrap.classList.add('is-live'); track.classList.add('is-live');
+            // x = how far the logos have travelled to the left; it loops every half track (the list is doubled)
+            let half = track.scrollWidth / 2, x = 0, boost = 0, dir = 1, hover = false, dragging = false;
+            let lastT = performance.now(), lastX = 0, lastMoveT = 0, dragV = 0, startX = 0, startPos = 0;
+            const measure = () => { half = track.scrollWidth / 2; };
+            window.addEventListener('resize', measure);
+            window.addEventListener('load', measure);
+            if ('ResizeObserver' in window) new ResizeObserver(measure).observe(track); // logos load lazily
+            // Page scroll pushes the logos: down = left, up = right
+            let lastScroll = window.scrollY;
+            window.addEventListener('scroll', () => {
+                const d = window.scrollY - lastScroll; lastScroll = window.scrollY;
+                if (reduce || !d) return;
+                boost = Math.max(-2600, Math.min(2600, boost + d * 7));
+                dir = d > 0 ? 1 : -1;
+            }, { passive: true });
+            // Horizontal trackpad swipe over the logos moves them directly
+            wrap.addEventListener('wheel', (e) => {
+                if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+                e.preventDefault();
+                boost = Math.max(-3000, Math.min(3000, boost + e.deltaX * 14));
+                dir = e.deltaX > 0 ? 1 : -1;
+            }, { passive: false });
+            wrap.addEventListener('mouseenter', () => { hover = true; });
+            wrap.addEventListener('mouseleave', () => { hover = false; });
+            // Grab and drag (mouse or finger), let go to flick
+            wrap.addEventListener('pointerdown', (e) => {
+                dragging = true; wrap.classList.add('dragging');
+                startX = lastX = e.clientX; startPos = x; lastMoveT = performance.now(); dragV = 0; boost = 0;
+                if (wrap.setPointerCapture) wrap.setPointerCapture(e.pointerId);
+            });
+            wrap.addEventListener('pointermove', (e) => {
+                if (!dragging) return;
+                const now = performance.now(), dt = Math.max(8, now - lastMoveT);
+                dragV = (e.clientX - lastX) / dt * 1000; lastX = e.clientX; lastMoveT = now;
+                x = startPos - (e.clientX - startX);
+            });
+            const endDrag = () => {
+                if (!dragging) return;
+                dragging = false; wrap.classList.remove('dragging');
+                if (performance.now() - lastMoveT > 120) dragV = 0; // held still before letting go: no flick
+                boost = Math.max(-4000, Math.min(4000, -dragV));
+                if (dragV) dir = dragV > 0 ? -1 : 1;
+            };
+            wrap.addEventListener('pointerup', endDrag);
+            wrap.addEventListener('pointercancel', endDrag);
+            function tick(t) {
+                const dt = Math.min(0.05, (t - lastT) / 1000); lastT = t;
+                if (!dragging) {
+                    const cruise = (half / 35) * (reduce ? 0.4 : 1) * (hover ? 0.3 : 1);
+                    x += (dir * cruise + boost) * dt;
+                    boost *= Math.pow(0.05, dt); // the push fades out in about a second
+                    if (Math.abs(boost) < 1) boost = 0;
+                }
+                if (half > 0) x = ((x % half) + half) % half;
+                track.style.transform = 'translate3d(' + (-x) + 'px,0,0)';
+                requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        })();
     </script>
 </body>
 </html>
