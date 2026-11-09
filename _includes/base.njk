@@ -1704,6 +1704,23 @@ overscroll-behavior-x: contain;
             .hero .scroll-line { height: 32px; }
             .work-section.work-section { padding-top: 14px; }
         }
+
+        /* Selected Work on phone: the first project large, then the others two by two */
+        @media (max-width: 768px) {
+            .projects-container:not(.is-filtered) { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; column-gap: 10px !important; row-gap: 26px !important; }
+            .projects-container:not(.is-filtered) .project-card.project-card.project-card { grid-column: auto !important; }
+            .projects-container:not(.is-filtered) .project-card.sw-first.sw-first.sw-first { grid-column: 1 / -1 !important; }
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-media { aspect-ratio: 4 / 5 !important; }
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-info { padding-top: 10px; }
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-title { font-size: 14px !important; line-height: 1.25; }
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-artist,
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-role { font-size: 9px !important; margin-top: 4px !important; letter-spacing: 0.06em !important; }
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-role:not([style*="none"]) { display: block !important; width: 100%; }
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-role::before { content: none !important; }
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-play { width: 32px !important; height: 32px !important; }
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-play::before { border-width: 6px 0 6px 10px !important; margin-left: 2px !important; }
+            .projects-container:not(.is-filtered) .project-card:not(.sw-first) .project-photos { width: 32px; height: 32px; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -2260,11 +2277,12 @@ overscroll-behavior-x: contain;
             const grid = document.querySelector('.projects-container');
             if (!grid) return;
             const cards = [...grid.querySelectorAll('.project-card')];
-            cards.forEach(c => { c.classList.remove('as-large', 'fill-full', 'sw-top'); c.style.gridColumn = ''; });
+            cards.forEach(c => { c.classList.remove('as-large', 'fill-full', 'sw-top', 'sw-first'); c.style.gridColumn = ''; });
             if (grid.classList.contains('is-filtered')) return;
             const visible = cards.filter(c => !c.classList.contains('filtered-out'))
                 .sort((a, b) => (Number(a.style.order) || 0) - (Number(b.style.order) || 0));
             visible.slice(0, 2).forEach(c => c.classList.add('sw-top'));
+            if (visible[0]) visible[0].classList.add('sw-first');
         }
         fillMobileGrid();
         let fillTimer;
@@ -2427,7 +2445,7 @@ overscroll-behavior-x: contain;
         }, true);
     </script>
     <script>
-        // Logos marquee: runs on its own, speeds up with page scroll, can be dragged or flicked left/right
+        // Logos marquee: runs on its own; a sideways swipe on it, or a drag and release, pushes it left or right
         (function () {
             const wrap = document.querySelector('.marquee-wrapper');
             const track = wrap && wrap.querySelector('.marquee-track');
@@ -2441,20 +2459,11 @@ overscroll-behavior-x: contain;
             window.addEventListener('resize', measure);
             window.addEventListener('load', measure);
             if ('ResizeObserver' in window) new ResizeObserver(measure).observe(track); // logos load lazily
-            // Page scroll pushes the logos: down = left, up = right
-            let lastScroll = window.scrollY;
-            window.addEventListener('scroll', () => {
-                const d = window.scrollY - lastScroll; lastScroll = window.scrollY;
-                if (reduce || !d) return;
-                boost = Math.max(-2600, Math.min(2600, boost + d * 7));
-                dir = d > 0 ? 1 : -1;
-            }, { passive: true });
             // Horizontal trackpad swipe over the logos moves them directly
             wrap.addEventListener('wheel', (e) => {
                 if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
                 e.preventDefault();
                 boost = Math.max(-3000, Math.min(3000, boost + e.deltaX * 14));
-                dir = e.deltaX > 0 ? 1 : -1;
             }, { passive: false });
             wrap.addEventListener('mouseenter', () => { hover = true; });
             wrap.addEventListener('mouseleave', () => { hover = false; });
@@ -2475,7 +2484,7 @@ overscroll-behavior-x: contain;
                 dragging = false; wrap.classList.remove('dragging');
                 if (performance.now() - lastMoveT > 120) dragV = 0; // held still before letting go: no flick
                 boost = Math.max(-4000, Math.min(4000, -dragV));
-                if (dragV) dir = dragV > 0 ? -1 : 1;
+                // the logos keep their usual leftward drift once the push has faded
             };
             wrap.addEventListener('pointerup', endDrag);
             wrap.addEventListener('pointercancel', endDrag);
