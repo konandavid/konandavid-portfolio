@@ -1617,6 +1617,34 @@ overscroll-behavior-x: contain;
             .projects-container.is-filtered .project-card .project-media,
             .projects-container.is-filtered .project-card.size-large .project-media { aspect-ratio: 4 / 3; height: auto; }
         }
+
+        /* ===== Descriptions: never written over the image ===== */
+        .project-card .project-overlay { display: none !important; }
+        .project-aside { display: none; }
+        /* Stage / Film & Commercials (desktop): description slides in beside the image on hover */
+        @media (hover: hover) and (pointer: fine) and (min-width: 769px) {
+            .projects-container.is-filtered .project-card { position: relative; }
+            .projects-container.is-filtered .project-card:hover { z-index: 40; }
+            .projects-container.is-filtered .project-aside {
+                display: flex; flex-direction: column; gap: 6px;
+                position: absolute; top: 0; left: calc(100% + 14px); width: 290px;
+                min-height: var(--media-h, auto); box-sizing: border-box; padding: 22px 22px 24px;
+                background: rgba(14,14,14,0.97); border: 1px solid rgba(255,255,255,0.08); border-radius: 6px;
+                box-shadow: 0 24px 60px rgba(0,0,0,0.55);
+                opacity: 0; transform: translateX(-10px); pointer-events: none;
+                transition: opacity 0.35s ease, transform 0.35s ease;
+            }
+            .projects-container.is-filtered .project-card.aside-left .project-aside { left: auto; right: calc(100% + 14px); transform: translateX(10px); }
+            .projects-container.is-filtered .project-card:hover .project-aside { opacity: 1; transform: none; }
+            .project-aside .aside-artist { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
+            .project-aside .aside-title { font-size: 19px; font-weight: 500; letter-spacing: -0.01em; color: #fff; line-height: 1.2; }
+            .project-aside .aside-role { font-size: 11px; letter-spacing: 0.08em; color: var(--accent); }
+            .project-aside .aside-desc { margin: auto 0 0; padding-top: 18px; font-size: 13px; line-height: 1.6; color: rgba(255,255,255,0.78); }
+        }
+        /* Phone: play button centred on the image */
+        @media (max-width: 768px) {
+            .project-card .project-media .project-play { top: 50%; left: 50%; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -2217,6 +2245,19 @@ overscroll-behavior-x: contain;
             else if (href.indexOf('youtube.com') !== -1 || href.indexOf('youtu.be') !== -1) track('YouTube click');
             else if (href === '#contact') track('Contact button');
         }, true);
+    </script>
+    <script>
+        // Side description (Stage / Film tabs): match the image height, open towards the side with room
+        document.querySelectorAll('.project-card').forEach(function (card) {
+            card.addEventListener('mouseenter', function () {
+                var aside = card.querySelector('.project-aside');
+                var media = card.querySelector('.project-media');
+                if (!aside || !media) return;
+                var r = media.getBoundingClientRect();
+                card.style.setProperty('--media-h', r.height + 'px');
+                card.classList.toggle('aside-left', r.right + 14 + 290 > document.documentElement.clientWidth - 8);
+            });
+        });
     </script>
 </body>
 </html>

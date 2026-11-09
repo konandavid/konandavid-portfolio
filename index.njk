@@ -139,6 +139,15 @@ layout: base.njk
                         {% endif %}
                     </div>
                 </div>
+                {% if project.description or project.description_fr %}
+                <aside class="project-aside" aria-hidden="true">
+                    <span class="aside-artist">{{ project.artist }}</span>
+                    <span class="aside-title">{{ project.title }}</span>
+                    {% if project.role %}<span class="aside-role" data-lang-en>{{ project.role }}</span><span class="aside-role" data-lang-fr style="display: none;">{{ project.role_fr or project.role }}</span>{% endif %}
+                    <p class="aside-desc" data-lang-en>{{ project.description }}</p>
+                    <p class="aside-desc" data-lang-fr style="display: none;">{{ project.description_fr or project.description }}</p>
+                </aside>
+                {% endif %}
             </article>
 {% endif %}
             {%- endfor -%}
