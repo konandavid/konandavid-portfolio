@@ -1653,18 +1653,30 @@ overscroll-behavior-x: contain;
         .project-photos::after { transform: translate(-65%, -65%); border-color: rgba(255,255,255,0.55); border-right-color: transparent; border-bottom-color: transparent; }
         .project-card:hover .project-photos { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         @media (hover: none) { .project-photos { opacity: 0.9; transform: translate(-50%, -50%) scale(0.75); } }
-        .modal-info { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: 32px; padding: 26px 4px 0; }
+        /* Info line under the video: ARTIST | Project / role underneath, description behind the + */
+        .video-modal { background: #000; }
+        .video-modal-content { margin: 0 auto; }
+        .modal-info { display: grid; grid-template-columns: auto 1fr auto; grid-template-areas: "artist title btn" "artist role btn" "desc desc desc"; align-items: center; column-gap: 18px; padding: 22px 2px 0; }
         .modal-info[hidden] { display: none; }
-        .modal-info .aside-artist { display: block; font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.5); }
-        .modal-info .aside-title { display: block; margin-top: 8px; font-size: 22px; font-weight: 500; letter-spacing: -0.01em; color: #fff; line-height: 1.2; }
-        .modal-info .aside-role { display: block; margin-top: 8px; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+        .modal-info > div:first-child { display: contents; }
+        .modal-info .aside-artist { grid-area: artist; align-self: stretch; display: flex; align-items: center; padding-right: 18px; border-right: 1px solid rgba(255,255,255,0.18); font-size: 15px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #fff; }
+        .modal-info .aside-title { grid-area: title; font-size: 17px; font-weight: 400; color: rgba(255,255,255,0.9); line-height: 1.25; }
+        .modal-info .aside-role { grid-area: role; margin-top: 5px; font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); }
+        .modal-info .aside-role[style*="none"], .modal-info .aside-desc[style*="none"] { display: none !important; }
+        .modal-info > div:nth-child(2) { grid-area: desc; max-width: 760px; max-height: 0; opacity: 0; overflow: hidden; transition: max-height 0.5s ease, opacity 0.4s ease, padding 0.4s ease; }
+        .video-modal.info-open .modal-info > div:nth-child(2) { max-height: 400px; opacity: 1; padding-top: 20px; }
         .modal-info .aside-desc { margin: 0; font-size: 14px; line-height: 1.7; color: rgba(255,255,255,0.78); }
-        .modal-info .aside-desc[style*="none"] { display: none; }
+        .info-plus { grid-area: btn; position: relative; width: 30px; height: 30px; padding: 0; border: 1px solid rgba(255,255,255,0.3); border-radius: 50%; background: none; cursor: pointer; transition: border-color 0.3s, background 0.3s, transform 0.4s; }
+        .info-plus::before, .info-plus::after { content: ''; position: absolute; top: 50%; left: 50%; width: 11px; height: 1.5px; background: #fff; transform: translate(-50%, -50%); }
+        .info-plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+        .info-plus:hover { border-color: var(--accent); background: rgba(255,107,53,0.12); }
+        .video-modal.info-open .info-plus { transform: rotate(45deg); }
         @media (max-width: 768px) {
             .video-modal { padding: 80px 0 32px; }
             .video-modal-content { width: calc(100% - 32px); min-width: 0; }
-            .modal-info { grid-template-columns: 1fr; gap: 14px; padding-top: 20px; }
-            .modal-info .aside-title { font-size: 19px; }
+            .modal-info { column-gap: 14px; padding-top: 18px; }
+            .modal-info .aside-artist { padding-right: 14px; font-size: 13px; }
+            .modal-info .aside-title { font-size: 15px; }
             .modal-info .aside-desc { font-size: 13.5px; }
         }
         /* Phone: play button centred on the image */
@@ -1898,9 +1910,15 @@ overscroll-behavior-x: contain;
             const body = document.createElement('div');
             aside.querySelectorAll('.aside-artist, .aside-title, .aside-role').forEach(el => head.appendChild(el.cloneNode(true)));
             aside.querySelectorAll('.aside-desc').forEach(el => body.appendChild(el.cloneNode(true)));
+            const plus = document.createElement('button');
+            plus.type = 'button';
+            plus.className = 'info-plus';
+            plus.setAttribute('aria-label', 'Description');
+            plus.addEventListener('click', (e) => { e.stopPropagation(); videoModal.classList.toggle('info-open'); });
             modalInfo.innerHTML = '';
-            modalInfo.append(head, body);
+            modalInfo.append(head, body, plus);
             modalInfo.hidden = false;
+            videoModal.classList.remove('info-open');
         }
         const modalSlides = document.getElementById('modal-slides');
         const slides = { imgs: [], i: 0, timer: null };
@@ -1920,7 +1938,7 @@ overscroll-behavior-x: contain;
             if (modalSlides) { modalSlides.hidden = true; modalSlides.querySelector('.slides-track').innerHTML = ''; }
         }
         function closeModal() {
-            videoModal.classList.remove('active');
+            videoModal.classList.remove('active', 'info-open');
             modalVideo.src = '';
             if (modalCover) { modalCover.hidden = true; modalCover.removeAttribute('src'); }
             stopSlides();
