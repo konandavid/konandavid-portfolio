@@ -1349,8 +1349,8 @@ overscroll-behavior-x: contain;
             width: 4px;
             height: 4px;
             border-radius: 50%;
-            background: var(--accent);
-            box-shadow: 0 0 10px var(--accent-glow);
+            background: rgba(255,255,255,0.7);
+            box-shadow: 0 0 8px rgba(255,255,255,0.25);
         }
 
         /* Work: every project visible, vertical grid */
@@ -1737,8 +1737,6 @@ overscroll-behavior-x: contain;
 
         /* Hero name + roles: thin dashes between the words, normal arrow cursor, letters light up warm white under the mouse */
         .hero-text { cursor: default; }
-        .hero-dot { width: 14px; height: 1px; border-radius: 0; background: rgba(255,255,255,0.35); box-shadow: none; }
-        @media (max-width: 768px) { .hero-dot { width: 10px; } }
         .hl { display: inline-block; transition: color 0.9s ease, text-shadow 0.9s ease; }
         .hl.sp { width: 0.28em; }
         @media (hover: hover) and (pointer: fine) {
