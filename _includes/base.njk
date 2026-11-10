@@ -1695,7 +1695,7 @@ overscroll-behavior-x: contain;
         .hero.hero { min-height: 100vh; min-height: 100svh; padding-bottom: 18px; justify-content: flex-start; }
         .hero .hero-content { flex: 1 0 auto; }
         .hero .hero-showreel { margin-top: auto; }
-        @media (min-width: 769px) { .hero .hero-showreel { width: min(100%, 900px, calc((100vh - 370px) * 16 / 9)); width: min(100%, 900px, calc((100svh - 370px) * 16 / 9)); min-width: 480px; } }
+        @media (min-width: 769px) { .hero .hero-showreel { width: min(100%, 900px, calc((100vh - 386px) * 16 / 9)); width: min(100%, 900px, calc((100svh - 386px) * 16 / 9)); min-width: 480px; } }
         .hero .scroll-indicator { margin-top: auto; padding-top: 8px; }
         .hero .scroll-line { height: 40px; }
         .work-section.work-section { padding-top: 22px; }
@@ -1724,20 +1724,15 @@ overscroll-behavior-x: contain;
 
         /* "discover" cue: small lowercase label, a beam of light running down the line */
         .scroll-label { text-transform: none; font-size: 10.5px; letter-spacing: 0.14em; }
-        .hero .scroll-line { position: relative; overflow: visible; background: rgba(255,255,255,0.12); }
+        /* Comet: a soft trail of light gliding down the line, one pass every 2s */
+        .hero .scroll-line.scroll-line { position: relative; overflow: hidden; height: 56px; background: rgba(255,255,255,0.12); }
         .hero .scroll-line::before {
-            display: block; content: ''; position: absolute; left: 0; top: 0; width: 100%; height: 16px; opacity: 0;
-            background: linear-gradient(to bottom, rgba(255,255,255,0), #fff 60%, var(--accent));
-            box-shadow: 0 0 6px 1px rgba(255,107,53,0.55), 0 0 14px 2px rgba(255,107,53,0.2);
-            border-radius: 1px;
-            animation: scrollBeam 2.6s cubic-bezier(0.55, 0, 0.35, 1) infinite;
+            display: block; content: ''; position: absolute; left: 0; top: -60%; width: 100%; height: 60%;
+            background: linear-gradient(to bottom, rgba(255,255,255,0), rgba(255,255,255,0.35) 60%, #fff 92%, rgba(255,184,150,1));
+            animation: scrollComet 2s linear infinite;
         }
-        @keyframes scrollBeam {
-            0% { top: 0; opacity: 0; }
-            15% { opacity: 1; }
-            70% { top: calc(100% - 16px); opacity: 1; }
-            85%, 100% { top: calc(100% - 16px); opacity: 0; }
-        }
+        @keyframes scrollComet { 0% { top: -60%; } 100% { top: 100%; } }
+        @media (max-width: 768px) { .hero .scroll-line.scroll-line { height: 44px; } }
         @media (prefers-reduced-motion: reduce) { .hero .scroll-line::before { animation: none; } }
     </style>
     
