@@ -1734,6 +1734,16 @@ overscroll-behavior-x: contain;
         @keyframes scrollComet { 0% { top: -60%; } 100% { top: 100%; } }
         @media (max-width: 768px) { .hero .scroll-line.scroll-line { height: 44px; } }
         @media (prefers-reduced-motion: reduce) { .hero .scroll-line::before { animation: none; } }
+
+        /* Hero name + roles: thin dashes between the words, normal arrow cursor, letters light up warm white under the mouse */
+        .hero-text { cursor: default; }
+        .hero-dot { width: 14px; height: 1px; border-radius: 0; background: rgba(255,255,255,0.35); box-shadow: none; }
+        @media (max-width: 768px) { .hero-dot { width: 10px; } }
+        .hl { display: inline-block; transition: color 0.9s ease, text-shadow 0.9s ease; }
+        .hl.sp { width: 0.28em; }
+        @media (hover: hover) and (pointer: fine) {
+            .hl:hover { color: #FFE2D2; text-shadow: 0 0 18px rgba(255,107,53,0.55), 0 0 2px rgba(255,170,130,0.6); transition-duration: 0.12s; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -2516,6 +2526,28 @@ overscroll-behavior-x: contain;
                 requestAnimationFrame(tick);
             }
             requestAnimationFrame(tick);
+        })();
+    </script>
+    <script>
+        // Split the hero name and the three words into letters for the warm-light hover
+        (function () {
+            var name = document.querySelector('.hero-name');
+            if (name) name.setAttribute('aria-label', name.textContent.replace(/\s+/g, ' ').trim()); // read as one phrase
+            function split(el) {
+                [].slice.call(el.childNodes).forEach(function (n) {
+                    if (n.nodeType !== 3 || !n.textContent.trim()) return;
+                    var holder = document.createDocumentFragment();
+                    n.textContent.split('').forEach(function (ch) {
+                        var s = document.createElement('span');
+                        s.className = 'hl' + (ch === ' ' ? ' sp' : '');
+                        s.textContent = ch === ' ' ? '\u00a0' : ch;
+                        holder.appendChild(s);
+                    });
+                    n.parentNode.replaceChild(holder, n);
+                });
+            }
+            if (name) split(name);
+            document.querySelectorAll('.hero-role > span:not(.hero-dot)').forEach(split);
         })();
     </script>
 </body>
