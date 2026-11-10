@@ -16,7 +16,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://konandavid.com">
     <meta property="og:site_name" content="Konan David">
-    <meta property="og:title" content="Konan David - Movement Artist & Choreographer">
+    <meta property="og:title" content="Konan David — Choreographer & Movement Director, Paris">
     <meta property="og:description" content="Portfolio · Paris">
     <meta property="og:image" content="https://konandavid.com/uploads/og-share-v3.jpg">
     <meta property="og:image:width" content="1200">
@@ -28,7 +28,7 @@
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://konandavid.com">
-    <meta name="twitter:title" content="Konan David - Movement Artist & Choreographer">
+    <meta name="twitter:title" content="Konan David — Choreographer & Movement Director, Paris">
     <meta name="twitter:description" content="Portfolio · Paris">
     <meta name="twitter:image" content="https://konandavid.com/uploads/og-share-v3.jpg">
     <meta name="twitter:image:alt" content="Aperçu du site konandavid.com">
@@ -2024,16 +2024,17 @@ overscroll-behavior-x: contain;
             stopSlides();
             const gallery = (card.dataset.gallery || '').split('|').filter(Boolean);
             if (gallery.length && modalSlides) {
-                const cover = img ? img.getAttribute('src') : null;
+                const cover = img ? (img.dataset.orig || img.getAttribute('src')) : null;
+                const cdn = (u, w) => /^\/uploads\/.+\.(jpe?g|png|webp)$/i.test(u) && !/^(localhost|127\.)/.test(location.hostname) ? '/.netlify/images?url=' + encodeURIComponent(u) + '&w=' + w : u;
                 const list = cover && !gallery.includes(cover) ? [cover, ...gallery] : gallery;
                 const track = modalSlides.querySelector('.slides-track');
                 slides.imgs = list.map((src, k) => {
                     const slide = document.createElement('div');
                     slide.className = 'slide';
                     const bg = document.createElement('img');
-                    bg.className = 'slide-bg'; bg.src = src; bg.alt = ''; bg.setAttribute('aria-hidden', 'true');
+                    bg.className = 'slide-bg'; bg.src = cdn(src, 400); bg.alt = ''; bg.setAttribute('aria-hidden', 'true');
                     const fg = document.createElement('img');
-                    fg.className = 'slide-fg'; fg.src = src; fg.alt = (img ? img.alt : '') + ' — ' + (k + 1);
+                    fg.className = 'slide-fg'; fg.src = cdn(src, 1600); fg.alt = (img ? img.alt : '') + ' — ' + (k + 1);
                     slide.append(bg, fg);
                     track.appendChild(slide);
                     return slide;

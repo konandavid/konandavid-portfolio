@@ -11,6 +11,12 @@ module.exports = function(eleventyConfig) {
   // Copy robots.txt for SEO
   eleventyConfig.addPassthroughCopy("robots.txt");
 
+  // Netlify Image CDN: resize + compress our own uploads on the fly (external URLs are left as they are)
+  eleventyConfig.addFilter("cdn", function(src, width) {
+    if (!src || typeof src !== "string" || !src.startsWith("/uploads/") || /\.(svg|gif|mp4)$/i.test(src)) return src;
+    return "/.netlify/images?url=" + encodeURIComponent(src) + "&w=" + (width || 1200);
+  });
+
   // Create collection from projects
   eleventyConfig.addCollection("projects", function(collectionApi) {
     return collectionApi.getFilteredByGlob("content/projects/*.md").sort((a, b) => {

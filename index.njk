@@ -113,7 +113,7 @@ layout: base.njk
             {%- set isFeatured = project.featured !== false -%}
             <article class="project-card size-{{ project.size or 'standard' }}{% if not isFeatured %} filtered-out{% endif %}" data-featured="{{ '1' if isFeatured else '0' }}" data-category="{{ project.category }}" data-direction="{{ '1' if isDirection else '0' }}" data-index="{{ loop.index }}"{% set posCat = (ord[catKeys[project.category]] or []).indexOf(project.title) + 1 %}{% set posDir = (ord.direction or []).indexOf(project.title) + 1 %}{% if posCat > 0 %} data-order-category="{{ posCat }}"{% endif %}{% set isScreen = project.category == 'Film & Music Video' or project.category == 'Commercial' %}{% if isScreen %} data-screen="1"{% set posScr = (ord.screen or []).indexOf(project.title) + 1 %}{% if posScr > 0 %} data-order-screen="{{ posScr }}"{% endif %}{% endif %}{% if posDir > 0 %} data-order-direction="{{ posDir }}"{% endif %} {% if project.video %}data-video="{{ project.video }}"{% endif %}{% if project.gallery and project.gallery.length %} data-gallery="{{ project.gallery | join('|') }}"{% endif %}>
                 <div class="project-media">
-                <img src="{{ project.image }}" alt="{{ project.title }}" loading="lazy" decoding="async"{% if project.framing %}{% set fr = project.framing.split(" ") %} style="--pos-x: {{ fr[0] }}%; --pos-y: {{ fr[1] }}%; --zoom: {{ fr[2] or 1 }};"{% elif project.zoom or project.pos_x or project.pos_y %} style="{% if project.zoom %}--zoom: {{ project.zoom }};{% endif %}{% if project.pos_x or project.pos_x == 0 %} --pos-x: {{ project.pos_x }}%;{% endif %}{% if project.pos_y or project.pos_y == 0 %} --pos-y: {{ project.pos_y }}%;{% endif %}"{% endif %}>
+                <img src="{{ project.image | cdn(900) }}" srcset="{{ project.image | cdn(600) }} 600w, {{ project.image | cdn(1200) }} 1200w" sizes="(max-width: 768px) 100vw, 50vw" data-orig="{{ project.image }}" alt="{{ project.title }}" loading="lazy" decoding="async"{% if project.framing %}{% set fr = project.framing.split(" ") %} style="--pos-x: {{ fr[0] }}%; --pos-y: {{ fr[1] }}%; --zoom: {{ fr[2] or 1 }};"{% elif project.zoom or project.pos_x or project.pos_y %} style="{% if project.zoom %}--zoom: {{ project.zoom }};{% endif %}{% if project.pos_x or project.pos_x == 0 %} --pos-x: {{ project.pos_x }}%;{% endif %}{% if project.pos_y or project.pos_y == 0 %} --pos-y: {{ project.pos_y }}%;{% endif %}"{% endif %}>
                 {% if project.description or project.description_fr %}
                 <div class="project-overlay">
                     <p data-lang-en>{{ project.description }}</p>
@@ -176,7 +176,7 @@ layout: base.njk
     <div class="about-container">
         <div class="about-image">
             {% if about.image %}
-            <img src="{{ about.image }}" alt="Konan David" loading="lazy" decoding="async">
+            <img src="{{ about.image | cdn(900) }}" alt="Konan David" loading="lazy" decoding="async">
             {% else %}
             <img src="/uploads/about.jpg" alt="Konan David" loading="lazy" decoding="async">
             {% endif %}
@@ -186,17 +186,17 @@ layout: base.njk
             <div data-lang-en>
                 <span class="about-label">{% if about.en.label %}{{ about.en.label }}{% else %}About{% endif %}</span>
                 {% if about.en.p1 %}
-                <p>{{ about.en.p1 | safe }}</p>
+                {% for para in about.en.p1.split('<br><br>') %}{% if para | trim %}<p>{{ para | trim | safe }}</p>{% endif %}{% endfor %}
                 {% else %}
                 <p>Born in Abidjan, Côte d'Ivoire, and raised in France, Konan David operates at the intersection of urban culture and high-end production. His work spans sold-out arena tours, dance films, music videos, and fashion collaborations with global brands including <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong>, and <strong>Vogue</strong>.</p>
                 {% endif %}
                 {% if about.en.p2 %}
-                <p>{{ about.en.p2 | safe }}</p>
+                {% for para in about.en.p2.split('<br><br>') %}{% if para | trim %}<p>{{ para | trim | safe }}</p>{% endif %}{% endfor %}
                 {% else %}
                 <p>Specializing in artist development and movement coaching, Konan empowers performers to unlock their expressive potential. Alongside this expertise, he has worked with renowned artists such as <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong>, and <strong>Dadju</strong>.</p>
                 {% endif %}
                 {% if about.en.p3 %}
-                <p>{{ about.en.p3 | safe }}</p>
+                {% for para in about.en.p3.split('<br><br>') %}{% if para | trim %}<p>{{ para | trim | safe }}</p>{% endif %}{% endfor %}
                 {% else %}
                 <p>His work is defined by meticulous attention to detail, raw attitude, and effortless flow. Driven by cinematic vision and cultural authenticity, Konan continuously explores new visual languages to elevate every artistic narrative.</p>
                 {% endif %}
@@ -205,17 +205,17 @@ layout: base.njk
             <div data-lang-fr style="display: none;">
                 <span class="about-label">{% if about.fr.label %}{{ about.fr.label }}{% else %}À propos{% endif %}</span>
                 {% if about.fr.p1 %}
-                <p>{{ about.fr.p1 | safe }}</p>
+                {% for para in about.fr.p1.split('<br><br>') %}{% if para | trim %}<p>{{ para | trim | safe }}</p>{% endif %}{% endfor %}
                 {% else %}
                 <p>Né à Abidjan, en Côte d'Ivoire, et élevé en France, Konan David évolue à l'intersection de la culture urbaine et de la production haut de gamme. Son travail comprend des tournées à guichets fermés, des films de danse, des clips musicaux et des collaborations mode avec des marques internationales telles que <strong>Dior</strong>, <strong>Nike</strong>, <strong>Rabanne</strong> et <strong>Vogue</strong>.</p>
                 {% endif %}
                 {% if about.fr.p2 %}
-                <p>{{ about.fr.p2 | safe }}</p>
+                {% for para in about.fr.p2.split('<br><br>') %}{% if para | trim %}<p>{{ para | trim | safe }}</p>{% endif %}{% endfor %}
                 {% else %}
                 <p>Spécialisé dans le développement artistique et le coaching de mouvement, Konan aide les artistes à libérer leur potentiel expressif. Fort de cette expertise, il a travaillé avec des artistes renommés tels que <strong>Gazo</strong>, <strong>Aya Nakamura</strong>, <strong>Bad Bunny</strong> et <strong>Dadju</strong>.</p>
                 {% endif %}
                 {% if about.fr.p3 %}
-                <p>{{ about.fr.p3 | safe }}</p>
+                {% for para in about.fr.p3.split('<br><br>') %}{% if para | trim %}<p>{{ para | trim | safe }}</p>{% endif %}{% endfor %}
                 {% else %}
                 <p>Son travail se distingue par une attention méticuleuse aux détails, une attitude brute et un flow naturel. Guidé par une vision cinématographique et une authenticité culturelle, Konan explore continuellement de nouveaux langages visuels pour sublimer chaque récit artistique.</p>
                 {% endif %}

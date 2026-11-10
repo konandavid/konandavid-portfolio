@@ -1,0 +1,118 @@
+backend:
+  name: git-gateway
+  branch: main
+
+# Only used when the admin runs on localhost (local testing); ignored on konandavid.com
+local_backend: true
+
+media_folder: "uploads"
+public_folder: "/uploads"
+
+collections:
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - name: "projects"
+        label: "Projects"
+        file: "_data/projects.json"
+        fields:
+          - label: "Projects"
+            name: "items"
+            widget: "list"
+            label_singular: "Project"
+            summary: "{{fields.artist}} — {{fields.title}}"
+            fields:
+              - { label: "Artist", name: "artist", widget: "string" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Category", name: "category", widget: "select", options: ["Live Show", "Commercial", "Film & Music Video"] }
+              - { label: "Role (English)", name: "role", widget: "string", required: false, hint: "Ex: Choreographer, Performer, Movement Director" }
+              - { label: "Rôle (Français)", name: "role_fr", widget: "string", required: false, hint: "Ex: Chorégraphe, Performeur" }
+              - { label: "Dans Selected Work", name: "featured", widget: "boolean", required: false, default: true, hint: "Coché : le projet apparaît dans Selected Work (la mosaïque) ET dans sa catégorie. Décoché : il apparaît seulement dans sa catégorie (Stage, Film…)." }
+              - { label: "Masquer le projet", name: "hidden", widget: "boolean", required: false, default: false, hint: "Cache le projet du site sans le supprimer" }
+              - { label: "Image", name: "image", widget: "image" }
+              - { label: "Cadrage de l'image", name: "framing", widget: "framing", required: false, hint: "Fais glisser l'image dans le cadre pour choisir la partie visible, et règle le zoom avec le curseur." }
+              - { label: "Description (English)", name: "description", widget: "text" }
+              - { label: "Description (Français)", name: "description_fr", widget: "text" }
+              - { label: "Video URL", name: "video", widget: "string", required: false }
+
+      - name: "order"
+        label: "Ordre des projets par onglet"
+        file: "_data/projectOrder.json"
+        fields:
+          - label: "Stage"
+            name: "live"
+            widget: "list"
+            hint: "Glisse les projets pour changer l'ordre dans cet onglet. Un projet absent de la liste passe à la fin."
+            field: { label: "Projet", name: "project", widget: "relation", collection: "settings", file: "projects", search_fields: ["items.*.title", "items.*.artist"], value_field: "items.*.title", display_fields: ["items.*.title"] }
+          - label: "Film & Commercials"
+            name: "screen"
+            widget: "list"
+            hint: "Glisse les projets pour changer l'ordre dans cet onglet. Un projet absent de la liste passe à la fin."
+            field: { label: "Projet", name: "project", widget: "relation", collection: "settings", file: "projects", search_fields: ["items.*.title", "items.*.artist"], value_field: "items.*.title", display_fields: ["items.*.title"] }
+
+      - name: "general"
+        label: "General Settings"
+        file: "_data/site.json"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Description", name: "description", widget: "string" }
+          - { label: "Favicon", name: "favicon", widget: "image", hint: "Image carrée 512x512 recommandée (PNG)" }
+          - { label: "Email", name: "email", widget: "string" }
+          - { label: "Instagram URL", name: "instagram", widget: "string" }
+          - { label: "YouTube URL", name: "youtube", widget: "string" }
+          - { label: "Showreel (vidéo MP4, ordinateur)", name: "heroVideo", widget: "file", required: false, hint: "Vidéo du hero hébergée sur le site : démarre tout de suite. MP4 compressé (~1080p, moins de 10 Mo). Si vide, le lien Vimeo ci-dessous est utilisé." }
+          - { label: "Showreel (vidéo MP4, mobile)", name: "heroVideoMobile", widget: "file", required: false, hint: "Version plus légère (~720p, ~5 Mo) pour les téléphones. Optionnel." }
+          - { label: "Vimeo Showreel URL (secours)", name: "vimeoShowreel", widget: "string", required: false, hint: "Utilisé seulement si aucune vidéo MP4 n'est mise ci-dessus. Format : https://player.vimeo.com/video/XXXXXX" }
+          - { label: "Image de fond du showreel", name: "heroPoster", widget: "image", required: false, hint: "Affichée avant le chargement de la vidéo. Mets la première image du showreel pour que le passage soit invisible." }
+
+      - name: "about"
+        label: "About Section"
+        file: "_data/about.json"
+        fields:
+          - { label: "About Image", name: "image", widget: "image" }
+          - label: "English Content"
+            name: "en"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "About" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Paragraph 1", name: "p1", widget: "text" }
+              - { label: "Paragraph 2", name: "p2", widget: "text" }
+              - { label: "Paragraph 3", name: "p3", widget: "text" }
+          - label: "French Content"
+            name: "fr"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "À propos" }
+              - { label: "Title", name: "title", widget: "string" }
+              - { label: "Paragraph 1", name: "p1", widget: "text" }
+              - { label: "Paragraph 2", name: "p2", widget: "text" }
+              - { label: "Paragraph 3", name: "p3", widget: "text" }
+
+      - name: "contact"
+        label: "Contact Section"
+        file: "_data/contact.json"
+        fields:
+          - label: "English Content"
+            name: "en"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "Get in Touch" }
+              - { label: "Title", name: "title", widget: "string", default: "Let's create something together" }
+          - label: "French Content"
+            name: "fr"
+            widget: "object"
+            fields:
+              - { label: "Label", name: "label", widget: "string", default: "Contact" }
+              - { label: "Title", name: "title", widget: "string", default: "Créons quelque chose ensemble" }
+
+      - name: "press"
+        label: "Press & Collaborations"
+        file: "_data/press.json"
+        fields:
+          - label: "Logos"
+            name: "logos"
+            widget: "list"
+            fields:
+              - { label: "Name", name: "name", widget: "string" }
+              - { label: "Logo Image", name: "image", widget: "image" }

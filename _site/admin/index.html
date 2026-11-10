@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Content Manager</title>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body>
+    <script src="https://unpkg.com/netlify-cms@^2.0.0/dist/netlify-cms.js"></script>
+    <script>
+        // Live mosaic preview for "Projects": shows All Work exactly as it will look,
+        // updating as projects are dragged or their format is changed.
+        (function () {
+            var h = window.h, createClass = window.createClass;
+            var LABELS = { large: 'Grand', wide: 'Petit', standard: 'Petit' };
+
+            var MosaicPreview = createClass({
+                render: function () {
+                    var self = this;
+                    var items = this.props.entry.getIn(['data', 'items']);
+                    var list = items && items.toJS ? items.toJS() : [];
+                    var visible = list.filter(function (p) { return p && !p.hidden && p.featured !== false; });
+                    var hiddenCount = list.length - visible.length;
+
+                    var cards = visible.map(function (p, i) {
+                        var size = i < 2 ? 'large' : 'standard';
+                        var img = p.image ? String(self.props.getAsset(p.image)) : '';
+                        return h('div', { className: 'm-card m-' + size, key: i },
+                            img ? h('img', { src: img, alt: '', style: framingStyle(p) }) : null,
+                            h('span', { className: 'm-badge' }, (i + 1) + ' · ' + LABELS[size]),
+                            h('div', { className: 'm-label' },
+                                h('span', { className: 'm-artist' }, p.artist || ''),
+                                h('strong', null, p.title || '')
+                            )
+                        );
+                    });
+
+                    return h('div', { className: 'm-wrap' },
+                        h('p', { className: 'm-hint' },
+                            'Aperçu de Selected Work. Glisse les projets à gauche pour changer l’ordre : les 2 premiers sont affichés en grand, côte à côte, puis les autres vont par 3. Avec 8 projets, toutes les lignes sont pleines.' +
+                            (hiddenCount ? ' ' + hiddenCount + ' projet(s) masqué(s) ou hors Selected Work ne sont pas affichés ici.' : '')
+                        ),
+                        h('div', { className: 'm-grid' }, cards)
+                    );
+                }
+            });
+
+            CMS.registerPreviewTemplate('projects', MosaicPreview);
+            CMS.registerPreviewStyle(
+                'body{margin:0;background:#0a0a0a;font-family:Inter,system-ui,sans-serif;color:#fff}' +
+                '.m-wrap{padding:20px}' +
+                '.m-hint{font-size:13px;color:#aaa;margin:0 0 16px;line-height:1.5}' +
+                '.m-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-auto-flow:row dense;gap:10px}' +
+                '.m-card{position:relative;border-radius:12px;overflow:hidden;background:#1c1c1c;border:1px solid rgba(255,255,255,.08);aspect-ratio:4/3;grid-column:span 2}' +
+                '.m-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}' +
+                '.m-card::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.85),transparent 60%)}' +
+                '.m-large{grid-column:span 3;aspect-ratio:3/2}' +
+                
+                '.m-badge{position:absolute;top:8px;left:8px;z-index:2;font-size:11px;padding:3px 8px;border-radius:999px;background:rgba(0,0,0,.6);color:#fff}' +
+                '.m-large .m-badge{background:#ff6b35}' +
+                '.m-label{position:absolute;left:10px;right:10px;bottom:8px;z-index:2;display:flex;flex-direction:column;gap:2px}' +
+                '.m-artist{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:#bbb}' +
+                '.m-label strong{font-size:13px;font-weight:600}' +
+                '.m-large .m-label strong{font-size:18px}',
+                { raw: true }
+            );
+        })();
+    </script>
+    <script>
+        // Reads "x y zoom" (Cadrage widget) or the older pos_x / pos_y / zoom fields
+        function parseFraming(p) {
+            if (p && p.framing) {
+                var a = String(p.framing).split(' ');
+                return { x: isNaN(parseFloat(a[0])) ? 50 : parseFloat(a[0]), y: isNaN(parseFloat(a[1])) ? 50 : parseFloat(a[1]), z: parseFloat(a[2]) || 1 };
+            }
+            return { x: p && p.pos_x != null ? p.pos_x : 50, y: p && p.pos_y != null ? p.pos_y : 50, z: (p && p.zoom) || 1 };
+        }
+        function framingStyle(p) {
+            var f = parseFraming(p);
+            return { objectPosition: f.x + '% ' + f.y + '%', transformOrigin: f.x + '% ' + f.y + '%', transform: 'scale(' + f.z + ')' };
+        }
+
+        // "Cadrage" widget: drag the image inside the frame to choose what shows, slider to zoom
+        (function () {
+            var h = window.h, createClass = window.createClass;
+            var FramingControl = createClass({
+                getInitialState: function () { return { src: '', large: false }; },
+                componentDidMount: function () {
+                    var self = this;
+                    this.findImage();
+                    this.timer = setInterval(function () { self.findImage(); }, 800);
+                },
+                componentWillUnmount: function () { clearInterval(this.timer); },
+                // Reuse the thumbnail shown by the "Image" field of the same project
+                findImage: function () {
+                    var root = this.rootEl; if (!root) return;
+                    var node = root.parentElement, src = '';
+                    // stop before reaching another project's fields (it would hold another Cadrage widget)
+                    while (node && !src && node.querySelectorAll('.kd-root').length === 1) {
+                        var imgs = node.querySelectorAll('img');
+                        for (var i = 0; i < imgs.length; i++) { if (!root.contains(imgs[i])) { src = imgs[i].getAttribute('src'); break; } }
+                        node = node.parentElement;
+                    }
+                    // Format de la carte (Grand / Petit) of the same project, read from its select
+                    var large = false;
+                    if (node) {
+                        var els = node.querySelectorAll('div');
+                        for (var j = 0; j < els.length; j++) { if (!els[j].children.length && els[j].textContent === 'Grand') { large = true; break; } }
+                    }
+                    if ((src && src !== this.state.src) || large !== this.state.large) this.setState({ src: src || this.state.src, large: large });
+                },
+                values: function () {
+                    var f = parseFraming({ framing: this.props.value || '50 50 1' });
+                    return { x: f.x, y: f.y, z: f.z };
+                },
+                save: function (x, y, z) {
+                    var c = function (v) { return Math.round(Math.max(0, Math.min(100, v))); };
+                    this.props.onChange(c(x) + ' ' + c(y) + ' ' + (Math.round(z * 100) / 100));
+                },
+                onDown: function (e) {
+                    e.preventDefault();
+                    var v = this.values(), box = e.currentTarget.getBoundingClientRect(), self = this;
+                    var sx = e.clientX, sy = e.clientY;
+                    var move = function (ev) {
+                        // dragging the image right reveals more of its left side
+                        var dx = (ev.clientX - sx) / box.width * 100 * 1.5 / v.z;
+                        var dy = (ev.clientY - sy) / box.height * 100 * 1.5 / v.z;
+                        self.save(v.x - dx, v.y - dy, v.z);
+                    };
+                    var up = function () { window.removeEventListener('pointermove', move); window.removeEventListener('pointerup', up); };
+                    window.addEventListener('pointermove', move); window.addEventListener('pointerup', up);
+                },
+                render: function () {
+                    var self = this, v = this.values();
+                    return h('div', { ref: function (el) { self.rootEl = el; }, className: 'kd-root ' + (this.props.classNameWrapper || ''), style: { padding: '14px' } },
+                        this.state.src ? h('div', { style: { display: 'flex', gap: '14px', alignItems: 'flex-end', flexWrap: 'wrap' } },
+                            [
+                                { label: 'Ordinateur', ratio: '4 / 3', w: '300px' },
+                                { label: 'Téléphone + 2 premiers projets', ratio: '3 / 2', w: '300px' }
+                            ].map(function (f, i) {
+                                return h('div', { key: i },
+                                    h('div', { style: { fontSize: '11px', color: '#798291', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '.04em' } }, f.label),
+                                    h('div', {
+                                        className: 'kd-frame',
+                                        onPointerDown: self.onDown,
+                                        style: { position: 'relative', width: f.w, maxWidth: '100%', aspectRatio: f.ratio, overflow: 'hidden', borderRadius: '8px', cursor: 'grab', background: '#111', touchAction: 'none' }
+                                    },
+                                        h('img', { src: self.state.src, draggable: false, style: { position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: v.x + '% ' + v.y + '%', transformOrigin: v.x + '% ' + v.y + '%', transform: 'scale(' + v.z + ')', pointerEvents: 'none', userSelect: 'none' } }),
+                                        i === 0 ? h('div', { style: { position: 'absolute', left: '8px', bottom: '8px', fontSize: '11px', padding: '3px 8px', borderRadius: '999px', background: 'rgba(0,0,0,.6)', color: '#fff', pointerEvents: 'none' } }, 'Glisse pour recadrer') : null
+                                    )
+                                );
+                            })
+                        ) : h('p', { style: { fontSize: '13px', color: '#798291' } }, 'Ajoute une image au-dessus pour pouvoir la recadrer.'),
+                        h('div', { style: { display: 'flex', alignItems: 'center', gap: '10px', marginTop: '12px', maxWidth: '440px' } },
+                            h('span', { style: { fontSize: '13px' } }, 'Zoom'),
+                            h('input', { type: 'range', className: 'kd-zoom', min: 1, max: 3, step: 0.05, value: v.z, style: { flex: 1 },
+                                onChange: function (e) { self.save(v.x, v.y, parseFloat(e.target.value)); } }),
+                            h('span', { style: { fontSize: '13px', width: '42px' } }, Math.round(v.z * 100) + '%'),
+                            h('button', { type: 'button', onClick: function () { self.save(50, 50, 1); },
+                                style: { fontSize: '12px', padding: '4px 10px', borderRadius: '6px', border: '1px solid #ccc', background: '#fff', cursor: 'pointer' } }, 'Réinitialiser')
+                        )
+                    );
+                }
+            });
+            var FramingPreview = createClass({ render: function () { return h('span', null, this.props.value || ''); } });
+            CMS.registerWidget('framing', FramingControl, FramingPreview);
+        })();
+    </script>
+</body>
+</html>
