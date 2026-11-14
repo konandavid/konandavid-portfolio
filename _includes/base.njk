@@ -1761,6 +1761,10 @@ overscroll-behavior-x: contain;
             .hero.hero .hero-name { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
             .hero.hero .hero-role { font-size: 12px; letter-spacing: 0.32em; }
         }
+
+        /* Instagram reels open in a tall frame instead of 16:9 */
+        .video-modal.is-vertical .video-modal-content { width: min(90%, 400px, calc((100vh - 220px) * 0.5)); min-width: 0; }
+        .video-modal.is-vertical .video-modal-content iframe { aspect-ratio: 1 / 2; background: #000; }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -2029,7 +2033,7 @@ overscroll-behavior-x: contain;
         }
         window.addEventListener('resize', centerModal);
         function closeModal() {
-            videoModal.classList.remove('active', 'info-open');
+            videoModal.classList.remove('active', 'info-open', 'is-vertical');
             modalVideo.src = '';
             if (modalCover) { modalCover.hidden = true; modalCover.removeAttribute('src'); }
             stopSlides();
@@ -2095,6 +2099,9 @@ overscroll-behavior-x: contain;
                     const ytStart = (url.match(/[?&](?:t|start)=(\d+)/) || [])[1];
                     if (yt) embed = `https://www.youtube.com/embed/${yt[1]}?autoplay=1${ytStart ? `&start=${ytStart}` : ''}`;
                     else if (url.includes('vimeo.com/')) embed = `https://player.vimeo.com/video/${url.split('vimeo.com/')[1]}?autoplay=1`;
+                    const ig = url.match(/instagram\.com\/(?:reel|reels|p)\/([\w-]+)/);
+                    if (ig) embed = `https://www.instagram.com/reel/${ig[1]}/embed/`;
+                    videoModal.classList.toggle('is-vertical', !!ig);
                     modalVideo.hidden = false;
                     if (modalCover) modalCover.hidden = true;
                     stopSlides();
