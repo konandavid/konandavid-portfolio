@@ -1742,6 +1742,16 @@ overscroll-behavior-x: contain;
         @media (hover: hover) and (pointer: fine) {
             .hl:hover { color: #FFE2D2; text-shadow: 0 0 18px rgba(255,107,53,0.55), 0 0 2px rgba(255,170,130,0.6); transition-duration: 0.12s; }
         }
+
+        /* Phone hero = full-bleed showreel, name sits on the bottom of the video */
+        @media (max-width: 768px) {
+            .hero.hero { padding: 0 0 14px; }
+            .hero.hero .hero-content { gap: 0; }
+            .hero.hero .hero-showreel { aspect-ratio: auto; height: 76vh; height: 76svh; width: 100%; max-width: none; min-width: 0; border-radius: 0; margin-top: 0; box-shadow: none; }
+            .hero.hero .hero-showreel::before { display: none; }
+            .hero.hero .hero-showreel::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 42%; background: linear-gradient(to bottom, rgba(0,0,0,0), #000); z-index: 1; pointer-events: none; }
+            .hero.hero .hero-text { margin-top: -92px; position: relative; z-index: 3; padding: 0 24px; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
