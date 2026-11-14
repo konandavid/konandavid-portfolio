@@ -1772,11 +1772,19 @@ overscroll-behavior-x: contain;
         .video-modal.is-vertical .video-modal-content video { aspect-ratio: 9 / 16; }
         .video-modal.is-vertical .video-modal-content:has(video:not([hidden])) { width: min(90%, 420px, calc((100vh - 220px) * 0.5625)); }
 
-        /* Several self-hosted videos for one project: small arrows + counter under the player, auto-advance at the end */
-        .mp4-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 12px; color: rgba(255,255,255,0.6); font-size: 12px; letter-spacing: 0.12em; }
+        /* Several self-hosted videos for one project: arrows on each side of the player, counter on top of it, auto-advance at the end */
+        .mp4-nav { position: absolute; left: 0; right: 0; height: 0; pointer-events: none; z-index: 4; }
         .mp4-nav[hidden] { display: none; }
-        .mp4-nav button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #fff; font-size: 20px; line-height: 1; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
-        .mp4-nav button:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
+        .mp4-nav button { position: absolute; top: 0; transform: translateY(-50%); pointer-events: auto; width: 42px; height: 42px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); background: rgba(0,0,0,0.35); color: #fff; font-size: 24px; line-height: 1; cursor: pointer; transition: border-color 0.2s, background 0.2s; -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); }
+        .mp4-nav button:hover { border-color: #fff; background: rgba(255,255,255,0.12); }
+        .mp4-nav .mp4-prev { left: -62px; }
+        .mp4-nav .mp4-next { right: -62px; }
+        .mp4-nav .mp4-count { position: absolute; left: 50%; top: calc(var(--mp4-h, 0px) / -2 + 12px); transform: translateX(-50%); padding: 4px 10px; border-radius: 999px; background: rgba(0,0,0,0.45); color: rgba(255,255,255,0.85); font-size: 11px; letter-spacing: 0.12em; }
+        @media (max-width: 768px) {
+            .mp4-nav .mp4-prev { left: 8px; }
+            .mp4-nav .mp4-next { right: 8px; }
+            .mp4-nav button { width: 38px; height: 38px; font-size: 22px; }
+        }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -2004,8 +2012,16 @@ overscroll-behavior-x: contain;
             mp4List.i = (i + n) % n;
             modalMp4.src = mp4List.items[mp4List.i];
             modalMp4.play().catch(() => {});
-            if (mp4Nav) { mp4Nav.hidden = n < 2; mp4Nav.querySelector('.mp4-count').textContent = (mp4List.i + 1) + ' / ' + n; }
+            if (mp4Nav) { mp4Nav.hidden = n < 2; mp4Nav.querySelector('.mp4-count').textContent = (mp4List.i + 1) + ' / ' + n; placeMp4Nav(); }
         }
+        function placeMp4Nav() {
+            if (!mp4Nav || mp4Nav.hidden || !modalMp4) return;
+            const h = modalMp4.offsetHeight;
+            mp4Nav.style.top = (modalMp4.offsetTop + h / 2) + 'px';
+            mp4Nav.style.setProperty('--mp4-h', h + 'px');
+        }
+        modalMp4?.addEventListener('loadedmetadata', placeMp4Nav);
+        window.addEventListener('resize', placeMp4Nav);
         mp4Nav?.querySelector('.mp4-prev').addEventListener('click', (e) => { e.stopPropagation(); showMp4(mp4List.i - 1); });
         mp4Nav?.querySelector('.mp4-next').addEventListener('click', (e) => { e.stopPropagation(); showMp4(mp4List.i + 1); });
         modalMp4?.addEventListener('ended', () => { if (mp4List.items.length > 1) showMp4(mp4List.i + 1); });
@@ -2102,7 +2118,7 @@ overscroll-behavior-x: contain;
             fillModalInfo(card);
             videoModal.scrollTop = 0;
             videoModal.classList.add('active');
-                    requestAnimationFrame(centerModal);
+                    requestAnimationFrame(() => { centerModal(); placeMp4Nav(); });
             document.body.style.overflow = 'hidden';
         }
         modalSlides?.querySelector('.slides-prev')?.addEventListener('click', (e) => { e.stopPropagation(); showSlide(slides.i - 1); restartSlides(); });
@@ -2149,7 +2165,7 @@ overscroll-behavior-x: contain;
                     fillModalInfo(btn.closest('.project-card'));
                     videoModal.scrollTop = 0;
                     videoModal.classList.add('active');
-                    requestAnimationFrame(centerModal);
+                    requestAnimationFrame(() => { centerModal(); placeMp4Nav(); });
                     document.body.style.overflow = 'hidden';
                 }
             });
