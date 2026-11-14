@@ -117,7 +117,11 @@
       "image": "/uploads/loading-gpi-didier-plowy-hippodanceclub-bannière-2.jpg",
       "description": "Creative & Show Direction for immersive live experience, overseeing artistic vision within world-class cultural venue.",
       "category": "Live Show",
-      "videoVertical": true
+      "videoVertical": true,
+      "videos": [
+        "/uploads/grand-palais-immersif-2.mp4",
+        "/uploads/grand-palais-immersif-3.mp4"
+      ]
     },
     {
       "size": "standard",

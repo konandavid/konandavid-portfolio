@@ -1771,6 +1771,12 @@ overscroll-behavior-x: contain;
         .video-modal-content video[hidden] { display: none; }
         .video-modal.is-vertical .video-modal-content video { aspect-ratio: 9 / 16; }
         .video-modal.is-vertical .video-modal-content:has(video:not([hidden])) { width: min(90%, 420px, calc((100vh - 220px) * 0.5625)); }
+
+        /* Several self-hosted videos for one project: small arrows + counter under the player, auto-advance at the end */
+        .mp4-nav { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 12px; color: rgba(255,255,255,0.6); font-size: 12px; letter-spacing: 0.12em; }
+        .mp4-nav[hidden] { display: none; }
+        .mp4-nav button { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.25); background: transparent; color: #fff; font-size: 20px; line-height: 1; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+        .mp4-nav button:hover { border-color: #fff; background: rgba(255,255,255,0.08); }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -1847,6 +1853,7 @@ overscroll-behavior-x: contain;
             <button class="video-modal-close" id="modal-close"></button>
             <iframe id="modal-video" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
             <video id="modal-mp4" hidden controls playsinline preload="auto"></video>
+            <div class="mp4-nav" id="mp4-nav" hidden><button type="button" class="mp4-prev" aria-label="Previous video">&#8249;</button><span class="mp4-count"></span><button type="button" class="mp4-next" aria-label="Next video">&#8250;</button></div>
             <img id="modal-cover" class="modal-cover" alt="" hidden>
             <div id="modal-slides" class="modal-slides" hidden>
                 <div class="slides-track"></div>
@@ -1990,7 +1997,19 @@ overscroll-behavior-x: contain;
         const videoModal = document.getElementById('video-modal');
         const modalVideo = document.getElementById('modal-video');
         const modalMp4 = document.getElementById('modal-mp4');
-        function stopMp4() { if (modalMp4) { modalMp4.pause(); modalMp4.removeAttribute('src'); modalMp4.load(); modalMp4.hidden = true; } }
+        const mp4Nav = document.getElementById('mp4-nav');
+        const mp4List = { items: [], i: 0 };
+        function showMp4(i) {
+            const n = mp4List.items.length; if (!n || !modalMp4) return;
+            mp4List.i = (i + n) % n;
+            modalMp4.src = mp4List.items[mp4List.i];
+            modalMp4.play().catch(() => {});
+            if (mp4Nav) { mp4Nav.hidden = n < 2; mp4Nav.querySelector('.mp4-count').textContent = (mp4List.i + 1) + ' / ' + n; }
+        }
+        mp4Nav?.querySelector('.mp4-prev').addEventListener('click', (e) => { e.stopPropagation(); showMp4(mp4List.i - 1); });
+        mp4Nav?.querySelector('.mp4-next').addEventListener('click', (e) => { e.stopPropagation(); showMp4(mp4List.i + 1); });
+        modalMp4?.addEventListener('ended', () => { if (mp4List.items.length > 1) showMp4(mp4List.i + 1); });
+        function stopMp4() { if (modalMp4) { modalMp4.pause(); modalMp4.removeAttribute('src'); modalMp4.load(); modalMp4.hidden = true; } mp4List.items = []; if (mp4Nav) mp4Nav.hidden = true; }
         const modalCover = document.getElementById('modal-cover');
         const modalInfo = document.getElementById('modal-info');
 
@@ -2118,8 +2137,10 @@ overscroll-behavior-x: contain;
                     stopSlides();
                     if (mp4 && modalMp4) {
                         modalVideo.src = ''; modalVideo.hidden = true;
-                        modalMp4.hidden = false; modalMp4.src = url;
-                        modalMp4.play().catch(() => {});
+                        modalMp4.hidden = false;
+                        const more = (btn.closest('.project-card')?.dataset.videos || '').split('|').filter(Boolean);
+                        mp4List.items = [url].concat(more.filter(u => u !== url));
+                        showMp4(0);
                     } else {
                         stopMp4();
                         modalVideo.hidden = false;
