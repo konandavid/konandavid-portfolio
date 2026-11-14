@@ -1765,6 +1765,12 @@ overscroll-behavior-x: contain;
         /* Instagram reels open in a tall frame instead of 16:9 */
         .video-modal.is-vertical .video-modal-content { width: min(90%, 400px, calc((100vh - 220px) * 0.5)); min-width: 0; }
         .video-modal.is-vertical .video-modal-content iframe { aspect-ratio: 1 / 2; background: #000; }
+
+        /* Self-hosted project videos play in a plain black player */
+        .video-modal-content video { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; background: #000; border-radius: 12px; object-fit: contain; }
+        .video-modal-content video[hidden] { display: none; }
+        .video-modal.is-vertical .video-modal-content video { aspect-ratio: 9 / 16; }
+        .video-modal.is-vertical .video-modal-content:has(video:not([hidden])) { width: min(90%, 420px, calc((100vh - 220px) * 0.5625)); }
     </style>
     
     <!-- Structured Data (JSON-LD) for SEO -->
@@ -1840,6 +1846,7 @@ overscroll-behavior-x: contain;
         <div class="video-modal-content">
             <button class="video-modal-close" id="modal-close"></button>
             <iframe id="modal-video" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            <video id="modal-mp4" hidden controls playsinline preload="auto"></video>
             <img id="modal-cover" class="modal-cover" alt="" hidden>
             <div id="modal-slides" class="modal-slides" hidden>
                 <div class="slides-track"></div>
@@ -1982,6 +1989,8 @@ overscroll-behavior-x: contain;
         // ===================
         const videoModal = document.getElementById('video-modal');
         const modalVideo = document.getElementById('modal-video');
+        const modalMp4 = document.getElementById('modal-mp4');
+        function stopMp4() { if (modalMp4) { modalMp4.pause(); modalMp4.removeAttribute('src'); modalMp4.load(); modalMp4.hidden = true; } }
         const modalCover = document.getElementById('modal-cover');
         const modalInfo = document.getElementById('modal-info');
 
@@ -2035,6 +2044,7 @@ overscroll-behavior-x: contain;
         function closeModal() {
             videoModal.classList.remove('active', 'info-open', 'is-vertical');
             modalVideo.src = '';
+            stopMp4();
             if (modalCover) { modalCover.hidden = true; modalCover.removeAttribute('src'); }
             stopSlides();
             document.body.style.overflow = '';
@@ -2043,6 +2053,7 @@ overscroll-behavior-x: contain;
             const img = card.querySelector('.project-media img');
             modalVideo.src = '';
             modalVideo.hidden = true;
+            stopMp4();
             if (modalCover) modalCover.hidden = true;
             stopSlides();
             const gallery = (card.dataset.gallery || '').split('|').filter(Boolean);
@@ -2101,11 +2112,19 @@ overscroll-behavior-x: contain;
                     else if (url.includes('vimeo.com/')) embed = `https://player.vimeo.com/video/${url.split('vimeo.com/')[1]}?autoplay=1`;
                     const ig = url.match(/instagram\.com\/(?:reel|reels|p)\/([\w-]+)/);
                     if (ig) embed = `https://www.instagram.com/reel/${ig[1]}/embed/`;
-                    videoModal.classList.toggle('is-vertical', !!ig);
-                    modalVideo.hidden = false;
+                    const mp4 = /\.(mp4|mov|webm)(\?|$)/i.test(url);
+                    videoModal.classList.toggle('is-vertical', !!ig || (mp4 && btn.closest('.project-card')?.dataset.vertical === '1'));
                     if (modalCover) modalCover.hidden = true;
                     stopSlides();
-                    modalVideo.src = embed;
+                    if (mp4 && modalMp4) {
+                        modalVideo.src = ''; modalVideo.hidden = true;
+                        modalMp4.hidden = false; modalMp4.src = url;
+                        modalMp4.play().catch(() => {});
+                    } else {
+                        stopMp4();
+                        modalVideo.hidden = false;
+                        modalVideo.src = embed;
+                    }
                     fillModalInfo(btn.closest('.project-card'));
                     videoModal.scrollTop = 0;
                     videoModal.classList.add('active');

@@ -113,10 +113,11 @@
       "role_fr": "Directeur Artistique",
       "role": "Creative Director",
       "title": "Grand Palais Immersif",
-      "video": "https://www.instagram.com/reel/C4qfKfpL3ld/",
+      "video": "/uploads/grand-palais-immersif.mp4",
       "image": "/uploads/loading-gpi-didier-plowy-hippodanceclub-bannière-2.jpg",
       "description": "Creative & Show Direction for immersive live experience, overseeing artistic vision within world-class cultural venue.",
-      "category": "Live Show"
+      "category": "Live Show",
+      "videoVertical": true
     },
     {
       "size": "standard",
